@@ -1,6 +1,6 @@
 package com.so.dingbring
 
-data class MyData(val imageUrl:String,val description:String){
+data class MyData(val eventDate:String,val eventName:String){
     constructor():this("","")
 }
 

@@ -1,5 +1,6 @@
 package com.so.dingbring
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,18 +15,19 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.storage.FirebaseStorage
 import com.so.dingbring.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(){
+class HomeFragment : Fragment(), MyCommunication {
 
 
     private val repository= DataRepository()
     private val factory= InfoViewModelFactory(repository)
     private val viewModel by lazy { ViewModelProviders.of(requireActivity(),factory).get(InfoViewModel::class.java) }
-
     private lateinit var adapter: InfoAdapter
+
 
     companion object{
 
         lateinit var storage: FirebaseStorage
+        var mHomeFragment = this
     }
 
 
@@ -34,13 +36,13 @@ class HomeFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         FirebaseApp.initializeApp(requireContext())
-        // Inflate the layout for this fragment
 
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_home,container,false)
 
+
         binding.upload.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_contentFragment)
+            it.findNavController().navigate(R.id.action_homeFragment_to_imageFragment)
         }
 
         adapter= InfoAdapter(requireActivity())
@@ -57,4 +59,5 @@ class HomeFragment : Fragment(){
         return binding.root
     }
 
+    
 }

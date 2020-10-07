@@ -63,7 +63,7 @@ class ImageFragment : Fragment(), UploadListener {
         }
 
         binding.back.setOnClickListener {
-            it.findNavController().navigate(R.id.action_imageFragment_to_contentFragment)
+            it.findNavController().navigate(R.id.action_imageFragment_to_homeFragment)
         }
 
 

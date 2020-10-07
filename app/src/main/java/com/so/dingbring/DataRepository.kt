@@ -21,24 +21,24 @@ class DataRepository {
     private val  ref=storage.getReference("/image/$userId")
     fun getAllInfo(): LiveData<MutableList<MyData>> {
         val mutableList= mutableListOf<MyData>()
-        fStore.collection("data").addSnapshotListener { querySnapshot, exception ->
+        fStore.collection("event").addSnapshotListener { querySnapshot, exception ->
 
-            if (exception != null) {
-
-                //
-
-            } else {
+            if (exception != null) {  }
+            else {
 
                 if (querySnapshot != null) {
                     for (document in querySnapshot.documents) {
-                        val imageUrl: String? = document.getString("imageUrl")
-                        val description: String? = document.getString("description")
 
-                        println(" -------description------------" + description)
+                        val eventDate: String? = document.getString("eventDate")
+                        val eventName: String? = document.getString("eventName")
+
+                        println("-----------eventName------------------" + eventName)
+                        println("----------eventDate-------------------" + eventDate)
+
                         val myData =
                             MyData(
-                                imageUrl!!,
-                                description!!
+                                    eventDate!!,
+                                    eventName!!
                             )
                         mutableList.add(myData)
                     }
