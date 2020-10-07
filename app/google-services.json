@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "156006836923",
+    "firebase_url": "https://dingbring-1df35.firebaseio.com",
+    "project_id": "dingbring-1df35",
+    "storage_bucket": "dingbring-1df35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156006836923:android:ee65e5caba82e399bb979e",
+        "android_client_info": {
+          "package_name": "com.so.dringbring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156006836923-3sv0ft6s4qjil5am9dleme4g0reeci85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.so.dringbring",
+            "certificate_hash": "5991c7a727438d62f9cc955a545aab51e69affb1"
+          }
+        },
+        {
+          "client_id": "156006836923-q01f695g0dd47vium7730pj9ebb07u2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAml-2_YIJINYLYSPJ1WVQANru15C1aQgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156006836923-q01f695g0dd47vium7730pj9ebb07u2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
