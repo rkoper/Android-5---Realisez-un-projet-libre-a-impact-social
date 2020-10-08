@@ -2,11 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_h_2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_home_h_9"
             android:layout_width="match_parent"
@@ -20,14 +27,15 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5"/>
         <androidx.recyclerview.widget.RecyclerView
+            android:padding="30dp"
+            android:background="@drawable/rectangle_corner"
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.065"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gl_home_h_2"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/upload"
@@ -41,7 +49,25 @@
             app:layout_constraintLeft_toLeftOf="@+id/gl_home_v_5"
             app:layout_constraintRight_toRightOf="parent"/>
 
+        <ImageView
+            android:id="@+id/home_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/home_name"/>
 
+        <TextView
+            android:id="@+id/home_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/gl_home_h_2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

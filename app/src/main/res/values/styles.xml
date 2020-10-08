@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TxtViewPrincipal" >
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">30</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/black</item>
+     </style>
+
+
+    <style name="txt1" parent="@style/TxtViewPrincipal">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/montserrat</item>
+    </style>
+
+
+    <style name="MyAppThemeCalendar" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorAccent">#bfac40</item>
+        <item name="android:minDate">01/01/2020</item>
+        <item name="colorControlActivated">#FF000000</item>
+        <item name="colorControlHighlight">#FF000000</item>
+        <item name="android:backgroundStacked">#FFFFFFFF</item>
+        <item name="android:colorBackground">#FFFFFFFF</item>
+        <item name="android:backgroundSplit">#FFFFFFFF</item>
+        <item name="android:background">#FFFFFFFF</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="TxtViewPrincipal">
+    </style>
+
+</resources>

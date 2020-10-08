@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/details"
+        android:id="@+id/detail_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -17,17 +17,6 @@
         android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintLeft_toLeftOf="parent"
-     app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/details1"/>
-    <TextView
-        android:id="@+id/details1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@+id/details"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

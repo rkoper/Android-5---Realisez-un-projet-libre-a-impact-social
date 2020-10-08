@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">DingBring</string>
+    <string name="facebook_application_id">3481097821967676</string>
+    <string name="fb_login_protocol_scheme">fb3481097821967676</string>
+    <string name="twitter_consumer_key" >EO4RoGIrqAlfo0CMhgk9ancbE</string>
+    <string name="twitter_consumer_secret">sAX3Dv4FEHhRrxkisAgNG2kHj2v8f1j8IruxQCRLFsdrqoFzjl</string>
+
+
+    <string-array name="Event">
+        <item>Anniversary</item>
+        <item>House-Warming</item>
+        <item>Baby-Shower</item>
+        <item>Farewell</item>
+        <item>Other</item>
+    </string-array>
+
+
+
 </resources>

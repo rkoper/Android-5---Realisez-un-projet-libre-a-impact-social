@@ -1,22 +1,22 @@
-package com.so.dingbring
+package com.so.dingbring.home
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.so.dingbring.UploadListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class InfoViewModel(private val repository: DataRepository): ViewModel() {
+class HomeViewModel(private val repository: HomeRepository): ViewModel() {
 
 
-    var uploadListener:UploadListener?=null
+    var uploadListener: UploadListener?=null
     private val disposables= CompositeDisposable()
 
 
-    fun getAllInformation() : LiveData<MutableList<MyData>> {
-        val mutableData= MutableLiveData<MutableList<MyData>>()
+    fun getAllInformation() : LiveData<MutableList<MyEvent>> {
+        val mutableData = MutableLiveData<MutableList<MyEvent>>()
         repository.getAllInfo().observeForever{
             mutableData.value=it
         }
