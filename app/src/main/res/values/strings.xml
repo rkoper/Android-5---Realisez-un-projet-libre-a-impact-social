@@ -6,12 +6,21 @@
     <string name="twitter_consumer_secret">sAX3Dv4FEHhRrxkisAgNG2kHj2v8f1j8IruxQCRLFsdrqoFzjl</string>
 
 
-    <string-array name="Event">
-        <item>Anniversary</item>
-        <item>House-Warming</item>
-        <item>Baby-Shower</item>
-        <item>Farewell</item>
-        <item>Other</item>
+    <string-array name="Status">
+        <item>I need</item>
+        <item>I am binging</item>
+    </string-array>
+
+    <string-array name="Quantity">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
     </string-array>
 
 

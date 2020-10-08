@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TxtViewPrincipal" >
+    <style name="TxtViewPrincipalBlack" >
         <item name="android:textSize">18sp</item>
         <item name="fontFamily">@font/montserrat</item>
         <item name="android:ellipsize">end</item>
@@ -12,8 +12,19 @@
         <item name="android:textColor">@color/black</item>
      </style>
 
+    <style name="TxtViewPrincipalWhite" >
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">30</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
-    <style name="txt1" parent="@style/TxtViewPrincipal">
+
+    <style name="txt1" parent="@style/TxtViewPrincipalBlack">
         <item name="android:textSize">18sp</item>
         <item name="fontFamily">@font/montserrat</item>
     </style>
@@ -33,7 +44,30 @@
         <item name="buttonBarPositiveButtonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
     </style>
 
-    <style name="spinnerDropDownItemStyle" parent="TxtViewPrincipal">
+    <style name="spinnerDropDownItemStyle" parent="TxtViewPrincipalWhite">
+        <item name="android:textAlignment">viewEnd</item>
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
+
+    <style name="MyDialogTheme" >
+    <item name="android:background">@drawable/round_black</item>
+    <item name="android:backgroundStacked">#bfac40</item>
+    <item name="android:colorBackground">#bfac40</item>
+    <item name="android:backgroundSplit">#bfac40</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFrame">@null</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowIsFloating">true</item>
+    <item name="android:backgroundDimEnabled">false</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:textSize">17sp</item>
+    <item name="fontFamily">@font/montserrat</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:maxLength">30</item>
+    </style>
 </resources>

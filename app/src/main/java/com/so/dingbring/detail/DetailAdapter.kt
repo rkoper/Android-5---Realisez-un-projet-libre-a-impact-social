@@ -16,7 +16,7 @@ class DetailAdapter(var mContext: Context): RecyclerView.Adapter<DetailAdapter.D
 
     inner class DetailViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bindView(mydetail: MyDetail){
-                itemView.detail_name.text = mydetail.mItem
+                itemView.detail_item.text = mydetail.mItem
         }
     }
 

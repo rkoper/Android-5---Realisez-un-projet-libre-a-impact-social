@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.HomeFragment">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/black"
         android:layout_width="match_parent"
@@ -26,6 +28,25 @@
             android:layout_height="2dp"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_h_98"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_v_8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_v_95"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:padding="30dp"
             android:background="@drawable/rectangle_corner"
@@ -37,22 +58,13 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/gl_home_h_2"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/plus"
-            android:tint="@color/ColorOne"
-            app:layout_constraintTop_toTopOf="@+id/gl_home_h_9"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_home_v_5"
-            app:layout_constraintRight_toRightOf="parent"/>
+
 
         <ImageView
+            android:src="@mipmap/ic_launcher_round"
             android:id="@+id/home_image"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/home_name"/>
@@ -68,7 +80,17 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/gl_home_h_2" />
-
+        <ImageButton
+            android:id="@+id/upload"
+            android:elevation="10dp"
+            android:background="@drawable/round_black"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/add"
+            app:layout_constraintTop_toTopOf="@+id/gl_home_h_9"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_home_h_98"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_home_v_8"
+            app:layout_constraintRight_toRightOf="@+id/gl_home_v_95"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

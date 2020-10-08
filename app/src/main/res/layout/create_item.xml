@@ -9,8 +9,7 @@
 
 
     <TextView
-        android:paddingRight="30dp"
-        android:id="@+id/detail_need"
+        android:id="@+id/create_need"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Need"
@@ -20,43 +19,27 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:paddingRight="30dp"
-        android:id="@+id/detail_item"
+        android:id="@+id/create_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Item"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="italic"
-        app:layout_constraintLeft_toRightOf="@+id/detail_need"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
-        android:paddingRight="30dp"
-        android:id="@+id/detail_quantity"
+        android:id="@+id/create_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="quantity"
+        android:text="Quantity"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="italic"
-        app:layout_constraintLeft_toRightOf="@+id/detail_item"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:paddingRight="30dp"
-        android:id="@+id/detail_personn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Personn"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintLeft_toRightOf="@+id/detail_quantity"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
