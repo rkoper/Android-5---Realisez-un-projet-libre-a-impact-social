@@ -23,6 +23,17 @@
         <item>9</item>
     </string-array>
 
+    <string name="day1">Mon.</string>
+    <string name="day2">Tue.</string>
+    <string name="day3">Wed.</string>
+    <string name="day4">Thu.</string>
+    <string name="day5">Fri.</string>
+    <string name="day6">Sat.</string>
+    <string name="day7">Sun.</string>
 
+    Monday
+    Mardi	Tuesday
+    Mercredi	Wednesday
+    Jeudi	Thursday
 
 </resources>

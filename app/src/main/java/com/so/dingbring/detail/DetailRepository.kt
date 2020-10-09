@@ -23,12 +23,17 @@ class DetailRepository {
         fStore.collection("item").document(mEventId).collection(mEventId).addSnapshotListener { querySnapshot, exception ->
             if (querySnapshot != null) {
                 for (document in querySnapshot.documents) {
-                    val mItem: String? = document.getString("item")
+                    val mItemStatus: String? = document.getString("itemStatus")
+                    val mItemQty: String? = document.getString("itemQty")
+                    val mItemType: String? = document.getString("itemType")
+                    val mItemUser: String? = document.getString("itemUser")
                     val myDetail =
                         MyDetail(
-                            mItem!!
+                            mItemStatus!!,
+                            mItemQty!!,
+                            mItemType!!,
+                            mItemUser!!
                         )
-
                     mDetailMutableList.add(myDetail)
                 }
 

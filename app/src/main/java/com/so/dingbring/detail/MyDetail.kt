@@ -1,5 +1,8 @@
 package com.so.dingbring.detail
 
 data class MyDetail(
-    val mItem:String)
+    val mItemStatus:String,
+    val mItemQty:String,
+    val mItemType:String,
+    val mItemUser:String)
 

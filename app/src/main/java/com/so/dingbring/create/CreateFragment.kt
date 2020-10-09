@@ -20,13 +20,12 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.so.dingbring.R
 import com.so.dingbring.Utils
+import com.so.dingbring.Utils.FindDay
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.databinding.FragmentCreateBinding
 import com.so.dingbring.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.text.ParseException
-import java.text.SimpleDateFormat
 
 
 class CreateFragment : Fragment() {
@@ -143,12 +142,11 @@ class CreateFragment : Fragment() {
 
             val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
                 val newDate = formatDate(y, m, d)
-
-                val dayDate = Utils.FindDay(y,m,d)
-
+                val dayDate = FindDay(requireContext(), y, m, d)
 
 
-                create_date.text =   dayDate
+
+                create_date.text =   dayDate + " " + newDate
                 mDate = create_date.text.toString()
             }
             val now = android.text.format.Time()

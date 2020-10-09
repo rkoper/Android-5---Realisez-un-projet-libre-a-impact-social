@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.so.dingbring.R.string
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,18 +24,39 @@ object Utils {
         if  (s < 10 && d >10 ) {return "$d/0$s/$y"}
         if  (d <10 && s > 10 ) {return  "0$d/$s/$y"}
         return if (s < 10 && d <10 ) {
-            "0$d/ 0$s /$y"
+            "0$d/0$s/$y"
         } else {
-            "$d/ $s /$y"
+            "$d/$s/$y"
         } }
 
-    fun FindDay(date: Int, month:Int, year:Int) : String {
-        val inFormat = SimpleDateFormat("dd-MM-yyyy")
-            val myDate: Date = inFormat.parse("$date-$month-$year")
-            val simpleDateFormat = SimpleDateFormat("EEEE")
-            val dayName = simpleDateFormat.format(myDate)
+    fun FindDay(mContext: Context, y: Int, m: Int, d: Int) : String {
+        val calendar = Calendar.getInstance();
+        calendar.set(y, m, d);
+        val dayName: Int = calendar.get(Calendar.DAY_OF_WEEK)
+        val dayName1: Int = calendar.get(Calendar.DATE)
+        val dayName2: Int = calendar.get(Calendar.DAY_OF_MONTH)
+        val dayName3: Int = calendar.get(Calendar.DAY_OF_YEAR)
 
-        return dayName
+        println("------------>> DATE <<------" +dayName + " // " +  dayName1 + " // " + dayName2 + " // " + dayName3)
+
+
+        if (dayName == 2)
+        {return mContext.resources.getText(string.day1).toString()}
+        if (dayName == 3)
+        {return mContext.resources.getText(string.day2).toString()}
+        if (dayName == 4)
+        {return mContext.resources.getText(string.day3).toString()}
+        if (dayName == 5)
+        {return mContext.resources.getText(string.day4).toString()}
+        if (dayName == 6)
+        {return mContext.resources.getText(string.day5).toString()}
+        if (dayName == 7)
+        {return mContext.resources.getText(string.day6).toString()}
+        if (dayName == 1)
+        {return mContext.resources.getText(string.day7).toString()}
+
+        else return ""
+
     }
 
     fun configureAutoCompleteFrag(

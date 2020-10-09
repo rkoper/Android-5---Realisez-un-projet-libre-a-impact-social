@@ -20,13 +20,17 @@ class HomeAdapter(var mContext: Context): RecyclerView.Adapter<HomeAdapter.HomeV
         fun bindView(myEvent: MyEvent){
             itemView.home_name.text = myEvent.eventName
             itemView.home_date.text = myEvent.eventDate
-            itemView.home_id.text = myEvent.eventId
+            itemView.home_address.text = myEvent.eventAdress
+            itemView.home_orga.text = myEvent.eventOrga
             itemView.setOnClickListener {
-
-                var bundle = bundleOf( "eventName" to myEvent.eventName, "eventDate" to myEvent.eventDate, "eventId" to myEvent.eventId)
+                var bundle = bundleOf(
+                    "eventName" to myEvent.eventName,
+                    "eventDate" to myEvent.eventDate,
+                    "eventAdress" to myEvent.eventAdress,
+                    "eventId" to myEvent.eventId,
+                    "eventOrga" to myEvent.eventOrga
+                )
                 it.findNavController().navigate(R.id.action_homeFragment_detail_fragment, bundle)
-
-
             }
         }
     }

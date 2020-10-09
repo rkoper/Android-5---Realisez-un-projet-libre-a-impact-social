@@ -25,11 +25,15 @@ class HomeRepository {
 
                         val eventDate: String? = document.getString("eventDate")
                         val eventName: String? = document.getString("eventName")
+                        val eventOrga: String? = document.getString("eventOrga")
+                        val eventAddress: String? = document.getString("eventAddress")
                         val eventId:String? = document.id
                         val myData = MyEvent(
                             eventDate!!,
                             eventName!!,
-                            eventId!!
+                            eventId!!,
+                            eventOrga!!,
+                            eventAddress!!
                         )
                         mutableList.add(myData)
                     }
