@@ -19,19 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_item_v_3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.24"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_item_v_4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3"/>
+        app:layout_constraintGuide_percent="0.16"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_create_item_v_5"
         android:layout_width="match_parent"
@@ -43,25 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_item_v_7"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_item_v_8"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_item_v_9"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9"/>
+        app:layout_constraintGuide_percent="0.68"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_create_item_h_1"
         android:layout_width="match_parent"
@@ -100,18 +70,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/gl_create_item_h_9"
         android:background="@drawable/round_black"/>
     <TextView
-        style="@style/TxtViewPrincipalBlack"
-        android:id="@+id/detail_item_status"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="I Need"
-        android:textSize="14sp"
-        android:textColor="@color/black"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_1"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
         android:padding="5dp"
         style="@style/TxtViewPrincipalBlack"
         android:id="@+id/detail_item_quantity"
@@ -120,8 +78,8 @@
         android:text="8"
         android:textSize="14sp"
         android:textColor="@color/black"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_3"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_4"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_1"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
@@ -135,8 +93,8 @@
         android:textStyle="bold"
         android:ellipsize="end"
         android:textSize="14sp"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_4"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_8"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_2"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -150,7 +108,7 @@
         android:text="Orgaaaaa"
         android:textColor="@color/black"
         android:ellipsize="end"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_8"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_6"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

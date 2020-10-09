@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView(mBinding: FragmentHomeBinding) {
-        mBinding.upload.setOnClickListener {
+        mBinding.homeCreate.setOnClickListener {
             it.findNavController().navigate(R.id.action_homeFragment_to_createFragment) } }
 
 
@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
         mBinding.recyclerView.adapter= mHomeAdapter
 
         mHomeViewModel.getAllInformation().observe(requireActivity(), Observer {
+
             mHomeAdapter.setList(it)
             mHomeAdapter.notifyDataSetChanged()
         })

@@ -2,14 +2,15 @@ package com.so.dingbring.create
 
 import android.app.DatePickerDialog
 import android.graphics.PorterDuff
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.so.dingbring.R
 import com.so.dingbring.Utils
@@ -174,11 +177,27 @@ class CreateFragment : Fragment() {
                 "AIzaSyByK0jz-yxjpZFX88W8zjzTwtzMtkPYC4w"
             )
         }
-        val autocompleteFragment = Utils.configureAutoCompleteFrag(
-            childFragmentManager,
-            resources,
-            requireActivity(),
-            "Enter Adress"
+        var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
+        var fView: View? = autocompleteFragment?.view
+        var etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)
+        etTextInput?.setBackgroundColor(resources.getColor(R.color.colorTransparent))
+        etTextInput?.setTextColor(resources.getColor(R.color.white))
+        etTextInput?.setHintTextColor(resources.getColor(R.color.white))
+        etTextInput?.gravity = Gravity.CENTER
+        etTextInput?.hint = " Enter address"
+        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
+        etTextInput?.typeface = font
+        etTextInput?.textSize = 18f
+        val searchIcon =
+            (autocompleteFragment?.view as? LinearLayout)?.getChildAt(0) as? ImageView
+        searchIcon?.visibility = View.GONE
+        autocompleteFragment?.setTypeFilter(TypeFilter.ADDRESS)
+        autocompleteFragment?.setPlaceFields(
+            listOf(
+                Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.ADDRESS_COMPONENTS
+            )
         )
         autocompleteFragment?.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
@@ -197,9 +216,14 @@ class CreateFragment : Fragment() {
                     }
                 }
 
+                etTextInput?.visibility = View.INVISIBLE
                 mAddress = "$mStreetNumber $mStreetName, $mCity "
                 create_address.text = mAddress
                 create_address.visibility = View.VISIBLE
+
+
+
+
             }
 
             override fun onError(status: Status) {
