@@ -2,18 +2,24 @@
 <resources>
 
     <style name="TxtViewPrincipalBlack" >
+        <item name="android:textColorHint">@color/black</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:padding">2dp</item>
         <item name="fontFamily">@font/montserrat</item>
-        <item name="android:ellipsize">end</item>
+        <item name="android:ellipsize">middle</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">30</item>
         <item name="android:gravity">center</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:textCursorDrawable">@color/black</item>
+        <item name="colorAccent">@color/black</item>
      </style>
 
     <style name="TxtViewPrincipalWhite" >
+        <item name="android:padding">2dp</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColorHint">@color/white</item>
         <item name="fontFamily">@font/montserrat</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
@@ -21,6 +27,8 @@
         <item name="android:gravity">center</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:textCursorDrawable">@color/white</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
 
@@ -45,9 +53,10 @@
     </style>
 
     <style name="spinnerDropDownItemStyle" parent="TxtViewPrincipalWhite">
-        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:textAlignment">center</item>
         <item name="fontFamily">@font/montserrat</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -69,5 +78,9 @@
     <item name="android:maxLines">1</item>
     <item name="android:textStyle">bold</item>
     <item name="android:maxLength">30</item>
+    </style>
+
+    <style name="BlackCheck" parent="TxtViewPrincipalBlack">
+        <item name="colorAccent">#FF000000</item>
     </style>
 </resources>

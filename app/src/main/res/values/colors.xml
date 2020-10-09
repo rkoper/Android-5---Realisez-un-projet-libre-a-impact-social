@@ -2,12 +2,16 @@
 <resources>
     <color name="ColorOne">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
-    <color name="ColorTwo">#FF3700B3</color>
-    <color name="ColorThree">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="white85">#D9ffffff</color>
+    <color name="grey">#303030</color>
+    <color name="yellow">#86782d</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorTransparent">#00000000</color>
-    <color name="Red">#f69f9f</color>
-    <color name="Green">#c7ecc4</color>
+    <color name="Red">#D9f7e6e6</color>
+    <color name="Green">#D9ebf2eb</color>
+
+
+
+
 </resources>

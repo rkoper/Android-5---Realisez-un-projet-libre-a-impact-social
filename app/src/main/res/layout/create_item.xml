@@ -1,44 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/create_item_all"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:layout_height="50dp"
+    android:padding="2dp">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_create_item_v_6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_create_item_v_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_create_item_v_05"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.01"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_create_item_h_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.09"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_create_item_h_9"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"/>
 
     <TextView
-        android:id="@+id/create_need"
+        style="@style/TxtViewPrincipalBlack"
+        android:text="1"
+        android:id="@+id/create_num_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_05"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_1"
+        app:layout_constraintTop_toTopOf="@+id/gl_create_item_h_1"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_create_item_h_9"
+        android:background="@drawable/round_black"/>
+    <TextView
+        style="@style/TxtViewPrincipalBlack"
+        android:id="@+id/create_status_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Need"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/create_num_item"
+        app:layout_constraintRight_toLeftOf="@+id/create_quantity_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:id="@+id/create_item"
+        android:padding="5dp"
+        style="@style/TxtViewPrincipalBlack"
+        android:id="@+id/create_quantity_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Qty"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@+id/create_status_item"
+        app:layout_constraintRight_toLeftOf="@+id/create_item_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        style="@style/TxtViewPrincipalBlack"
+        android:id="@+id/create_item_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Item"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/create_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quantity"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="italic"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/create_quantity_item"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

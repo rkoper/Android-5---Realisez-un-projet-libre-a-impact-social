@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@color/ColorThree"
+        tools:srcCompat="@color/black"
         android:background="@color/ColorOne"/>
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
-        android:background="@color/ColorTwo"
+        android:background="@color/black"
         android:text="TextView"
         android:textColor="@color/black"
         android:textSize="20sp"
