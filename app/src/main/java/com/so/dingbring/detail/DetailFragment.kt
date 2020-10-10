@@ -1,6 +1,7 @@
 package com.so.dingbring.detail
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.so.dingbring.R
 import com.so.dingbring.databinding.FragmentDetailBinding
-import com.so.dingbring.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
@@ -26,8 +26,12 @@ class DetailFragment : Fragment() {
     var mDataOne = arrayListOf<MyDetail>()
     val mDataTwo = arrayListOf<MyDetail>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-      mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+      mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
         initView(mBinding)
         initHeader(mBinding)
@@ -45,9 +49,9 @@ class DetailFragment : Fragment() {
         mEventDate = arguments?.get("eventDate").toString()
         mEventId = arguments?.get("eventId").toString()
 
-        mBinding.fragDetailName.text = mEventName
-        mBinding.fragDetailDate.text = mEventDate
-        mBinding.fragDetailId.text = mEventId
+        mBinding.detailNameEvent.text = mEventName
+        mBinding.detailDate.text = mEventDate
+        mBinding.detailAddress.text = mEventId
     }
 
     private fun initRV(mBinding: FragmentDetailBinding) {
@@ -60,13 +64,10 @@ class DetailFragment : Fragment() {
 
 
         mDetailViewModel.getAllDetail(mEventId).observe(requireActivity(), Observer {
-            it.forEach {myD ->
-                if (myD.mItemStatus == "I need" )
-                { mDataOne.add(myD)}
-                else
-                {mDataTwo.add(myD)}
+            it.forEach { myD ->
+                if (myD.mItemStatus == "I need") { mDataOne.add(myD) }
+                else { mDataTwo.add(myD) } }
 
-            }
             mDetailAdapterOne.setListDetail(mDataOne)
             mDetailAdapterTwo.setListDetail(mDataTwo)
             mDetailAdapterOne.notifyDataSetChanged()
@@ -74,6 +75,8 @@ class DetailFragment : Fragment() {
 
         })
     }
+
+
 
 
 }

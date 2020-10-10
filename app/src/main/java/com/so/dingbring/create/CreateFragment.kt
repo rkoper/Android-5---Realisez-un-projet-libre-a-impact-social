@@ -37,6 +37,7 @@ class CreateFragment : Fragment() {
     private var mAddress = "xxx"
     private var mOrga = "xxx"
     private var mEvent = "xxx"
+    var i : Int = 1
 
 
     private val mHomeViewModel by viewModel<HomeViewModel>()
@@ -103,25 +104,24 @@ class CreateFragment : Fragment() {
     }
 
     private fun initQuantity() {
-        val mSelectQuantity = resources.getStringArray(((R.array.Quantity)))
-        if (create_quantity != null) {
-            create_quantity.background.setColorFilter(
-                resources.getColor(R.color.black), PorterDuff.Mode.SRC_ATOP
-            )
-            val adapter = ArrayAdapter(requireContext(), R.layout.spinner_custom, mSelectQuantity)
-            create_quantity.adapter = adapter
-        }
+        create_quantity_item.text = i.toString()
+       create_plus.setOnClickListener { i = i.plus(1)
+           mQuantity = i.toString()
+            create_quantity_item.text = i.toString()
+           mQuantity = i.toString()}
+            create_minus.setOnClickListener {
 
-        create_quantity?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, id: Long) {
-                mQuantity = mSelectQuantity[i]
-            }
+                if (i != 1) { i =  i.minus(1)
+                create_quantity_item.text = i.toString()
+                    mQuantity = i.toString()}
+                else {i = 1
+                    mQuantity = i.toString()}
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                mQuantity = "1"
-            }
-        }
-    }
+        }  }
+
+
+
+
 
     private fun initStatus() {
         create_status_bring?.isChecked = true
@@ -181,11 +181,11 @@ class CreateFragment : Fragment() {
         var fView: View? = autocompleteFragment?.view
         var etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)
         etTextInput?.setBackgroundColor(resources.getColor(R.color.colorTransparent))
-        etTextInput?.setTextColor(resources.getColor(R.color.white))
-        etTextInput?.setHintTextColor(resources.getColor(R.color.white))
+        etTextInput?.setTextColor(resources.getColor(R.color.black))
+        etTextInput?.setHintTextColor(resources.getColor(R.color.black))
         etTextInput?.gravity = Gravity.CENTER
         etTextInput?.hint = " Enter address"
-        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.montserrat)
+        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto)
         etTextInput?.typeface = font
         etTextInput?.textSize = 18f
         val searchIcon =

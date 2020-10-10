@@ -5,7 +5,7 @@
         <item name="android:textColorHint">@color/black</item>
         <item name="android:textSize">18sp</item>
         <item name="android:padding">2dp</item>
-        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/roboto</item>
         <item name="android:ellipsize">middle</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">30</item>
@@ -20,7 +20,7 @@
         <item name="android:padding">2dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColorHint">@color/white</item>
-        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/roboto</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">30</item>
@@ -34,7 +34,7 @@
 
     <style name="txt1" parent="@style/TxtViewPrincipalBlack">
         <item name="android:textSize">18sp</item>
-        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/roboto</item>
     </style>
 
 
@@ -53,8 +53,10 @@
     </style>
 
     <style name="spinnerDropDownItemStyle" parent="TxtViewPrincipalWhite">
+
         <item name="android:textAlignment">center</item>
-        <item name="fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:padding">0dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
@@ -73,7 +75,7 @@
     <item name="android:backgroundDimEnabled">false</item>
     <item name="android:windowContentOverlay">@null</item>
     <item name="android:textSize">17sp</item>
-    <item name="fontFamily">@font/montserrat</item>
+    <item name="fontFamily">@font/roboto</item>
     <item name="android:ellipsize">end</item>
     <item name="android:maxLines">1</item>
     <item name="android:textStyle">bold</item>

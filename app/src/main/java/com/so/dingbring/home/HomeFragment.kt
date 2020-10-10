@@ -57,13 +57,25 @@ class HomeFragment : Fragment() {
 
 
     private fun createFireStoreUser(mBinding: FragmentHomeBinding) {
+        if (FirebaseAuth.getInstance().currentUser?.displayName != null)
 
-        mBinding.homeName.text =  FirebaseAuth.getInstance().currentUser?.displayName.toString()
+
+        { mBinding.homeName.text =  FirebaseAuth.getInstance().currentUser?.displayName.toString()}
+        else
+        { mBinding.homeName.text = "Donald Duck"}
+
+        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
+        {
         Glide
             .with(requireContext())
             .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
             .apply(RequestOptions.circleCropTransform())
-            .into(mBinding.homeImage);
+            .into(mBinding.homeImage)}
+        else
+        { Glide.with(requireContext())
+            .load(R.drawable.donald)
+            .apply(RequestOptions.circleCropTransform())
+            .into(mBinding.homeImage)}
 
 
         println(" ------email----------" + FirebaseAuth.getInstance().currentUser?.email)

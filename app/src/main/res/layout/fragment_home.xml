@@ -7,9 +7,20 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/back"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_h_05"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_h_15"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_home_h_2"
             android:layout_width="match_parent"
@@ -34,6 +45,18 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.98"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_v_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_v_6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_home_v_8"
             android:layout_width="match_parent"
@@ -61,22 +84,25 @@
 
 
         <ImageView
+            android:background="@color/yellow"
+            android:padding="3dp"
             android:src="@mipmap/ic_launcher_round"
             android:id="@+id/home_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/home_name"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_home_v_4"
+            app:layout_constraintRight_toRightOf="@+id/gl_home_v_6"
+            app:layout_constraintTop_toTopOf="@+id/gl_home_h_05"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_home_h_15"/>
 
         <TextView
+            style="@style/TxtViewPrincipalBlack"
             android:id="@+id/home_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="italic"
+            android:textStyle="normal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/gl_home_h_2" />

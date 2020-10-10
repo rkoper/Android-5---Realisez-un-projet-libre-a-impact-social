@@ -6,20 +6,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:padding="2dp">
+    android:layout_margin="2dp">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_create_item_v_05"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_create_item_v_1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1"/>
+        app:layout_constraintGuide_percent="0.15"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_create_item_v_2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.16"/>
+        app:layout_constraintGuide_percent="0.27"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_create_item_v_5"
         android:layout_width="match_parent"
@@ -31,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.68"/>
+        app:layout_constraintGuide_percent="0.75"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_create_item_h_1"
         android:layout_width="match_parent"
@@ -47,28 +53,26 @@
 
     <ImageView
         android:visibility="invisible"
-        style="@style/TxtViewPrincipalBlack"
         android:src="@drawable/check"
         android:id="@+id/create_num_item_ok"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_05"
         app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_1"
         app:layout_constraintTop_toTopOf="@+id/gl_create_item_h_1"
         app:layout_constraintBottom_toBottomOf="@+id/gl_create_item_h_9"
-        android:background="@drawable/round_black"/>
+        android:background="@drawable/round_black_small"/>
     <ImageView
         android:visibility="invisible"
-        style="@style/TxtViewPrincipalBlack"
         android:src="@drawable/round_white"
         android:id="@+id/create_num_item_wait"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_05"
         app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_1"
         app:layout_constraintTop_toTopOf="@+id/gl_create_item_h_1"
         app:layout_constraintBottom_toBottomOf="@+id/gl_create_item_h_9"
-        android:background="@drawable/round_black"/>
+        android:background="@drawable/round_black_small"/>
     <TextView
         android:padding="5dp"
         style="@style/TxtViewPrincipalBlack"
@@ -76,23 +80,19 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="8"
-        android:textSize="14sp"
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_1"
         app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:padding="5dp"
         style="@style/TxtViewPrincipalBlack"
         android:id="@+id/detail_item_type"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Itemmmmmmmmmmmmmmm"
+        android:text="1xxxxxxxxxxxxxxxxxxxxxxx9"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:ellipsize="end"
-        android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_2"
         app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_6"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,7 +105,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textSize="14sp"
-        android:text="Orgaaaaa"
+        android:text="Guillaume de la villardiere"
         android:textColor="@color/black"
         android:ellipsize="end"
         app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_6"

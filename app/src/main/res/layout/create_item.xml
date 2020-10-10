@@ -44,19 +44,19 @@
         style="@style/TxtViewPrincipalBlack"
         android:text="1"
         android:id="@+id/create_num_item"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="@+id/gl_create_item_v_05"
         app:layout_constraintRight_toRightOf="@+id/gl_create_item_v_1"
         app:layout_constraintTop_toTopOf="@+id/gl_create_item_h_1"
         app:layout_constraintBottom_toBottomOf="@+id/gl_create_item_h_9"
-        android:background="@drawable/round_black"/>
+        android:background="@drawable/round_black_small"/>
     <TextView
         style="@style/TxtViewPrincipalBlack"
         android:id="@+id/create_status_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Need"
+        android:text="xxxxxxxxxxxxxxxxxxxxxxxx"
         android:textColor="@color/black"
         app:layout_constraintLeft_toRightOf="@+id/create_num_item"
         app:layout_constraintRight_toLeftOf="@+id/create_quantity_item"
