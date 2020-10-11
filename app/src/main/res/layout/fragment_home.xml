@@ -32,7 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.9"/>
+            app:layout_constraintGuide_percent="0.87"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_home_h_93"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.93"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_home_v_5"
             android:layout_width="match_parent"
@@ -107,16 +113,38 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/gl_home_h_2" />
         <ImageButton
-            android:id="@+id/home_create"
-            android:elevation="10dp"
-            android:background="@drawable/round_black"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/home_white"
+            android:elevation="1dp"
+            android:background="@drawable/round_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/add"
-            app:layout_constraintTop_toTopOf="@+id/gl_home_h_9"
             app:layout_constraintBottom_toBottomOf="@+id/gl_home_h_98"
             app:layout_constraintLeft_toLeftOf="@+id/gl_home_v_8"
             app:layout_constraintRight_toRightOf="@+id/gl_home_v_95"/>
+        <ImageButton
+            android:layout_margin="10dp"
+            android:id="@+id/home_create"
+            android:elevation="10dp"
+            android:background="@drawable/round_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            app:layout_constraintTop_toTopOf="@+id/home_white"
+            app:layout_constraintBottom_toBottomOf="@+id/home_white"
+            app:layout_constraintLeft_toLeftOf="@+id/home_white"
+            app:layout_constraintRight_toRightOf="@+id/home_white"/>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/gl_home_h_93"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/yellow"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

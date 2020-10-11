@@ -64,7 +64,8 @@
         android:background="@drawable/round_black_small"/>
     <ImageView
         android:visibility="invisible"
-        android:src="@drawable/round_white"
+        android:padding="5dp"
+        android:src="@drawable/round_white_small"
         android:id="@+id/create_num_item_wait"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
