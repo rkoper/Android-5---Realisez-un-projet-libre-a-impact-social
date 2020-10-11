@@ -67,15 +67,29 @@ class MyItemRepository {
         }
     }
 
-    fun updateStatusItem(mItemID: String, mEventId: String) = Completable.create { emitter ->
+    fun updateStatusItem(
+        mItemID: String,
+        mEventId: String,
+        mItemStatus: String
+    ) = Completable.create { emitter ->
+
+        if (mItemStatus == "I need"){
         dbFire.collection("item")
             .document(mEventId)
             .collection(mEventId)
             .document(mItemID)
-            .update("itemStatus", "I bring")
+            .update("itemStatus", "I bring")}
+
+        else {
+            dbFire.collection("item")
+                .document(mEventId)
+                .collection(mEventId)
+                .document(mItemID)
+                .update("itemStatus", "I need")}
+        }
 
 
-    }
+
 
 }
 

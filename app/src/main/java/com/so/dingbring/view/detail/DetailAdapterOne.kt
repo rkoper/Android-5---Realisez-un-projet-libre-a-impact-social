@@ -14,7 +14,7 @@ class DetailAdapterOne(var mContext: Context, private val itemSelectedListener: 
     : RecyclerView.Adapter<DetailAdapterOne.DetailOneViewHolder>() {
 
     private var dataList : MutableList<MyItem> = mutableListOf()
-    interface ItemSelectedListener { fun onItemSelected(mItemID:String) }
+    interface ItemSelectedListener { fun onItemSelected(mItemID: String, mItemStatus: String) }
 
     fun setListDetail(data: MutableList<MyItem>){ dataList = data }
 
@@ -32,7 +32,7 @@ class DetailAdapterOne(var mContext: Context, private val itemSelectedListener: 
             itemView.detail_item_personn.text = mydetail.mItemUser
         }
         init{ itemView.setOnClickListener {
-            itemSelectedListener.onItemSelected(dataList?.get(adapterPosition)?.mItemId.toString())
+            itemSelectedListener.onItemSelected(dataList?.get(adapterPosition)?.mItemId.toString(), dataList?.get(adapterPosition).mItemStatus)
         dataList.clear()} }
     }
 

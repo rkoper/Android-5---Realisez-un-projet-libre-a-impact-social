@@ -9,13 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.so.dingbring.R
-import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.data.MyItem
 import com.so.dingbring.databinding.FragmentDetailBinding
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.*
 
 class DetailFragment : Fragment() {
     var dataList = mutableListOf<MyItem>()
@@ -76,8 +74,8 @@ class DetailFragment : Fragment() {
 
     private fun initRV(mBinding: FragmentDetailBinding) {
         mDetailAdapterOne= DetailAdapterOne(requireActivity(), object:DetailAdapterOne.ItemSelectedListener {
-            override fun onItemSelected(mItemID: String) {
-                mItemVM.updateStatus(mItemID, mEventId)} })
+            override fun onItemSelected(mItemID: String, mItemStatus: String) {
+                mItemVM.updateStatus(mItemID, mEventId, mItemStatus)} })
       mItemVM.getAllItem(mEventId).observeForever {
           mBinding.recyclerViewDetailOne.layoutManager= LinearLayoutManager(context)
           mBinding.recyclerViewDetailOne.adapter= mDetailAdapterOne
