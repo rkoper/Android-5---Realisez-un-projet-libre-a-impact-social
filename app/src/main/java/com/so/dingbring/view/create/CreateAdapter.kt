@@ -1,17 +1,13 @@
-package com.so.dingbring.create
+package com.so.dingbring.view.detail.create
 
 import android.content.Context
-import android.graphics.Color.red
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.so.dingbring.R
-import com.so.dingbring.home.MyEvent
 
 class CreateAdapter(
     var mContext: Context,
@@ -30,7 +26,6 @@ class CreateAdapter(
 
     }
     override fun onBindViewHolder(holder: CreateViewHolder, position: Int) {
-        println("mStatusList  // 2 // " + mStatusList.toString() +  "    mItemList     // 2  // "      + mItemList.toString() +  "mQuantityList // 2 // " + mQuantityList.toString() )
         holder.mDisplayStatus.text = mStatusList[position]
         holder.mDisplayItem.text = mItemList[position]
         holder.mDisplayQuantity.text = mQuantityList[position]

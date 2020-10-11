@@ -1,4 +1,4 @@
-package com.so.dingbring.detail
+package com.so.dingbring.view.detail
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.so.dingbring.R
+import com.so.dingbring.data.MyItem
 import kotlinx.android.synthetic.main.detail_item.view.*
 
 class DetailAdapterTwo(var mContext: Context): RecyclerView.Adapter<DetailAdapterTwo.DetailTwoViewHolder>() {
 
-    private var dataList= mutableListOf<MyDetail>()
+    private var dataList= mutableListOf<MyItem>()
 
-    fun setListDetail(data:MutableList<MyDetail>){ dataList=data }
+    fun setListDetail(data:MutableList<MyItem>){ dataList=data }
 
     inner class DetailTwoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bindView(mydetail: MyDetail){
+        fun bindView(mydetail: MyItem){
 
                 itemView.create_num_item_ok.isVisible = true
                 itemView.detail_item_quantity.text = mydetail.mItemQty
@@ -37,7 +38,7 @@ class DetailAdapterTwo(var mContext: Context): RecyclerView.Adapter<DetailAdapte
     }
 
     override fun onBindViewHolder(holder: DetailTwoViewHolder, position: Int) {
-        val userDetails: MyDetail = dataList[position]
+        val userDetails: MyItem = dataList[position]
         holder.bindView(userDetails)
     }
 

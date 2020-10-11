@@ -1,4 +1,4 @@
-package com.so.dingbring
+package com.so.dingbring.view.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.FirebaseApp
+import com.so.dingbring.R
 import com.so.dingbring.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     lateinit var binding: ActivityMainBinding
 

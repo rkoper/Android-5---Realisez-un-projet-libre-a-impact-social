@@ -1,4 +1,4 @@
-package com.so.dingbring.home
+package com.so.dingbring.view.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.so.dingbring.R
+import com.so.dingbring.data.MyEvent
 import kotlinx.android.synthetic.main.home_item.view.*
 
 class HomeAdapter(var mContext: Context): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
@@ -18,18 +19,12 @@ class HomeAdapter(var mContext: Context): RecyclerView.Adapter<HomeAdapter.HomeV
 
     inner class HomeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bindView(myEvent: MyEvent){
-            itemView.home_name.text = myEvent.eventName
-            itemView.home_date.text = myEvent.eventDate
-            itemView.home_address.text = myEvent.eventAdress
-            itemView.home_orga.text = myEvent.eventOrga
+            itemView.home_name.text = myEvent.mEventName
+            itemView.home_date.text = myEvent.mEventDate
+            itemView.home_address.text = myEvent.mEventAdress
+            itemView.home_orga.text = myEvent.mEventOrga
             itemView.setOnClickListener {
-                var bundle = bundleOf(
-                    "eventName" to myEvent.eventName,
-                    "eventDate" to myEvent.eventDate,
-                    "eventAdress" to myEvent.eventAdress,
-                    "eventId" to myEvent.eventId,
-                    "eventOrga" to myEvent.eventOrga
-                )
+                var bundle = bundleOf("eventId" to myEvent.mEventId)
                 it.findNavController().navigate(R.id.action_homeFragment_detail_fragment, bundle)
             }
         }
