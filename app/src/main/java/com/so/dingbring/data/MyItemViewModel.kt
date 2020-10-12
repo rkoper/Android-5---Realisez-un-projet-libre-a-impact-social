@@ -43,8 +43,8 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
     }
 
 
-    fun updateStatus(mItemID: String, mEventId: String, mItemStatus: String) {
-        val disposable=mItemRepository.updateStatusItem( mItemID ,mEventId, mItemStatus )
+    fun updateStatus(mItemID: String, mEventId: String, mItemStatus: String, mCase: Int) {
+        val disposable=mItemRepository.updateStatusItem( mItemID ,mEventId, mItemStatus, mCase )
             .subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe({
                 uploadListener?.onSuccess()

@@ -19,7 +19,7 @@ class DetailAdapterTwo(var mContext: Context): RecyclerView.Adapter<DetailAdapte
     inner class DetailTwoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bindView(mydetail: MyItem){
 
-                itemView.create_num_item_ok.isVisible = true
+                itemView.detail_num_item_ok.isVisible = true
                 itemView.detail_item_quantity.text = mydetail.mItemQty
                 itemView.detail_item_type.text = mydetail.mItemType
                 itemView.detail_item_personn.text = mydetail.mItemUser }

@@ -74,8 +74,10 @@ class DetailFragment : Fragment() {
 
     private fun initRV(mBinding: FragmentDetailBinding) {
         mDetailAdapterOne= DetailAdapterOne(requireActivity(), object:DetailAdapterOne.ItemSelectedListener {
-            override fun onItemSelected(mItemID: String, mItemStatus: String) {
-                mItemVM.updateStatus(mItemID, mEventId, mItemStatus)} })
+            override fun onItemSelected(mItemID: String, mItemState: String, mCase : Int) {
+                mItemVM.updateStatus(mItemID, mEventId, mItemState, mCase )} })
+
+
       mItemVM.getAllItem(mEventId).observeForever {
           mBinding.recyclerViewDetailOne.layoutManager= LinearLayoutManager(context)
           mBinding.recyclerViewDetailOne.adapter= mDetailAdapterOne

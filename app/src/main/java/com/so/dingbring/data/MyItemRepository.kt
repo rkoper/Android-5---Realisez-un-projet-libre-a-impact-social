@@ -70,22 +70,30 @@ class MyItemRepository {
     fun updateStatusItem(
         mItemID: String,
         mEventId: String,
-        mItemStatus: String
+        mItemStatus: String,
+        mCase: Int
     ) = Completable.create { emitter ->
 
-        if (mItemStatus == "I need"){
+        if (mCase == 1){
         dbFire.collection("item")
             .document(mEventId)
             .collection(mEventId)
             .document(mItemID)
             .update("itemStatus", "I bring")}
 
-        else {
+        if (mCase == 2 ) {
             dbFire.collection("item")
                 .document(mEventId)
                 .collection(mEventId)
                 .document(mItemID)
                 .update("itemStatus", "I need")}
+
+        if (mCase == 3 ){
+            dbFire.collection("item")
+                .document(mEventId)
+                .collection(mEventId)
+                .document(mItemID)
+                .update("itemQty", mItemStatus.toInt().plus(1).toString())}
         }
 
 

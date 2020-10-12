@@ -14,7 +14,7 @@ class DetailAdapterOne(var mContext: Context, private val itemSelectedListener: 
     : RecyclerView.Adapter<DetailAdapterOne.DetailOneViewHolder>() {
 
     private var dataList : MutableList<MyItem> = mutableListOf()
-    interface ItemSelectedListener { fun onItemSelected(mItemID: String, mItemStatus: String) }
+    interface ItemSelectedListener { fun onItemSelected(mItemID: String, mItemStatus: String, mCase:Int) }
 
     fun setListDetail(data: MutableList<MyItem>){ dataList = data }
 
@@ -22,18 +22,27 @@ class DetailAdapterOne(var mContext: Context, private val itemSelectedListener: 
 
         fun bindView(mydetail: MyItem){
             if (mydetail.mItemStatus == "I need")
-            { itemView.create_num_item_wait.isVisible = true
+            { itemView.detail_num_item_wait.isVisible = true
                 itemView.detail_item_cl.setBackgroundColor(mContext.resources.getColor(R.color.Red))}
-            else { itemView.create_num_item_ok.isVisible = true
+            else { itemView.detail_num_item_ok.isVisible = true
                 itemView.detail_item_cl.setBackgroundColor(mContext.resources.getColor(R.color.Green))}
 
             itemView.detail_item_quantity.text = mydetail.mItemQty
             itemView.detail_item_type.text = mydetail.mItemType
             itemView.detail_item_personn.text = mydetail.mItemUser
         }
-        init{ itemView.setOnClickListener {
-            itemSelectedListener.onItemSelected(dataList?.get(adapterPosition)?.mItemId.toString(), dataList?.get(adapterPosition).mItemStatus)
-        dataList.clear()} }
+        init{ itemView.detail_num_item_wait.setOnClickListener {
+            itemSelectedListener.onItemSelected(dataList[adapterPosition].mItemId,  dataList[adapterPosition].mItemStatus, 1)
+        dataList.clear()}
+
+            itemView.detail_num_item_ok.setOnClickListener {
+                itemSelectedListener.onItemSelected(dataList[adapterPosition].mItemId.toString(), dataList[adapterPosition].mItemStatus, 2)
+                dataList.clear()}
+
+        itemView.detail_item_add_one.setOnClickListener {
+            itemSelectedListener.onItemSelected   (dataList[adapterPosition].mItemId.toString(), dataList[adapterPosition].mItemQty, 3)
+            dataList.clear()}
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailOneViewHolder {
