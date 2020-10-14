@@ -7,4 +7,3 @@ data class MyEvent(
     val mEventAdress:String,
     val mEventUserMail:String,
     val mEventId:String)
-

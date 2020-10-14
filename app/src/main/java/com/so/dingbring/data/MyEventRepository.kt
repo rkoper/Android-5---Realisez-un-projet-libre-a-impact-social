@@ -20,44 +20,44 @@ class MyEventRepository {
         val mutableList= mutableListOf<MyEvent>()
         dbFire.collection("event").addSnapshotListener { querySnapshot, exception ->
             if (querySnapshot != null) {
-                    for (document in querySnapshot.documents) {
+                for (document in querySnapshot.documents) {
                     val eventDate: String? = document.getString("eventDate")
-                        val eventUserMail: String? = document.getString("eventUserMail")
-                        val eventName: String? = document.getString("eventName")
-                        val eventOrga: String? = document.getString("eventOrga")
-                        val eventAddress: String? = document.getString("eventAddress")
-                        val eventId: String? = document.getString("eventId")
-                        val myData = MyEvent(
-                            eventDate!!,
-                            eventName!!,
-                            eventOrga!!,
-                            eventAddress!!,
-                            eventUserMail!!,
-                            eventId!!
-                        )
-                        mutableList.add(myData)
-                    }
-                    mEventSet.value = mutableList
+                    val eventUserMail: String? = document.getString("eventUserMail")
+                    val eventName: String? = document.getString("eventName")
+                    val eventOrga: String? = document.getString("eventOrga")
+                    val eventAddress: String? = document.getString("eventAddress")
+                    val eventId: String? = document.getString("eventId")
+                    val myData = MyEvent(
+                        eventDate!!,
+                        eventName!!,
+                        eventOrga!!,
+                        eventAddress!!,
+                        eventUserMail!!,
+                        eventId!!
+                    )
+                    mutableList.add(myData)
                 }
+                mEventSet.value = mutableList
+            }
         }
         return mEventSet
     }
 
-        fun createEvent(myData : MyEvent) : String{
+    fun createEvent(myData : MyEvent) : String{
         val items = HashMap<String, Any>()
         items["eventName"] = myData.mEventName
         items["eventDate"] = myData.mEventDate
         items["eventAddress"] = myData.mEventAdress
         items["eventOrga"] = myData.mEventOrga
         items["eventUserMail"] = myData.mEventUserMail
-            items["eventId"] = myData.mEventId
+        items["eventId"] = myData.mEventId
 
         dbFire.collection("event").document(myData.mEventId).set(items)
 
-            return dbFire.collection("event").document().id
-      }
+        return dbFire.collection("event").document().id
+    }
     fun getEventById(mEventID : String): LiveData<MyEvent> {
-         var mEventOne: MutableLiveData<MyEvent> = MutableLiveData()
+        var mEventOne: MutableLiveData<MyEvent> = MutableLiveData()
         dbFire.collection("event").document(mEventID).addSnapshotListener { querySnapshot, exception ->
             if (querySnapshot != null) {
                 if (querySnapshot.contains(mEventID)){
@@ -81,5 +81,3 @@ class MyEventRepository {
         return mEventOne
     }
 }
-
-

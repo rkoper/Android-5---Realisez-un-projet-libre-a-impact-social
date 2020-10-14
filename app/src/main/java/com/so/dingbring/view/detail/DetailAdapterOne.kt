@@ -28,20 +28,20 @@ class DetailAdapterOne(var mContext: Context, private val itemSelectedListener: 
                 itemView.detail_item_cl.setBackgroundColor(mContext.resources.getColor(R.color.Green))}
 
             itemView.detail_item_quantity.text = mydetail.mItemQty
-            itemView.detail_item_type.text = mydetail.mItemType
+            itemView.detail_item_type.text = mydetail.mItemName
             itemView.detail_item_personn.text = mydetail.mItemUser
         }
         init{ itemView.detail_num_item_wait.setOnClickListener {
             itemSelectedListener.onItemSelected(dataList[adapterPosition].mItemId,  dataList[adapterPosition].mItemStatus, 1)
-        dataList.clear()}
+            dataList.clear()}
 
             itemView.detail_num_item_ok.setOnClickListener {
                 itemSelectedListener.onItemSelected(dataList[adapterPosition].mItemId.toString(), dataList[adapterPosition].mItemStatus, 2)
                 dataList.clear()}
 
-        itemView.detail_item_add_one.setOnClickListener {
-            itemSelectedListener.onItemSelected   (dataList[adapterPosition].mItemId.toString(), dataList[adapterPosition].mItemQty, 3)
-            dataList.clear()}
+            itemView.detail_item_add_one.setOnClickListener {
+                itemSelectedListener.onItemSelected   (dataList[adapterPosition].mItemId.toString(), dataList[adapterPosition].mItemQty, 3)
+                dataList.clear()}
         }
     }
 

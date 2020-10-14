@@ -43,8 +43,11 @@ class HomeFragment : Fragment() {
     private fun initView(mBinding: FragmentHomeBinding) {
         mBinding.homeCreate.setOnClickListener {
             var bundle = bundleOf(
-                 "mUserName" to FirebaseAuth.getInstance().currentUser?.displayName,
-                 "mUserUserMail" to FirebaseAuth.getInstance().currentUser?.email)
+              "mUserName" to  " 1 ",
+//                //FirebaseAuth.getInstance().currentUser?.displayName,
+                "mUserUserMail" to  "2")
+                //
+                //FirebaseAuth.getInstance().currentUser?.email)
             it.findNavController().navigate(R.id.action_homeFragment_to_createFragment, bundle)} }
 
 

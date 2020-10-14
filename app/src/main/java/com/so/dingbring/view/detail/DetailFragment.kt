@@ -78,20 +78,19 @@ class DetailFragment : Fragment() {
                 mItemVM.updateStatus(mItemID, mEventId, mItemState, mCase )} })
 
 
-      mItemVM.getAllItem(mEventId).observeForever {
-          mBinding.recyclerViewDetailOne.layoutManager= LinearLayoutManager(context)
-          mBinding.recyclerViewDetailOne.adapter= mDetailAdapterOne
-          mDetailAdapterOne.setListDetail(it)
+        mItemVM.getAllItem(mEventId).observeForever {mlmi ->
 
-      }
+            mlmi.sortBy { it.mItemStatus }
+            mBinding.recyclerViewDetailOne.layoutManager= LinearLayoutManager(context)
+            mBinding.recyclerViewDetailOne.adapter= mDetailAdapterOne
+            mDetailAdapterOne.setListDetail(mlmi)
+
+        }
 
 
 
 
-            mDetailAdapterOne.notifyDataSetChanged()
+        mDetailAdapterOne.notifyDataSetChanged()
 
     }
 }
-
-
-

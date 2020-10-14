@@ -46,7 +46,7 @@ class CreateFragment : Fragment() {
     private var mEventAdress = ""
     private var mEventSize = ""
 
-// testb!!!!!!!!!!!!!!!!!!!!
+    // testb!!!!!!!!!!!!!!!!!!!!
     private val dbFire= FirebaseFirestore.getInstance()
 
 
@@ -76,10 +76,10 @@ class CreateFragment : Fragment() {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create, container, false)
 
         // CHECK THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //    mUserMail = arguments?.get("eventName").toString()
-      //  mUserName = arguments?.get("eventDate").toString()
+        //    mUserMail = arguments?.get("eventName").toString()
+        //  mUserName = arguments?.get("eventDate").toString()
         mEventVM.getAllEvent().observe(requireActivity(), {
-                mEventSize =  it.size.toString() })
+            mEventSize =  it.size.toString() })
 
 
 
@@ -201,15 +201,15 @@ class CreateFragment : Fragment() {
 
     private fun initQuantity() {
         create_quantity_item.text = i.toString()
-       create_plus.setOnClickListener {
-           i = i.plus(1) ; mQuantity = i.toString()
+        create_plus.setOnClickListener {
+            i = i.plus(1) ; mQuantity = i.toString()
             create_quantity_item.text = i.toString() ; mQuantity = i.toString()}
 
-            create_minus.setOnClickListener {
-         if (i != 1) { i =  i.minus(1) ;create_quantity_item.text = i.toString() ;   mQuantity = i.toString()}
-         else {i = 1 ;  mQuantity = i.toString()} }  }
+        create_minus.setOnClickListener {
+            if (i != 1) { i =  i.minus(1) ;create_quantity_item.text = i.toString() ;   mQuantity = i.toString()}
+            else {i = 1 ;  mQuantity = i.toString()} }  }
 
-   private fun initStatus() {
+    private fun initStatus() {
         create_status_bring?.isChecked = true
         mStatus = "I bring"
         create_status_need?.setOnCheckedChangeListener { _, b ->
@@ -239,5 +239,3 @@ class CreateFragment : Fragment() {
 
 
 }
-
-

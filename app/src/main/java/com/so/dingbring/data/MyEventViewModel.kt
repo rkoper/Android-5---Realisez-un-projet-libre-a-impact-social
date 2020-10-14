@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 
 class MyEventViewModel(private val mEventRepository: MyEventRepository): ViewModel() {
 
- fun getAllEvent() : LiveData<MutableList<MyEvent>> {
+    fun getAllEvent() : LiveData<MutableList<MyEvent>> {
         val mutableData = MutableLiveData<MutableList<MyEvent>>()
         mEventRepository.getAllEvent().observeForever{ mutableData.value=it }
         return mutableData

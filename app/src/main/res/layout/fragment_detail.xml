@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4"/>
+            app:layout_constraintGuide_percent="0.37"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_detail_h_6"
             android:layout_width="match_parent"
@@ -347,7 +347,7 @@
                 app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_8"
                 android:contentDescription="save" />
             <EditText
-                android:theme="@style/TxtViewPrincipalBlack"
+                android:theme="@style/TxtViewPrincipalBlack3"
                 android:background="@null"
                 android:hint="Type Item "
                 android:layout_width="0dp"
@@ -417,7 +417,7 @@
                 <TextView
                     android:padding="0dp"
                     android:gravity="center"
-                    android:theme="@style/TxtViewPrincipalBlack"
+                    android:theme="@style/TxtViewPrincipalBlack1"
                     android:text="Quantity"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -440,7 +440,7 @@
                     app:layout_constraintLeft_toLeftOf="@+id/gl_detail3_v_25"/>
                 <TextView
                     android:text="1"
-                    android:theme="@style/TxtViewPrincipalBlack"
+                    android:theme="@style/TxtViewPrincipalBlack1"
                     app:layout_constraintLeft_toRightOf="@+id/detail_minus"
                     app:layout_constraintRight_toLeftOf="@+id/detail_plus"
                     android:id="@+id/detail_quantity_item"
@@ -472,7 +472,7 @@
         <TextView
             android:background="@null"
             android:id="@+id/detail_name_Event"
-            android:theme="@style/TxtViewPrincipalBlack"
+            android:theme="@style/TxtViewPrincipalBlack4"
             android:hint="Enter Name's Event"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -504,7 +504,7 @@
         <TextView
             android:id="@+id/detail_address"
             android:background="@color/colorTransparent"
-            android:theme="@style/TxtViewPrincipalBlack"
+            android:theme="@style/TxtViewPrincipalBlack3"
             android:hint="Enter Address"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -516,7 +516,7 @@
         <TextView
             android:textColorHint="@color/black"
             android:id="@+id/detail_date"
-            android:theme="@style/TxtViewPrincipalBlack"
+            android:theme="@style/TxtViewPrincipalBlack3"
             android:hint="Enter Date"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -537,7 +537,7 @@
             android:background="@null"
             android:textColorHint="@color/black"
             android:id="@+id/detail_orga"
-            android:theme="@style/TxtViewPrincipalBlack"
+            android:theme="@style/TxtViewPrincipalBlack3"
             android:hint="Enter Organizer"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -555,18 +555,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
-
-        <TextView
-            android:theme="@style/TxtViewPrincipalBlack"
-            android:text="I need : "
-            android:gravity="center"
-            android:background="@drawable/rectangle_corner_yellow"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/gl_detail_h_5"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_55"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_margin="5dp"

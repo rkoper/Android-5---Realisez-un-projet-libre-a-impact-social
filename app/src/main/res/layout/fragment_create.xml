@@ -326,7 +326,7 @@
                     app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_8"
                     android:contentDescription="save" />
                 <EditText
-                    android:theme="@style/TxtViewPrincipalBlack"
+                    android:theme="@style/TxtViewPrincipalBlack3"
                     android:background="@null"
                     android:hint="Type Item "
                     android:layout_width="0dp"
@@ -396,7 +396,7 @@
                     <TextView
                         android:padding="0dp"
                         android:gravity="center"
-                        android:theme="@style/TxtViewPrincipalBlack"
+                        android:theme="@style/TxtViewPrincipalBlack1"
                         android:text="Quantity"
                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -419,7 +419,7 @@
                         app:layout_constraintLeft_toLeftOf="@+id/gl_create3_v_25"/>
                     <TextView
                         android:text="1"
-                        android:theme="@style/TxtViewPrincipalBlack"
+                        android:theme="@style/TxtViewPrincipalBlack2"
                         app:layout_constraintLeft_toRightOf="@+id/create_minus"
                         app:layout_constraintRight_toLeftOf="@+id/create_plus"
                         android:id="@+id/create_quantity_item"
@@ -451,7 +451,7 @@
             <EditText
                 android:background="@null"
                 android:id="@+id/create_name_Event"
-                android:theme="@style/TxtViewPrincipalBlack"
+                android:theme="@style/TxtViewPrincipalBlack4"
                 android:hint="Enter Name's Event"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -494,7 +494,7 @@
         android:visibility="invisible"
         android:id="@+id/create_address"
         android:background="@color/colorTransparent"
-        android:theme="@style/TxtViewPrincipalBlack"
+        android:theme="@style/TxtViewPrincipalBlack3"
         android:hint="Enter Address"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -506,7 +506,7 @@
     <TextView
         android:textColorHint="@color/black"
         android:id="@+id/create_date"
-        android:theme="@style/TxtViewPrincipalBlack"
+        android:theme="@style/TxtViewPrincipalBlack3"
         android:hint="Enter Date"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -527,7 +527,7 @@
                 android:background="@null"
                 android:textColorHint="@color/black"
                 android:id="@+id/create_orga"
-                android:theme="@style/TxtViewPrincipalBlack"
+                android:theme="@style/TxtViewPrincipalBlack3"
                 android:hint="Enter Organizer"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

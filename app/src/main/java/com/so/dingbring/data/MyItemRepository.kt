@@ -20,19 +20,19 @@ class MyItemRepository {
         val mDetailMutableList = mutableListOf<MyItem>()
 
         dbFire.collection("item").document(mEventId).collection(mEventId)
-            .addSnapshotListener { querySnapshot, exception ->
+            .addSnapshotListener { querySnapshot, _ ->
                 if (querySnapshot != null) {
                     for (document in querySnapshot.documents) {
                         val mItemStatus: String? = document.getString("itemStatus")
                         val mItemQty: String? = document.getString("itemQty")
-                        val mItemType: String? = document.getString("itemType")
+                        val mItemName: String? = document.getString("itemName")
                         val mItemUser: String? = document.getString("itemUser")
                         val mItemIdDoc: String? = document.id
                         val myDetail =
                             MyItem(
                                 mItemStatus!!,
                                 mItemQty!!,
-                                mItemType!!,
+                                mItemName!!,
                                 mItemUser!!,
                                 mItemIdDoc!!
                             )
@@ -58,7 +58,7 @@ class MyItemRepository {
             var mItemEach = HashMap<String, String>()
             var mUniqueID = UUID.randomUUID().toString()
             mItemEach["itemStatus"] = mStatusList[i]
-            mItemEach["itemType"] = mItemList[i]
+            mItemEach["itemName"] = mItemList[i]
             mItemEach["itemUser"] = mUserName
             mItemEach["itemQty"] = mQuantityList[i]
             mItemEach["itemId"] = mUniqueID
@@ -75,11 +75,11 @@ class MyItemRepository {
     ) = Completable.create { emitter ->
 
         if (mCase == 1){
-        dbFire.collection("item")
-            .document(mEventId)
-            .collection(mEventId)
-            .document(mItemID)
-            .update("itemStatus", "I bring")}
+            dbFire.collection("item")
+                .document(mEventId)
+                .collection(mEventId)
+                .document(mItemID)
+                .update("itemStatus", "I bring")}
 
         if (mCase == 2 ) {
             dbFire.collection("item")
@@ -94,7 +94,7 @@ class MyItemRepository {
                 .collection(mEventId)
                 .document(mItemID)
                 .update("itemQty", mItemStatus.toInt().plus(1).toString())}
-        }
+    }
 
 
 
@@ -106,16 +106,10 @@ class MyItemRepository {
 
 
 /*
-
         items["itemStatus"] = mStatusList[i]
         items["itemType"] = mItemList[i]
         items["itemQty"] = mQuantityList[i]
         items["itemUser"] = mUserName
-
-
         dbFire.collection("data").document(mDocId).set(items)
             .addOnSuccessListener { emitter.onComplete() }.addOnFailureListener {}
-
-
     */
-
