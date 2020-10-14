@@ -77,18 +77,16 @@ class DetailAdapterOne(var mContext: Context,
                     mStatusLst[adapterPosition],
                     2
                 )
-                notifyDataSetChanged()
             }
 
             itemView.detail_item_add_one.setOnClickListener {
                 println("---| click 3 |---" )
-                mQuantityLst[adapterPosition]  =  mQuantityLst[adapterPosition].toInt().plus(1).toString()
                 itemSelectedListener.onItemSelected(
                     mItemIDLst[adapterPosition],
                     mQuantityLst[adapterPosition],
                     3
                 )
-                notifyDataSetChanged()
+                mQuantityLst[adapterPosition]  =  mQuantityLst[adapterPosition].toInt().plus(1).toString()
             }
         }
     }
