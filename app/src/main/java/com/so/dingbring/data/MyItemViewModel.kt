@@ -23,14 +23,14 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
         return mMutableData
     }
 
-    fun createItem(
+    fun createItemList(
         mStatusList: ArrayList<String>,
         mItemList: ArrayList<String>,
         mQuantityList: ArrayList<String>,
         mUserName : String,
         mDocId: String
     ) {
-        val disposable=mItemRepository.createItem(mStatusList, mItemList,mQuantityList, mUserName, mDocId)
+        val disposable=mItemRepository.createItemList(mStatusList, mItemList,mQuantityList, mUserName, mDocId)
             .subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()).subscribe({
                 uploadListener?.onSuccess()
@@ -39,6 +39,19 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
             })
 
         disposables.add(disposable)
+
+    }
+
+    fun createItem(
+        mStatus: String,
+        mItem: String,
+        mQuantity: String,
+        mUser : String,
+        mDocId: String
+    ) {
+
+        mItemRepository.createItem(mStatus, mItem,mQuantity, mUser, mDocId)
+
 
     }
 

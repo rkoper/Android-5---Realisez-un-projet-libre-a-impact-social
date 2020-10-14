@@ -46,7 +46,7 @@ class MyItemRepository {
     }
 
 
-    fun createItem(
+    fun createItemList(
         mStatusList: ArrayList<String>,
         mItemList: ArrayList<String>,
         mQuantityList: ArrayList<String>,
@@ -67,36 +67,60 @@ class MyItemRepository {
         }
     }
 
-    fun updateStatusItem(
-        mItemID: String,
-        mEventId: String,
-        mItemStatus: String,
-        mCase: Int
-    ) = Completable.create { emitter ->
+    fun createItem(
+        mStatus: String,
+        mItem: String,
+        mQuantity: String,
+        mUserName: String,
+        mDocId: String
+    ) {
 
-        if (mCase == 1){
-            dbFire.collection("item")
-                .document(mEventId)
-                .collection(mEventId)
-                .document(mItemID)
-                .update("itemStatus", "I bring")}
+        println("--| Rep 1 |--" + mStatus + " /  " + mItem + mQuantity + " /  " + mUserName + " /  " + mDocId)
 
-        if (mCase == 2 ) {
-            dbFire.collection("item")
-                .document(mEventId)
-                .collection(mEventId)
-                .document(mItemID)
-                .update("itemStatus", "I need")}
+        var mItemEach = HashMap<String, String>()
+        var mUniqueID = UUID.randomUUID().toString()
+        mItemEach["itemStatus"] = mStatus
+        mItemEach["itemName"] = mItem
+        mItemEach["itemUser"] = mUserName
+        mItemEach["itemQty"] = mQuantity
+        mItemEach["itemId"] = mUniqueID
 
-        if (mCase == 3 ){
-            dbFire.collection("item")
-                .document(mEventId)
-                .collection(mEventId)
-                .document(mItemID)
-                .update("itemQty", mItemStatus.toInt().plus(1).toString())}
+        dbFire.collection("item").document(mDocId).collection(mDocId).document("123")
+            .set(mItemEach)
+
     }
 
+        fun updateStatusItem(
+            mItemID: String,
+            mEventId: String,
+            mItemStatus: String,
+            mCase: Int
+        ) = Completable.create { emitter ->
 
+            if (mCase == 1) {
+                dbFire.collection("item")
+                    .document(mEventId)
+                    .collection(mEventId)
+                    .document(mItemID)
+                    .update("itemStatus", "I bring")
+            }
+
+            if (mCase == 2) {
+                dbFire.collection("item")
+                    .document(mEventId)
+                    .collection(mEventId)
+                    .document(mItemID)
+                    .update("itemStatus", "I need")
+            }
+
+            if (mCase == 3) {
+                dbFire.collection("item")
+                    .document(mEventId)
+                    .collection(mEventId)
+                    .document(mItemID)
+                    .update("itemQty", mItemStatus.toInt().plus(1).toString())
+            }
+        }
 
 
 }

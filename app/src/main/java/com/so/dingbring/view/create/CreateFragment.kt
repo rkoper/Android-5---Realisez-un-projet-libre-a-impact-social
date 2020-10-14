@@ -46,10 +46,6 @@ class CreateFragment : Fragment() {
     private var mEventAdress = ""
     private var mEventSize = ""
 
-    // testb!!!!!!!!!!!!!!!!!!!!
-    private val dbFire= FirebaseFirestore.getInstance()
-
-
     private val mItemVM by viewModel<MyItemViewModel>()
     var i : Int = 1
     var mStatus: String = "I bring"
@@ -57,16 +53,12 @@ class CreateFragment : Fragment() {
     var mQuantity: String = "1"
     var mDocId = "Test mDocId"
 
-
-
-
     var mStatusList = arrayListOf<String>()
     var mItemList = arrayListOf<String>()
     var mQuantityList = arrayListOf<String>()
 
     private lateinit var mCreateAdapter: CreateAdapter
     private lateinit var mBinding: FragmentCreateBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,26 +72,20 @@ class CreateFragment : Fragment() {
         //  mUserName = arguments?.get("eventDate").toString()
         mEventVM.getAllEvent().observe(requireActivity(), {
             mEventSize =  it.size.toString() })
-
-
-
-
-        initView(mBinding)
-
+             initView(mBinding)
         return mBinding.root }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCreateEvent()
         initCreateItem() }
 
-
-
     private fun initCreateEvent() {
         initAdresse()
         initDate()
-        createEvent()
-    }
+        createEvent() }
+
     private fun initAdresse() {
         var mStreetNumber = ""; var mStreetName = ""; var mCity = ""
         if (!Places.isInitialized()) { Places.initialize(activity?.applicationContext!!, "AIzaSyByK0jz-yxjpZFX88W8zjzTwtzMtkPYC4w") }
@@ -179,9 +165,6 @@ class CreateFragment : Fragment() {
                 it.findNavController().navigate(R.id.action_createFragment_to_homeFragment) } } }
 
 
-
-
-
     private fun initCreateItem() {
         initItem(); initRV(); initQuantity(); initStatus()
         create_add?.setOnClickListener {
@@ -219,15 +202,7 @@ class CreateFragment : Fragment() {
 
 
     private fun createItem(mDocId:String) {
-        mItemVM.createItem(mStatusList, mItemList, mQuantityList, mUserName, mDocId)  }
-
-
-
-
-
-
-
-
+        mItemVM.createItemList(mStatusList, mItemList, mQuantityList, mUserName, mDocId)  }
 
 
     private fun initView(mBinding: FragmentCreateBinding) {
