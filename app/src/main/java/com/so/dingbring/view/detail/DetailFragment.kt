@@ -20,7 +20,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
 class DetailFragment : Fragment() {
     var mEventName = ""
@@ -73,18 +72,13 @@ class DetailFragment : Fragment() {
         initRV()
 
         mDetailAdapter.itemClickFull.subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                     data -> mItemVM.updateStatus(data, 1)
-            }
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 1) }
 
         mDetailAdapter.itemClickEmpty.subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                    data -> mItemVM.updateStatus(data, 2)
-            }
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 2)}
 
         mDetailAdapter.itemClickN.subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe {
-                     data -> mItemVM.updateStatus(data, 3 ) } }
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 3) } }
 
 
    private fun initRV() {
@@ -136,8 +130,7 @@ class DetailFragment : Fragment() {
                     mEventId)
 
                 mListMyItem.add(mMyItem)
-
-                createItem()
+                mItemVM.createUniqueItem(mMyItem)
             }
         }
     }
@@ -172,8 +165,6 @@ class DetailFragment : Fragment() {
     private fun initItem() {
         mItemName = detail_item.text.toString() }
 
-    private fun createItem() {
-        mItemVM.createItem(mListMyItem) }
 }
 
 

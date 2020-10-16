@@ -581,27 +581,6 @@
             app:layout_constraintRight_toRightOf="parent"
             android:background="@color/yellow"/>
 
-        <ImageButton
-            android:id="@+id/detail_white_create"
-            android:elevation="1dp"
-            android:background="@drawable/round_white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_98"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_8"
-            app:layout_constraintRight_toRightOf="@+id/gl_detail_v_95"/>
-        <ImageButton
-            android:id="@+id/detail_create"
-            android:elevation="10dp"
-            android:background="@drawable/round_black"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/check"
-            app:layout_constraintTop_toTopOf="@+id/detail_white_create"
-            app:layout_constraintBottom_toBottomOf="@+id/detail_white_create"
-            app:layout_constraintLeft_toLeftOf="@+id/detail_white_create"
-            app:layout_constraintRight_toRightOf="@+id/detail_white_create"/>
 
         <ImageButton
             android:id="@+id/detail_white_return"
@@ -611,8 +590,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/add"
             app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_98"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_3"
-            app:layout_constraintRight_toRightOf="@+id/gl_detail_v_05"/>
+            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_5"
+            app:layout_constraintRight_toRightOf="@+id/gl_detail_v_5"/>
         <ImageButton
             android:id="@+id/detail_return"
             android:elevation="10dp"

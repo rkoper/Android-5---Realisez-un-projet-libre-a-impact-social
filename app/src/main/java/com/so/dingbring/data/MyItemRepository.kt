@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import io.reactivex.Completable
+import com.so.dingbring.view.detail.DetailAdapter
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -76,17 +76,31 @@ class MyItemRepository {
                 mItemEach["ItemEventId"] = mMyItem.mItemEventId
                 dbFire.collection("item").document(mUniqueID).set(mItemEach) } }
 
+    fun createUniqueItem(mListItem: MyItem) {
+            var mItemEach = HashMap<String, String>()
+            var mUniqueID = UUID.randomUUID().toString()
+            mItemEach["itemStatus"] = mListItem.mItemStatus
+            mItemEach["itemName"] = mListItem.mItemName
+            mItemEach["itemUser"] = mListItem.mItemUser
+            mItemEach["itemQty"] = mListItem.mItemQty
+            mItemEach["itemId"] = mUniqueID
+            mItemEach["ItemEventId"] = mListItem.mItemEventId
+            dbFire.collection("item").document(mUniqueID).set(mItemEach) }
 
 
-        fun updateStatusItem(mData: MyItem, i:Int) {
+
+        fun updateStatusItem(mData: MyItem, i: Int) : String {
             if (i == 1)
             {dbFire.collection("item").document(mData.mItemId).update("itemStatus", "I need")}
             if (i == 2)
             {dbFire.collection("item").document(mData.mItemId).update("itemStatus", "I bring")}
             if (i == 3)
             {dbFire.collection("item").document(mData.mItemId)
-                .update("itemQty", mData.mItemQty.toInt().plus(1).toString())} 
-        
-        println(" --------update finsh-----")}
+                .update("itemQty", mData.mItemQty.toInt().plus(1).toString())}
+
+
+            return dbFire.collection("item").document(mData.mItemId).id
+        }
+
     }
 

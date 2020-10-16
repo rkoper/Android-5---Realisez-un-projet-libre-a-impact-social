@@ -65,22 +65,22 @@ class DetailAdapter(
         init {
             mDetailEmptyButton.setOnClickListener {
                 itemClickEmpty.onNext(mListMyItem[position])
-                mDetailFullButton.visibility = View.VISIBLE
-                mDetailEmptyButton.visibility = View.INVISIBLE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))
+               //    mDetailFullButton.visibility = View.VISIBLE
+               //  mDetailEmptyButton.visibility = View.INVISIBLE
+               //  mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))
             }
 
             mDetailFullButton.setOnClickListener {
                 itemClickFull.onNext(mListMyItem[position])
-                mDetailEmptyButton.visibility = View.VISIBLE
-                mDetailFullButton.visibility = View.INVISIBLE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))
+              //  mDetailEmptyButton.visibility = View.VISIBLE
+              //  mDetailFullButton.visibility = View.INVISIBLE
+               // mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))
             }
 
             mDetailAddOne.setOnClickListener {
                 itemClickN.onNext(mListMyItem[position])
-                mDetailQuantity.text = mListMyItem[position].mItemQty.toInt().plus(1).toString()
-                return@setOnClickListener
+                // mDetailQuantity.text = mListMyItem[position].mItemQty.toInt().plus(1).toString()
+
             }
 
         }
