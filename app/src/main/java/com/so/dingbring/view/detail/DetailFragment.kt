@@ -1,5 +1,6 @@
 package com.so.dingbring.view.detail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,15 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
-import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.data.MyItem
+import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.databinding.FragmentDetailBinding
-import kotlinx.android.synthetic.main.fragment_create.*
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DetailFragment : Fragment() {
     var mEventName = ""
@@ -24,25 +28,21 @@ class DetailFragment : Fragment() {
     var mEventOrga = ""
     var mEventAddress = ""
     var mEventId = ""
+    var mNb = 0
 
     private lateinit var mBinding: FragmentDetailBinding
-    private lateinit var mDetailAdapterOne: DetailAdapterOne
-    private lateinit var mDetailAdapterTwo: DetailAdapterTwo
+    private lateinit var mDetailAdapter: DetailAdapter
+
     private val mItemVM by viewModel<MyItemViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
 
-    var i : Int = 1
-    var mStatus: String = "I bring"
-    var mNameItem: String = "<3"
-    var mQuantity: String = "1"
-    var mUser: String = "1"
-    var mIdItem: String = "1"
+    var i: Int = 1
+    var mItemStatus: String = "I bring"
+    var mItemName: String = "<3"
+    var mItemQuantity: String = "1"
+    var mItemUniqueID = UUID.randomUUID().toString()
+    var mListMyItem = arrayListOf<MyItem>()
 
-    var mStatusList = arrayListOf<String>()
-    var mItemList = arrayListOf<String>()
-    var mQuantityList = arrayListOf<String>()
-    var mUserList = arrayListOf<String>()
-    var mItemIdList = arrayListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,25 +50,58 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-
         initView(mBinding)
         initHeader(mBinding)
-
-        return mBinding.root
-    }
+        println("----------| 1 |----------")
+        return mBinding.root}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRetrieveItem()
+        println("----------| 2 |----------")
         initCreateItem() }
+
+
+    @SuppressLint("CheckResult")
+    private fun initRetrieveItem() {
+        mDetailAdapter = DetailAdapter(
+            requireContext(),
+            mListMyItem)
+        mBinding.recyclerViewDetailOne.layoutManager = LinearLayoutManager(context)
+        mBinding.recyclerViewDetailOne.adapter = mDetailAdapter
+        println("----------| 3 |----------")
+        initRV()
+
+        mDetailAdapter.itemClickFull.subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                     data -> mItemVM.updateStatus(data, 1)
+            }
+
+        mDetailAdapter.itemClickEmpty.subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                    data -> mItemVM.updateStatus(data, 2)
+            }
+
+        mDetailAdapter.itemClickN.subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                     data -> mItemVM.updateStatus(data, 3 ) } }
+
+
+   private fun initRV() {
+       mItemVM.getTestItem(mEventId).observeForever {  mlmi ->
+           println("-----------M L M I ----" + mlmi.size)
+           mlmi.sortBy { it.mItemStatus }
+           for (i in mlmi.indices) {mListMyItem.add(mlmi[i])}
+           mDetailAdapter.notifyDataSetChanged()
+       } }
+
 
     private fun initView(mBinding: FragmentDetailBinding) {
         mBinding.detailReturn.setOnClickListener {
             it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
 
-
     private fun initHeader(mBinding: FragmentDetailBinding) {
         mEventId = arguments?.get("eventId").toString()
-
         mEventVM.getAllEvent().observe(requireActivity(), {
             it.forEach { myEvent ->
                 if (myEvent.mEventId == mEventId) {
@@ -80,73 +113,67 @@ class DetailFragment : Fragment() {
                     mEventAddress = myEvent.mEventAdress
                     mBinding.detailOrga.text = myEvent.mEventOrga
                     mEventOrga = myEvent.mEventOrga
-                    mEventId = myEvent.mEventId } } }) }
+                    mEventId = myEvent.mEventId
+                } } }) }
 
-    private fun initRV() {
-        mDetailAdapterOne= DetailAdapterOne(requireActivity() , object:DetailAdapterOne.ItemSelectedListener {
-            override fun onItemSelected(mItemID: String, mItemState: String, mCase : Int) {
-                mItemVM.updateStatus(mItemID, mEventId, mItemState, mCase )} })
-
-        mItemVM.getAllItem(mEventId).observeForever {mlmi ->
-            mlmi.sortBy { it.mItemStatus }
-            mBinding.recyclerViewDetailOne.layoutManager= LinearLayoutManager(context)
-            mBinding.recyclerViewDetailOne.adapter= mDetailAdapterOne
-
-            mlmi.forEach { mStatusList.add(it.mItemStatus)
-                 mItemList.add(it.mItemName)
-                 mQuantityList.add(it.mItemQty)
-                 mUserList.add(it.mItemUser)
-                 mItemIdList.add(it.mItemId)
-                 mUser = it.mItemUser
-                 mIdItem = it.mItemId }
-
-
-            mDetailAdapterOne.setListDetail(mStatusList,mItemList,mQuantityList,mUserList,mItemIdList) }
-
-        mDetailAdapterOne.notifyDataSetChanged() }
 
     private fun initCreateItem() {
+        println("-------------initCreateItem--------------")
         initItem()
-        initRV()
         initQuantity()
         initStatus()
         detail_add?.setOnClickListener {
             initItem()
-            if (mNameItem == "") { Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show()}
-            else{  mStatusList.add(mStatus)
-                mItemList.add(mNameItem)
-                mQuantityList.add(mQuantity)
-                mUserList.add(mUser)
-                mItemIdList.add(mIdItem)
+            if (mItemName == "") {
+                Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show()
+            } else {
+                var mMyItem = MyItem(
+                    mItemStatus,
+                    mItemQuantity,
+                    mItemName,
+                    mEventOrga,
+                    mItemUniqueID,
+                    mEventId)
+
+                mListMyItem.add(mMyItem)
 
                 createItem()
-                mDetailAdapterOne.notifyDataSetChanged() }
-
-            println("-|Stat |-" + mStatus  +  "-| item|-" + mNameItem + "-| qté|-" + mQuantity  )
-            } }
+            }
+        }
+    }
 
 
     private fun initStatus() {
         detail_status_bring?.isChecked = true
-        mStatus = "I bring"
+        mItemStatus = "I bring"
         detail_status_need?.setOnCheckedChangeListener { _, b ->
-            if (b) { mStatus = "I need"; detail_status_bring.isChecked = false; } }
+            if (b) { mItemStatus = "I need"
+                detail_status_bring.isChecked = false; } }
+
         detail_status_bring?.setOnCheckedChangeListener { _, b ->
-            if (b) { mStatus = "I bring" ; detail_status_need.isChecked = false; } } }
+            if (b) { mItemStatus = "I bring"
+                detail_status_need.isChecked = false; } } }
 
     private fun initQuantity() {
         detail_quantity_item.text = i.toString()
         detail_plus.setOnClickListener {
-            i = i.plus(1) ; mQuantity = i.toString()
-            detail_quantity_item.text = i.toString() ; mQuantity = i.toString()}
+            i = i.plus(1)
+            mItemQuantity = i.toString()
+            detail_quantity_item.text = i.toString()
+            mItemQuantity = i.toString() }
 
         detail_minus.setOnClickListener {
-            if (i != 1) { i =  i.minus(1) ;detail_quantity_item.text = i.toString() ;   mQuantity = i.toString()}
-            else {i = 1 ;  mQuantity = i.toString()} }  }
+            if (i != 1) { i = i.minus(1)
+                detail_quantity_item.text = i.toString()
+                mItemQuantity = i.toString()
+            } else { i = 1
+                mItemQuantity = i.toString() } } }
 
     private fun initItem() {
-        mNameItem = detail_item.text.toString() }
+        mItemName = detail_item.text.toString() }
 
     private fun createItem() {
-        mItemVM.createItem(mStatus, mNameItem, mQuantity, mUser, mIdItem )  }
+        mItemVM.createItem(mListMyItem) }
 }
+
+

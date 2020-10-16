@@ -8,12 +8,11 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.so.dingbring.R
+import com.so.dingbring.data.MyItem
 
 class CreateAdapter(
     var mContext: Context,
-    var mStatusList: ArrayList<String>,
-    var mItemList: ArrayList<String>,
-    var mQuantityList: ArrayList<String>
+    var mListMyItem: ArrayList<MyItem>
 ): RecyclerView.Adapter<CreateAdapter.CreateViewHolder>() {
 
 
@@ -26,12 +25,12 @@ class CreateAdapter(
 
     }
     override fun onBindViewHolder(holder: CreateViewHolder, position: Int) {
-        holder.mDisplayStatus.text = mStatusList[position]
-        holder.mDisplayItem.text = mItemList[position]
-        holder.mDisplayQuantity.text = mQuantityList[position]
+        holder.mDisplayStatus.text = mListMyItem[position].mItemStatus
+        holder.mDisplayItem.text = mListMyItem[position].mItemName
+        holder.mDisplayQuantity.text = mListMyItem[position].mItemQty
         holder.mDisplayNum.text = position.plus(1).toString()
 
-        if (mStatusList[position] == "I need")
+        if (mListMyItem[position].mItemStatus == "I need")
         {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))}
         else
         {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))}
@@ -46,7 +45,7 @@ class CreateAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if(mItemList.size>0){ mItemList.size }
+        return if(mListMyItem.size>0){ mListMyItem.size }
         else { 0 }
     }
 

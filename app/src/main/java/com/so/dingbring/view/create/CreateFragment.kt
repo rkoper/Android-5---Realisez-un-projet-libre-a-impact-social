@@ -20,19 +20,15 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.firebase.firestore.FirebaseFirestore
 import com.so.dingbring.R
 import com.so.dingbring.Utils.FindDay
 import com.so.dingbring.Utils.formatDate
-import com.so.dingbring.data.MyEvent
-import com.so.dingbring.data.MyEventViewModel
+import com.so.dingbring.data.*
 import com.so.dingbring.databinding.FragmentCreateBinding
-import com.so.dingbring.data.MyItemViewModel
-import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.detail.create.CreateAdapter
 import kotlinx.android.synthetic.main.fragment_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.Observer
+import java.util.*
 
 
 class CreateFragment : Fragment() {
@@ -48,14 +44,13 @@ class CreateFragment : Fragment() {
 
     private val mItemVM by viewModel<MyItemViewModel>()
     var i : Int = 1
-    var mStatus: String = "I bring"
-    var mItem: String = "<3"
-    var mQuantity: String = "1"
-    var mDocId = "Test mDocId"
+    var mItemStatus: String = "I bring"
+    var mItemName: String = "<3"
+    var mItemQuantity: String = "1"
+    var mEventUniqueID = UUID.randomUUID().toString()
+    var mItemUniqueID = UUID.randomUUID().toString()
 
-    var mStatusList = arrayListOf<String>()
-    var mItemList = arrayListOf<String>()
-    var mQuantityList = arrayListOf<String>()
+    var mListMyItem = arrayListOf<MyItem>()
 
     private lateinit var mCreateAdapter: CreateAdapter
     private lateinit var mBinding: FragmentCreateBinding
@@ -70,16 +65,20 @@ class CreateFragment : Fragment() {
         // CHECK THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //    mUserMail = arguments?.get("eventName").toString()
         //  mUserName = arguments?.get("eventDate").toString()
-        mEventVM.getAllEvent().observe(requireActivity(), {
-            mEventSize =  it.size.toString() })
              initView(mBinding)
         return mBinding.root }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCreateEvent()
         initCreateItem() }
+
+
+    private fun initView(mBinding: FragmentCreateBinding) {
+        mBinding.createCancel.setOnClickListener {
+            it.findNavController().navigate(R.id.action_createFragment_to_homeFragment) } }
+
+
 
     private fun initCreateEvent() {
         initAdresse()
@@ -120,7 +119,7 @@ class CreateFragment : Fragment() {
                 create_address.visibility = View.VISIBLE }
 
             override fun onError(status: Status) {
-                Log.i("TAG", "An error occurred: $mStatus") } })
+                Log.i("TAG", "An error occurred: $mItemStatus") } })
     }
     private fun initDate() {
         create_date?.setOnClickListener {
@@ -158,26 +157,39 @@ class CreateFragment : Fragment() {
             if (mEventAdress == "") {Toast.makeText(requireContext(), "Please add address...", Toast.LENGTH_SHORT).show()}
 
             else {
-                mDocId = "Event$mEventSize"
-                val mDataEvent = MyEvent (mEventDate, mEventName, mEventOrga, mEventAdress, mUserMail, mDocId)
+                val mDataEvent = MyEvent (mEventDate, mEventName, mEventOrga, mEventAdress, mUserMail, mEventUniqueID)
                 mEventVM.createEvent(mDataEvent)
-                createItem(mDocId)
+                createItem()
                 it.findNavController().navigate(R.id.action_createFragment_to_homeFragment) } } }
 
 
     private fun initCreateItem() {
-        initItem(); initRV(); initQuantity(); initStatus()
+        initItem()
+        initRV()
+        initQuantity()
+        initStatus()
         create_add?.setOnClickListener {
             initItem()
-            if (mItem == "") { Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show()}
-            else { mStatusList.add(mStatus); mItemList.add(mItem); mQuantityList.add(mQuantity)
-                mCreateAdapter.notifyDataSetChanged()} } }
+            if (mItemName == "") { Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show()}
+
+            else {  var mMyItem = MyItem(
+                mItemStatus,
+                mItemQuantity,
+                mItemName,
+                mEventOrga,
+                mItemUniqueID,
+                mEventUniqueID)
+
+                mListMyItem.add(mMyItem)
+
+
+                   mCreateAdapter.notifyDataSetChanged()} } }
 
     private fun initItem() {
-        mItem = create_item.text.toString() }
+        mItemName = create_item.text.toString() }
 
     private fun initRV() {
-        mCreateAdapter = CreateAdapter(requireActivity(), mStatusList, mItemList, mQuantityList)
+        mCreateAdapter = CreateAdapter(requireActivity(),mListMyItem)
         create_recyclerView.layoutManager = LinearLayoutManager(context)
         create_recyclerView.adapter = mCreateAdapter }
 
@@ -185,29 +197,26 @@ class CreateFragment : Fragment() {
     private fun initQuantity() {
         create_quantity_item.text = i.toString()
         create_plus.setOnClickListener {
-            i = i.plus(1) ; mQuantity = i.toString()
-            create_quantity_item.text = i.toString() ; mQuantity = i.toString()}
+            i = i.plus(1) ; mItemQuantity = i.toString()
+            create_quantity_item.text = i.toString() ; mItemQuantity = i.toString()}
 
         create_minus.setOnClickListener {
-            if (i != 1) { i =  i.minus(1) ;create_quantity_item.text = i.toString() ;   mQuantity = i.toString()}
-            else {i = 1 ;  mQuantity = i.toString()} }  }
+            if (i != 1) { i =  i.minus(1) ;create_quantity_item.text = i.toString() ;   mItemQuantity = i.toString()}
+            else {i = 1 ;  mItemQuantity = i.toString()} }  }
 
     private fun initStatus() {
         create_status_bring?.isChecked = true
-        mStatus = "I bring"
+        mItemStatus = "I bring"
         create_status_need?.setOnCheckedChangeListener { _, b ->
-            if (b) { mStatus = "I need"; create_status_bring.isChecked = false; } }
+            if (b) { mItemStatus = "I need"; create_status_bring.isChecked = false; } }
         create_status_bring?.setOnCheckedChangeListener { _, b ->
-            if (b) { mStatus = "I bring" ; create_status_need.isChecked = false; } } }
+            if (b) { mItemStatus = "I bring" ; create_status_need.isChecked = false; } } }
 
 
-    private fun createItem(mDocId:String) {
-        mItemVM.createItemList(mStatusList, mItemList, mQuantityList, mUserName, mDocId)  }
+    private fun createItem() {
+        mItemVM.createItem(mListMyItem)  }
 
 
-    private fun initView(mBinding: FragmentCreateBinding) {
-        mBinding.createCancel.setOnClickListener {
-            it.findNavController().navigate(R.id.action_createFragment_to_homeFragment) } }
 
 
 
