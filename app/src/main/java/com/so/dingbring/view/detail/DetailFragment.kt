@@ -69,25 +69,30 @@ class DetailFragment : Fragment() {
         mBinding.recyclerViewDetailOne.layoutManager = LinearLayoutManager(context)
         mBinding.recyclerViewDetailOne.adapter = mDetailAdapter
         println("----------| 3 |----------")
-        initRV()
+        initRVObserver()
 
         mDetailAdapter.itemClickFull.subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 1) }
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 1)
+                initRVObserver()}
 
         mDetailAdapter.itemClickEmpty.subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 2)}
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 2)
+                initRVObserver()}
 
         mDetailAdapter.itemClickN.subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 3) } }
+            .observeOn(AndroidSchedulers.mainThread()).subscribe { data -> mItemVM.updateStatus(data, 3)
+                initRVObserver()} }
 
 
-   private fun initRV() {
+   private fun initRVObserver() {
        mItemVM.getTestItem(mEventId).observeForever {  mlmi ->
-           println("-----------M L M I ----" + mlmi.size)
            mlmi.sortBy { it.mItemStatus }
-           for (i in mlmi.indices) {mListMyItem.add(mlmi[i])}
-           mDetailAdapter.notifyDataSetChanged()
-       } }
+           with(mListMyItem){
+               clear()
+               addAll(mlmi)}
+           mListMyItem.let {
+               mDetailAdapter.notifyDataSetChanged()
+           } } }
 
 
     private fun initView(mBinding: FragmentDetailBinding) {
