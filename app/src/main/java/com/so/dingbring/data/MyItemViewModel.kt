@@ -13,7 +13,7 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
             mMutableData.value= it }
         return mMutableData }
 
-    fun getTestItem(mEventId:String): LiveData<MutableList<MyItem>> {
+    fun  getTestItem(mEventId:String): LiveData<MutableList<MyItem>> {
         val mMutableData= MutableLiveData<MutableList<MyItem>>()
         mItemRepository.getTestItem(mEventId).observeForever{
             mMutableData.value= it }

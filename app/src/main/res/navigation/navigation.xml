@@ -26,7 +26,7 @@
             android:name="mEventSize"
             app:argType="string"/>
         <argument
-            android:name="mUserUserMail"
+            android:name="mUserMail"
             app:argType="string"/>
         <argument
             android:name="mUserName"

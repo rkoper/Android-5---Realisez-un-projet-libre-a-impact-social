@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -16,10 +15,12 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import com.so.dingbring.R
+import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.collections.HashMap
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +29,8 @@ class HomeFragment : Fragment() {
     private val mUserVM by viewModel<MyUserViewModel>()
     private lateinit var mHomeAdapter: HomeAdapter
     private lateinit var mBinding: FragmentHomeBinding
+    private  var mUserName = "No Name"
+    var mDataEvent : MutableList<MyEvent> = mutableListOf()
 
 
 
@@ -37,27 +40,30 @@ class HomeFragment : Fragment() {
         initView(mBinding)
         initRV(mBinding)
         createFireStoreUser(mBinding)
+     //   popu()
+        initUser()
         return mBinding.root
     }
+
+    private fun initUser() {}
+
 
     private fun initView(mBinding: FragmentHomeBinding) {
         mBinding.homeCreate.setOnClickListener {
             var bundle = bundleOf(
-              "mUserName" to  " 1 ",
-//                //FirebaseAuth.getInstance().currentUser?.displayName,
-                "mUserUserMail" to  "2")
-                //
-                //FirebaseAuth.getInstance().currentUser?.email)
+                "mUserName" to mUserName ,
+                "mUserMail" to  "2")
             it.findNavController().navigate(R.id.action_homeFragment_to_createFragment, bundle)} }
 
 
     private fun initRV(mBinding: FragmentHomeBinding) {
-        mHomeAdapter= HomeAdapter(requireActivity())
+        mHomeAdapter= HomeAdapter(requireActivity(), mDataEvent)
+        mBinding.recyclerView.setHasFixedSize(true)
         mBinding.recyclerView.layoutManager= LinearLayoutManager(context)
         mBinding.recyclerView.adapter= mHomeAdapter
 
         mEventVM.getAllEvent().observe(requireActivity(), {
-            mHomeAdapter.setList(it)
+            mDataEvent.addAll(it)
             mHomeAdapter.notifyDataSetChanged()
         })
 
@@ -68,7 +74,7 @@ class HomeFragment : Fragment() {
     private fun createFireStoreUser(mBinding: FragmentHomeBinding) {
         if (FirebaseAuth.getInstance().currentUser?.displayName != null)
         { mBinding.homeName.text =  FirebaseAuth.getInstance().currentUser?.displayName.toString()}
-        else { mBinding.homeName.text = "Donald Duck"}
+        else { mBinding.homeName.text = mUserName}
 
         if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
         { Glide.with(requireContext())
@@ -90,6 +96,8 @@ class HomeFragment : Fragment() {
 
 
     }
+
+
 
 
     companion object{

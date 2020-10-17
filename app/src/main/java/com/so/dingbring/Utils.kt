@@ -92,5 +92,13 @@ object Utils {
         return autocompleteFragment
     }
 
+    fun formatAdress(adress:String, case:Boolean) : String {
+         val formataddress = adress.split(",")
 
+        if (case)
+        {return formataddress[0]}
+        if (!case)
+        {return formataddress[1]}
+        else
+        { return ""} }
 }

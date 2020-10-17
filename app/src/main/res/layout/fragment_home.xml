@@ -77,7 +77,9 @@
             app:layout_constraintGuide_percent="0.95"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:padding="30dp"
+            android:paddingBottom="15dp"
+
+            android:layout_marginBottom="60dp"
             android:background="@drawable/rectangle_corner"
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
@@ -104,12 +106,12 @@
         <TextView
             style="@style/TxtViewPrincipalBlack"
             android:id="@+id/home_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
-            android:textStyle="normal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gl_home_h_15"
             app:layout_constraintBottom_toBottomOf="@id/gl_home_h_2" />
         <ImageButton
             android:id="@+id/home_white"

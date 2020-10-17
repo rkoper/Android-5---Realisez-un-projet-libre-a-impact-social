@@ -63,8 +63,11 @@ class CreateFragment : Fragment() {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create, container, false)
 
         // CHECK THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //    mUserMail = arguments?.get("eventName").toString()
-        //  mUserName = arguments?.get("eventDate").toString()
+           mUserMail = arguments?.get("mUserMail").toString()
+           mUserName = arguments?.get("mUserName").toString()
+
+        println("--|mUserMail|--" + mUserMail + "--|mUserName|---" + mUserName)
+
              initView(mBinding)
         return mBinding.root }
 
@@ -83,6 +86,8 @@ class CreateFragment : Fragment() {
     private fun initCreateEvent() {
         initAdresse()
         initDate()
+        initEvent()
+        initOrga()
         createEvent() }
 
     private fun initAdresse() {
@@ -96,9 +101,9 @@ class CreateFragment : Fragment() {
         etTextInput?.setHintTextColor(resources.getColor(R.color.black))
         etTextInput?.gravity = Gravity.CENTER
         etTextInput?.hint = " Enter address"
-        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto)
+        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.adventpro)
         etTextInput?.typeface = font
-        etTextInput?.textSize = 18f
+        etTextInput?.textSize = 20f
         val searchIcon =
             (autocompleteFragment?.view as? LinearLayout)?.getChildAt(0) as? ImageView
         searchIcon?.visibility = View.GONE
@@ -142,7 +147,7 @@ class CreateFragment : Fragment() {
     }
 
     private fun initOrga() {
-        create_orga.setText(mUserName)
+        create_orga.text = mUserName
         mEventOrga = create_orga.text.toString()
     }
 

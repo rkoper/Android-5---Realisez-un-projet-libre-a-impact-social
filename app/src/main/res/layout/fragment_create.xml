@@ -523,7 +523,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
         app:layout_constraintRight_toRightOf="@+id/gl_create_v_5"
         app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_5"/>
-            <EditText
+            <TextView
                 android:background="@null"
                 android:textColorHint="@color/black"
                 android:id="@+id/create_orga"

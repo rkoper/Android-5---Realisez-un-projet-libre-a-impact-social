@@ -22,19 +22,22 @@ class DetailAdapter(
     val itemClickN: BehaviorSubject<MyItem> = BehaviorSubject.create()
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
-        holder.mDetailItem.text = mListMyItem[position].mItemName
-        holder.mDetailQuantity.text = mListMyItem[position].mItemQty
-        holder.mDetailUser.text = mListMyItem[position].mItemUser
+        with(holder) {
+            mDetailItem.text = mListMyItem[position].mItemName
+            mDetailQuantity.text = mListMyItem[position].mItemQty
+            mDetailUser.text = mListMyItem[position].mItemUser
 
 
-        if (mListMyItem[position].mItemStatus == "I need") {
-            holder.mDetailEmptyButton.visibility = View.VISIBLE
-            holder.mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))
-        } else {
-            holder.mDetailFullButton.visibility = View.VISIBLE
-            holder.mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))
+            if (mListMyItem[position].mItemStatus == "I need") {
+                mDetailEmptyButton.visibility = View.VISIBLE
+                mDetailFullButton.visibility = View.INVISIBLE
+                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))
+            } else {
+                mDetailFullButton.visibility = View.VISIBLE
+                mDetailEmptyButton.visibility = View.INVISIBLE
+                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))
+            }
         }
-
 
     }
 
@@ -63,27 +66,9 @@ class DetailAdapter(
 
 
         init {
-            mDetailEmptyButton.setOnClickListener {
-                itemClickEmpty.onNext(mListMyItem[position])
-               //    mDetailFullButton.visibility = View.VISIBLE
-               //  mDetailEmptyButton.visibility = View.INVISIBLE
-               //  mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))
-            }
-
-            mDetailFullButton.setOnClickListener {
-                itemClickFull.onNext(mListMyItem[position])
-              //  mDetailEmptyButton.visibility = View.VISIBLE
-              //  mDetailFullButton.visibility = View.INVISIBLE
-               // mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))
-            }
-
-            mDetailAddOne.setOnClickListener {
-                itemClickN.onNext(mListMyItem[position])
-                // mDetailQuantity.text = mListMyItem[position].mItemQty.toInt().plus(1).toString()
-
-            }
-
-        }
+            mDetailEmptyButton.setOnClickListener { itemClickEmpty.onNext(mListMyItem[position]) }
+            mDetailFullButton.setOnClickListener { itemClickFull.onNext(mListMyItem[position]) }
+            mDetailAddOne.setOnClickListener { itemClickN.onNext(mListMyItem[position])} }
     }
 }
 
