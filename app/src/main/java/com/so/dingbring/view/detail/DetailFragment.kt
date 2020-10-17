@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -17,7 +18,10 @@ import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.databinding.FragmentDetailBinding
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.detail_item.*
+import kotlinx.android.synthetic.main.fragment_create.*
 import kotlinx.android.synthetic.main.fragment_detail.*
+import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -45,7 +49,7 @@ class DetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-        initView(mBinding)
+      //  initView(mBinding)
         initHeader(mBinding)
         return mBinding.root}
 
@@ -73,7 +77,16 @@ class DetailFragment : Fragment() {
                 initRVObserver()}
 
         itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe { data -> mItemVM.updateStatus(data, 3)
+            .subscribe { data ->
+                mBinding.detailAddNotif.visibility = View.VISIBLE
+                val animationIn = AnimationUtils.loadAnimation(requireContext(), R.anim.movedown)
+                 mBinding.detailAddNotif.startAnimation(animationIn)
+              //  val animationOut = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout)
+                // mBinding.detailAddNotif.startAnimation(animationOut)
+
+                //detail_add_notif.visibility = View.GONE
+
+                mItemVM.updateStatus(data, 3)
                 initRVObserver()}}}
 
 
@@ -87,10 +100,14 @@ class DetailFragment : Fragment() {
 
    } }
 
-
+/*
     private fun initView(mBinding: FragmentDetailBinding) {
         mBinding.detailReturn.setOnClickListener {
             it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
+
+
+
+ */
 
     private fun initHeader(mBinding: FragmentDetailBinding) {
         mEventId = arguments?.get("eventId").toString()
@@ -111,6 +128,7 @@ class DetailFragment : Fragment() {
                 } } }) }
 
 
+    @SuppressLint("ResourceType")
     private fun initCreateItem() {
         initItem(); initQuantity(); initStatus();
         detail_add?.setOnClickListener {
@@ -119,6 +137,20 @@ class DetailFragment : Fragment() {
             else { val mMyItem = MyItem(mItemStatus, mItemQuantity, mItemName, mEventOrga, mItemUniqueID, mEventId)
                 mItemVM.createUniqueItem(mMyItem)
                 initRVObserver()
+
+
+                val animationIn = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin)
+                detail_item_add_one.startAnimation(animationIn)
+                val animationOut = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout)
+                detail_item_add_one.startAnimation(animationOut)
+
+
+
+
+
+
+
+
             }
         }
     }
@@ -134,19 +166,19 @@ class DetailFragment : Fragment() {
                 detail_status_need.isChecked = false; } } }
 
     private fun initQuantity() {
-        detail_quantity_item.text = i.toString()
-        detail_plus.setOnClickListener {
-            i = i.plus(1)
-            mItemQuantity = i.toString()
-            detail_quantity_item.text = i.toString()
-            mItemQuantity = i.toString() }
+        detail_quantity_item.count = 1
+        detail_quantity_item.minValue = 1
+        detail_quantity_item.maxValue = 50
+        detail_quantity_item.sideTapEnabled = true
+        detail_quantity_item.addStepCallback(object : OnStepCallback {
+            override fun onStep(qty: Int, positive: Boolean) {
+                mItemQuantity = qty.toString()
+                println(" mItemQty ------>$mItemQuantity")
+            }
+        })
 
-        detail_minus.setOnClickListener {
-            if (i != 1) { i = i.minus(1)
-                detail_quantity_item.text = i.toString()
-                mItemQuantity = i.toString() }
-            else { i = 1
-                mItemQuantity = i.toString() } } }
+
+    }
 
     private fun initItem() {
         mItemName = detail_item.text.toString() }

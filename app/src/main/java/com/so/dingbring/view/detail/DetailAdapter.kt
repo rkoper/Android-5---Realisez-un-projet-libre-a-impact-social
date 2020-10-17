@@ -1,9 +1,14 @@
 package com.so.dingbring.view.detail
 
+import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Point
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.so.dingbring.R
 import com.so.dingbring.data.MyItem
 import io.reactivex.subjects.BehaviorSubject
+
 
 class DetailAdapter(
     var mContext: Context,
@@ -68,9 +74,10 @@ class DetailAdapter(
         init {
             mDetailEmptyButton.setOnClickListener { itemClickEmpty.onNext(mListMyItem[position]) }
             mDetailFullButton.setOnClickListener { itemClickFull.onNext(mListMyItem[position]) }
-            mDetailAddOne.setOnClickListener { itemClickN.onNext(mListMyItem[position])} }
+            mDetailAddOne.setOnClickListener { itemClickN.onNext(mListMyItem[position]) }} }
+
+
     }
-}
 
 
 

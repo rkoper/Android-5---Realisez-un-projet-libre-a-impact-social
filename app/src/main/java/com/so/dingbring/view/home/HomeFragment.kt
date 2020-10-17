@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -37,23 +38,35 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         FirebaseApp.initializeApp(requireContext())
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
-        initView(mBinding)
+        //initView(mBinding)
+        initBottom(mBinding, view)
         initRV(mBinding)
         createFireStoreUser(mBinding)
-     //   popu()
-        initUser()
         return mBinding.root
     }
 
-    private fun initUser() {}
+    private fun initBottom(mBinding: FragmentHomeBinding, view: View?) {
+        mBinding.floatingTopBarNavigation.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.adventpro))
+        mBinding.floatingTopBarNavigation.setNavigationChangeListener { view , position ->
+            when (position) {
+                0 -> print("here")
+                1 -> goCreate(view)
+                2 -> goCalendar(view)
+                3 -> goProfil(view)
+                4 -> goSettings(view)
+                else -> { print("Error")}
+                }
+            }
+        }
 
+    private fun goSettings(view: View) {view.findNavController().navigate(R.id.action_homeFragment_to_settings_fragment)}
 
-    private fun initView(mBinding: FragmentHomeBinding) {
-        mBinding.homeCreate.setOnClickListener {
-            var bundle = bundleOf(
-                "mUserName" to mUserName ,
-                "mUserMail" to  "2")
-            it.findNavController().navigate(R.id.action_homeFragment_to_createFragment, bundle)} }
+    private fun goCalendar(view: View) {view.findNavController().navigate(R.id.action_homeFragment_to_calendar_fragment)}
+
+    private fun goProfil(view: View) { view.findNavController().navigate(R.id.action_homeFragment_to_profil_fragment) }
+
+    private fun goCreate(view: View) { var bundle = bundleOf("mUserName" to mUserName , "mUserMail" to  "2")
+        view.findNavController().navigate(R.id.action_homeFragment_to_createFragment, bundle)}
 
 
     private fun initRV(mBinding: FragmentHomeBinding) {

@@ -65,7 +65,7 @@ class HomeAdapter(var context: Context, mDataEvent: MutableList<MyEvent>): Recyc
         holder.itemView.cl2.setOnClickListener {
             println("    Click 1  ")
             var bundle = bundleOf("eventId" to dataList[position].mEventId)
-            it.findNavController().navigate(R.id.action_homeFragment_detail_fragment, bundle)
+            it.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle)
         }
 
 

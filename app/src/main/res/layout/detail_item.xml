@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75"/>
+            app:layout_constraintGuide_percent="0.85"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_detail_item_h_1"
             android:layout_width="match_parent"
@@ -105,7 +105,7 @@
         <TextView
             android:padding="5dp"
             android:layout_marginRight="10dp"
-            style="@style/TxtViewPrincipalBlack2"
+            style="@style/TxtViewPrincipalBlack"
             android:id="@+id/detail_item_quantity"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -117,6 +117,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+     
             android:id="@+id/detail_item_add_one"
             android:src="@drawable/plus"
             android:layout_width="0dp"
@@ -127,21 +128,22 @@
             app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_25"
             app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_15"/>
         <TextView
-            style="@style/TxtViewPrincipalBlack3"
+            style="@style/TxtViewPrincipalBlack"
             android:id="@+id/detail_item_type"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:autoSizeMaxTextSize="24sp"
             android:text="1xxxxxxxxxxxxxxxxxxxxxxx9"
             android:textColor="@color/black"
             android:ellipsize="end"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_2"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_25"
             app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:padding="5dp"
-            style="@style/TxtViewPrincipalBlack3"
+            style="@style/TxtViewPrincipalBlack"
             android:id="@+id/detail_item_personn"
             android:layout_width="0dp"
             android:layout_height="0dp"

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -25,8 +26,11 @@ import com.so.dingbring.Utils.FindDay
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.*
 import com.so.dingbring.databinding.FragmentCreateBinding
+import com.so.dingbring.databinding.FragmentDetailBinding
 import com.so.dingbring.view.detail.create.CreateAdapter
 import kotlinx.android.synthetic.main.fragment_create.*
+import kotlinx.android.synthetic.main.fragment_detail.*
+import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -66,9 +70,8 @@ class CreateFragment : Fragment() {
            mUserMail = arguments?.get("mUserMail").toString()
            mUserName = arguments?.get("mUserName").toString()
 
-        println("--|mUserMail|--" + mUserMail + "--|mUserName|---" + mUserName)
 
-             initView(mBinding)
+        initBottom(mBinding, view)
         return mBinding.root }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,10 +79,29 @@ class CreateFragment : Fragment() {
         initCreateEvent()
         initCreateItem() }
 
+    private fun initBottom(mBinding: FragmentCreateBinding, view: View?) {
+        mBinding.floatingTopBarNavigation.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.adventpro))
+        mBinding.floatingTopBarNavigation.setNavigationChangeListener { view , position ->
+            when (position) {
+                0 -> goHome(view)
+                1 -> print("here")
+                2 -> goCalendar(view)
+                3 -> goProfil(view)
+                4 -> goSettings(view)
+                else -> { print("Error")}
+            }
+        }
+    }
 
-    private fun initView(mBinding: FragmentCreateBinding) {
-        mBinding.createCancel.setOnClickListener {
-            it.findNavController().navigate(R.id.action_createFragment_to_homeFragment) } }
+    private fun goHome(view: View) { view.findNavController().navigate(R.id.action_createFragment_to_homeFragment)}
+
+    private fun goProfil(view: View) {view.findNavController().navigate(R.id.action_createFragment_to_profil_fragment)}
+
+    private fun goCalendar(view: View) {view.findNavController().navigate(R.id.action_createFragment_to_calendar_fragment)}
+
+    private fun goSettings(view: View) {view.findNavController().navigate(R.id.action_createFragment_to_settings_fragment)}
+
+
 
 
 
@@ -171,7 +193,7 @@ class CreateFragment : Fragment() {
     private fun initCreateItem() {
         initItem()
         initRV()
-        initQuantity()
+       initQuantity()
         initStatus()
         create_add?.setOnClickListener {
             initItem()
@@ -200,6 +222,7 @@ class CreateFragment : Fragment() {
 
 
     private fun initQuantity() {
+        /*
         create_quantity_item.text = i.toString()
         create_plus.setOnClickListener {
             i = i.plus(1) ; mItemQuantity = i.toString()
@@ -208,6 +231,18 @@ class CreateFragment : Fragment() {
         create_minus.setOnClickListener {
             if (i != 1) { i =  i.minus(1) ;create_quantity_item.text = i.toString() ;   mItemQuantity = i.toString()}
             else {i = 1 ;  mItemQuantity = i.toString()} }  }
+   */
+        create_quantity_item.count = 1
+        create_quantity_item.minValue = 1
+        create_quantity_item.maxValue = 50
+        create_quantity_item.sideTapEnabled = true
+        create_quantity_item.addStepCallback(object : OnStepCallback {
+            override fun onStep(qty: Int, positive: Boolean) {
+                mItemQuantity = qty.toString()
+                println(" mItemQty ------>$mItemQuantity")
+            }
+        })
+    }
 
     private fun initStatus() {
         create_status_bring?.isChecked = true
@@ -215,7 +250,8 @@ class CreateFragment : Fragment() {
         create_status_need?.setOnCheckedChangeListener { _, b ->
             if (b) { mItemStatus = "I need"; create_status_bring.isChecked = false; } }
         create_status_bring?.setOnCheckedChangeListener { _, b ->
-            if (b) { mItemStatus = "I bring" ; create_status_need.isChecked = false; } } }
+            if (b) { mItemStatus = "I bring" ; create_status_need.isChecked = false; } }
+            }
 
 
     private fun createItem() {

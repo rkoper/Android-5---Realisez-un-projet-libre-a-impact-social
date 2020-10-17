@@ -1,15 +1,23 @@
 package com.so.dingbring.view.main
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.res.ResourcesCompat.getFont
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import com.so.dingbring.R
 import com.so.dingbring.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(){
@@ -20,36 +28,21 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.my_menu, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.terms -> {
-                Toast.makeText(this@MainActivity, "agreenment", Toast.LENGTH_SHORT).show()
-            }
-            R.id.privacy -> {
-                Toast.makeText(this@MainActivity, "agreenment", Toast.LENGTH_SHORT).show()
-            }
-
-            R.id.share -> {
-                val intent = Intent()
-                intent.apply {
-                    action = Intent.ACTION_SEND
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, "download this app through")
-                    `package` = "com.whatsapp"
-                    startActivity(intent)
-                }
-            }
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+        if (count == 0) {
+            super.onBackPressed()
+        } else {
+            supportFragmentManager.popBackStack()
         }
-
-        return super.onOptionsItemSelected(item)
     }
+
 
 
 }
