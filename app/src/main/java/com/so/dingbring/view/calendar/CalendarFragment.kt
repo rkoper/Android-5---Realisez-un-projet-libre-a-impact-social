@@ -28,7 +28,6 @@ class CalendarFragment : Fragment() {
     var startCal = Calendar.getInstance()
     var endCal = Calendar.getInstance()
     var date = Date()
-    var eventCal = Calendar.getInstance()
     lateinit var configuration: RecyclerCalendarConfiguration
     private val mEventVM by viewModel<MyEventViewModel>()
 
@@ -38,11 +37,8 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-
-
         initCal()
         initRV()
-
         return mBinding.root
     }
 
@@ -61,8 +57,7 @@ class CalendarFragment : Fragment() {
     private fun initRV() {
         configuration = RecyclerCalendarConfiguration(
             RecyclerCalendarConfiguration.CalenderViewType.VERTICAL,
-            Locale.getDefault(),
-            true
+            Locale.getDefault(), true
         )
 
         mEventVM.getAllEvent().observe(requireActivity(), { mlme ->
@@ -77,10 +72,6 @@ class CalendarFragment : Fragment() {
                 val c = y.split("/")[2]
 
                 val afterDate = c + b + a
-
-
-                println("-----------------------" + eventCal.time)
-
                 val t = afterDate + "," + myevent.mEventName + "," + myevent.mEventId
 
                 mTestMap.add(t)
@@ -117,13 +108,10 @@ class CalendarFragment : Fragment() {
         d.dialog_name.text = z2
         d.show()
         d.dialog_eye.setOnClickListener {
-
             goToDetail(z3)
-            d.dismiss()
-        }
+            d.dismiss() } }
 
 
-    }
     private fun goToDetail(z3: String) {
         var bundle = bundleOf("eventId" to z3)
         mBinding.root.findNavController().navigate(R.id.action_calendar_to_detail, bundle)
