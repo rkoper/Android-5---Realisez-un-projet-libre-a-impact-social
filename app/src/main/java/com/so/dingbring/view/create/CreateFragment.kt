@@ -71,36 +71,12 @@ class CreateFragment : Fragment() {
            mUserName = arguments?.get("mUserName").toString()
 
 
-        initBottom(mBinding, view)
         return mBinding.root }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCreateEvent()
         initCreateItem() }
-
-    private fun initBottom(mBinding: FragmentCreateBinding, view: View?) {
-        mBinding.floatingTopBarNavigation.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.adventpro))
-        mBinding.floatingTopBarNavigation.setNavigationChangeListener { view , position ->
-            when (position) {
-                0 -> goHome(view)
-                1 -> print("here")
-                2 -> goCalendar(view)
-                3 -> goProfil(view)
-                4 -> goSettings(view)
-                else -> { print("Error")}
-            }
-        }
-    }
-
-    private fun goHome(view: View) { view.findNavController().navigate(R.id.action_createFragment_to_homeFragment)}
-
-    private fun goProfil(view: View) {view.findNavController().navigate(R.id.action_createFragment_to_profil_fragment)}
-
-    private fun goCalendar(view: View) {view.findNavController().navigate(R.id.action_createFragment_to_calendar_fragment)}
-
-    private fun goSettings(view: View) {view.findNavController().navigate(R.id.action_createFragment_to_settings_fragment)}
-
 
 
 

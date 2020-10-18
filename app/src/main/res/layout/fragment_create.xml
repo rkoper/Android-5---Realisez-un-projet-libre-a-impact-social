@@ -6,7 +6,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/white"
+            android:background="@color/blue_bg_light"
             android:layout_height="match_parent">
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_create_h_1"
@@ -320,6 +320,7 @@
                     android:background="@drawable/round_black_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/blue_active"
                     android:src="@drawable/add"
                     app:layout_constraintTop_toTopOf="@+id/gl_create2_v_3"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -390,10 +391,10 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="@+id/gl_create3_v_8"
                         app:layout_constraintLeft_toLeftOf="@+id/gl_create3_v_2"
-                        app:stepperBackgroundColor="@color/Red"
-                        app:stepperButtonColor="@color/yellow"
+                        app:stepperBackgroundColor="@color/blue_bg_light"
+                        app:stepperButtonColor="@color/blue_active"
                         app:stepperActionsColor="@color/black"
-                        app:stepperActionsDisabledColor="@color/Red"
+                        app:stepperActionsDisabledColor="@color/blue_active"
                         app:stepperTextColor="@color/white"
                         app:stepperAllowNegative="true"
                         app:stepperAllowPositive="true"/>
@@ -523,124 +524,12 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         app:tint ="@color/white"
+        android:backgroundTint="@color/blue_active"
         app:srcCompat="@drawable/save"
         android:padding="12dp"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_8"
         app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"/>
 
-    <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
-        android:id="@+id/floating_top_bar_navigation"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="15dp"
-        android:background="@drawable/rectangle_corner_white"
-        android:elevation="10dp"
-        android:padding="12dp"
-        app:bnc_mode="packed"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/main_item_home"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:bt_active="true"
-            app:bt_titleSize="25sp"
-            app:bt_colorActive="@color/red_active"
-            app:bt_colorInactive="@color/grey_active"
-            app:bt_icon="@drawable/homecircle"
-            app:bt_shape="@drawable/rounded_r_red"
-            app:bt_badgeTextSize="30sp"
-            app:bt_shapeColor="@color/red_bg_light"
-            app:bt_title="Home"
-            android:elevation="10dp"
-            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/main_item_add"
-
-
-            />
-
-
-
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            app:layout_constraintLeft_toRightOf="@+id/main_item_home"
-            app:layout_constraintRight_toLeftOf="@+id/main_item_calendar"
-            android:id="@+id/main_item_add"
-            android:layout_width="wrap_content"
-            app:bt_titleSize="25sp"
-            android:layout_height="0dp"
-            app:bt_colorActive="@color/blue_active"
-            app:bt_colorInactive="@color/grey_active"
-            app:bt_icon="@drawable/addcircle"
-            app:bt_shape="@drawable/rounded_r_purple"
-            app:bt_shapeColor="@color/blue_bg_light"
-            android:elevation="10dp"
-            app:bt_title="Create"
-            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"
-
-
-            />
-
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            app:layout_constraintLeft_toRightOf="@+id/main_item_add"
-            app:layout_constraintRight_toLeftOf="@+id/main_item_personn"
-            android:id="@+id/main_item_calendar"
-            android:layout_width="wrap_content"
-            app:bt_titleSize="25sp"
-            android:layout_height="0dp"
-            app:bt_colorActive="@color/purple_active"
-            app:bt_colorInactive="@color/grey_active"
-            app:bt_icon="@drawable/calendarcircle"
-            app:bt_shape="@drawable/rounded_r_purple"
-            app:bt_shapeColor="@color/purple_bg_light"
-            android:elevation="10dp"
-            app:bt_title="Profil"
-            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"
-
-
-            />
-
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            app:layout_constraintLeft_toRightOf="@+id/main_item_calendar"
-            app:layout_constraintRight_toLeftOf="@+id/main_item_setting"
-            android:id="@+id/main_item_personn"
-            android:layout_width="wrap_content"
-            app:bt_titleSize="25sp"
-            android:layout_height="0dp"
-            app:bt_colorActive="@color/orange_active"
-            app:bt_colorInactive="@color/grey_active"
-            app:bt_icon="@drawable/usercircle"
-            app:bt_shape="@drawable/rounded_r_blue"
-            app:bt_shapeColor="@color/orange_bg_light"
-            android:elevation="10dp"
-            app:bt_title="Calendar"
-            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"/>
-
-        <com.gauravk.bubblenavigation.BubbleToggleView
-            app:layout_constraintLeft_toRightOf="@+id/main_item_personn"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/main_item_setting"
-            app:bt_titleSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:bt_colorActive="@color/green_active"
-            app:bt_colorInactive="@color/grey_active"
-            app:bt_icon="@drawable/settingcircle"
-            app:bt_shape="@drawable/rounded_r_green"
-            app:bt_shapeColor="@color/green_bg_light"
-            android:elevation="10dp"
-            app:bt_title="Settings"
-            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"/>
-
-    </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

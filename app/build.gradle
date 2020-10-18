@@ -144,4 +144,8 @@ dependencies {
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
 
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:3.0.0'
+    implementation 'com.github.kizitonwose:CalendarView:0.4.5'
+    implementation 'com.applandeo:material-calendar-view:1.4.0'
+    implementation 'com.roomorama:caldroid:3.0.1'
+    implementation 'com.github.tejpratap46:RecyclerCalendarAndroid:1.5'
 }

@@ -25,37 +25,11 @@ class ProfilFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profil, container, false)
         mBindingHome = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        initBottom(mBindingHome, view)
         return mBinding.root}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         test()
         super.onViewCreated(view, savedInstanceState) }
-
-    private fun initBottom(mBindingHome: FragmentHomeBinding, view: View?) {
-        mBindingHome.floatingTopBarNavigation.visibility = View.VISIBLE
-        mBindingHome.floatingTopBarNavigation.setTypeface(ResourcesCompat.getFont(requireContext(), R.font.adventpro))
-        mBindingHome.floatingTopBarNavigation.setNavigationChangeListener { view , position ->
-            mBindingHome.floatingTopBarNavigation.setCurrentActiveItem(position)
-            when (position) {
-                0 -> goHome(view)
-                1 -> goCreate(view)
-                2 -> goCalendar(view)
-                3 -> print("here")
-                4 -> goSettings(view)
-                else -> { print("Error")}
-            }
-        }
-    }
-
-    private fun goHome(view: View) {view.findNavController().navigate(R.id.action_profil_fragment_to_homeFragment) }
-
-    private fun goCreate(view: View) {view.findNavController().navigate(R.id.action_profil_fragment_to_create_fragment)}
-
-    private fun goCalendar(view: View) {view.findNavController().navigate(R.id.action_profil_fragment_to_calendar_fragment)}
-
-    private fun goSettings(view: View) {view.findNavController().navigate(R.id.action_profil_fragment_to_settings_fragment)}
-
 
 
 

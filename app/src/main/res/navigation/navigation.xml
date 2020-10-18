@@ -58,21 +58,6 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/fui_slide_in_right"
             app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_createFragment_to_calendar_fragment"
-            app:destination="@id/calendar_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_createFragment_to_profil_fragment"
-            app:destination="@id/profil_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_createFragment_to_settings_fragment"
-            app:destination="@id/settings_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -99,21 +84,6 @@
             app:destination="@id/homeFragment"
             app:enterAnim="@anim/fui_slide_in_right"
             app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_detailFragment_to_calendar_fragment"
-            app:destination="@id/calendar_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_detailFragment_to_profil_fragment"
-            app:destination="@id/profil_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_detailFragment_to_settings_fragment"
-            app:destination="@id/settings_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
     </fragment>
 
     <fragment
@@ -121,24 +91,12 @@
         android:name="com.so.dingbring.view.calendar.CalendarFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="eventId"
+            app:argType="string"/>
         <action
-            android:id="@+id/action_calendar_fragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_calendar_fragment_to_create_fragment"
-            app:destination="@id/createFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_calendar_fragment_to_profil_fragment"
-            app:destination="@id/profil_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_calendar_fragment_to_settings_fragment"
-            app:destination="@id/settings_fragment"
+            android:id="@+id/action_calendar_to_detail"
+            app:destination="@id/detailFragment"
             app:enterAnim="@anim/fui_slide_in_right"
             app:exitAnim="@anim/stationary" />
     </fragment>
@@ -148,26 +106,6 @@
         android:name="com.so.dingbring.view.profil.ProfilFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_profil_fragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_profil_fragment_to_create_fragment"
-            app:destination="@id/createFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_profil_fragment_to_calendar_fragment"
-            app:destination="@id/calendar_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_profil_fragment_to_settings_fragment"
-            app:destination="@id/settings_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
     </fragment>
 
     <fragment
@@ -175,26 +113,5 @@
         android:name="com.so.dingbring.view.settings.SettingsFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_settings_fragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_settings_fragment_to_create_fragment"
-            app:destination="@id/createFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_settings_fragment_to_calendar_fragment"
-            app:destination="@id/calendar_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_settings_fragment_to_profil_fragment"
-            app:destination="@id/profil_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-
     </fragment>
 </navigation>

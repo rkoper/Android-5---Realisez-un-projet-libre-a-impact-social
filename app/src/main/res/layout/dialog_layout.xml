@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:background="@color/colorTransparent">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        style="@style/MyDialogTheme"
+        android:background="@drawable/rectangle_corner_purple">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            style="@style/MyDialogTheme"
+            android:background="@drawable/rectangle_corner_purple">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dialog_v_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dialog_h_33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.33"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/dialog_h_66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.66"/>
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="@id/dialog_h_33"
+                app:layout_constraintRight_toLeftOf="@+id/dialog_v_5"
+                style="@style/TxtViewPrincipalBlack"
+                android:id="@+id/dialogText11"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event : "
+                android:textSize="14sp" />
+            <TextView
+                app:layout_constraintBottom_toBottomOf="@id/dialog_h_33"
+                app:layout_constraintLeft_toRightOf="@+id/dialog_v_5"
+                style="@style/TxtViewPrincipalBlack"
+                android:id="@+id/dialog_name"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="14sp" />
+            <TextView
+                app:layout_constraintBottom_toBottomOf="@id/dialog_h_66"
+                app:layout_constraintRight_toLeftOf="@+id/dialog_v_5"
+                style="@style/TxtViewPrincipalBlack"
+                android:id="@+id/dialogText21"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date : "
+                android:textSize="14sp" />
+            <TextView
+                app:layout_constraintBottom_toBottomOf="@id/dialog_h_66"
+                app:layout_constraintLeft_toRightOf="@+id/dialog_v_5"
+                style="@style/TxtViewPrincipalBlack"
+                android:id="@+id/dialog_date"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XX/XX/XX"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/dialog_eye"
+                android:layout_margin="7dp"
+                android:background="@drawable/eye"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
