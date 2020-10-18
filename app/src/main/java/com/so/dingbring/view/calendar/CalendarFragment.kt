@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -37,10 +38,27 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
+        initBottomInvisible()
         initCal()
         initRV()
         return mBinding.root
     }
+
+    private fun initBottomInvisible() {
+        mBinding.textViewSelectedDate.visibility = View.INVISIBLE
+        mBinding.textViewSelectedName.visibility = View.INVISIBLE
+        mBinding.textViewSelectedIcon.visibility = View.INVISIBLE
+        mBinding.textViewSelectedIcon.visibility = View.INVISIBLE
+        mBinding.textViewSelectedIcon.visibility = View.INVISIBLE
+    }
+    private fun initBottomVisible() {
+        mBinding.textViewSelectedDate.visibility = View.VISIBLE
+        mBinding.textViewSelectedName.visibility = View.VISIBLE
+        mBinding.textViewSelectedIcon.visibility = View.VISIBLE
+        mBinding.textViewSelectedIcon.visibility = View.VISIBLE
+        mBinding.textViewSelectedIcon.visibility = View.VISIBLE
+    }
+
 
 
     private fun initCal() {
@@ -97,23 +115,45 @@ class CalendarFragment : Fragment() {
     }
 
     private fun createAlert(event: String) {
-        val d = Dialog(requireContext())
-        d.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        d.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        d.setContentView(R.layout.dialog_layout)
         val z1 = event.split(",")[0]
         val z2 = event.split(",")[1]
         val z3 = event.split(",")[2]
-        d.dialog_date.text = z1
-        d.dialog_name.text = z2
-        d.show()
-        d.dialog_eye.setOnClickListener {
-            goToDetail(z3)
-            d.dismiss() } }
+
+        val animationL = AnimationUtils.loadAnimation(requireContext(), R.anim.slideleft)
+        val animationR = AnimationUtils.loadAnimation(requireContext(), R.anim.slideright)
+        val animationD = AnimationUtils.loadAnimation(requireContext(), R.anim.slidedown)
+        mBinding.textViewSelectedDate.startAnimation(animationR)
+        mBinding.textViewSelectedName.startAnimation(animationL)
+        mBinding.textViewSelectedIcon.startAnimation(animationD)
 
 
-    private fun goToDetail(z3: String) {
-        var bundle = bundleOf("eventId" to z3)
-        mBinding.root.findNavController().navigate(R.id.action_calendar_to_detail, bundle)
+
+
+
+      initBottomVisible()
+
+        val a0 = z1.split("")[0]
+        val a1 = z1.split("")[1]
+        val a2 = z1.split("")[2]
+        val a3 = z1.split("")[3]
+        val a4 = z1.split("")[4]
+        val a5 = z1.split("")[5]
+        val a6 = z1.split("")[6]
+        val a7 = z1.split("")[7]
+
+        val dateDispolay = (a7+a6+"/"+a5+a4+"/"+a0+a1+a2+a3).toString()
+
+        println("----"+a0+"--/---"+a1+"--/--"+a2+"--/--"+a3+"----------")
+
+        mBinding.textViewSelectedDate.text = z2
+        mBinding.textViewSelectedName.text = dateDispolay
+
+        mBinding.textViewSelectedIcon.setOnClickListener {
+            var bundle = bundleOf("eventId" to z3)
+            mBinding.root.findNavController().navigate(R.id.action_calendar_to_detail, bundle)
+        }
+
+
     }
+
 }

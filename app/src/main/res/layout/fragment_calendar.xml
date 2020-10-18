@@ -25,13 +25,13 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:id="@+id/calendar_h_7"
-            app:layout_constraintGuide_percent="0.67"/>
+            app:layout_constraintGuide_percent="0.68"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:id="@+id/calendar_h_8"
-            app:layout_constraintGuide_percent="0.75"/>
+            app:layout_constraintGuide_percent="0.77"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/calendar_v_5"
-            app:layout_constraintGuide_percent="0.4"/>
+            app:layout_constraintGuide_percent="0.5"/>
 
 
         <com.tejpratapsingh.recyclercalendar.views.InfiniteRecyclerCalendarView
@@ -55,45 +55,25 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="0dp" />
-
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@+id/calendar_h_6"
-                app:layout_constraintBottom_toBottomOf="@+id/calendar_h_7"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="@+id/calendar_v_5"
-                android:textAlignment="textEnd"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                style="@style/TxtViewPrincipalBlack"
-                tools:text="Event : " />
         <TextView
+            android:layout_margin="5dp"
             app:layout_constraintTop_toBottomOf="@+id/calendar_h_6"
             app:layout_constraintBottom_toBottomOf="@+id/calendar_h_7"
-            app:layout_constraintLeft_toLeftOf="@+id/calendar_v_5"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="0dp"
-            android:textAlignment="textStart"
+            android:textAlignment="center"
             android:id="@+id/textViewSelectedName"
             android:layout_height="0dp"
             style="@style/TxtViewPrincipalBlack"
             android:layout_marginStart="10dp"
             tools:text="Party" />
         <TextView
+            android:layout_margin="5dp"
+            android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/calendar_h_7"
             app:layout_constraintBottom_toBottomOf="@+id/calendar_h_8"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="@+id/calendar_v_5"
-            android:layout_width="0dp"
-            android:textAlignment="textEnd"
-            android:layout_height="0dp"
-            style="@style/TxtViewPrincipalBlack"
-            tools:text="Date : " />
-        <TextView
-            android:textAlignment="textStart"
-            app:layout_constraintTop_toBottomOf="@+id/calendar_h_7"
-            app:layout_constraintBottom_toBottomOf="@+id/calendar_h_8"
-            app:layout_constraintLeft_toLeftOf="@+id/calendar_v_5"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -103,12 +83,13 @@
             tools:text="01/01/2020" />
         <ImageView
             app:layout_constraintTop_toBottomOf="@+id/calendar_h_8"
-            app:layout_constraintBottom_toBottomOf="@+id/calendar_h_9"
             app:layout_constraintLeft_toLeftOf="@+id/calendar_v_5"
             app:layout_constraintRight_toRightOf="@+id/calendar_v_5"
             android:id="@+id/textViewSelectedIcon"
             android:backgroundTint="@color/purple_200"
-            android:background="@drawable/eye"
+            android:background="@drawable/circle"
+            app:tint="@color/white"
+            android:src="@drawable/eye"
             android:layout_width="50dp"
             android:layout_height="50dp"
             style="@style/TxtViewPrincipalBlack"
