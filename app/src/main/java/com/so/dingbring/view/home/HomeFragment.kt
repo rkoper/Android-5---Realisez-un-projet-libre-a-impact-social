@@ -22,6 +22,7 @@ import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
 import kotlin.collections.HashMap
 
 class HomeFragment : Fragment() {
@@ -40,9 +41,12 @@ class HomeFragment : Fragment() {
         FirebaseApp.initializeApp(requireContext())
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
         initRV(mBinding)
-        createFireStoreUser(mBinding)
+        checkFireStoreUser(mBinding)
+
         return mBinding.root
     }
+
+
 
 
     private fun initRV(mBinding: FragmentHomeBinding) {
@@ -59,41 +63,39 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun checkFireStoreUser(mBinding: FragmentHomeBinding?) {
+        mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(),
+
+            {mlmu -> if (mlmu == null){createFireStoreUser(mBinding!!)}
+
+                else { mBinding!!.homeName.text = mlmu.mNameUser
+                    Glide.with(requireActivity())
+                        .load(mlmu.mPhotoUser)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(mBinding.homeImage)} })
+    }
+
 
     private fun createFireStoreUser(mBinding: FragmentHomeBinding) {
+
         if (FirebaseAuth.getInstance().currentUser?.displayName != null)
         { mBinding.homeName.text =  FirebaseAuth.getInstance().currentUser?.displayName.toString()}
-        else { mBinding.homeName.text = mUserName}
 
         if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
         { Glide.with(requireContext())
             .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
             .apply(RequestOptions.circleCropTransform())
             .into(mBinding.homeImage)}
-        else
-        { Glide.with(requireContext())
-            .load(R.drawable.donald)
-            .apply(RequestOptions.circleCropTransform())
-            .into(mBinding.homeImage)}
 
+        val userId = UUID.randomUUID().toString()
         val mDataUser: MutableMap<String, Any> = HashMap()
         mDataUser["NameUser"] = FirebaseAuth.getInstance().currentUser?.displayName.toString()
         mDataUser["EmailUser"] = FirebaseAuth.getInstance().currentUser?.email.toString()
         mDataUser["PhotoUser"] = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
+        mDataUser["DocIdUser"] = userId
 
         mUserVM.createUser(mDataUser)
 
-
     }
-
-
-
-
-    companion object{
-        lateinit var storage: FirebaseStorage
-        var mHomeFragment = this }
-
-
-
 
 }

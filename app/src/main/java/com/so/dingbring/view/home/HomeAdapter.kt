@@ -47,23 +47,8 @@ class HomeAdapter(var context: Context, mDataEvent: MutableList<MyEvent>): Recyc
 
         val mHome: MyEvent = dataList[position]
         holder.bindView(mHome)
-        holder.itemView.home_item_expand_button.setOnClickListener {
-            (object :
-                ExpandableLayout.OnExpandListener {
-                override fun onExpand(expanded: Boolean) {
-                    if (expandedPositionSet.contains(position)) {
-                        expandedPositionSet.remove(position)
-                    } else {
-                        expandedPositionSet.add(position)
-                    }
-                }
-            })
-            holder.itemView.expand_layout.setExpand(expandedPositionSet.contains(position))
-        }
-
-
+        holder.itemView.expand_layout.setExpand(expandedPositionSet.contains(position))
         holder.itemView.cl2.setOnClickListener {
-            println("    Click 1  ")
             var bundle = bundleOf("eventId" to dataList[position].mEventId)
             it.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle)
         }

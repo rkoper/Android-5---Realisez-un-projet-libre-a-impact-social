@@ -6,7 +6,6 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/blue_bg_light"
             android:layout_height="match_parent">
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_create_h_1"
@@ -391,7 +390,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="@+id/gl_create3_v_8"
                         app:layout_constraintLeft_toLeftOf="@+id/gl_create3_v_2"
-                        app:stepperBackgroundColor="@color/blue_bg_light"
+                        app:stepperBackgroundColor="@color/white"
                         app:stepperButtonColor="@color/blue_active"
                         app:stepperActionsColor="@color/black"
                         app:stepperActionsDisabledColor="@color/blue_active"

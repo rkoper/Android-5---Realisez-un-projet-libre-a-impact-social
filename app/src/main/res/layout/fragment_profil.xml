@@ -12,17 +12,177 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85"/>
-    <TextView
-        android:id="@+id/profil_textView"
-        style="@style/TxtViewPrincipalBlack"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_profil_v_4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_profil_v_5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_profil_v_6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_profil_v_65"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_profil_v_75"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"/>
+    <ImageView
+        android:background="@drawable/round_white"
+        android:id="@+id/profil_image"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_4"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="139dp" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="TextView" />
+
+    <TextView
+        android:padding="30dp"
+        android:background="@color/yellow_100"
+        android:id="@+id/profil_name"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="0dp"
+        style="@style/TxtViewPrincipalBlack"
+        android:layout_height="0dp"
+        android:text="Name" />
+    <ImageView
+        android:id="@+id/profil_edit_name"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/edit"
+        android:padding="10dp"
+        android:background="@drawable/round_white_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profil_name"
+        app:layout_constraintBottom_toBottomOf="@+id/profil_name"
+        app:tint="@color/black" />
+    <TextView
+        android:padding="10dp"
+
+        android:id="@+id/profil_choose"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="0dp"
+        style="@style/TxtViewPrincipalBlack"
+        android:layout_height="0dp"
+        android:text="Change your profil picture : " />
+
+    <ImageView
+        android:background="@drawable/round_white_small"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/profil_img1"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/profil_img2"/>
+    <ImageView
+        android:background="@drawable/round_white_small"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/profil_img2"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
+        app:layout_constraintLeft_toRightOf="@+id/profil_img1"
+        app:layout_constraintRight_toLeftOf="@+id/profil_img3"/>
+    <ImageView
+        android:background="@drawable/round_white_small"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/profil_img3"
+        app:layout_constraintLeft_toRightOf="@+id/profil_img2"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
+        app:layout_constraintRight_toLeftOf="@+id/profil_img4"/>
+    <ImageView
+        android:background="@drawable/round_white_small"
+        app:layout_constraintLeft_toRightOf="@+id/profil_img3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/profil_img4"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <ImageView
+        android:background="@drawable/round_white_small"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/profil_img5"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_75"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/profil_img6"/>
+    <ImageView
+        android:background="@drawable/round_white_small"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/profil_img6"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_75"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
+        app:layout_constraintLeft_toRightOf="@+id/profil_img5"
+        app:layout_constraintRight_toLeftOf="@+id/profil_img7"/>
+    <ImageView
+        android:background="@drawable/round_white_small"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/profil_img7"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_75"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
+        app:layout_constraintLeft_toRightOf="@+id/profil_img6"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/profil_save"
+        android:src="@drawable/check"
+        android:padding="10dp"
+        android:background="@drawable/round_white_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="@+id/profil_img7"
+        app:layout_constraintLeft_toLeftOf="@+id/profil_img6"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_8"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
+        app:tint="@color/black" />
+
+    <ImageView
+        android:id="@+id/profil_refresh"
+        android:padding="10dp"
+        android:src="@drawable/refreshtwo"
+        android:background="@drawable/round_white_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="@+id/profil_img6"
+        app:layout_constraintLeft_toLeftOf="@+id/profil_img5"
+        app:layout_constraintTop_toTopOf="@+id/gl_profil_v_8"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
+        app:tint="@color/black" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

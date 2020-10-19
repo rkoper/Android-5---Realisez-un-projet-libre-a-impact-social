@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2"/>
+            app:layout_constraintGuide_percent="0.225"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_detail_h_45"
             android:layout_width="match_parent"
@@ -214,13 +214,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.01"/>
+                app:layout_constraintGuide_percent="0.05"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_h_99"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.99"/>
+                app:layout_constraintGuide_percent="0.95"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_h_5"
@@ -302,7 +302,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.55"/>
+                app:layout_constraintGuide_percent="0.5"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_v_6"
@@ -315,27 +315,28 @@
             <CheckBox
                 android:buttonTint="@color/black"
                 android:background="@color/colorTransparent"
-                style="@style/BlackCheck"
+                style="@style/MyDialogTheme"
                 android:text="I Bring "
+                android:gravity="center"
                 android:id="@+id/detail_status_bring"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/gl_detail2_v_3"
-                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_33"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_25"
+                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_01"/>
             <CheckBox
                 android:buttonTint="@color/black"
                 android:background="@color/colorTransparent"
-                style="@style/BlackCheck"
+                style="@style/MyDialogTheme"
                 android:text="I need "
                 android:id="@+id/detail_status_need"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/gl_detail2_v_3"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_66"/>
+                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_99"
+                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_75"/>
             <ImageView
                 android:id="@+id/detail_add"
                 android:elevation="10dp"
@@ -352,7 +353,7 @@
                 android:theme="@style/TxtViewPrincipalBlack3"
                 android:background="@null"
                 android:hint="Type Item "
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:id="@+id/detail_item"
                 android:textColor="@color/black"
@@ -397,7 +398,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:stepperBackgroundColor="@color/Red"
+                    app:stepperBackgroundColor="@color/white"
                     app:stepperButtonColor="@color/yellow"
                     app:stepperActionsColor="@color/black"
                     app:stepperActionsDisabledColor="@color/Red"
@@ -449,6 +450,7 @@
             android:id="@+id/detail_address"
             android:background="@color/colorTransparent"
             android:theme="@style/TxtViewPrincipalBlack"
+            android:padding="3dp"
             android:hint="Enter Address"
             android:layout_width="0dp"
             android:layout_height="0dp"

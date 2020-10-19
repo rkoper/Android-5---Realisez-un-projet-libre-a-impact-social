@@ -3,38 +3,34 @@ package com.so.dingbring.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class MyUserRepository {
 
     private val dbFire = FirebaseFirestore.getInstance()
-
+    private var mUserSet: MutableLiveData<MyUser> = MutableLiveData()
 
     fun createUser(mDataUser: MutableMap<String, Any>){
-        dbFire.collection("user").document(mDataUser["EmailUser"].toString()).set(mDataUser)
+        dbFire.collection("user").document(mDataUser["DocIdUser"].toString()).set(mDataUser)
     }
-/*
-    fun getUser() : LiveData<MutableList<MyUser>>  {
-        val mDetailMutableList = mutableListOf<MyItem>()
-        dbFire.collection("user").whereEqualTo("ItemEventId", mEventId)
+
+    fun getUser(mUserEmail:String) : LiveData<MyUser>?  {
+        dbFire.collection("user").whereEqualTo("EmailUser", mUserEmail)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents) {
-                    val mIStatus: String? = doc.getString("itemStatus")
-                    val mIQty: String? = doc.getString("itemQty")
-                    val mIName: String? = doc.getString("itemName")
-                    val mEUser: String? = doc.getString("itemUser")
-                    val mIEventId: String? = doc.getString("ItemEventId")
-                    val mIDocId: String? = doc.id
-                    val myDetail =
-                        MyItem(mIStatus!!, mIQty!!, mIName!!, mEUser!!, mIDocId!!, mIEventId!!)
-                    mDetailMutableList.add(myDetail)
+                    val mNameUser: String? = doc.getString("NameUser")
+                    val mMailUser: String? = doc.getString("EmailUser")
+                    val mPicUser: String? = doc.getString("PhotoUser")
+                    val mDocIdUser: String? = doc.getString("DocIdUser")
+                    val myUser = MyUser(mNameUser!!, mMailUser!!, mPicUser!!, mDocIdUser!!)
+                       mUserSet.value = myUser
                 }
-                mItemSet.value = mDetailMutableList
+
             }
             .addOnFailureListener { exception -> println("Error getting documents: " + exception) }
-        return mItemSet
+        return mUserSet
     }
 
- */
 
 }

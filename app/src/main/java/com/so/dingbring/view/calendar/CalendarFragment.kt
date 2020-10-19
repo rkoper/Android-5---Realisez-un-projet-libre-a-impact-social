@@ -132,7 +132,7 @@ class CalendarFragment : Fragment() {
 
       initBottomVisible()
 
-        val a0 = z1.split("")[0]
+        val a = z1.split("")[0]
         val a1 = z1.split("")[1]
         val a2 = z1.split("")[2]
         val a3 = z1.split("")[3]
@@ -141,9 +141,8 @@ class CalendarFragment : Fragment() {
         val a6 = z1.split("")[6]
         val a7 = z1.split("")[7]
 
-        val dateDispolay = (a7+a6+"/"+a5+a4+"/"+a0+a1+a2+a3).toString()
+        val dateDispolay = (a7+a6+"/"+a5+a4+"/"+a+a1+a2+a3).toString()
 
-        println("----"+a0+"--/---"+a1+"--/--"+a2+"--/--"+a3+"----------")
 
         mBinding.textViewSelectedDate.text = z2
         mBinding.textViewSelectedName.text = dateDispolay
