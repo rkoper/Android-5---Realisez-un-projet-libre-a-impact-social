@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.so.dingbring.R
 import com.so.dingbring.data.MyItem
@@ -31,9 +33,9 @@ class CreateAdapter(
         holder.mDisplayNum.text = position.plus(1).toString()
 
         if (mListMyItem[position].mItemStatus == "I need")
-        {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))}
+        {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.blue_50))}
         else
-        {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))}
+        {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.blue_100))}
 
 
     }

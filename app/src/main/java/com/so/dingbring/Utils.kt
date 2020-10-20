@@ -73,7 +73,7 @@ object Utils {
         etTextInput?.setHintTextColor(resources.getColor(R.color.white))
         etTextInput?.gravity = Gravity.CENTER
         etTextInput?.hint = hint
-        val font: Typeface? = ResourcesCompat.getFont(mContext, R.font.montserrat)
+        val font: Typeface? = ResourcesCompat.getFont(mContext, R.font.roboto)
         etTextInput?.typeface = font
         etTextInput?.textSize = 18f
         val searchIcon =

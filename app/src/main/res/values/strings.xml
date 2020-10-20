@@ -1,28 +1,6 @@
 <resources>
     <string name="app_name">DingBring</string>
-    <string name="facebook_application_id">3481097821967676</string>
     <string name="fb_login_protocol_scheme">fb3481097821967676</string>
-    <string name="twitter_consumer_key" >EO4RoGIrqAlfo0CMhgk9ancbE</string>
-    <string name="twitter_consumer_secret">sAX3Dv4FEHhRrxkisAgNG2kHj2v8f1j8IruxQCRLFsdrqoFzjl</string>
-
-
-    <string-array name="Status">
-        <item>I need</item>
-        <item>I am binging</item>
-    </string-array>
-
-    <string-array name="Quantity">
-        <item>Quantity</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-    </string-array>
 
     <string name="day1">Mon.</string>
     <string name="day2">Tue.</string>
@@ -31,10 +9,45 @@
     <string name="day5">Fri.</string>
     <string name="day6">Sat.</string>
     <string name="day7">Sun.</string>
+    <string name="one">one</string>
+    <string name="two">two</string>
+    <string name="item">Item</string>
+    <string name="photo_info">photo info</string>
+    <string name="enter_name_s_event">Enter Name\'s Event</string>
+    <string name="enter_organizer">Enter Organizer</string>
+    <string name="i_bring">I Bring</string>
+    <string name="i_need">I need</string>
+    <string name="save">save</string>
+    <string name="type_item">Type Item</string>
+    <string name="quantity">Quantity</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_orga">Enter Orga</string>
+    <string name="_1">+1</string>
+    <string name="enter_date">Enter Date</string>
+    <string name="textview">TextView</string>
+    <string name="name">Name</string>
+    <string name="image_view">image view</string>
+    <string name="change_your_profil_picture">Change your profil picture :</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="french">French</string>
+    <string name="spanish">Spanish</string>
+    <string name="arabic">Arabic</string>
+    <string name="italian">Italian</string>
+    <string name="chiniese">Chiniese</string>
+    <string name="deutsh">Deutsh</string>
+    <string name="portuguese">Portuguese</string>
+    <string name="contact">contact</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="logout">LogOut</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="icon_logout">icon logout</string>
+    <string name="event">Event</string>
+    <string name="display_event">display event</string>
+    <string name="decoration">decoration</string>
+    <string name="wait">wait</string>
+    <string name="ok">ok</string>
+    <string name="qty">Qty</string>
 
-    Monday
-    Mardi	Tuesday
-    Mercredi	Wednesday
-    Jeudi	Thursday
 
 </resources>

@@ -26,7 +26,7 @@
             android:layout_height="100dp"
             android:background="@color/colorTransparent"
             android:gravity="center"
-            android:hint="photo_info"
+            android:hint="@string/photo_info"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="textNoSuggestions"
@@ -49,8 +49,8 @@
             android:layout_height="50dp"
             android:background="@drawable/check"
             android:backgroundTint="@color/grey_300"
-            android:text="dismiss"
-            android:contentDescription="ok" />
+            android:text="@string/wait"
+            android:contentDescription="@string/wait" />
 
         <ImageButton
             app:layout_constraintTop_toBottomOf="@+id/custom_dialog_txt"
@@ -62,8 +62,8 @@
             android:layout_gravity="center"
             android:background="@drawable/check"
             android:backgroundTint="@color/grey"
-            android:text="dismiss"
+            android:text="@string/ok"
             android:visibility="invisible"
-            android:contentDescription="ok" />
+            android:contentDescription="@string/ok" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

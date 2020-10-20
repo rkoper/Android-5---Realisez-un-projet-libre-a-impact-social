@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DingBring</string>
+    <string name="fb_login_protocol_scheme">fb3481097821967676</string>
+    <string name="day1">सोमवार।</string>
+    <string name="day2">मंगल</string>
+    <string name="day3">समुद्र।</string>
+    <string name="day4">खेल।</string>
+    <string name="day5">शुक्र</string>
+    <string name="day6">बैठ गया।</string>
+    <string name="day7">रवि।</string>
+    <string name="one">ए</string>
+    <string name="two">उनमें से</string>
+    <string name="item">मद</string>
+    <string name="photo_info">फोटो की जानकारी</string>
+    <string name="enter_name_s_event">घटना का नाम</string>
+    <string name="enter_organizer">व्यवस्था करनेवाला</string>
+    <string name="i_bring">मैं लाता हूँ</string>
+    <string name="i_need">मुझे जरूरत है</string>
+    <string name="save">अभिलेख</string>
+    <string name="type_item">मद</string>
+    <string name="quantity">रकम</string>
+    <string name="enter_address">पता</string>
+    <string name="enter_orga">व्यवस्था करनेवाला</string>
+    <string name="_1">1</string>
+    <string name="enter_date">दिनांक</string>
+    <string name="textview">व्याख्यान दर्शन</string>
+    <string name="name">उपनाम</string>
+    <string name="image_view">छवि देखें</string>
+    <string name="change_your_profil_picture">प्रोफ़ाइल चित्र बदलें:</string>
+    <string name="language">बोली</string>
+    <string name="english">अंग्रेज़ी</string>
+    <string name="french">फ्रेंच</string>
+    <string name="spanish">स्पेनिश</string>
+    <string name="arabic">अरब</string>
+    <string name="italian">इतालवी</string>
+    <string name="chiniese">चीनी</string>
+    <string name="deutsh">जर्मन</string>
+    <string name="portuguese">पुर्तगाली</string>
+    <string name="contact">संपर्क करें</string>
+    <string name="contact_us">संपर्क करें</string>
+    <string name="logout">लॉग आउट</string>
+    <string name="disconnect">लॉग आउट</string>
+    <string name="icon_logout">वियोग चिह्न</string>
+    <string name="event">प्रतिस्पर्धा</string>
+    <string name="display_event">घटना दिखाओ</string>
+    <string name="decoration">सजावट</string>
+    <string name="wait">मरीज़</string>
+    <string name="ok">ठीक</string>
+    <string name="qty">मात्रा</string>
+
+</resources>

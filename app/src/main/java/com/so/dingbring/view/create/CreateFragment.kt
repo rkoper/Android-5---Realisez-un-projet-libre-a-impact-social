@@ -1,13 +1,11 @@
 package com.so.dingbring.view.create
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
@@ -15,18 +13,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.Utils.FindDay
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.*
+import com.so.dingbring.databinding.ActivityMainBinding
 import com.so.dingbring.databinding.FragmentCreateBinding
 import com.so.dingbring.databinding.FragmentDetailBinding
+import com.so.dingbring.databinding.FragmentProfilBinding
 import com.so.dingbring.view.detail.create.CreateAdapter
 import kotlinx.android.synthetic.main.fragment_create.*
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -45,7 +48,7 @@ class CreateFragment : Fragment() {
     private var mUserName = "Soso"
     private var mEventAdress = ""
     private var mEventSize = ""
-
+    private var themedContext: Context? = null
     private val mItemVM by viewModel<MyItemViewModel>()
     var i : Int = 1
     var mItemStatus: String = "I bring"
@@ -59,12 +62,15 @@ class CreateFragment : Fragment() {
     private lateinit var mCreateAdapter: CreateAdapter
     private lateinit var mBinding: FragmentCreateBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create, container, false)
+
+
 
         // CHECK THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
            mUserMail = arguments?.get("mUserMail").toString()
@@ -99,7 +105,7 @@ class CreateFragment : Fragment() {
         etTextInput?.setHintTextColor(resources.getColor(R.color.black))
         etTextInput?.gravity = Gravity.CENTER
         etTextInput?.hint = " Enter address"
-        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.adventpro)
+        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto)
         etTextInput?.typeface = font
         etTextInput?.textSize = 20f
         val searchIcon =
@@ -130,7 +136,7 @@ class CreateFragment : Fragment() {
             val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
                 val newDate = formatDate(y, m, d)
                 val dayDate = FindDay(requireContext(), y, m, d)
-                create_date.text =   dayDate + " " + newDate
+                create_date.text = "$dayDate $newDate"
                 mEventDate = create_date.text.toString() }
             val now = android.text.format.Time()
             now.setToNow()
@@ -145,9 +151,13 @@ class CreateFragment : Fragment() {
     }
 
     private fun initOrga() {
-        create_orga.text = mUserName
-        mEventOrga = create_orga.text.toString()
-    }
+
+        mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), { mlmu ->
+            if (mlmu != null){
+                mUserName = mlmu.mNameUser
+                create_orga.text = mUserName
+                mEventOrga = create_orga.text.toString()
+             } })}
 
     fun createEvent(){
         create_save?.setOnClickListener {
@@ -232,11 +242,6 @@ class CreateFragment : Fragment() {
 
     private fun createItem() {
         mItemVM.createItem(mListMyItem)  }
-
-
-
-
-
 
 
 }

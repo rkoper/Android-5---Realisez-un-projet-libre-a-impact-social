@@ -9,6 +9,7 @@ class MyUserRepository {
 
     private val dbFire = FirebaseFirestore.getInstance()
     private var mUserSet: MutableLiveData<MyUser> = MutableLiveData()
+    private var mEventIdSet: MutableLiveData<MutableList<String>> = MutableLiveData()
 
     fun createUser(mDataUser: MutableMap<String, Any>){
         dbFire.collection("user").document(mDataUser["DocIdUser"].toString()).set(mDataUser)
@@ -24,13 +25,10 @@ class MyUserRepository {
                     val mPicUser: String? = doc.getString("PhotoUser")
                     val mDocIdUser: String? = doc.getString("DocIdUser")
                     val myUser = MyUser(mNameUser!!, mMailUser!!, mPicUser!!, mDocIdUser!!)
-                       mUserSet.value = myUser
-                }
 
-            }
+                    mUserSet.value = myUser
+                } }
             .addOnFailureListener { exception -> println("Error getting documents: " + exception) }
         return mUserSet
     }
-
-
 }

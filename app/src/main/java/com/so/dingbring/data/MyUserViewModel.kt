@@ -15,4 +15,5 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
     fun getUser(mMailUser : String) : LiveData<MyUser>? {
         return mUserRepository.getUser(mMailUser)
     }
+
 }

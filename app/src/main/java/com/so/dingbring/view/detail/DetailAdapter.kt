@@ -37,11 +37,11 @@ class DetailAdapter(
             if (mListMyItem[position].mItemStatus == "I need") {
                 mDetailEmptyButton.visibility = View.VISIBLE
                 mDetailFullButton.visibility = View.INVISIBLE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Red))
+                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.orange_50))
             } else {
                 mDetailFullButton.visibility = View.VISIBLE
                 mDetailEmptyButton.visibility = View.INVISIBLE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.Green))
+                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.orange_100))
             }
         }
 

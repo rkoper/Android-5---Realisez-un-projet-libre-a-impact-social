@@ -1,28 +1,31 @@
 package com.so.dingbring.view.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
+import androidx.lifecycle.LiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.firestore.FirebaseFirestore
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.FragmentHomeBinding
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class HomeFragment : Fragment() {
@@ -32,7 +35,6 @@ class HomeFragment : Fragment() {
     private val mUserVM by viewModel<MyUserViewModel>()
     private lateinit var mHomeAdapter: HomeAdapter
     private lateinit var mBinding: FragmentHomeBinding
-    private  var mUserName = "No Name"
     var mDataEvent : MutableList<MyEvent> = mutableListOf()
 
 
@@ -42,38 +44,63 @@ class HomeFragment : Fragment() {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
         initRV(mBinding)
         checkFireStoreUser(mBinding)
-
         return mBinding.root
     }
 
 
 
-
+    @SuppressLint("CheckResult")
     private fun initRV(mBinding: FragmentHomeBinding) {
-        mHomeAdapter= HomeAdapter(requireActivity(), mDataEvent)
+        mHomeAdapter= HomeAdapter(requireActivity(), mDataEvent, )
         mBinding.recyclerView.setHasFixedSize(true)
         mBinding.recyclerView.layoutManager= LinearLayoutManager(context)
         mBinding.recyclerView.adapter= mHomeAdapter
 
-        mEventVM.getAllEvent().observe(requireActivity(), {
-            mDataEvent.addAll(it)
-            mHomeAdapter.notifyDataSetChanged()
-        })
-
-
+        mHomeAdapter.itemClick.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe { data ->
+                var bundle = bundleOf("eventId" to data.mEventId)
+                mBinding.root.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle) }
     }
 
     private fun checkFireStoreUser(mBinding: FragmentHomeBinding?) {
-        mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(),
 
-            {mlmu -> if (mlmu == null){createFireStoreUser(mBinding!!)}
+//       mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(),{
+        mUserVM.getUser("fifi@gmail.com")?.observe(requireActivity(),{ mlmu ->
+            if (mlmu == null){createFireStoreUser(mBinding!!)}
 
-                else { mBinding!!.homeName.text = mlmu.mNameUser
-                    Glide.with(requireActivity())
-                        .load(mlmu.mPhotoUser)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(mBinding.homeImage)} })
-    }
+            else { mBinding!!.homeName.text = mlmu.mNameUser
+                Glide.with(requireActivity())
+                    .load(mlmu.mPhotoUser)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(mBinding.homeImage)
+
+                println("--------------|mUserId|------------" + mlmu.mUserId)
+
+
+
+                mEventVM.getAllEvent().observe(requireActivity(), { mlme ->
+                    //mDataEvent.addAll(mlme)
+                    val dbFire = FirebaseFirestore.getInstance()
+
+                    mlme.forEach {
+                        dbFire.collection("event")
+                            .document(it.mEventId)
+                            .collection("AuthUser")
+                            .get()
+                            .addOnSuccessListener { result ->
+                                for (document in result) {
+
+                                    if (mlmu.mUserId == document["mUserID"].toString()) {
+
+                                        println("------------------------------->>>>>>>>" + document.reference.parent.parent!!.id)
+                                    } else {
+                                        println("----------no match -----------------")
+                                    }
+                                }
+                            }
+                }})
+ } }) }
+
 
 
     private fun createFireStoreUser(mBinding: FragmentHomeBinding) {
@@ -97,5 +124,8 @@ class HomeFragment : Fragment() {
         mUserVM.createUser(mDataUser)
 
     }
+
+
+
 
 }

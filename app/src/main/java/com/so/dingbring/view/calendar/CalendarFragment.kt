@@ -144,8 +144,8 @@ class CalendarFragment : Fragment() {
         val dateDispolay = (a7+a6+"/"+a5+a4+"/"+a+a1+a2+a3).toString()
 
 
-        mBinding.textViewSelectedDate.text = z2
-        mBinding.textViewSelectedName.text = dateDispolay
+        mBinding.textViewSelectedDate.text = dateDispolay
+        mBinding.textViewSelectedName.text = z2
 
         mBinding.textViewSelectedIcon.setOnClickListener {
             var bundle = bundleOf("eventId" to z3)

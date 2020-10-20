@@ -9034,7 +9034,7 @@ instanceKlass com/android/build/gradle/tasks/ProcessApplicationManifest$Creation
 instanceKlass com/android/build/gradle/tasks/ProcessApplicationManifest$CreationAction$$Lambda$508
 instanceKlass org/gradle/api/internal/provider/ValidatingMapEntryCollector
 instanceKlass org/gradle/api/internal/provider/DefaultMapProperty$EmptySupplier
-instanceKlass org/gradle/api/internal/provider/DefaultMapProperty$NoValueSupplier
+instanceKlass org/gradle/api/internal/provider/DefaultMapProperty$robotolueSupplier
 instanceKlass org/gradle/api/internal/provider/MapSupplier
 instanceKlass org/gradle/api/internal/provider/MapEntryCollector
 instanceKlass org/gradle/api/internal/provider/MapCollector
@@ -9883,7 +9883,7 @@ instanceKlass org/gradle/api/internal/provider/AbstractCollectionProperty$Collec
 instanceKlass org/gradle/api/internal/provider/ValidatingValueCollector
 instanceKlass org/gradle/api/internal/provider/AbstractCollectionProperty$EmptySupplier
 instanceKlass org/gradle/api/internal/provider/DefaultListProperty$1
-instanceKlass org/gradle/api/internal/provider/AbstractCollectionProperty$NoValueSupplier
+instanceKlass org/gradle/api/internal/provider/AbstractCollectionProperty$robotolueSupplier
 instanceKlass org/gradle/api/internal/provider/CollectionSupplier
 instanceKlass com/android/build/api/artifact/impl/MultiplePropertyAdapter
 instanceKlass com/android/build/api/artifact/impl/AppendRequestImpl

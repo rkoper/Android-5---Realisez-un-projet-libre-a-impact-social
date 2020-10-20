@@ -29,7 +29,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ProfilFragment : Fragment() {
 
-    private lateinit var mBinding: FragmentProfilBinding
+    private lateinit var mBng: FragmentProfilBinding
     private val mUserVM by viewModel<MyUserViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
     private var mUserName = "XXXXXX"
@@ -39,29 +39,41 @@ class ProfilFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         FirebaseApp.initializeApp(requireContext())
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profil, container, false)
-        checkFireStoreUser(mBinding)
+        mBng = DataBindingUtil.inflate(inflater, R.layout.fragment_profil, container, false)
+        checkFireStoreUser(mBng)
        saveNewUserInfo()
         refreshInfo()
-        editNameUser(mBinding)
+        invisibleButton()
+
+        editNameUser(mBng)
 
 
 
 
-        return mBinding.root}
+        return mBng.root}
+
+    private fun invisibleButton() {
+        mBng.profilRefresh.visibility = View.INVISIBLE
+        mBng.profilSave.visibility = View.INVISIBLE
+    }
+
+    private fun visibleButton() {
+        mBng.profilRefresh.visibility = View.VISIBLE
+        mBng.profilSave.visibility = View.VISIBLE
+    }
 
     private fun saveNewUserInfo() {
         // SAVE NEW INFOS -----> MUSER.UPLOAD PHOTO NAME
     }
 
     private fun refreshInfo() {
-        mBinding.profilRefresh.setOnClickListener {
-            checkFireStoreUser(mBinding)
+        mBng.profilRefresh.setOnClickListener {
+            checkFireStoreUser(mBng)
         }
     }
 
-    private fun editNameUser(mBinding: FragmentProfilBinding?) {
-        mBinding?.profilEditName?.setOnClickListener {
+    private fun editNameUser(mBng: FragmentProfilBinding?) {
+        mBng?.profilEditName?.setOnClickListener {
             val d = Dialog(requireContext())
             d.requestWindowFeature(Window.FEATURE_NO_TITLE)
             d.window?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT))
@@ -86,8 +98,9 @@ class ProfilFragment : Fragment() {
 
             d.custom_dialog_ok.setOnClickListener {
                 d.dismiss()
+                visibleButton()
                 mUserName = d.custom_dialog_txt.text.toString()
-                mBinding!!.profilName.text = mUserName}
+                mBng!!.profilName.text = mUserName}
 
         }
 
@@ -97,85 +110,49 @@ class ProfilFragment : Fragment() {
         test()
         super.onViewCreated(view, savedInstanceState) }
 
-    private fun checkFireStoreUser(mBinding: FragmentProfilBinding?) {
+    private fun checkFireStoreUser(mBng: FragmentProfilBinding?) {
         mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), {mlmu ->
                 if (mlmu != null){
                     mUserName = mlmu.mNameUser
                     mUserPP = mlmu.mPhotoUser
-                    createDisplay(mBinding)} })}
+                    createDisplay(mBng)} })}
 
-    private fun createDisplay(mBinding: FragmentProfilBinding?) {
-     mBinding!!.profilName.text = mUserName
+    private fun createDisplay(mBng: FragmentProfilBinding?) {
+     mBng!!.profilName.text = mUserName
 
 
         Glide.with(requireContext())
             .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
             .apply(RequestOptions.circleCropTransform())
-            .into(mBinding.profilImage)
+            .into(mBng.profilImage)
 
     }
 
 
     private fun test() {
         val c = HashMap<Int,ImageView>()
-            c[R.drawable.img1] = mBinding.profilImg1
-            c[R.drawable.img2]= mBinding.profilImg2
-            c[R.drawable.img3]= mBinding.profilImg3
-            c[R.drawable.img4]= mBinding.profilImg4
-            c[R.drawable.img5]= mBinding.profilImg5
-            c[R.drawable.img6]= mBinding.profilImg6
-            c[R.drawable.img7]= mBinding.profilImg7
+        var mLstDrawable = arrayListOf(R.drawable.img1, R.drawable.img2,R.drawable.img3,R.drawable.img4,R.drawable.img5,R.drawable.img6,R.drawable.img7)
+        var mLstImageV = arrayListOf(mBng.profilImg1,mBng.profilImg2,mBng.profilImg3,mBng.profilImg4,mBng.profilImg5,mBng.profilImg6,mBng.profilImg7)
+
+           for (i in 0..6) { c[mLstDrawable[i]] = mLstImageV[i] }
 
         c.forEach { testtwo(it) }
     }
 
     private fun testtwo(it: Map.Entry<Int, ImageView>) {
-             Glide.with(requireContext())
+        var key = it.key
+        Glide.with(requireContext())
             .load(it.key)
             .apply(RequestOptions.circleCropTransform())
             .into(it.value)
 
-        mBinding.profilImg1.setOnClickListener {
+        it.value.setOnClickListener {
             Glide.with(requireContext())
-                .load(R.drawable.img1)
+                .load(key)
                 .apply(RequestOptions.circleCropTransform())
-                .into( mBinding.profilImage) }
+                .into( mBng.profilImage)
+        }
 
-        mBinding.profilImg2.setOnClickListener {
-            Glide.with(requireContext())
-                .load(R.drawable.img2)
-                .apply(RequestOptions.circleCropTransform())
-                .into( mBinding.profilImage) }
-
-        mBinding.profilImg3.setOnClickListener {
-            Glide.with(requireContext())
-                .load(R.drawable.img3)
-                .apply(RequestOptions.circleCropTransform())
-                .into( mBinding.profilImage) }
-
-        mBinding.profilImg4.setOnClickListener {
-            Glide.with(requireContext())
-                .load(R.drawable.img4)
-                .apply(RequestOptions.circleCropTransform())
-                .into( mBinding.profilImage) }
-
-        mBinding.profilImg5.setOnClickListener {
-            Glide.with(requireContext())
-                .load(R.drawable.img5)
-                .apply(RequestOptions.circleCropTransform())
-                .into( mBinding.profilImage) }
-
-        mBinding.profilImg6.setOnClickListener {
-            Glide.with(requireContext())
-                .load(R.drawable.img6)
-                .apply(RequestOptions.circleCropTransform())
-                .into( mBinding.profilImage) }
-
-        mBinding.profilImg7.setOnClickListener {
-            Glide.with(requireContext())
-                .load(R.drawable.img7)
-                .apply(RequestOptions.circleCropTransform())
-                .into( mBinding.profilImage) }
 
     }
 

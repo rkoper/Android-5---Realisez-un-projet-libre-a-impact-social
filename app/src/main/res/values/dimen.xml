@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="txt4">30sp</dimen>
-    <dimen name="txt3">25sp</dimen>
-    <dimen name="txt2">20sp</dimen>
-    <dimen name="txt1">15sp</dimen>
-</resources>
+<resources></resources>

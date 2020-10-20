@@ -3,10 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/yellow_bg_light"
+    android:background="@color/yellow_200"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.profil.ProfilFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_profil_v_8"
         android:layout_width="match_parent"
@@ -53,11 +58,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:text="TextView" />
+        android:text="@string/textview"
+        android:contentDescription="@string/textview" />
 
     <TextView
         android:padding="30dp"
-        android:background="@color/yellow_100"
         android:id="@+id/profil_name"
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_4"
         app:layout_constraintRight_toRightOf="parent"
@@ -66,31 +71,34 @@
         android:layout_width="0dp"
         style="@style/TxtViewPrincipalBlack"
         android:layout_height="0dp"
-        android:text="Name" />
+        android:text="@string/name" />
     <ImageView
         android:id="@+id/profil_edit_name"
         android:layout_marginEnd="15dp"
         android:src="@drawable/edit"
         android:padding="10dp"
+
         android:background="@drawable/round_white_small"
+        android:backgroundTint="@color/yellow_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/profil_name"
         app:layout_constraintBottom_toBottomOf="@+id/profil_name"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        android:contentDescription="@string/image_view" />
     <TextView
         android:padding="10dp"
-
         android:id="@+id/profil_choose"
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_5"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_6"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="0dp"
+        android:background="@color/yellow_200"
         style="@style/TxtViewPrincipalBlack"
         android:layout_height="0dp"
-        android:text="Change your profil picture : " />
+        android:text="@string/change_your_profil_picture" />
 
     <ImageView
         android:background="@drawable/round_white_small"
@@ -100,7 +108,8 @@
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/profil_img2"/>
+        app:layout_constraintRight_toLeftOf="@+id/profil_img2"
+        android:contentDescription="@string/image_view" />
     <ImageView
         android:background="@drawable/round_white_small"
         android:layout_width="60dp"
@@ -109,7 +118,8 @@
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
         app:layout_constraintLeft_toRightOf="@+id/profil_img1"
-        app:layout_constraintRight_toLeftOf="@+id/profil_img3"/>
+        app:layout_constraintRight_toLeftOf="@+id/profil_img3"
+        android:contentDescription="@string/image_view" />
     <ImageView
         android:background="@drawable/round_white_small"
         android:layout_width="60dp"
@@ -118,7 +128,8 @@
         app:layout_constraintLeft_toRightOf="@+id/profil_img2"
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
-        app:layout_constraintRight_toLeftOf="@+id/profil_img4"/>
+        app:layout_constraintRight_toLeftOf="@+id/profil_img4"
+        android:contentDescription="@string/image_view"/>
     <ImageView
         android:background="@drawable/round_white_small"
         app:layout_constraintLeft_toRightOf="@+id/profil_img3"
@@ -127,7 +138,8 @@
         android:id="@+id/profil_img4"
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_65"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_75"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/image_view"/>
 
 
     <ImageView
@@ -138,7 +150,8 @@
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_75"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/profil_img6"/>
+        app:layout_constraintRight_toLeftOf="@+id/profil_img6"
+        android:contentDescription="@string/image_view"/>
     <ImageView
         android:background="@drawable/round_white_small"
         android:layout_width="60dp"
@@ -147,7 +160,8 @@
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_75"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
         app:layout_constraintLeft_toRightOf="@+id/profil_img5"
-        app:layout_constraintRight_toLeftOf="@+id/profil_img7"/>
+        app:layout_constraintRight_toLeftOf="@+id/profil_img7"
+        android:contentDescription="@string/image_view"/>
     <ImageView
         android:background="@drawable/round_white_small"
         android:layout_width="60dp"
@@ -156,12 +170,14 @@
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_75"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
         app:layout_constraintLeft_toRightOf="@+id/profil_img6"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/image_view"/>
 
     <ImageView
         android:id="@+id/profil_save"
         android:src="@drawable/check"
         android:padding="10dp"
+        android:backgroundTint="@color/yellow_200"
         android:background="@drawable/round_white_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -169,7 +185,8 @@
         app:layout_constraintLeft_toLeftOf="@+id/profil_img6"
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_8"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        android:contentDescription="@string/image_view"/>
 
     <ImageView
         android:id="@+id/profil_refresh"
@@ -178,12 +195,14 @@
         android:background="@drawable/round_white_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow_200"
         app:layout_constraintRight_toRightOf="@+id/profil_img6"
         app:layout_constraintLeft_toLeftOf="@+id/profil_img5"
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_8"
         app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_8"
-        app:tint="@color/black" />
+        app:tint="@color/black"
+        android:contentDescription="@string/image_view"/>
 
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

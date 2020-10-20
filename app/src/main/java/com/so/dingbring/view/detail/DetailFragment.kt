@@ -1,6 +1,7 @@
 package com.so.dingbring.view.detail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,21 +10,22 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyItem
 import com.so.dingbring.data.MyItemViewModel
+import com.so.dingbring.databinding.ActivityMainBinding
 import com.so.dingbring.databinding.FragmentDetailBinding
+import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.detail_item.*
-import kotlinx.android.synthetic.main.fragment_create.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
+
 
 class DetailFragment : Fragment() {
     var mEventName = ""
@@ -45,18 +47,39 @@ class DetailFragment : Fragment() {
     var mItemQuantity: String = "1"
     var mItemUniqueID = UUID.randomUUID().toString()
     var mListMyItem = arrayListOf<MyItem>()
+    private lateinit var mBindingMain: ActivityMainBinding
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-      //  initView(mBinding)
         initHeader(mBinding)
         return mBinding.root}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRetrieveItem()
-        initCreateItem() }
+        initCreateItem()
+        hideBottom()
+        initBack()
+
+
+
+
+    }
+
+    private fun initBack() {
+        mBinding.detailBack.setOnClickListener {
+            activity?.startActivity(Intent(activity, MainActivity::class.java))
+        }
+    }
+
+    private fun hideBottom() {
+        val activity = activity as MainActivity?
+        activity?.hideBottomBar(true)
+    }
 
 
     @SuppressLint("CheckResult")
@@ -114,18 +137,21 @@ class DetailFragment : Fragment() {
         mEventVM.getAllEvent().observe(requireActivity(), {
             it.forEach { myEvent ->
                 if (myEvent.mEventId == mEventId) {
-                    with(mBinding){
-                    detailNameEvent.text = myEvent.mEventName
-                    detailDate.text = myEvent.mEventDate
-                    detailAddress.text = myEvent.mEventAdress
-                    detailOrga.text = myEvent.mEventOrga}
+                    with(mBinding) {
+                        detailNameEvent.text = myEvent.mEventName
+                        detailDate.text = myEvent.mEventDate
+                        detailAddress.text = myEvent.mEventAdress
+                        detailOrga.text = myEvent.mEventOrga
+                    }
 
                     mEventName = myEvent.mEventName
                     mEventDate = myEvent.mEventDate
                     mEventAddress = myEvent.mEventAdress
                     mEventOrga = myEvent.mEventOrga
                     mEventId = myEvent.mEventId
-                } } }) }
+                }
+            }
+        }) }
 
 
     @SuppressLint("ResourceType")
@@ -133,8 +159,19 @@ class DetailFragment : Fragment() {
         initItem(); initQuantity(); initStatus();
         detail_add?.setOnClickListener {
             initItem()
-            if (mItemName == "") { Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show() }
-            else { val mMyItem = MyItem(mItemStatus, mItemQuantity, mItemName, mEventOrga, mItemUniqueID, mEventId)
+            if (mItemName == "") { Toast.makeText(
+                requireContext(),
+                "Please add item <3",
+                Toast.LENGTH_LONG
+            ).show() }
+            else { val mMyItem = MyItem(
+                mItemStatus,
+                mItemQuantity,
+                mItemName,
+                mEventOrga,
+                mItemUniqueID,
+                mEventId
+            )
                 mItemVM.createUniqueItem(mMyItem)
                 initRVObserver()
 

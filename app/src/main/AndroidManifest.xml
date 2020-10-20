@@ -17,7 +17,10 @@
 
 
     <activity android:name=".view.main.MainActivity">
-
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
     </activity>
 
 
@@ -26,10 +29,6 @@
             android:value="AIzaSyDE4FywHPCTvc-oP4FPzfdKZ2eCI3ZUTKk" />
 
         <activity android:name=".view.login.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId"/>
         <activity android:name="com.facebook.FacebookActivity"

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DingBring</string>
+    <string name="fb_login_protocol_scheme">fb3481097821967676</string>
+    <string name="day1">Seg.</string>
+    <string name="day2">Ter.</string>
+    <string name="day3">Mar.</string>
+    <string name="day4">Jogos.</string>
+    <string name="day5">Sex.</string>
+    <string name="day6">Sentou.</string>
+    <string name="day7">Sol.</string>
+    <string name="one">uma</string>
+    <string name="two">deles</string>
+    <string name="item">Item</string>
+    <string name="photo_info">informação da foto</string>
+    <string name="enter_name_s_event">Nome do evento</string>
+    <string name="enter_organizer">Organizador</string>
+    <string name="i_bring">Eu trago</string>
+    <string name="i_need">eu preciso</string>
+    <string name="save">Registro</string>
+    <string name="type_item">Item</string>
+    <string name="quantity">Montante</string>
+    <string name="enter_address">Endereço</string>
+    <string name="enter_orga">Organizador</string>
+    <string name="_1">1</string>
+    <string name="enter_date">Datado</string>
+    <string name="textview">Visualização de texto</string>
+    <string name="name">Último nome</string>
+    <string name="image_view">Vista de imagem</string>
+    <string name="change_your_profil_picture">Alterar a foto do perfil:</string>
+    <string name="language">línguas</string>
+    <string name="english">Inglês</string>
+    <string name="french">francês</string>
+    <string name="spanish">espanhol</string>
+    <string name="arabic">árabe</string>
+    <string name="italian">italiano</string>
+    <string name="chiniese">chinês</string>
+    <string name="deutsh">alemão</string>
+    <string name="portuguese">Português</string>
+    <string name="contact">Contato</string>
+    <string name="contact_us">Contate-Nos</string>
+    <string name="logout">Sair</string>
+    <string name="disconnect">Sair</string>
+    <string name="icon_logout">ícone de desconexão</string>
+    <string name="event">Evento</string>
+    <string name="display_event">Mostrar evento</string>
+    <string name="decoration">decoração</string>
+    <string name="wait">paciente</string>
+    <string name="ok">Está bem</string>
+    <string name="qty">Qty</string>
+
+</resources>

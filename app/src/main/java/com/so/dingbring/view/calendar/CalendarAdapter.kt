@@ -97,7 +97,7 @@ class CalendarAdapter(
                 val z = event.split(",")[0]
                 if (z == dateInt) {
                     monthViewHolder.viewEvent.visibility = View.VISIBLE
-                    monthViewHolder.viewEvent.setBackgroundColor(mContext.resources.getColor(R.color.purple_bg_light))
+                    monthViewHolder.viewEvent.setBackgroundColor(mContext.resources.getColor(R.color.purple_200))
 
                     monthViewHolder.itemView.setOnClickListener {
 
