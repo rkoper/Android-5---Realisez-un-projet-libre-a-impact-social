@@ -34,8 +34,6 @@ class DetailFragment : Fragment() {
     var mUserId = ""
     var mNb = 0
 
-    var mUserPhoto = ""
-
     private lateinit var mBinding: FragmentDetailBinding
     private lateinit var mDetailAdapter: DetailAdapter
 
@@ -64,9 +62,10 @@ class DetailFragment : Fragment() {
         mNameUser = arguments?.get("GlobalName").toString()
         mEmailUser = arguments?.get("GlobalEmail").toString()
         mPhotoUser = arguments?.get("GlobalPhoto").toString()
+        mEventId = arguments?.get("GlobalIdEvent").toString()
 
 
-        println("--detail--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+        println("--detail--|Name|---"+mPhotoUser + "--|Mail|---"+ mEmailUser+ "--|Photo|--"+mPhotoUser + "--|ID|--" + mEventId)
 
         initHeader(mBinding)
         return mBinding.root}
@@ -127,21 +126,17 @@ class DetailFragment : Fragment() {
                 clear()
                 addAll(mlmi)}
 
-            mListMyItem.let { mDetailAdapter.notifyDataSetChanged() }
+            mListMyItem.let {
+
+
+                println("--detail--–||----"+mListMyItem.toString())
+
+                mDetailAdapter.notifyDataSetChanged() }
 
         } }
 
-/*
-    private fun initView(mBinding: FragmentDetailBinding) {
-        mBinding.detailReturn.setOnClickListener {
-            it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
- */
+  private fun initHeader(mBinding: FragmentDetailBinding) {
 
-    private fun initHeader(mBinding: FragmentDetailBinding) {
-
-
-
-        mEventId = arguments?.get("eventId").toString()
         mEventVM.getAllEvent().observe(requireActivity(), {
             it.forEach { myEvent ->
                 if (myEvent.mEventId == mEventId) {
@@ -176,10 +171,10 @@ class DetailFragment : Fragment() {
                 mItemStatus,
                 mItemQuantity,
                 mItemName,
-                mEventOrga,
+                mNameUser,
                 mItemUniqueID,
                 mEventId,
-                mUserPhoto
+                mPhotoUser
             )
                 mItemVM.createUniqueItem(mMyItem)
                 initRVObserver() }
@@ -206,12 +201,16 @@ class DetailFragment : Fragment() {
                 mItemQuantity = qty.toString()
                 println(" mItemQty ------>$mItemQuantity")
             }
-        })
-
-
-    }
+        }) }
 
     private fun initItem() {
         mItemName = detail_item.text.toString() }
+
+/*
+    private fun initView(mBinding: FragmentDetailBinding) {
+        mBinding.detailReturn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
+ */
+
 
 }

@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
     var mNameUser = "Fifi"
     var mEmailUser = "fifi@gmail.com"
     var mPhotoUser = "https://i.ibb.co/r6W0hxp/Capture-d-e-cran-2020-10-16-a-21-09-59.png"
+    var mDefaultPhoto = "https://i.ibb.co/r6W0hxp/Capture-d-e-cran-2020-10-16-a-21-09-59.png"
 
 
     override fun onCreateView(
@@ -78,8 +79,11 @@ class HomeFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { data ->
                 val bundle = Bundle()
-                bundle.putString("eventId", data.mEventId)
-                bundle.putString("userId", data.mEventId)
+                bundle.putString("GlobalIdEvent", data.mEventId)
+                bundle.putString("GlobalName", mNameUser)
+                bundle.putString("GlobalEmail", mEmailUser)
+                bundle.putString("GlobalPhoto", mPhotoUser)
+                bundle.putString("GlobalPhoto", mPhotoUser)
                 mBinding.root.findNavController()
                     .navigate(R.id.action_homeFragment_to_detail_fragment, bundle)
             }

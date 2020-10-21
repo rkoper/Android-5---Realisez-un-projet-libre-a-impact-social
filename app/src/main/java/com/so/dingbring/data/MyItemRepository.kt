@@ -28,7 +28,7 @@ class MyItemRepository {
                     val mEUser: String? = doc.getString("itemUser")
                     val mIEventId: String? = doc.getString("itemEventId")
                     val mIDocId: String? = doc.id
-                    val mUserPhoto:String? = doc.getString("itemPhotoUser")
+                    val mUserPhoto:String? = doc.getString("itemUserPhoto")
                     val myDetail =
                         MyItem(mIStatus!!, mIQty!!, mIName!!, mEUser!!, mIDocId!!, mIEventId!!,mUserPhoto)
                     mDetailMutableList.add(myDetail)
@@ -51,10 +51,10 @@ class MyItemRepository {
                     val mIStatus: String? = doc.getString("itemStatus")
                     val mIQty: String? = doc.getString("itemQty")
                     val mIName: String? = doc.getString("itemName")
-                    val mEUser: String? = doc.getString("itemUserID")
+                    val mEUser: String? = doc.getString("itemUser")
                     val mIEventId: String? = doc.getString("itemEventId")
                     val mIDocId: String? = doc.id
-                    val mUserPhoto:String? = doc.getString("itemPhotoUser")
+                    val mUserPhoto:String? = doc.getString("itemUserPhoto")
                     val myDetail =
                         MyItem(mIStatus, mIQty, mIName, mEUser, mIDocId, mIEventId, mUserPhoto)
                     mDetailMutableList.add(myDetail)
@@ -76,6 +76,7 @@ class MyItemRepository {
             mItemEach["itemQty"] = mMyItem.mItemQty.toString()
             mItemEach["itemId"] = mUniqueID
             mItemEach["itemEventId"] = mMyItem.mItemEventId.toString()
+            mItemEach["itemUserPhoto"] = mMyItem.mItemUserPhoto.toString()
             dbFire.collection("item").document(mUniqueID).set(mItemEach) } }
 
     fun createUniqueItem(mListItem: MyItem) {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="70dp"
     android:layout_margin="2dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detail_item_cl"
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15"/>
+            app:layout_constraintGuide_percent="0.13"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_detail_item_v_15"
             android:layout_width="match_parent"
@@ -33,13 +33,13 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.27"/>
+            app:layout_constraintGuide_percent="0.25"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_detail_item_v_25"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3"/>
+            app:layout_constraintGuide_percent="0.33"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -50,7 +50,13 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85"/>
+            app:layout_constraintGuide_percent="0.87"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_detail_item_v_9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.98"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_detail_item_h_1"
             android:layout_width="match_parent"
@@ -77,7 +83,7 @@
             app:layout_constraintGuide_percent="0.26"/>
 
         <ImageView
-            android:visibility="invisible"
+            android:visibility="visible"
             android:src="@drawable/check"
             android:id="@+id/detail_num_item_ok"
             android:layout_width="wrap_content"
@@ -90,7 +96,6 @@
             android:background="@drawable/round_black_small"/>
         <ImageView
             android:visibility="invisible"
-            android:padding="5dp"
             android:backgroundTint="@color/orange_200"
             android:src="@drawable/round_white_small"
             android:id="@+id/detail_num_item_wait"
@@ -102,13 +107,12 @@
             app:layout_constraintBottom_toBottomOf="@+id/gl_detail_item_h_9"
             android:background="@drawable/round_black_small"/>
         <TextView
-            android:padding="5dp"
-            android:layout_marginRight="10dp"
             style="@style/TxtViewPrincipalBlack"
             android:id="@+id/detail_item_quantity"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text=""
+            android:text="8"
+            android:padding="12dp"
             android:textColor="@color/black"
             app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_1"
             app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_2"
@@ -126,33 +130,44 @@
             app:layout_constraintBottom_toBottomOf="@+id/gl_detail_item_h_6"
             app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_25"
             app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_15"/>
+
         <TextView
-            android:padding="4dp"
-            style="@style/TxtViewPrincipalBlack"
             android:id="@+id/detail_item_type"
+            style="@style/TxtViewPrincipalBlack"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:padding="13dp"
+            android:text="Text"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_25"
+            app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/detail_item_photo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_6"
+            app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_9"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_item_h_6"
+            app:layout_constraintTop_toTopOf="@+id/gl_detail_item_h_1" />
+
+        <TextView
+            android:padding="0dp"
+            style="@style/TxtViewPrincipalBlack"
+            android:id="@+id/detail_item_personn"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Text"
             android:textColor="@color/black"
             android:ellipsize="end"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_25"
-            app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_6"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:padding="7dp"
-            style="@style/TxtViewPrincipalBlack"
-            android:id="@+id/detail_item_personn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:textSize="14sp"
-            android:text="Txt"
-            android:textColor="@color/black"
-            android:ellipsize="end"
             app:layout_constraintLeft_toLeftOf="@+id/gl_detail_item_v_6"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/gl_detail_item_v_9"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/gl_detail_item_h_6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

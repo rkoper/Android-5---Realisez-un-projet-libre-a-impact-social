@@ -13,6 +13,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.so.dingbring.R
 import com.so.dingbring.data.MyItem
 import io.reactivex.subjects.BehaviorSubject
@@ -32,6 +34,15 @@ class DetailAdapter(
             mDetailItem.text = mListMyItem[position].mItemName
             mDetailQuantity.text = mListMyItem[position].mItemQty
             mDetailUser.text = mListMyItem[position].mItemUser
+
+            Glide.with(mContext)
+                .load(mListMyItem[position].mItemUserPhoto)
+                .apply(RequestOptions.circleCropTransform())
+                .into(mDetailImageUser)
+
+            println("----|mItemUserPhoto|-----" + mListMyItem[position].mItemUserPhoto)
+            println("----|mItemUser|-----" + mListMyItem[position].mItemUser)
+
 
 
             if (mListMyItem[position].mItemStatus == "I need") {
@@ -69,6 +80,7 @@ class DetailAdapter(
         var mDetailColor: ConstraintLayout = itemView.findViewById(R.id.detail_item_cl)
         var mDetailUser: TextView = itemView.findViewById(R.id.detail_item_personn)
         var mDetailAddOne: ImageView = itemView.findViewById(R.id.detail_item_add_one)
+        var mDetailImageUser: ImageView = itemView.findViewById(R.id.detail_item_photo)
 
 
         init {
