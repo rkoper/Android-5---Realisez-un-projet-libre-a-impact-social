@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(){
 
     lateinit var mBinding: ActivityMainBinding
     var mNameUser = "Fifi"
-    var mEmailUser = "fifi@gmail.Com"
+    var mEmailUser = "fifi@gmail.com"
     var mPhotoUser = "https://i.ibb.co/r6W0hxp/Capture-d-e-cran-2020-10-16-a-21-09-59.png"
     private val mEventVM by viewModel<MyEventViewModel>()
     private val mUserVM by viewModel<MyUserViewModel>()

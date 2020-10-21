@@ -12,12 +12,36 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_profil_h_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_profil_h_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_profil_v_8"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_profil_v_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_profil_v_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_profil_v_4"
@@ -52,12 +76,12 @@
     <ImageView
         android:background="@drawable/round_white"
         android:id="@+id/profil_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_4"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        app:layout_constraintTop_toTopOf="@id/gl_profil_v_1"
+        app:layout_constraintRight_toRightOf="@id/gl_profil_h_4"
+        app:layout_constraintBottom_toBottomOf="@+id/gl_profil_v_3"
+        app:layout_constraintLeft_toLeftOf="@id/gl_profil_h_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/textview"
         android:contentDescription="@string/textview" />
 

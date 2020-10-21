@@ -93,12 +93,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadRV() {
-        println("--------->>>>>>>>>>>>" + mEmailUser)
         mUserVM.getUserByMail(mEmailUser)?.observe(requireActivity(),{ mlmu ->
-            println("--------->>>>>>>>>>>>" + mlmu.mEventUser.toString())
             mEventVM.getSelectedEvent(mlmu.mEventUser).observe(requireActivity(), { a ->
                 mDataEvent.addAll(a)
-                mHomeAdapter.notifyDataSetChanged() })}) }
+                mHomeAdapter.notifyDataSetChanged() })})
+
+
+    }
 
 }
 

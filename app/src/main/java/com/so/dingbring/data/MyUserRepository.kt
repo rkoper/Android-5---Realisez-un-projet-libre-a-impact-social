@@ -59,5 +59,19 @@ class MyUserRepository {
     }
 
 
+    fun updateUserName(mUserId: String, mUserName: String) {
+      dbFire.collection("user").document(mUserId)
+            .update("NameUser", mUserName)
+
+    }
+
+    fun updateUserPhoto(mUserId: String, mUserPhoto: String) {
+        dbFire.collection("user").document(mUserId)
+            .update("PhotoUser", mUserPhoto)
+
+    }
+
+
+
 
 }

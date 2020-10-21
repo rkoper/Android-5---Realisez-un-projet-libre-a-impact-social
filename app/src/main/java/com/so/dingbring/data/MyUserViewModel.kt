@@ -21,4 +21,11 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
     }
 
 
+    fun updateUserName(mUserId:String, mUserName:String) {
+         mUserRepository.updateUserName(mUserId,mUserName )  }
+
+    fun updateUserPhoto(mUserId:String, mUserPhoto:String) {
+        mUserRepository.updateUserPhoto(mUserId, mUserPhoto )  }
+
+
 }

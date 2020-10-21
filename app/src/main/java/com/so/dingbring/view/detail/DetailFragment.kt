@@ -64,9 +64,6 @@ class DetailFragment : Fragment() {
         mPhotoUser = arguments?.get("GlobalPhoto").toString()
         mEventId = arguments?.get("GlobalIdEvent").toString()
 
-
-        println("--detail--|Name|---"+mPhotoUser + "--|Mail|---"+ mEmailUser+ "--|Photo|--"+mPhotoUser + "--|ID|--" + mEventId)
-
         initHeader(mBinding)
         return mBinding.root}
 

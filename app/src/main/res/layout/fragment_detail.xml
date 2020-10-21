@@ -349,7 +349,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/add"
-                android:backgroundTint="@color/orange_200"
+                android:tint="@color/black"
+                android:backgroundTint="@color/orange_100"
                 app:layout_constraintTop_toTopOf="@+id/gl_detail2_v_3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_9"
@@ -407,10 +408,10 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:stepperBackgroundColor="@color/white"
-                    app:stepperButtonColor="@color/orange_200"
-                    app:stepperActionsColor="@color/orange_200"
+                    app:stepperButtonColor="@color/orange_100"
+                    app:stepperActionsColor="@color/black"
                     app:stepperActionsDisabledColor="@color/white"
-                    app:stepperTextColor="@color/white"
+                    app:stepperTextColor="@color/black"
                     app:stepperAllowNegative="true"
                     app:stepperAllowPositive="true"/>
 

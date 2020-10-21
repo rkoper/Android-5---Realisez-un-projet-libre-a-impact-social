@@ -39,19 +39,20 @@ class ProfilFragment : Fragment() {
     var mNameUser = "..."
     var mEmailUser = "..."
     var mPhotoUser = "..."
+    var mUserId = "..."
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         FirebaseApp.initializeApp(requireContext())
         mBng = DataBindingUtil.inflate(inflater, R.layout.fragment_profil, container, false)
 
-        mNameUser = arguments?.get("GlobalName").toString()
+      //  mNameUser = arguments?.get("GlobalName").toString()
         mEmailUser = arguments?.get("GlobalEmail").toString()
-        mPhotoUser = arguments?.get("GlobalPhoto").toString()
+        //mPhotoUser = arguments?.get("GlobalPhoto").toString()
 
         println("--profil--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
 
         checkFireStoreUser(mBng)
-       saveNewUserInfo()
+        saveNewUserInfo()
         refreshInfo()
         invisibleButton()
 
@@ -72,9 +73,7 @@ class ProfilFragment : Fragment() {
         mBng.profilSave.visibility = View.VISIBLE
     }
 
-    private fun saveNewUserInfo() {
-        // SAVE NEW INFOS -----> MUSER.UPLOAD PHOTO NAME
-    }
+
 
     private fun refreshInfo() {
         mBng.profilRefresh.setOnClickListener {
@@ -109,6 +108,7 @@ class ProfilFragment : Fragment() {
             d.custom_dialog_ok.setOnClickListener {
                 d.dismiss()
                 visibleButton()
+                // --------- 2
                 mUserName = d.custom_dialog_txt.text.toString()
                 mBng!!.profilName.text = mUserName}
 
@@ -121,10 +121,11 @@ class ProfilFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState) }
 
     private fun checkFireStoreUser(mBng: FragmentProfilBinding?) {
-        mUserVM.getUserByMail(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), {mlmu ->
+        mUserVM.getUserByMail(mEmailUser)?.observe(requireActivity(), {mlmu ->
                 if (mlmu != null){
                     mUserName = mlmu.mNameUser
                     mUserPP = mlmu.mPhotoUser
+                    mUserId = mlmu.mUserId
                     createDisplay(mBng)} })}
 
     private fun createDisplay(mBng: FragmentProfilBinding?) {
@@ -132,7 +133,7 @@ class ProfilFragment : Fragment() {
 
 
         Glide.with(requireContext())
-            .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
+            .load(mUserPP)
             .apply(RequestOptions.circleCropTransform())
             .into(mBng.profilImage)
 
@@ -156,15 +157,26 @@ class ProfilFragment : Fragment() {
             .apply(RequestOptions.circleCropTransform())
             .into(it.value)
 
-        it.value.setOnClickListener {
+        it.value.setOnClickListener {view ->
+            visibleButton()
+            println("-------|photo|-----" + it.key + "//" + it.value + "//" + view  )
             Glide.with(requireContext())
                 .load(key)
+                    // -------- 1
                 .apply(RequestOptions.circleCropTransform())
                 .into( mBng.profilImage)
         }
-
-
     }
+
+        // IL FAUT CHANGER LES VALEURS NAME ET PHOTOS PAR DEFAUT
+        private fun saveNewUserInfo() {
+            mBng.profilSave.setOnClickListener {
+               mUserVM.updateUserName(mUserId, "1")
+                mUserVM.updateUserPhoto(mUserId, "https://media3.artoyz.net/shop/38711-thickbox_default/udf-gizmo-les-gremlins.jpg")
+
+                checkFireStoreUser(mBng)
+            }
+        }
 
 
 }
