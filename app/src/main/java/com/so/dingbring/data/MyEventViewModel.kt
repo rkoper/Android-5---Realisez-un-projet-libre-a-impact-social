@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 class MyEventViewModel(private val mEventRepository: MyEventRepository): ViewModel() {
     private var mEventSet: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
 
+
     fun getAllEvent() : LiveData<MutableList<MyEvent>> {
         val mutableData = MutableLiveData<MutableList<MyEvent>>()
         mEventRepository.getAllEvent().observeForever{
@@ -18,6 +19,13 @@ class MyEventViewModel(private val mEventRepository: MyEventRepository): ViewMod
 
     fun createEvent(myData : MyEvent) {
         mEventRepository.createEvent(myData)
+    }
+
+    fun getSelectedEvent(mEmailUser: ArrayList<String>): LiveData<MutableList<MyEvent>> {
+        val mutableData = MutableLiveData<MutableList<MyEvent>>()
+        mEventRepository.getSelectedEvent(mEmailUser).observeForever{
+            mutableData.value=it }
+        return mutableData
     }
 
 

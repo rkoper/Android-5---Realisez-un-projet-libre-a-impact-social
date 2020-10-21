@@ -15,6 +15,7 @@ import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyItem
 import com.so.dingbring.data.MyItemViewModel
+import com.so.dingbring.data.MyUser
 import com.so.dingbring.databinding.ActivityMainBinding
 import com.so.dingbring.databinding.FragmentDetailBinding
 import com.so.dingbring.view.main.MainActivity
@@ -119,7 +120,11 @@ class DetailFragment : Fragment() {
            with(mListMyItem){
                clear()
                 addAll(mlmi)}
-          mListMyItem.let { mDetailAdapter.notifyDataSetChanged() }
+
+       println("------->>     mListMyItem     <<-------" + mListMyItem)
+
+
+        //  mListMyItem.let { mDetailAdapter.notifyDataSetChanged() }
 
    } }
 

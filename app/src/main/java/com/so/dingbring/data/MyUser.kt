@@ -5,4 +5,5 @@ data class MyUser(
     val mEmailUser:String,
     val mPhotoUser:String,
     val mUserId:String,
+    val mEventUser:ArrayList<String>
 )

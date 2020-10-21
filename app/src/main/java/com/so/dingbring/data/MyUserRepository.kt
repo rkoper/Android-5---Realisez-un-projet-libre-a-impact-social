@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MyUserRepository {
 
@@ -15,8 +16,8 @@ class MyUserRepository {
         dbFire.collection("user").document(mDataUser["DocIdUser"].toString()).set(mDataUser)
     }
 
-    fun getUser(mUserEmail:String) : LiveData<MyUser>?  {
-        dbFire.collection("user").whereEqualTo("EmailUser", mUserEmail)
+    fun getUser(mUserMail:String) : LiveData<MyUser>?  {
+        dbFire.collection("user").whereEqualTo("EmailUser", mUserMail)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents) {
@@ -24,7 +25,11 @@ class MyUserRepository {
                     val mMailUser: String? = doc.getString("EmailUser")
                     val mPicUser: String? = doc.getString("PhotoUser")
                     val mDocIdUser: String? = doc.getString("DocIdUser")
-                    val myUser = MyUser(mNameUser!!, mMailUser!!, mPicUser!!, mDocIdUser!!)
+                    val mEventUser = doc.get("eventUser")
+                    val myUser = MyUser(mNameUser!!, mMailUser!!, mPicUser!!, mDocIdUser!!,
+                        mEventUser as ArrayList<String>
+                    )
+
 
                     mUserSet.value = myUser
                 } }

@@ -8,7 +8,7 @@ import kotlin.collections.HashMap
 class MyEventRepository {
 
     private var mEventSet: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
-    private var mEventSetForId: MutableLiveData<MyEvent> = MutableLiveData()
+    private var mEventSetForId:MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
     private var mEventSize: MutableLiveData<MutableList<Int>> = MutableLiveData()
     private var mEventOne: MutableLiveData<MyEvent> = MutableLiveData()
     var eventDate: String? = ""
@@ -65,7 +65,35 @@ class MyEventRepository {
 
         return dbFire.collection("event").document().id
     }
+    fun getSelectedEvent(mEventUser: ArrayList<String>): LiveData<MutableList<MyEvent>> {
 
+        dbFire.collection("event").addSnapshotListener { querySnapshot, exception ->
+            if (querySnapshot != null) {
+                val mutableList = mutableListOf<MyEvent>()
+                    for (document in querySnapshot.documents) {
+                        if (mEventUser.contains(document.getString("eventId")) ){
+                    eventDate = document.getString("eventDate")
+                    eventUserMail = document.getString("eventUserMail")
+                    eventName = document.getString("eventName")
+                    eventOrga = document.getString("eventOrga")
+                    eventAddress = document.getString("eventAddress")
+                    eventId = document.getString("eventId")
+                    myData = MyEvent(
+                        eventDate!!,
+                        eventName!!,
+                        eventOrga!!,
+                        eventAddress!!,
+                        eventUserMail!!,
+                        eventId!!
+                    )
+
+                    mutableList.add(myData)}
+                }
+                mEventSet.value = mutableList
+            }
+        }
+        return mEventSet
+    }
 }
 
 
