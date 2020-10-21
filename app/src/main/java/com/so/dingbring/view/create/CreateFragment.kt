@@ -152,7 +152,7 @@ class CreateFragment : Fragment() {
 
     private fun initOrga() {
 
-        mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), { mlmu ->
+        mUserVM.getUserByMail(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), { mlmu ->
             if (mlmu != null){
                 mUserName = mlmu.mNameUser
                 create_orga.text = mUserName

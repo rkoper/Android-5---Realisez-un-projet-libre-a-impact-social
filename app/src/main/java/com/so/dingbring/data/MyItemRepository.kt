@@ -50,7 +50,7 @@ class MyItemRepository {
                     val mIStatus: String? = doc.getString("itemStatus")
                     val mIQty: String? = doc.getString("itemQty")
                     val mIName: String? = doc.getString("itemName")
-                    val mEUser: String? = doc.getString("itemUser")
+                    val mEUser: String? = doc.getString("ItemUserID")
                     val mIEventId: String? = doc.getString("ItemEventId")
                     val mIDocId: String? = doc.id
                     val myDetail =

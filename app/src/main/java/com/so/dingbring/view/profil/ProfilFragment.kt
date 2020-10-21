@@ -111,7 +111,7 @@ class ProfilFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState) }
 
     private fun checkFireStoreUser(mBng: FragmentProfilBinding?) {
-        mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), {mlmu ->
+        mUserVM.getUserByMail(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), {mlmu ->
                 if (mlmu != null){
                     mUserName = mlmu.mNameUser
                     mUserPP = mlmu.mPhotoUser

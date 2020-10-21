@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
     private fun checkFireStoreUser(mBinding: FragmentHomeBinding?) {
 
 //       mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(),{
-        mUserVM.getUser("fifi@gmail.com")?.observe(requireActivity(),{ mlmu ->
+        mUserVM.getUserByMail("fifi@gmail.com")?.observe(requireActivity(),{ mlmu ->
             if (mlmu == null){createFireStoreUser(mBinding!!)}
 
             else {

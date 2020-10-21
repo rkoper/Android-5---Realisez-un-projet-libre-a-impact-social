@@ -1,31 +1,27 @@
 package com.so.dingbring.view.detail
 
-import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Point
-import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.so.dingbring.R
+import com.so.dingbring.data.MyDetailItem
 import com.so.dingbring.data.MyItem
 import io.reactivex.subjects.BehaviorSubject
 
 
 class DetailAdapter(
     var mContext: Context,
-    var mListMyItem: ArrayList<MyItem>
+    var mListMyItem: MutableList<MyDetailItem>
 ) : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
 
-    val itemClickEmpty: BehaviorSubject<MyItem> = BehaviorSubject.create()
-    val itemClickFull: BehaviorSubject<MyItem> = BehaviorSubject.create()
-    val itemClickN: BehaviorSubject<MyItem> = BehaviorSubject.create()
+    val itemClickEmpty: BehaviorSubject<MyDetailItem> = BehaviorSubject.create()
+    val itemClickFull: BehaviorSubject<MyDetailItem> = BehaviorSubject.create()
+    val itemClickN: BehaviorSubject<MyDetailItem> = BehaviorSubject.create()
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         with(holder) {
