@@ -1,7 +1,6 @@
 package com.so.dingbring.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel() {
@@ -17,8 +16,9 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
         return mUserRepository.getUserByMail(mMailUser)
     }
 
+    fun getUserById(mUserId : String) : LiveData<MyUser>? {
+        return mUserRepository.getUserById(mUserId)
+    }
 
-    fun  getUserByID(myItem: MyItem): LiveData<MutableList<MyDetailItem>> {
-        return mUserRepository.getUserByID(myItem) }
 
 }

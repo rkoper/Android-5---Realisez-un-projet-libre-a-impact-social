@@ -70,24 +70,24 @@ class MyEventRepository {
         dbFire.collection("event").addSnapshotListener { querySnapshot, exception ->
             if (querySnapshot != null) {
                 val mutableList = mutableListOf<MyEvent>()
-                    for (document in querySnapshot.documents) {
-                        if (mEventUser.contains(document.getString("eventId")) ){
-                    eventDate = document.getString("eventDate")
-                    eventUserMail = document.getString("eventUserMail")
-                    eventName = document.getString("eventName")
-                    eventOrga = document.getString("eventOrga")
-                    eventAddress = document.getString("eventAddress")
-                    eventId = document.getString("eventId")
-                    myData = MyEvent(
-                        eventDate!!,
-                        eventName!!,
-                        eventOrga!!,
-                        eventAddress!!,
-                        eventUserMail!!,
-                        eventId!!
-                    )
+                for (document in querySnapshot.documents) {
+                    if (mEventUser.contains(document.getString("eventId")) ){
+                        eventDate = document.getString("eventDate")
+                        eventUserMail = document.getString("eventUserMail")
+                        eventName = document.getString("eventName")
+                        eventOrga = document.getString("eventOrga")
+                        eventAddress = document.getString("eventAddress")
+                        eventId = document.getString("eventId")
+                        myData = MyEvent(
+                            eventDate!!,
+                            eventName!!,
+                            eventOrga!!,
+                            eventAddress!!,
+                            eventUserMail!!,
+                            eventId!!
+                        )
 
-                    mutableList.add(myData)}
+                        mutableList.add(myData)}
                 }
                 mEventSet.value = mutableList
             }
@@ -95,6 +95,3 @@ class MyEventRepository {
         return mEventSet
     }
 }
-
-
-

@@ -27,9 +27,22 @@ class SettingsFragment : Fragment() {
     lateinit var locale: Locale
     private var currentLanguage = "en"
     private var currentLang: String? = null
+    var mNameUser = "..."
+    var mEmailUser = "..."
+    var mPhotoUser = "..."
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
+
+        mNameUser = arguments?.get("GlobalName").toString()
+        mEmailUser = arguments?.get("GlobalEmail").toString()
+        mPhotoUser = arguments?.get("GlobalPhoto").toString()
+
+
+        println("--setting--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+
+
+
         return mBinding.root}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

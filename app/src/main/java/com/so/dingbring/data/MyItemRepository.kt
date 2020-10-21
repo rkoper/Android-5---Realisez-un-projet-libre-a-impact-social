@@ -26,10 +26,11 @@ class MyItemRepository {
                     val mIQty: String? = doc.getString("itemQty")
                     val mIName: String? = doc.getString("itemName")
                     val mEUser: String? = doc.getString("itemUser")
-                    val mIEventId: String? = doc.getString("ItemEventId")
+                    val mIEventId: String? = doc.getString("itemEventId")
                     val mIDocId: String? = doc.id
+                    val mUserPhoto:String? = doc.getString("itemPhotoUser")
                     val myDetail =
-                        MyItem(mIStatus!!, mIQty!!, mIName!!, mEUser!!, mIDocId!!, mIEventId!!)
+                        MyItem(mIStatus!!, mIQty!!, mIName!!, mEUser!!, mIDocId!!, mIEventId!!,mUserPhoto)
                     mDetailMutableList.add(myDetail)
                 }
                 mItemSet.value = mDetailMutableList
@@ -43,18 +44,19 @@ class MyItemRepository {
     fun getTestItem(mEventId:String) : LiveData<MutableList<MyItem>>  {
         val mDetailMutableList = mutableListOf<MyItem>()
         dbFire.collection("item")
-            .whereEqualTo("ItemEventId", mEventId)
+            .whereEqualTo("itemEventId", mEventId)
             .get()
             .addOnSuccessListener { documents ->
                 for (doc in documents) {
                     val mIStatus: String? = doc.getString("itemStatus")
                     val mIQty: String? = doc.getString("itemQty")
                     val mIName: String? = doc.getString("itemName")
-                    val mEUser: String? = doc.getString("ItemUserID")
-                    val mIEventId: String? = doc.getString("ItemEventId")
+                    val mEUser: String? = doc.getString("itemUserID")
+                    val mIEventId: String? = doc.getString("itemEventId")
                     val mIDocId: String? = doc.id
+                    val mUserPhoto:String? = doc.getString("itemPhotoUser")
                     val myDetail =
-                        MyItem(mIStatus!!, mIQty!!, mIName!!, mEUser!!, mIDocId!!, mIEventId!!)
+                        MyItem(mIStatus, mIQty, mIName, mEUser, mIDocId, mIEventId, mUserPhoto)
                     mDetailMutableList.add(myDetail)
                 }
                 mItemSet.value = mDetailMutableList
@@ -64,43 +66,44 @@ class MyItemRepository {
     }
 
 
-        fun createItem(mListItem: ArrayList<MyItem>) {
-            mListItem.forEach { mMyItem ->
-                var mItemEach = HashMap<String, String>()
-                var mUniqueID = UUID.randomUUID().toString()
-                mItemEach["itemStatus"] = mMyItem.mItemStatus
-                mItemEach["itemName"] = mMyItem.mItemName
-                mItemEach["itemUser"] = mMyItem.mItemUser
-                mItemEach["itemQty"] = mMyItem.mItemQty
-                mItemEach["itemId"] = mUniqueID
-                mItemEach["ItemEventId"] = mMyItem.mItemEventId
-                dbFire.collection("item").document(mUniqueID).set(mItemEach) } }
-
-    fun createUniqueItem(mListItem: MyItem) {
+    fun createItem(mListItem: ArrayList<MyItem>) {
+        mListItem.forEach { mMyItem ->
             var mItemEach = HashMap<String, String>()
             var mUniqueID = UUID.randomUUID().toString()
-            mItemEach["itemStatus"] = mListItem.mItemStatus
-            mItemEach["itemName"] = mListItem.mItemName
-            mItemEach["itemUser"] = mListItem.mItemUser
-            mItemEach["itemQty"] = mListItem.mItemQty
+            mItemEach["itemStatus"] = mMyItem.mItemStatus.toString()
+            mItemEach["itemName"] = mMyItem.mItemName.toString()
+            mItemEach["itemUser"] = mMyItem.mItemUser.toString()
+            mItemEach["itemQty"] = mMyItem.mItemQty.toString()
             mItemEach["itemId"] = mUniqueID
-            mItemEach["ItemEventId"] = mListItem.mItemEventId
-            dbFire.collection("item").document(mUniqueID).set(mItemEach) }
+            mItemEach["itemEventId"] = mMyItem.mItemEventId.toString()
+            dbFire.collection("item").document(mUniqueID).set(mItemEach) } }
+
+    fun createUniqueItem(mListItem: MyItem) {
+        var mItemEach = HashMap<String, String>()
+        var mUniqueID = UUID.randomUUID().toString()
+        mItemEach["itemStatus"] = mListItem.mItemStatus.toString()
+        mItemEach["itemName"] = mListItem.mItemName.toString()
+        mItemEach["itemUser"] = mListItem.mItemUser.toString()
+        mItemEach["itemQty"] = mListItem.mItemQty.toString()
+        mItemEach["itemId"] = mUniqueID
+        mItemEach["itemEventId"] = mListItem.mItemEventId.toString()
+        mItemEach["itemUserPhoto"] = mListItem.mItemUserPhoto.toString()
+        dbFire.collection("item").document(mUniqueID).set(mItemEach) }
 
 
 
-        fun updateStatusItem(mData: MyItem, i: Int) : String {
-            if (i == 1)
-            {dbFire.collection("item").document(mData.mItemId).update("itemStatus", "I need")}
-            if (i == 2)
-            {dbFire.collection("item").document(mData.mItemId).update("itemStatus", "I bring")}
-            if (i == 3)
-            {dbFire.collection("item").document(mData.mItemId)
-                .update("itemQty", mData.mItemQty.toInt().plus(1).toString())}
+    fun updateStatusItem(mData: MyItem, i: Int) : String {
+        if (i == 1)
+        {dbFire.collection("item").document(mData.mItemId.toString()).update("itemStatus", "I need")}
+        if (i == 2)
+        {dbFire.collection("item").document(mData.mItemId.toString()).update("itemStatus", "I bring")}
+        if (i == 3)
+        {dbFire.collection("item").document(mData.mItemId.toString())
+            .update("itemQty", mData.mItemQty.toString().toInt().plus(1).toString())}
 
 
-            return dbFire.collection("item").document(mData.mItemId).id
-        }
-
+        return dbFire.collection("item").document(mData.mItemId.toString()).id
     }
+
+}
 

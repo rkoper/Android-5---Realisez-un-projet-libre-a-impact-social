@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class DetailFragment : Fragment() {
@@ -32,22 +31,28 @@ class DetailFragment : Fragment() {
     var mEventOrga = ""
     var mEventAddress = ""
     var mEventId = ""
+    var mUserId = ""
     var mNb = 0
+
+    var mUserPhoto = ""
 
     private lateinit var mBinding: FragmentDetailBinding
     private lateinit var mDetailAdapter: DetailAdapter
-    private val mUserVM by viewModel<MyUserViewModel>()
+
     private val mItemVM by viewModel<MyItemViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
-    val tt = HashMap<MyItem, String>()
+    private val mUserVM by viewModel<MyUserViewModel>()
+
     var i: Int = 1
     var mItemStatus: String = "I bring"
     var mItemName: String = "<3"
     var mItemQuantity: String = "1"
     var mItemUniqueID = UUID.randomUUID().toString()
     var mListMyItem = arrayListOf<MyItem>()
-    var mListMyItemDetail = mutableListOf<MyDetailItem>()
     private lateinit var mBindingMain: ActivityMainBinding
+    var mNameUser = "..."
+    var mEmailUser = "..."
+    var mPhotoUser = "..."
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +60,14 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+
+        mNameUser = arguments?.get("GlobalName").toString()
+        mEmailUser = arguments?.get("GlobalEmail").toString()
+        mPhotoUser = arguments?.get("GlobalPhoto").toString()
+
+
+        println("--detail--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+
         initHeader(mBinding)
         return mBinding.root}
 
@@ -63,12 +76,7 @@ class DetailFragment : Fragment() {
         initRetrieveItem()
         initCreateItem()
         hideBottom()
-        initBack()
-
-
-
-
-    }
+        initBack() }
 
     private fun initBack() {
         mBinding.detailBack.setOnClickListener {
@@ -84,77 +92,55 @@ class DetailFragment : Fragment() {
 
     @SuppressLint("CheckResult")
     private fun initRetrieveItem() {
-        mDetailAdapter = DetailAdapter(requireContext(), mListMyItemDetail)
+        mDetailAdapter = DetailAdapter(requireContext(), mListMyItem)
         mBinding.recyclerViewDetailOne.layoutManager = LinearLayoutManager(context)
         mBinding.recyclerViewDetailOne.adapter = mDetailAdapter
         initRVObserver()
 
         with(mDetailAdapter){
 
-        itemClickFull.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe { data ->
-                val myItem = createMyDetail(data)
-                mItemVM.updateStatus(myItem, 1)
-                initRVObserver()}
+            itemClickFull.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe { data -> mItemVM.updateStatus(data, 1)
+                    initRVObserver()}
 
-        itemClickEmpty.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe { data ->
-                val myItem = createMyDetail(data)
-                mItemVM.updateStatus(myItem, 2)
-                initRVObserver()}
+            itemClickEmpty.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe { data -> mItemVM.updateStatus(data, 2)
+                    initRVObserver()}
 
-        itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe { data ->
-                mBinding.detailAddNotif.visibility = View.VISIBLE
-                val animationIn = AnimationUtils.loadAnimation(requireContext(), R.anim.movedown)
-                 mBinding.detailAddNotif.startAnimation(animationIn)
-                val myItem = createMyDetail(data)
-                mItemVM.updateStatus(myItem, 3)
-                initRVObserver()}}}
+            itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe { data ->
 
-    private fun createMyDetail(data: MyDetailItem?) : MyItem{
 
-        return MyItem(
-            data?.mItemStatus.toString(),
-            data?.mItemQty.toString(),
-            data?.mItemName.toString(),
-            data?.mItemOrga.toString(),
-        data?.mItemId.toString(),
-        data?.mItemEventId.toString())
-    }
+                    mBinding.detailAddNotif.visibility = View.VISIBLE
+                    val animationIn = AnimationUtils.loadAnimation(requireContext(), R.anim.movedown)
+                    mBinding.detailAddNotif.startAnimation(animationIn)
+
+
+                    mItemVM.updateStatus(data, 3)
+                    initRVObserver()}}}
 
 
     private fun initRVObserver() {
-        mItemVM.getTestItem(mEventId).observe(requireActivity(), {lstitem ->
-            lstitem.forEach { myitem ->
-            loadTest(myitem)}
-        })}
+        mItemVM.getTestItem(mEventId).observeForever { mlmi ->
+            mlmi.sortBy { it.mItemStatus }
+            with(mListMyItem){
+                clear()
+                addAll(mlmi)}
 
-    private fun loadTest(myitem: MyItem) {
+            mListMyItem.let { mDetailAdapter.notifyDataSetChanged() }
 
-
-        mUserVM.getUserByID(myitem)?.observe(requireActivity(), {myUser ->
-
-            myUser.forEach {
-                println("(_)(_)(_)(_)(_) "+ it.toString() + " (_)(_)(_)(_)(_)(_)" )
-            }
-
-
-
-        })
-    }
-
+        } }
 
 /*
     private fun initView(mBinding: FragmentDetailBinding) {
         mBinding.detailReturn.setOnClickListener {
             it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
-
-
-
  */
 
     private fun initHeader(mBinding: FragmentDetailBinding) {
+
+
+
         mEventId = arguments?.get("eventId").toString()
         mEventVM.getAllEvent().observe(requireActivity(), {
             it.forEach { myEvent ->
@@ -192,25 +178,11 @@ class DetailFragment : Fragment() {
                 mItemName,
                 mEventOrga,
                 mItemUniqueID,
-                mEventId
+                mEventId,
+                mUserPhoto
             )
                 mItemVM.createUniqueItem(mMyItem)
-                initRVObserver()
-
-
-                val animationIn = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin)
-                detail_item_add_one.startAnimation(animationIn)
-                val animationOut = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout)
-                detail_item_add_one.startAnimation(animationOut)
-
-
-
-
-
-
-
-
-            }
+                initRVObserver() }
         }
     }
 
@@ -219,10 +191,10 @@ class DetailFragment : Fragment() {
         detail_status_bring?.isChecked = true
         mItemStatus = "I bring"
         detail_status_need?.setOnCheckedChangeListener { _, b -> if (b) { mItemStatus = "I need"
-                detail_status_bring.isChecked = false; } }
+            detail_status_bring.isChecked = false; } }
 
         detail_status_bring?.setOnCheckedChangeListener { _, b -> if (b) { mItemStatus = "I bring"
-                detail_status_need.isChecked = false; } } }
+            detail_status_need.isChecked = false; } } }
 
     private fun initQuantity() {
         detail_quantity_item.count = 1
@@ -243,6 +215,3 @@ class DetailFragment : Fragment() {
         mItemName = detail_item.text.toString() }
 
 }
-
-
-//      println("(_)(_)(_)(_)(_)(_)(_) "+ +"" (_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)")

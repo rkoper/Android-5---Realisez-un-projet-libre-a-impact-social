@@ -46,6 +46,8 @@ class CreateFragment : Fragment() {
     private var mEventName = ""
     private var mUserMail = "XXX@XXX.COM"
     private var mUserName = "Soso"
+    private var mUserId = ""
+    private var mUserPhoto = ""
     private var mEventAdress = ""
     private var mEventSize = ""
     private var themedContext: Context? = null
@@ -56,6 +58,9 @@ class CreateFragment : Fragment() {
     var mItemQuantity: String = "1"
     var mEventUniqueID = UUID.randomUUID().toString()
     var mItemUniqueID = UUID.randomUUID().toString()
+    var mNameUser = "..."
+    var mEmailUser = "..."
+    var mPhotoUser = "..."
 
     var mListMyItem = arrayListOf<MyItem>()
 
@@ -70,13 +75,11 @@ class CreateFragment : Fragment() {
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create, container, false)
 
+        mNameUser = arguments?.get("GlobalName").toString()
+        mEmailUser = arguments?.get("GlobalEmail").toString()
+        mPhotoUser = arguments?.get("GlobalPhoto").toString()
 
-
-        // CHECK THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-           mUserMail = arguments?.get("mUserMail").toString()
-           mUserName = arguments?.get("mUserName").toString()
-
-
+        println("--create--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
         return mBinding.root }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -191,7 +194,8 @@ class CreateFragment : Fragment() {
                 mItemName,
                 mEventOrga,
                 mItemUniqueID,
-                mEventUniqueID)
+                mEventUniqueID,
+                mUserPhoto)
 
                 mListMyItem.add(mMyItem)
 

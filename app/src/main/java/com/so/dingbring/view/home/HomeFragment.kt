@@ -32,78 +32,71 @@ class HomeFragment : Fragment() {
     private val mUserVM by viewModel<MyUserViewModel>()
     private lateinit var mHomeAdapter: HomeAdapter
     private lateinit var mBinding: FragmentHomeBinding
-    var mDataEvent : MutableList<MyEvent> = mutableListOf()
+    var mDataEvent: MutableList<MyEvent> = mutableListOf()
+    var mNameUser = "Fifi"
+    var mEmailUser = "fifi@gmail.com"
+    var mPhotoUser = "https://i.ibb.co/r6W0hxp/Capture-d-e-cran-2020-10-16-a-21-09-59.png"
 
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         FirebaseApp.initializeApp(requireContext())
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+
+        if (FirebaseAuth.getInstance().currentUser?.displayName != null)
+        { mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
+        if (FirebaseAuth.getInstance().currentUser?.email != null)
+        { mEmailUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
+        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
+        { mPhotoUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
+
+        initHeader(mBinding)
         initRV(mBinding)
-        checkFireStoreUser(mBinding)
-        return mBinding.root
-    }
+
+        return mBinding.root }
+
+    private fun initHeader(mBinding: FragmentHomeBinding?) {
+        mBinding!!.homeName.text = mNameUser
+
+        Glide.with(requireActivity())
+            .load(mPhotoUser)
+            .apply(RequestOptions.circleCropTransform())
+            .into(mBinding.homeImage) }
 
 
     @SuppressLint("CheckResult")
     private fun initRV(mBinding: FragmentHomeBinding) {
-        mHomeAdapter= HomeAdapter(requireActivity(), mDataEvent, )
+        mHomeAdapter = HomeAdapter(requireActivity(), mDataEvent)
         mBinding.recyclerView.setHasFixedSize(true)
-        mBinding.recyclerView.layoutManager= LinearLayoutManager(context)
-        mBinding.recyclerView.adapter= mHomeAdapter
+        mBinding.recyclerView.layoutManager = LinearLayoutManager(context)
+        mBinding.recyclerView.adapter = mHomeAdapter
 
-        mHomeAdapter.itemClick.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+        mHomeAdapter.itemClick.subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe { data ->
-                var bundle = bundleOf("eventId" to data.mEventId)
-                mBinding.root.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle) }
+                val bundle = Bundle()
+                bundle.putString("eventId", data.mEventId)
+                bundle.putString("userId", data.mEventId)
+                mBinding.root.findNavController()
+                    .navigate(R.id.action_homeFragment_to_detail_fragment, bundle)
+            }
+
+        loadRV()
 
     }
 
-    private fun checkFireStoreUser(mBinding: FragmentHomeBinding?) {
-
-//       mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(),{
-        mUserVM.getUserByMail("fifi@gmail.com")?.observe(requireActivity(),{ mlmu ->
-            if (mlmu == null){createFireStoreUser(mBinding!!)}
-
-            else {
-                mBinding!!.homeName.text = mlmu.mNameUser
-                Glide.with(requireActivity())
-                    .load(mlmu.mPhotoUser)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(mBinding.homeImage)
-
-                mEventVM.getSelectedEvent(mlmu.mEventUser).observe(requireActivity(), { a ->
-                    mDataEvent.addAll(a)
-                    mHomeAdapter.notifyDataSetChanged()
-                })}})
-
-    }
-
-
-
-    private fun createFireStoreUser(mBinding: FragmentHomeBinding) {
-
-        if (FirebaseAuth.getInstance().currentUser?.displayName != null)
-        { mBinding.homeName.text =  FirebaseAuth.getInstance().currentUser?.displayName.toString()}
-
-        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
-        { Glide.with(requireContext())
-            .load(FirebaseAuth.getInstance().currentUser?.photoUrl)
-            .apply(RequestOptions.circleCropTransform())
-            .into(mBinding.homeImage)}
-
-        val userId = UUID.randomUUID().toString()
-        val mDataUser: MutableMap<String, Any> = HashMap()
-        mDataUser["NameUser"] = FirebaseAuth.getInstance().currentUser?.displayName.toString()
-        mDataUser["EmailUser"] = FirebaseAuth.getInstance().currentUser?.email.toString()
-        mDataUser["PhotoUser"] = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
-        mDataUser["DocIdUser"] = userId
-
-        mUserVM.createUser(mDataUser)
-
-    }
-
-
-
+    private fun loadRV() {
+        println("--------->>>>>>>>>>>>" + mEmailUser)
+        mUserVM.getUserByMail(mEmailUser)?.observe(requireActivity(),{ mlmu ->
+            println("--------->>>>>>>>>>>>" + mlmu.mEventUser.toString())
+            mEventVM.getSelectedEvent(mlmu.mEventUser).observe(requireActivity(), { a ->
+                mDataEvent.addAll(a)
+                mHomeAdapter.notifyDataSetChanged() })}) }
 
 }
+
+
+

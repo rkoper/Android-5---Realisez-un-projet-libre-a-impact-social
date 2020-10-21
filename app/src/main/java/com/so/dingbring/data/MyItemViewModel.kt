@@ -7,7 +7,7 @@ import com.so.dingbring.view.detail.DetailAdapter
 
 class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel() {
 
- fun getAllItem(): LiveData<MutableList<MyItem>> {
+    fun getAllItem(): LiveData<MutableList<MyItem>> {
         val mMutableData= MutableLiveData<MutableList<MyItem>>()
         mItemRepository.getAllItem().observeForever{
             mMutableData.value= it }
@@ -28,6 +28,6 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
 
     fun updateStatus(myItem: MyItem, i: Int) : String {
         mItemRepository.updateStatusItem( myItem, i )
-    return mItemRepository.updateStatusItem( myItem, i )  }
+        return mItemRepository.updateStatusItem( myItem, i )  }
 
 }

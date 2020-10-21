@@ -31,6 +31,9 @@ class CalendarFragment : Fragment() {
     var date = Date()
     lateinit var configuration: RecyclerCalendarConfiguration
     private val mEventVM by viewModel<MyEventViewModel>()
+    var mNameUser = "..."
+    var mEmailUser = "..."
+    var mPhotoUser = "..."
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +41,16 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
+
+
+
+        mNameUser = arguments?.get("GlobalName").toString()
+        mEmailUser = arguments?.get("GlobalEmail").toString()
+        mPhotoUser = arguments?.get("GlobalPhoto").toString()
+
+        println("--calendar--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+
+
         initBottomInvisible()
         initCal()
         initRV()

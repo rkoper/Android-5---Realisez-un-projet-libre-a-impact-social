@@ -36,10 +36,20 @@ class ProfilFragment : Fragment() {
     private var mUserMail = "XXXXX"
     private var mUserPP = "XXXXX"
     var mImageList = arrayListOf<String>()
+    var mNameUser = "..."
+    var mEmailUser = "..."
+    var mPhotoUser = "..."
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         FirebaseApp.initializeApp(requireContext())
         mBng = DataBindingUtil.inflate(inflater, R.layout.fragment_profil, container, false)
+
+        mNameUser = arguments?.get("GlobalName").toString()
+        mEmailUser = arguments?.get("GlobalEmail").toString()
+        mPhotoUser = arguments?.get("GlobalPhoto").toString()
+
+        println("--profil--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+
         checkFireStoreUser(mBng)
        saveNewUserInfo()
         refreshInfo()
