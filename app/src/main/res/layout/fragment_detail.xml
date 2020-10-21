@@ -349,13 +349,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/add"
-                android:tint="@color/black"
                 android:backgroundTint="@color/orange_100"
                 app:layout_constraintTop_toTopOf="@+id/gl_detail2_v_3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_9"
                 app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_8"
-                android:contentDescription="@string/save" />
+                android:contentDescription="@string/save"
+                app:tint="@color/black" />
             <EditText
                 android:theme="@style/TxtViewPrincipalBlack3"
                 android:background="@null"

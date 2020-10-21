@@ -327,13 +327,14 @@
                     android:background="@drawable/round_black_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blue_200"
+                    android:backgroundTint="@color/blue_100"
                     android:src="@drawable/add"
                     app:layout_constraintTop_toTopOf="@+id/gl_create2_v_3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="@+id/gl_create2_h_9"
                     app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_8"
-                    android:contentDescription="@string/save" />
+                    android:contentDescription="@string/save"
+                    app:tint="@color/black" />
                 <EditText
                     android:theme="@style/TxtViewPrincipalBlack3"
                     android:background="@null"
@@ -399,10 +400,10 @@
                         app:layout_constraintRight_toRightOf="@+id/gl_create3_v_8"
                         app:layout_constraintLeft_toLeftOf="@+id/gl_create3_v_2"
                         app:stepperBackgroundColor="@color/white"
-                        app:stepperButtonColor="@color/blue_200"
+                        app:stepperButtonColor="@color/blue_100"
                         app:stepperActionsColor="@color/black"
                         app:stepperActionsDisabledColor="@color/white"
-                        app:stepperTextColor="@color/white"
+                        app:stepperTextColor="@color/black"
                         app:stepperAllowNegative="true"
                         app:stepperAllowPositive="true"/>
 
