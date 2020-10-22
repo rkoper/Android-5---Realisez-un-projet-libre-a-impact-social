@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.so.dingbring.view.detail.DetailAdapter
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -93,17 +92,35 @@ class MyItemRepository {
 
 
 
-    fun updateStatusItem(mData: MyItem, i: Int) : String {
-        if (i == 1)
-        {dbFire.collection("item").document(mData.mItemId.toString()).update("itemStatus", "I need")}
-        if (i == 2)
-        {dbFire.collection("item").document(mData.mItemId.toString()).update("itemStatus", "I bring")}
-        if (i == 3)
-        {dbFire.collection("item").document(mData.mItemId.toString())
-            .update("itemQty", mData.mItemQty.toString().toInt().plus(1).toString())}
+    fun updateStatusItem(mData: HashMap<Int, MyItem>) {
+
+        println(" --------->>>>   " + mData.toString())
 
 
-        return dbFire.collection("item").document(mData.mItemId.toString()).id
+
+        if (mData.containsKey(0)) {
+            var i=0
+            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
+            if (mData[i]!!.mItemStatus == "I need" ){mShortLink.update("itemStatus", "I bring")}
+            else {mShortLink.update("itemStatus", "I need")}
+
+        }
+        if (mData.containsKey(1))
+        {    var i=1
+            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
+            mShortLink.update("itemQty", mData[i]!!.mItemQty.toString().toInt().plus(1).toString())
+
+          //
+        }
+        if (mData.containsKey(2))
+        {    var i=2
+            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
+            mShortLink.delete()
+
+
+         //   dbFire.collection("item").document(mData.mItemId.toString()).update("itemQty", mData.mItemQty.toString().toInt().plus(1).toString())
+        }
+
     }
 
 }

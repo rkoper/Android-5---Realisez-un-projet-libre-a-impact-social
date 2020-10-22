@@ -3,7 +3,6 @@ package com.so.dingbring.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.so.dingbring.view.detail.DetailAdapter
 
 class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel() {
 
@@ -26,8 +25,6 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
 
     fun createUniqueItem(mMyItem :MyItem) { mItemRepository.createUniqueItem(mMyItem) }
 
-    fun updateStatus(myItem: MyItem, i: Int) : String {
-        mItemRepository.updateStatusItem( myItem, i )
-        return mItemRepository.updateStatusItem( myItem, i )  }
+    fun updateStatus(myItem: HashMap<Int, MyItem>) { mItemRepository.updateStatusItem( myItem) }
 
 }

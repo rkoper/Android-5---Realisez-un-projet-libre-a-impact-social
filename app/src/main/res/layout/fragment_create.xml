@@ -418,7 +418,7 @@
             <EditText
                 android:background="@null"
                 android:id="@+id/create_name_Event"
-                android:theme="@style/TxtViewPrincipalBlack4"
+                android:theme="@style/TxtViewPrincipalBlack"
                 android:hint="@string/enter_name_s_event"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

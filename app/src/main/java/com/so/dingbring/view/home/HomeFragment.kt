@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
@@ -56,6 +57,9 @@ class HomeFragment : Fragment() {
 
         initHeader(mBinding)
         initRV(mBinding)
+
+
+
 
         return mBinding.root }
 

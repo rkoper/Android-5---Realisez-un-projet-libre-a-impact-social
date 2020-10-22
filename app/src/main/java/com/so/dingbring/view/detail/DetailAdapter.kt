@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.imangazaliev.circlemenu.CircleMenu
 import com.so.dingbring.R
 import com.so.dingbring.data.MyItem
 import io.reactivex.subjects.BehaviorSubject
@@ -27,7 +28,7 @@ class DetailAdapter(
 
     val itemClickEmpty: BehaviorSubject<MyItem> = BehaviorSubject.create()
     val itemClickFull: BehaviorSubject<MyItem> = BehaviorSubject.create()
-    val itemClickN: BehaviorSubject<MyItem> = BehaviorSubject.create()
+    val itemClickN: BehaviorSubject<HashMap<Int,MyItem>> = BehaviorSubject.create()
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
         with(holder) {
@@ -46,15 +47,15 @@ class DetailAdapter(
 
 
             if (mListMyItem[position].mItemStatus == "I need") {
-                mDetailEmptyButton.visibility = View.VISIBLE
-                mDetailFullButton.visibility = View.INVISIBLE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.orange_100))
+                mDetailBand.visibility = View.VISIBLE
+                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.orange_50))
             } else {
-                mDetailFullButton.visibility = View.VISIBLE
-                mDetailEmptyButton.visibility = View.INVISIBLE
+                mDetailBand.visibility = View.GONE
                 mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.orange_300))
             }
         }
+
+
 
     }
 
@@ -75,18 +76,18 @@ class DetailAdapter(
     inner class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mDetailItem: TextView = itemView.findViewById(R.id.detail_item_type)
         var mDetailQuantity: TextView = itemView.findViewById(R.id.detail_item_quantity)
-        var mDetailEmptyButton: ImageView = itemView.findViewById(R.id.detail_num_item_wait)
-        var mDetailFullButton: ImageView = itemView.findViewById(R.id.detail_num_item_ok)
         var mDetailColor: ConstraintLayout = itemView.findViewById(R.id.detail_item_cl)
         var mDetailUser: TextView = itemView.findViewById(R.id.detail_item_personn)
-        var mDetailAddOne: ImageView = itemView.findViewById(R.id.detail_item_add_one)
+        var mDetailAddOne: CircleMenu = itemView.findViewById(R.id.circleMenu)
         var mDetailImageUser: ImageView = itemView.findViewById(R.id.detail_item_photo)
+        var mDetailBand: TextView = itemView.findViewById(R.id.detail_item_band)
 
 
         init {
-            mDetailEmptyButton.setOnClickListener { itemClickEmpty.onNext(mListMyItem[position]) }
-            mDetailFullButton.setOnClickListener { itemClickFull.onNext(mListMyItem[position]) }
-            mDetailAddOne.setOnClickListener { itemClickN.onNext(mListMyItem[position]) }} }
+            mDetailAddOne.setOnItemClickListener { buttonIndex ->
+                var mChangeHashMap = hashMapOf< Int,MyItem>()
+                mChangeHashMap[buttonIndex] = mListMyItem[position]
+            itemClickN.onNext(mChangeHashMap) }} }
 
 
 }

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -18,7 +17,6 @@ import com.so.dingbring.databinding.FragmentDetailBinding
 import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.detail_item.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -93,27 +91,11 @@ class DetailFragment : Fragment() {
         mBinding.recyclerViewDetailOne.adapter = mDetailAdapter
         initRVObserver()
 
-        with(mDetailAdapter){
-
-            itemClickFull.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe { data -> mItemVM.updateStatus(data, 1)
+        mDetailAdapter.itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe { data -> mItemVM.updateStatus(data)
                     initRVObserver()}
 
-            itemClickEmpty.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe { data -> mItemVM.updateStatus(data, 2)
-                    initRVObserver()}
-
-            itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe { data ->
-
-
-                    mBinding.detailAddNotif.visibility = View.VISIBLE
-                    val animationIn = AnimationUtils.loadAnimation(requireContext(), R.anim.movedown)
-                    mBinding.detailAddNotif.startAnimation(animationIn)
-
-
-                    mItemVM.updateStatus(data, 3)
-                    initRVObserver()}}}
+        }
 
 
     private fun initRVObserver() {
@@ -124,11 +106,7 @@ class DetailFragment : Fragment() {
                 addAll(mlmi)}
 
             mListMyItem.let {
-
-
-                println("--detail--–||----"+mListMyItem.toString())
-
-                mDetailAdapter.notifyDataSetChanged() }
+        mDetailAdapter.notifyDataSetChanged() }
 
         } }
 

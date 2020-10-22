@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="simple_menu_icons">
+        <item>@drawable/check</item>
+        <item>@drawable/plus</item>
+        <item>@drawable/delete</item>
+    </array>
+
+    <array name="simple_menu_colors">
+        <item>@color/orange_100</item>
+        <item>@color/orange_100</item>
+        <item>@color/orange_100</item>
+    </array>
+
+</resources>
