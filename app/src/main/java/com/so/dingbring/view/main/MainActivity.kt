@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity(){
         if (FirebaseAuth.getInstance().currentUser?.displayName != null)
         { mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
         if (FirebaseAuth.getInstance().currentUser?.email != null)
-        { mEmailUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
+        { mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()}
         if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
-        { mPhotoUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
+        { mPhotoUser = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()}
 
 
         println("--Main--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
@@ -56,8 +56,8 @@ class MainActivity : AppCompatActivity(){
 
     private fun checkFireStoreUser() {
 
-//       mUserVM.getUser(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(),{
-        mUserVM.getUserByMail(mEmailUser)?.observe(this,{ mlmu ->
+      mUserVM.getUserByMail(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(this,{mlmu ->
+//        mUserVM.getUserByMail(mEmailUser)?.observe(this,{ mlmu ->
             if (mlmu == null){createFireStoreUser()}
 
     })}

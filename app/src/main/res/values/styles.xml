@@ -16,6 +16,21 @@
         <item name= "autoSizeTextType">uniform</item>
     </style>
 
+    <style name="TxtViewEditTxt" >
+        <item name="android:padding">7dp</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">10</item>
+        <item name="android:maxLength">500</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textCursorDrawable">@color/black</item>
+        <item name="colorAccent">@color/black</item>
+    </style>
+
     <style name="TxtChip" >
         <item name="fontFamily">@font/roboto</item>
         <item name="android:gravity">center</item>
@@ -150,5 +165,15 @@
         <item name="android:windowBackground">@color/black</item>
     </style>
 
+    <style name="sign_up_buttons_style" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="elevation">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginStart">48dp</item>
+        <item name="android:layout_marginEnd">48dp</item>
+    </style>
 
 </resources>

@@ -93,33 +93,25 @@ class MyItemRepository {
 
 
     fun updateStatusItem(mData: HashMap<Int, MyItem>) {
-
-        println(" --------->>>>   " + mData.toString())
-
-
-
-        if (mData.containsKey(0)) {
-            var i=0
+       if (mData.containsKey(0)) { var i=0
             var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
             if (mData[i]!!.mItemStatus == "I need" ){mShortLink.update("itemStatus", "I bring")}
-            else {mShortLink.update("itemStatus", "I need")}
+            else {mShortLink.update("itemStatus", "I need")}}
 
-        }
-        if (mData.containsKey(1))
-        {    var i=1
+        if (mData.containsKey(1)) {    var i=1
             var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
-            mShortLink.update("itemQty", mData[i]!!.mItemQty.toString().toInt().plus(1).toString())
+            mShortLink.update("itemQty", mData[i]!!.mItemQty.toString().toInt().plus(1).toString()) }
 
-          //
-        }
-        if (mData.containsKey(2))
-        {    var i=2
+        if (mData.containsKey(2)) {    var i=2
             var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
-            mShortLink.delete()
+            if (mData[i]!!.mItemQty!!.toInt() > 1)
+            {  mShortLink.update("itemQty", mData[i]!!.mItemQty.toString().toInt().minus(1).toString())}}
 
 
-         //   dbFire.collection("item").document(mData.mItemId.toString()).update("itemQty", mData.mItemQty.toString().toInt().plus(1).toString())
-        }
+        if (mData.containsKey(3)) {    var i=3
+            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
+            mShortLink.delete()}
+
 
     }
 

@@ -32,24 +32,17 @@ class ProfilFragment : Fragment() {
     private lateinit var mBng: FragmentProfilBinding
     private val mUserVM by viewModel<MyUserViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
-    private var mUserName = "XXXXXX"
-    private var mUserMail = "XXXXX"
-    private var mUserPP = "XXXXX"
     var mImageList = arrayListOf<String>()
-    var mNameUser = "..."
-    var mEmailUser = "..."
-    var mPhotoUser = "..."
+    var mUserName = "..."
+    var mUserMail = "..."
+    var mUserPP = "..."
     var mUserId = "..."
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         FirebaseApp.initializeApp(requireContext())
         mBng = DataBindingUtil.inflate(inflater, R.layout.fragment_profil, container, false)
 
-      //  mNameUser = arguments?.get("GlobalName").toString()
-        mEmailUser = arguments?.get("GlobalEmail").toString()
-        //mPhotoUser = arguments?.get("GlobalPhoto").toString()
-
-        println("--profil--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+        mUserMail = arguments?.get("GlobalEmail").toString()
 
         checkFireStoreUser(mBng)
         saveNewUserInfo()
@@ -57,9 +50,6 @@ class ProfilFragment : Fragment() {
         invisibleButton()
 
         editNameUser(mBng)
-
-
-
 
         return mBng.root}
 
@@ -70,16 +60,11 @@ class ProfilFragment : Fragment() {
 
     private fun visibleButton() {
         mBng.profilRefresh.visibility = View.VISIBLE
-        mBng.profilSave.visibility = View.VISIBLE
-    }
-
-
+        mBng.profilSave.visibility = View.VISIBLE }
 
     private fun refreshInfo() {
         mBng.profilRefresh.setOnClickListener {
-            checkFireStoreUser(mBng)
-        }
-    }
+            checkFireStoreUser(mBng) } }
 
     private fun editNameUser(mBng: FragmentProfilBinding?) {
         mBng?.profilEditName?.setOnClickListener {
@@ -117,11 +102,11 @@ class ProfilFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        test()
+        changeUserProfil()
         super.onViewCreated(view, savedInstanceState) }
 
     private fun checkFireStoreUser(mBng: FragmentProfilBinding?) {
-        mUserVM.getUserByMail(mEmailUser)?.observe(requireActivity(), {mlmu ->
+        mUserVM.getUserByMail(mUserMail)?.observe(requireActivity(), {mlmu ->
                 if (mlmu != null){
                     mUserName = mlmu.mNameUser
                     mUserPP = mlmu.mPhotoUser
@@ -131,7 +116,6 @@ class ProfilFragment : Fragment() {
     private fun createDisplay(mBng: FragmentProfilBinding?) {
      mBng!!.profilName.text = mUserName
 
-
         Glide.with(requireContext())
             .load(mUserPP)
             .apply(RequestOptions.circleCropTransform())
@@ -139,40 +123,38 @@ class ProfilFragment : Fragment() {
 
     }
 
-
-    private fun test() {
-        val c = HashMap<Int,ImageView>()
-        var mLstDrawable = arrayListOf(R.drawable.img1, R.drawable.img2,R.drawable.img3,R.drawable.img4,R.drawable.img5,R.drawable.img6,R.drawable.img7)
+    private fun changeUserProfil() {
+        val c = HashMap<String,ImageView>()
+        var mLstDrawable = arrayListOf("https://i.ibb.co/vVgfnWS/img7.png",
+            "https://i.ibb.co/dQwq2wQ/img6.png",
+            "https://i.ibb.co/ZLRtHW9/img5.png",
+            "https://i.ibb.co/FBrZzQR/img4.png",
+            "https://i.ibb.co/JkyRSZM/img3.png",
+            "https://i.ibb.co/d5JzbXp/img2.png",
+            "https://i.ibb.co/XYvhRss/img1.png")
         var mLstImageV = arrayListOf(mBng.profilImg1,mBng.profilImg2,mBng.profilImg3,mBng.profilImg4,mBng.profilImg5,mBng.profilImg6,mBng.profilImg7)
 
            for (i in 0..6) { c[mLstDrawable[i]] = mLstImageV[i] }
 
-        c.forEach { testtwo(it) }
+        c.forEach { loadUserChange(it) }
     }
 
-    private fun testtwo(it: Map.Entry<Int, ImageView>) {
+    private fun loadUserChange(it: Map.Entry<String, ImageView>) {
         var key = it.key
         Glide.with(requireContext())
-            .load(it.key)
-            .apply(RequestOptions.circleCropTransform())
-            .into(it.value)
+            .load(it.key).apply(RequestOptions.circleCropTransform()).into(it.value)
 
         it.value.setOnClickListener {view ->
             visibleButton()
-            println("-------|photo|-----" + it.key + "//" + it.value + "//" + view  )
             Glide.with(requireContext())
-                .load(key)
-                    // -------- 1
-                .apply(RequestOptions.circleCropTransform())
-                .into( mBng.profilImage)
-        }
-    }
+                .load(key).apply(RequestOptions.circleCropTransform()).into( mBng.profilImage)
+                mUserPP = key } }
 
-        // IL FAUT CHANGER LES VALEURS NAME ET PHOTOS PAR DEFAUT
         private fun saveNewUserInfo() {
             mBng.profilSave.setOnClickListener {
-               mUserVM.updateUserName(mUserId, "1")
-                mUserVM.updateUserPhoto(mUserId, "https://media3.artoyz.net/shop/38711-thickbox_default/udf-gizmo-les-gremlins.jpg")
+                mUserVM.updateUserPhoto(mUserId, mUserPP)
+               mUserVM.updateUserName(mUserId, mUserName)
+
 
                 checkFireStoreUser(mBng)
             }

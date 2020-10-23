@@ -92,8 +92,15 @@ class DetailFragment : Fragment() {
         initRVObserver()
 
         mDetailAdapter.itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe { data -> mItemVM.updateStatus(data)
-                    initRVObserver()}
+                .subscribe { data ->
+
+
+//                    println("(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)" + data.toString())
+
+
+                    mItemVM.updateStatus(data)
+                    initRVObserver()
+                }
 
         }
 

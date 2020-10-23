@@ -13,6 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.firebase.ui.auth.AuthUI
 import com.so.dingbring.R
 import com.so.dingbring.databinding.FragmentDetailBinding
 import com.so.dingbring.databinding.FragmentSettingsBinding
@@ -38,20 +39,33 @@ class SettingsFragment : Fragment() {
         mEmailUser = arguments?.get("GlobalEmail").toString()
         mPhotoUser = arguments?.get("GlobalPhoto").toString()
 
-
-        println("--setting--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
-
-
-
         return mBinding.root}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        test()
+        goLanguage()
+        goContactUs()
+        goLogOut()
         super.onViewCreated(view, savedInstanceState) }
 
+    private fun goLogOut() {
+
+        mBinding.settingsLogoutButton.setOnClickListener {
+            AuthUI.getInstance().signOut(requireContext()).addOnCompleteListener {
+                Toast.makeText(requireContext(), "Bye bye", Toast.LENGTH_SHORT).show() }
+        }
 
 
-    private fun test() {
+
+
+
+    }
+
+    private fun goContactUs() {
+
+    }
+
+
+    private fun goLanguage() {
         Log.d(TAG,"getDisplayLanguage = " + Locale.getDefault().getDisplayLanguage());
         Log.d(TAG,"getLanguage = " + Locale.getDefault().getLanguage());
         Log.d(TAG,"Resources.getLanguage = " + Resources.getSystem().getConfiguration().locale.getLanguage());
