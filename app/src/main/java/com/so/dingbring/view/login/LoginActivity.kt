@@ -3,6 +3,7 @@ package com.so.dingbring.view.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
@@ -17,6 +18,11 @@ class LoginActivity : AppCompatActivity() {
 
 
     val RC_SIGN_IN = 19840521
+    var mNameUser = " ... "
+    var mEmailUser = "..."
+    var mPhotoUser = "..."
+    var mIdUser = "..."
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,22 +30,15 @@ class LoginActivity : AppCompatActivity() {
 
 
         val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.PhoneBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build(),
             AuthUI.IdpConfig.FacebookBuilder().build(),
             AuthUI.IdpConfig.TwitterBuilder().build()
         )
-
-// Create and launch sign-in intent
-        startActivityForResult(
-            AuthUI.getInstance()
+        startActivityForResult(AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setIsSmartLockEnabled(true)
-                .build(),
-            RC_SIGN_IN
-        )
+                .setIsSmartLockEnabled(false)
+                .build(), RC_SIGN_IN)
 
 
     }
@@ -51,27 +50,51 @@ class LoginActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
-                // Successfully signed in
-                val user = FirebaseAuth.getInstance().currentUser
-                val mail = FirebaseAuth.getInstance().currentUser
-                val photo = FirebaseAuth.getInstance().currentUser
                 launchMainActivity()
 
-                // ...
             } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
             }
         }
     }
 
     private fun launchMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        if (FirebaseAuth.getInstance().currentUser?.displayName != null)
+        { mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
+        else {mNameUser = "x"}
+        if (FirebaseAuth.getInstance().currentUser?.email != null)
+        { mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()}
+        else {mEmailUser = "xx"}
+        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
+        { mPhotoUser = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()}
+        else {mPhotoUser = "xxx"}
+
+        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
+        { mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()}
+        else { finish()}
+
+
+        testprintln()
+
+
+
+        val mIntent = Intent(this, MainActivity::class.java)
+        mIntent.putExtra(USERID, mIdUser)
+                startActivity(mIntent)
+    }
+
+    private fun testprintln() {
+        println("-1--mIdUser--------------------" + mIdUser)
+    }
+
+    companion object {
+
+        val USERNAME = "GlobalName"
+        val USERPHOTO = "GlobalEmail"
+        val USERMAIL = "GlobalPhoto"
+        val USERID = "GlobalId"
+
     }
 
 
-
 }
+

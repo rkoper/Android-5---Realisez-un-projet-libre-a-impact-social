@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">DingBring</string>
-    <string name="fb_login_protocol_scheme">fb3481097821967676</string>
     <string name="day1">Lun.</string>
     <string name="day2">Mar.</string>
     <string name="day3">Mie.</string>

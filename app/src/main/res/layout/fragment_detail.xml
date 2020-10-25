@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/orange_200"
+        android:background="@color/green_200"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.detail.DetailFragment">
@@ -349,7 +349,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/add"
-                android:backgroundTint="@color/orange_100"
+                android:backgroundTint="@color/green_100"
                 app:layout_constraintTop_toTopOf="@+id/gl_detail2_v_3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_9"
@@ -408,7 +408,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:stepperBackgroundColor="@color/white"
-                    app:stepperButtonColor="@color/orange_100"
+                    app:stepperButtonColor="@color/green_100"
                     app:stepperActionsColor="@color/black"
                     app:stepperActionsDisabledColor="@color/white"
                     app:stepperTextColor="@color/black"
@@ -516,7 +516,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_margin="5dp"
             android:scrollbars="vertical"
-            android:scrollbarThumbVertical="@color/yellow"
+            android:scrollbarThumbVertical="@color/green_bg_light"
             android:background="@drawable/rectangle_corner"
             android:id="@+id/recyclerViewDetailOne"
             android:layout_width="0dp"
@@ -548,13 +548,29 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/back"
-            android:backgroundTint="@color/orange_200"
+            android:backgroundTint="@color/green_200"
             app:layout_constraintTop_toTopOf="@+id/gl_detail_h_91"
             app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_98"
             app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_05"
             app:layout_constraintRight_toRightOf="@+id/gl_detail_v_3"
             android:contentDescription="@string/save"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/detail_share"
+            android:elevation="10dp"
+            android:background="@drawable/round_black_small"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/share"
+            android:padding="8dp"
+            android:backgroundTint="@color/green_200"
+            app:layout_constraintTop_toTopOf="@+id/gl_detail_h_91"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_98"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_8"
+            app:layout_constraintRight_toRightOf="@+id/gl_detail_v_95"
+            android:contentDescription="@string/save"
+            app:tint="@color/black" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

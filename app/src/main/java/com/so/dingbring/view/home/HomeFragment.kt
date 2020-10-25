@@ -15,12 +15,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.FragmentHomeBinding
+import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -33,13 +35,13 @@ class HomeFragment : Fragment() {
     private val mEventVM by viewModel<MyEventViewModel>()
     private val mUserVM by viewModel<MyUserViewModel>()
     private lateinit var mHomeAdapter: HomeAdapter
-    private lateinit var mBinding: FragmentHomeBinding
+    private lateinit var mBg: FragmentHomeBinding
     var mDataEvent: MutableList<MyEvent> = mutableListOf()
-    var mUserName = "///"
+    var mNameUser = "///"
     var mEmailUser = " /// "
-    var mUserPP = " /// "
-    var mUserId = "////"
-    var mUserEvent = arrayListOf<String>()
+    var mPhotoUser = " /// "
+    var mIdUser = "////"
+    var mUserEvent = arrayListOf("", "")
 
 
     override fun onCreateView(
@@ -48,68 +50,81 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         FirebaseApp.initializeApp(requireContext())
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        mBg = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        if (FirebaseAuth.getInstance().currentUser?.email != null)
-        { mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()}
 
-        mUserVM.getUserByMail(mEmailUser)?.observe(requireActivity(), {mlmu ->
-            if (mlmu != null){
-                mUserName = mlmu.mNameUser
-                mUserPP = mlmu.mPhotoUser
-                mUserId = mlmu.mUserId
-                mUserEvent = mlmu.mEventUser
+        mIdUser  = MainActivity.mIdUser
+        mNameUser  = MainActivity.mNameUser
+        mEmailUser  = MainActivity.mEmailUser
+        mPhotoUser  = MainActivity.mPhotoUser
 
-            test(mUserName, mUserId, mUserPP)}})
-            return mBinding.root }
 
-    private fun test(mUserName: String, mUserId: String, mUserPP: String) {
-        println("-----Home------|mEmailUser|----2-----" + mEmailUser)
-        println("-----Home------|mUserName|-----2----" + mUserName)
-        println("-----Home------|mUserPP|-------2--" + mUserPP)
-        println("-----Home------|mUserId|-------2--" + mUserId)
+        mUserVM.getifUserExist(mIdUser)?.observe(requireActivity(), { condition ->
 
-        initHeader()
-       initRV()
 
-    }
+            println("( condition------> )" + condition )
+
+
+            if (condition){
+                mIdUser  = MainActivity.mIdUser
+                mNameUser  = MainActivity.mNameUser
+                mEmailUser  = MainActivity.mEmailUser
+                mPhotoUser  = MainActivity.mPhotoUser
+                initHeader()
+                initRV()}
+
+
+            else{
+                mUserVM.getUserById(mIdUser)?.observe(requireActivity(), {mlmu ->
+                    mIdUser  = mlmu.mUserId
+                    mNameUser  = mlmu.mNameUser
+                    mEmailUser  = mlmu.mEmailUser
+                    mPhotoUser  = mlmu.mPhotoUser
+
+
+                    println("( mPhotoUser------> )" + mPhotoUser )
+                    initHeader()
+                    initRV()
+
+                })}
+
+
+
+
+        })
+
+
+        return mBg.root}
 
 
     private fun initHeader() {
         val animation100 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoominbacktofront)
-        mBinding.homeName.startAnimation(animation100)
-        mBinding.homeName.text = mUserName
-        mBinding.homeImage.startAnimation(animation100)
-        Glide.with(requireActivity())
-            .load(mUserPP).apply(RequestOptions.circleCropTransform()).into(mBinding.homeImage) }
+        mBg.homeName.startAnimation(animation100)
+        mBg.homeName.text = mNameUser
+        mBg.homeImage.startAnimation(animation100)
+        Glide.with(requireActivity()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(mBg.homeImage) }
 
 
     @SuppressLint("CheckResult")
     private fun initRV() {
         mHomeAdapter = HomeAdapter(requireActivity(), mDataEvent)
-        mBinding.recyclerView.setHasFixedSize(true)
-        mBinding.recyclerView.layoutManager = LinearLayoutManager(context)
-        mBinding.recyclerView.adapter = mHomeAdapter
+        mBg.recyclerView.setHasFixedSize(true)
+        mBg.recyclerView.layoutManager = LinearLayoutManager(context)
+        mBg.recyclerView.adapter = mHomeAdapter
 
         mHomeAdapter.itemClick.subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread()).subscribe { data ->
                 val bundle = Bundle()
                 bundle.putString("GlobalIdEvent", data.mEventId)
-                bundle.putString("GlobalName", mUserName)
-                bundle.putString("GlobalEmail", mEmailUser)
-                bundle.putString("GlobalPhoto", mUserPP)
-                mBinding.root.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle) }
-
-
+                bundle.putString("GlobalName", mNameUser)
+                mBg.root.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle) }
         loadRV()
 
     }
 
 
-
-
     private fun loadRV() {
-            mEventVM.getSelectedEvent(mUserEvent).observe(requireActivity(), { a ->
+            mEventVM.getUserEvent(mUserEvent).observe(requireActivity(), { a ->
                 mDataEvent.clear()
                 mDataEvent.addAll(a)
                 mHomeAdapter.notifyDataSetChanged() })}

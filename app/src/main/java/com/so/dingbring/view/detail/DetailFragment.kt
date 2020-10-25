@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.so.dingbring.R
 import com.so.dingbring.data.*
 import com.so.dingbring.databinding.ActivityMainBinding
 import com.so.dingbring.databinding.FragmentDetailBinding
+import com.so.dingbring.view.login.LoginActivity
 import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -32,7 +35,7 @@ class DetailFragment : Fragment() {
     var mUserId = ""
     var mNb = 0
 
-    private lateinit var mBinding: FragmentDetailBinding
+    private lateinit var mBg: FragmentDetailBinding
     private lateinit var mDetailAdapter: DetailAdapter
 
     private val mItemVM by viewModel<MyItemViewModel>()
@@ -45,36 +48,43 @@ class DetailFragment : Fragment() {
     var mItemQuantity: String = "1"
     var mItemUniqueID = UUID.randomUUID().toString()
     var mListMyItem = arrayListOf<MyItem>()
-    private lateinit var mBindingMain: ActivityMainBinding
+    private lateinit var mBgMain: ActivityMainBinding
     var mNameUser = "..."
     var mEmailUser = "..."
     var mPhotoUser = "..."
+    var mIdUser = "////"
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        mBg = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
-        mNameUser = arguments?.get("GlobalName").toString()
-        mEmailUser = arguments?.get("GlobalEmail").toString()
-        mPhotoUser = arguments?.get("GlobalPhoto").toString()
         mEventId = arguments?.get("GlobalIdEvent").toString()
 
-        initHeader(mBinding)
-        return mBinding.root}
+        initHeader()
+        return mBg.root}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRetrieveItem()
         initCreateItem()
         hideBottom()
-        initBack() }
+        initBack()
+        prepareToShare()}
+
+    private fun prepareToShare() {
+       mBg.detailShare.setOnClickListener {
+           println("--- GO----> SHARE----> LINK -----")
+       }
+    }
 
     private fun initBack() {
-        mBinding.detailBack.setOnClickListener {
-            activity?.startActivity(Intent(activity, MainActivity::class.java))
+        mBg.detailBack.setOnClickListener {
+            val mIntent = Intent(requireContext(), MainActivity::class.java)
+            mIntent.putExtra(LoginActivity.USERID, mIdUser)
+            startActivity(mIntent)
         }
     }
 
@@ -87,17 +97,12 @@ class DetailFragment : Fragment() {
     @SuppressLint("CheckResult")
     private fun initRetrieveItem() {
         mDetailAdapter = DetailAdapter(requireContext(), mListMyItem)
-        mBinding.recyclerViewDetailOne.layoutManager = LinearLayoutManager(context)
-        mBinding.recyclerViewDetailOne.adapter = mDetailAdapter
+        mBg.recyclerViewDetailOne.layoutManager = LinearLayoutManager(context)
+        mBg.recyclerViewDetailOne.adapter = mDetailAdapter
         initRVObserver()
 
         mDetailAdapter.itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe { data ->
-
-
-//                    println("(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)" + data.toString())
-
-
                     mItemVM.updateStatus(data)
                     initRVObserver()
                 }
@@ -117,25 +122,14 @@ class DetailFragment : Fragment() {
 
         } }
 
-  private fun initHeader(mBinding: FragmentDetailBinding) {
+  private fun initHeader() {
+        mEventVM.getEventrById(mEventId).observe(requireActivity(), { myevent ->
 
-        mEventVM.getAllEvent().observe(requireActivity(), {
-            it.forEach { myEvent ->
-                if (myEvent.mEventId == mEventId) {
-                    with(mBinding) {
-                        detailNameEvent.text = myEvent.mEventName
-                        detailDate.text = myEvent.mEventDate
-                        detailAddress.text = myEvent.mEventAdress
-                        detailOrga.text = myEvent.mEventOrga
-                    }
+            mBg.detailNameEvent.text = myevent.mEventName
+            mBg.detailDate.text = myevent.mEventDate
+            mBg.detailAddress.text = myevent.mEventAdress
+            mBg.detailOrga.text = myevent.mEventOrga
 
-                    mEventName = myEvent.mEventName
-                    mEventDate = myEvent.mEventDate
-                    mEventAddress = myEvent.mEventAdress
-                    mEventOrga = myEvent.mEventOrga
-                    mEventId = myEvent.mEventId
-                }
-            }
         }) }
 
 
@@ -189,8 +183,8 @@ class DetailFragment : Fragment() {
         mItemName = detail_item.text.toString() }
 
 /*
-    private fun initView(mBinding: FragmentDetailBinding) {
-        mBinding.detailReturn.setOnClickListener {
+    private fun initView(mBg: FragmentDetailBinding) {
+        mBg.detailReturn.setOnClickListener {
             it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
  */
 

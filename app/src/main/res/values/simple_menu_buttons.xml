@@ -8,9 +8,9 @@
     </array>
 
     <array name="simple_menu_colors">
-        <item>@color/orange_100</item>
-        <item>@color/orange_100</item>
-        <item>@color/orange_100</item>
+        <item>@color/green_100</item>
+        <item>@color/green_100</item>
+        <item>@color/green_100</item>
     </array>
 
 </resources>

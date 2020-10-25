@@ -11,7 +11,7 @@
         android:centerX="43%"
         android:centerColor="#FFFFFFFF"
         android:startColor="#FFFFFFFF"
-        android:endColor="#fbf4f4"
+        android:endColor="@color/green_100"
         android:type="linear"
         />
     <size

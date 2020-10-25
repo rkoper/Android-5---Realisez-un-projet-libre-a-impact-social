@@ -6,14 +6,18 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
 import androidx.navigation.NavOptions.Builder
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
+import com.so.dingbring.data.MyItem
+import com.so.dingbring.data.MyUser
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.ActivityMainBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -24,54 +28,39 @@ import kotlin.collections.HashMap
 class MainActivity : AppCompatActivity(){
 
     lateinit var mBinding: ActivityMainBinding
-    var mNameUser = "Fifi"
-    var mEmailUser = "fifi@gmail.com"
-    var mPhotoUser = "https://i.ibb.co/r6W0hxp/Capture-d-e-cran-2020-10-16-a-21-09-59.png"
-    private val mEventVM by viewModel<MyEventViewModel>()
+    var mNameUser = " .... "
+    var mEmailUser = "...."
+    var mPhotoUser = "...."
+    var mIdUser = "...."
     private val mUserVM by viewModel<MyUserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
+        mIdUser = intent?.getStringExtra(USERID).toString()
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
-
-        if (FirebaseAuth.getInstance().currentUser?.displayName != null)
-        { mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
-        if (FirebaseAuth.getInstance().currentUser?.email != null)
-        { mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()}
-        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
-        { mPhotoUser = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()}
-
-
-        println("--Main--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
-
-        checkFireStoreUser()
+        mUserVM.getifUserExist(mIdUser)?.observe(this, { condition ->
+            println("---------|mIdUser|--------" + mIdUser)
+            println("---------| IF USER DON'T EXIST|--------" + condition.toString())
+            if (condition){createFireStoreUser()} })
 
         initBottom(mBinding)
         hideBottomBar(false)
 
     }
 
-    private fun checkFireStoreUser() {
 
-      mUserVM.getUserByMail(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(this,{mlmu ->
-//        mUserVM.getUserByMail(mEmailUser)?.observe(this,{ mlmu ->
-            if (mlmu == null){createFireStoreUser()}
-
-    })}
 
     private fun createFireStoreUser() {
-        val userId = UUID.randomUUID().toString()
+        println("----------------| createFireStoreUser |------------------")
         val emptylist = arrayListOf<String>()
         val mDataUser: MutableMap<String, Any> = HashMap()
         mDataUser["NameUser"] = FirebaseAuth.getInstance().currentUser?.displayName.toString()
         mDataUser["EmailUser"] = FirebaseAuth.getInstance().currentUser?.email.toString()
         mDataUser["PhotoUser"] = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
-        mDataUser["DocIdUser"] = userId
+        mDataUser["DocIdUser"] = FirebaseAuth.getInstance().currentUser?.uid.toString()
         mDataUser["eventUser"] = emptylist
-
         mUserVM.createUser(mDataUser)
 
     }
@@ -98,14 +87,10 @@ class MainActivity : AppCompatActivity(){
                 )
             )
             mBinding.floatingTopBarNavigation.setNavigationChangeListener { view, position ->
-
-
-                 val navBuilder  =   Builder();
+                val navBuilder  =   Builder();
                 navBuilder.setEnterAnim(R.anim.slideright)
                 val bundle = Bundle()
-                bundle.putString("GlobalName", mNameUser)
-                bundle.putString("GlobalEmail", mEmailUser)
-                bundle.putString("GlobalPhoto", mPhotoUser)
+                bundle.putString(USERID, mIdUser)
 
 
 
@@ -135,6 +120,12 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+    companion object {
+        val USERID = "GlobalId"
 
-
+        val mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()
+        val mEmailUser  = FirebaseAuth.getInstance().currentUser?.email.toString()
+        val mPhotoUser   = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
+        val mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    }
 }

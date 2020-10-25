@@ -15,15 +15,17 @@ class MyEventViewModel(private val mEventRepository: MyEventRepository): ViewMod
         return mutableData
     }
 
+    fun getEventrById(mEventId:String) : LiveData<MyEvent> { return mEventRepository.getEventById(mEventId) }
+
 
 
     fun createEvent(myData : MyEvent) {
         mEventRepository.createEvent(myData)
     }
 
-    fun getSelectedEvent(mEmailUser: ArrayList<String>): LiveData<MutableList<MyEvent>> {
+    fun getUserEvent(mEventUser: ArrayList<String>): LiveData<MutableList<MyEvent>> {
         val mutableData = MutableLiveData<MutableList<MyEvent>>()
-        mEventRepository.getSelectedEvent(mEmailUser).observeForever{
+        mEventRepository.getUserEvent(mEventUser).observeForever{
             mutableData.value=it }
         return mutableData
     }

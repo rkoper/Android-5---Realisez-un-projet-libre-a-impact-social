@@ -53,10 +53,10 @@ class DetailAdapter(
 
             if (mListMyItem[position].mItemStatus == "I need") {
                 mDetailBand.visibility = View.VISIBLE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.orange_50))
+                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.green_50))
             } else {
                 mDetailBand.visibility = View.GONE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.orange_300))
+                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.green_300))
             }
         }
 

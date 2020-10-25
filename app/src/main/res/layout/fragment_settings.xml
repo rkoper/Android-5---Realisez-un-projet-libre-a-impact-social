@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/green_200"
+        android:background="@color/green_100"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.profil.ProfilFragment">
@@ -103,7 +103,7 @@
     <ImageView
         android:layout_marginEnd="15dp"
         android:background="@drawable/language"
-        android:backgroundTint="@color/green_200"
+        android:backgroundTint="@color/green_100"
         android:id="@+id/settings_language"
         app:layout_constraintRight_toRightOf="@+id/gl_settings_v_5"
         app:layout_constraintBottom_toBottomOf="@+id/gl_settings_v_2"
@@ -149,7 +149,7 @@
             android:textAppearance="@style/TxtChip"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -160,7 +160,7 @@
             android:textAppearance="@style/TxtChip"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -171,7 +171,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -182,7 +182,7 @@
                android:gravity="center_vertical|center_horizontal"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -190,10 +190,10 @@
             android:layout_height="50dp"
             android:text="@string/italian"
             android:textAppearance="@style/TxtChip"
-               android:gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -204,7 +204,7 @@
                android:gravity="center_vertical|center_horizontal"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -215,7 +215,7 @@
             android:textAppearance="@style/TxtChip"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -226,13 +226,13 @@
             android:textAppearance="@style/TxtChip"
             android:textColor="@color/txt_chip_state_list"
             android:theme="@style/Theme.MaterialComponents.Light"
-            app:chipBackgroundColor="@color/bg_chip_state_list" />
+            app:chipBackgroundColor="@color/green_50" />
     </com.google.android.material.chip.ChipGroup>
 
     <ImageView
         android:layout_marginEnd="15dp"
         android:background="@drawable/mail"
-        android:backgroundTint="@color/green_200"
+        android:backgroundTint="@color/green_100"
         android:id="@+id/settings_contact"
         app:layout_constraintRight_toRightOf="@+id/gl_settings_v_5"
         app:layout_constraintBottom_toBottomOf="@+id/gl_settings_v_4"
@@ -297,7 +297,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_white_small"
-        android:backgroundTint="@color/green_200"
+        android:backgroundTint="@color/green_100"
         android:contentDescription="@string/icon_logout"
         android:padding="8dp"
         android:src="@drawable/send"
@@ -312,7 +312,7 @@
         android:contentDescription="@string/icon_logout"
         android:layout_marginEnd="15dp"
         android:background="@drawable/exit"
-        android:backgroundTint="@color/green_200"
+        android:backgroundTint="@color/green_100"
         android:id="@+id/settings_logout"
         app:layout_constraintRight_toRightOf="@+id/gl_settings_v_5"
         app:layout_constraintBottom_toBottomOf="@+id/gl_settings_v_6"
@@ -338,7 +338,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_white"
-        android:backgroundTint="@color/green_200"
+        android:backgroundTint="@color/green_100"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gl_settings_v_6"

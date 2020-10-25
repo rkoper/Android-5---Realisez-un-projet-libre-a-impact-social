@@ -17,6 +17,8 @@ import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.FragmentCalendarBinding
+import com.so.dingbring.view.home.HomeFragment
+import com.so.dingbring.view.main.MainActivity
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
 import kotlinx.android.synthetic.main.dialog_layout.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -36,6 +38,7 @@ class CalendarFragment : Fragment() {
     var mNameUser = "..."
     var mEmailUser = "..."
     var mPhotoUser = "..."
+    var mIdUser = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,11 +47,11 @@ class CalendarFragment : Fragment() {
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
 
-        mNameUser = arguments?.get("GlobalName").toString()
-        mEmailUser = arguments?.get("GlobalEmail").toString()
-        mPhotoUser = arguments?.get("GlobalPhoto").toString()
+        mIdUser = arguments?.get(MainActivity.USERID).toString()
 
-        println("--calendar--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+
+        testprintln()
+
 
         initBottomInvisible()
         initCal()
@@ -90,11 +93,11 @@ class CalendarFragment : Fragment() {
 
 
 
-        mUserVM.getUserByMail(mEmailUser)?.observe(requireActivity(),{myUser ->
+        mUserVM.getUserById(mIdUser)?.observe(requireActivity(),{myUser ->
             println("-------------myUser----------" + myUser.mEventUser)
 
 
-     mEventVM.getSelectedEvent(myUser.mEventUser).observe(requireActivity(), { mlme ->
+     mEventVM.getUserEvent(myUser.mEventUser).observe(requireActivity(), { mlme ->
             mlme.forEach { myevent ->
                 println("------M EVENT-----" + myevent.mEventDate)
 
@@ -154,10 +157,6 @@ class CalendarFragment : Fragment() {
         val a7 = z1.split("")[7]
         val a8 = z1.split("")[8]
 
-
-        println(   "/dateDispolay/" + z1)
-        println(   "//" + "//" + a + "//" + a1 + "//" + a2 + "//" +a3 + "//" + a4 + "//" + a5 + "//" + a6 + "//" + a7 + "//" + a8)
-
         val dateDispolay = (a7+a8+"/"+a5+a6+"/" +a1+a2+a3+a4).toString()
 
 
@@ -167,9 +166,10 @@ class CalendarFragment : Fragment() {
         mBinding.textViewSelectedIcon.setOnClickListener {
             var bundle = bundleOf("GlobalIdEvent" to z3)
             mBinding.root.findNavController().navigate(R.id.action_calendar_to_detail, bundle)
-        }
+        } }
 
 
+    private fun testprintln() {
+        println("-5--mIdUser----" + mIdUser)
     }
-
 }

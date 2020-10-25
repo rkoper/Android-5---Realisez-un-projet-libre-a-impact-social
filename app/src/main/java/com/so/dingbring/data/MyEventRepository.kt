@@ -8,21 +8,17 @@ import kotlin.collections.HashMap
 class MyEventRepository {
 
     private var mEventSet: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
-    private var mEventSetForId:MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
-    private var mEventSize: MutableLiveData<MutableList<Int>> = MutableLiveData()
-    private var mEventOne: MutableLiveData<MyEvent> = MutableLiveData()
+    private var mEventIDSet: MutableLiveData<MyEvent> = MutableLiveData()
     var eventDate: String? = ""
     var eventUserMail: String? = ""
     var eventName: String? = ""
     var eventOrga: String? = ""
     var eventAddress: String? = ""
     var eventId: String? = ""
-    var myData =
-        MyEvent(eventDate!!, eventName!!, eventOrga!!, eventAddress!!, eventUserMail!!, eventId!!)
-    var myDataForId =
-        MyEvent(eventDate!!, eventName!!, eventOrga!!, eventAddress!!, eventUserMail!!, eventId!!)
+    var myData = MyEvent(eventDate!!, eventName!!, eventOrga!!, eventAddress!!, eventUserMail!!, eventId!!)
 
     private val dbFire = FirebaseFirestore.getInstance()
+
 
     fun getAllEvent(): LiveData<MutableList<MyEvent>> {
         val mutableList = mutableListOf<MyEvent>()
@@ -65,7 +61,7 @@ class MyEventRepository {
 
         return dbFire.collection("event").document().id
     }
-    fun getSelectedEvent(mEventUser: ArrayList<String>): LiveData<MutableList<MyEvent>> {
+    fun getUserEvent(mEventUser: ArrayList<String>): LiveData<MutableList<MyEvent>> {
 
         dbFire.collection("event").addSnapshotListener { querySnapshot, exception ->
             if (querySnapshot != null) {
@@ -94,4 +90,41 @@ class MyEventRepository {
         }
         return mEventSet
     }
+
+
+    fun getEventById(mEventId:String) : LiveData<MyEvent>  {
+        dbFire.collection("event").whereEqualTo("eventId", mEventId)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+
+                    eventDate = document.getString("eventDate")
+                    eventUserMail = document.getString("eventUserMail")
+                    eventName = document.getString("eventName")
+                    eventOrga = document.getString("eventOrga")
+                    eventAddress = document.getString("eventAddress")
+                    eventId = document.getString("eventId")
+                    myData = MyEvent(
+                        eventDate!!,
+                        eventName!!,
+                        eventOrga!!,
+                        eventAddress!!,
+                        eventUserMail!!,
+                        eventId!!
+                    )
+
+                    mEventIDSet.value = myData
+                } }
+
+        return mEventIDSet
+    }
+
+
+
+
+
+
+
+
+
 }

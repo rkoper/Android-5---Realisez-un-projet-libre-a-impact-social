@@ -1,20 +1,17 @@
 package com.so.dingbring.view.create
 
 import android.app.DatePickerDialog
-import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -22,17 +19,17 @@ import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.so.dingbring.R
 import com.so.dingbring.Utils.FindDay
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.*
-import com.so.dingbring.databinding.ActivityMainBinding
 import com.so.dingbring.databinding.FragmentCreateBinding
-import com.so.dingbring.databinding.FragmentDetailBinding
-import com.so.dingbring.databinding.FragmentProfilBinding
 import com.so.dingbring.view.detail.create.CreateAdapter
+import com.so.dingbring.view.home.HomeFragment
+import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_create.*
-import kotlinx.android.synthetic.main.fragment_detail.*
 import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -41,26 +38,25 @@ import java.util.*
 class CreateFragment : Fragment() {
     private val mUserVM by viewModel<MyUserViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
+    private val mItemVM by viewModel<MyItemViewModel>()
+
     private var mEventDate = ""
     private var mEventOrga = ""
     private var mEventName = ""
-    private var mUserMail = "XXX@XXX.COM"
-    private var mUserName = "Soso"
-    private var mUserId = ""
-    private var mUserPhoto = ""
     private var mEventAdress = ""
-    private var mEventSize = ""
-    private var themedContext: Context? = null
-    private val mItemVM by viewModel<MyItemViewModel>()
+
+    var mNameUser = ""
+    var mEmailUser = ""
+    var mPhotoUser = ""
+    var mIdUser = ""
+
     var i : Int = 1
     var mItemStatus: String = "I bring"
     var mItemName: String = "<3"
     var mItemQuantity: String = "1"
     var mEventUniqueID = UUID.randomUUID().toString()
     var mItemUniqueID = UUID.randomUUID().toString()
-    var mNameUser = "..."
-    var mEmailUser = "..."
-    var mPhotoUser = "..."
+
 
     var mListMyItem = arrayListOf<MyItem>()
 
@@ -75,11 +71,15 @@ class CreateFragment : Fragment() {
     ): View? {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create, container, false)
 
-        mNameUser = arguments?.get("GlobalName").toString()
-        mEmailUser = arguments?.get("GlobalEmail").toString()
-        mPhotoUser = arguments?.get("GlobalPhoto").toString()
+        mIdUser  = MainActivity.mIdUser
+        mNameUser  = MainActivity.mNameUser
+        mEmailUser  = MainActivity.mEmailUser
+        mPhotoUser  = MainActivity.mPhotoUser
+        println("( Create )" + mIdUser + "( - )" + mNameUser  + "( - )" + mEmailUser + "( - )" + mPhotoUser )
 
-        println("--create--–|mNameUser|----"+mPhotoUser + "----–|mEmailUser|----"+ mEmailUser+ "----–|mPhotoUser|----"+mPhotoUser )
+        testprintln()
+
+
         return mBinding.root }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,7 +107,7 @@ class CreateFragment : Fragment() {
         etTextInput?.setTextColor(resources.getColor(R.color.black))
         etTextInput?.setHintTextColor(resources.getColor(R.color.black))
         etTextInput?.gravity = Gravity.CENTER
-        etTextInput?.hint = " Enter address"
+        etTextInput?.hint = " Event Adress"
         val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto)
         etTextInput?.typeface = font
         etTextInput?.textSize = 20f
@@ -127,20 +127,22 @@ class CreateFragment : Fragment() {
 
                 etTextInput?.visibility = View.INVISIBLE
                 mEventAdress = "$mStreetNumber $mStreetName, $mCity "
-                create_address.text = mEventAdress
-                create_address.visibility = View.VISIBLE }
+              //  create_address.text = mEventAdress
+                // create_address.visibility = View.VISIBLE
+
+            }
 
             override fun onError(status: Status) {
                 Log.i("TAG", "An error occurred: $mItemStatus") } })
     }
     private fun initDate() {
-        create_date?.setOnClickListener {
+        create_date_txt?.setOnClickListener {
 
             val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
                 val newDate = formatDate(y, m, d)
                 val dayDate = FindDay(requireContext(), y, m, d)
-                create_date.text = "$dayDate $newDate"
-                mEventDate = create_date.text.toString() }
+                create_date_txt.setText("$dayDate $newDate")
+                mEventDate = create_date_txt.text.toString() }
             val now = android.text.format.Time()
             now.setToNow()
             val d = DatePickerDialog(requireContext(), R.style.MyAppThemeCalendar, dpd, now.year, now.month, now.monthDay)
@@ -150,34 +152,34 @@ class CreateFragment : Fragment() {
 
 
     private fun initEvent() {
-        mEventName = create_name_Event.text.toString()
+        val animationD = AnimationUtils.loadAnimation(requireContext(), R.anim.animedittxt)
+        create_name_txt.setOnFocusChangeListener { view, b ->
+            if (b)
+            {
+                create_name_edit.visibility = View.VISIBLE
+                create_name_edit.startAnimation(animationD);
+            }
+            else
+            {
+                create_name_edit.visibility = View.INVISIBLE
+            }
+        }
+
+        mEventName = create_name_edit.text.toString()
+
+
+
+
+        println("------mEventName------" + mEventName)
     }
 
     private fun initOrga() {
-
-        mUserVM.getUserByMail(FirebaseAuth.getInstance().currentUser?.email.toString())?.observe(requireActivity(), { mlmu ->
+        mUserVM.getUserById(mIdUser)?.observe(requireActivity(), { mlmu ->
             if (mlmu != null){
-                mUserName = mlmu.mNameUser
-                create_orga.text = mUserName
-                mEventOrga = create_orga.text.toString()
+                mNameUser = mlmu.mNameUser
+                create_orga_txt.setText(mNameUser)
+                mEventOrga = create_orga_txt.text.toString()
              } })}
-
-    fun createEvent(){
-        create_save?.setOnClickListener {
-            initEvent()
-            initOrga()
-
-            if (mEventDate== "") {Toast.makeText(requireContext(), "Please add date...", Toast.LENGTH_SHORT).show()}
-            if (mEventName == "") {Toast.makeText(requireContext(), "Please add event name...", Toast.LENGTH_SHORT).show()}
-            if (mEventOrga == "") {Toast.makeText(requireContext(), "Please add organizer...", Toast.LENGTH_SHORT).show()}
-            if (mEventAdress == "") {Toast.makeText(requireContext(), "Please add address...", Toast.LENGTH_SHORT).show()}
-
-            else {
-                val mDataEvent = MyEvent (mEventDate, mEventName, mEventOrga, mEventAdress, mUserMail, mEventUniqueID)
-                mEventVM.createEvent(mDataEvent)
-                createItem()
-                it.findNavController().navigate(R.id.action_createFragment_to_homeFragment) } } }
-
 
     private fun initCreateItem() {
         initItem()
@@ -195,7 +197,7 @@ class CreateFragment : Fragment() {
                 mEventOrga,
                 mItemUniqueID,
                 mEventUniqueID,
-                mUserPhoto)
+                mPhotoUser)
 
                 mListMyItem.add(mMyItem)
 
@@ -212,16 +214,6 @@ class CreateFragment : Fragment() {
 
 
     private fun initQuantity() {
-        /*
-        create_quantity_item.text = i.toString()
-        create_plus.setOnClickListener {
-            i = i.plus(1) ; mItemQuantity = i.toString()
-            create_quantity_item.text = i.toString() ; mItemQuantity = i.toString()}
-
-        create_minus.setOnClickListener {
-            if (i != 1) { i =  i.minus(1) ;create_quantity_item.text = i.toString() ;   mItemQuantity = i.toString()}
-            else {i = 1 ;  mItemQuantity = i.toString()} }  }
-   */
         create_quantity_item.count = 1
         create_quantity_item.minValue = 1
         create_quantity_item.maxValue = 50
@@ -247,5 +239,30 @@ class CreateFragment : Fragment() {
     private fun createItem() {
         mItemVM.createItem(mListMyItem)  }
 
+    fun createEvent(){
+        create_save?.setOnClickListener {
+            initEvent()
+            initOrga()
 
+            if (mEventDate== "") {Toast.makeText(requireContext(), "Please add date...", Toast.LENGTH_SHORT).show()}
+            if (mEventName == "") {Toast.makeText(requireContext(), "Please add event name...", Toast.LENGTH_SHORT).show()}
+            if (mEventOrga == "") {Toast.makeText(requireContext(), "Please add organizer...", Toast.LENGTH_SHORT).show()}
+            if (mEventAdress == "") {Toast.makeText(requireContext(), "Please add address...", Toast.LENGTH_SHORT).show()}
+
+            else {
+                val mDataEvent = MyEvent (mEventDate, mEventName, mEventOrga, mEventAdress, mEmailUser, mEventUniqueID)
+                mEventVM.createEvent(mDataEvent)
+                createItem()
+                addEventIdToUser(mIdUser,mEventUniqueID)
+
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(intent) } } }
+
+    private fun addEventIdToUser(mIDUser: String, mEventUniqueID: String) {
+        mUserVM.upadateEventUser(mIDUser, mEventUniqueID)
+        }
+
+    private fun testprintln() {
+        println("--4--mIdUser----" + mIdUser)
+    }
 }
