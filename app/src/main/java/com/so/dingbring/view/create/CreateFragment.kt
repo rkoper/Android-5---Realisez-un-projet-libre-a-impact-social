@@ -99,7 +99,7 @@ class CreateFragment : Fragment() {
 
     private fun initAdresse() {
         var mStreetNumber = ""; var mStreetName = ""; var mCity = ""
-        if (!Places.isInitialized()) { Places.initialize(activity?.applicationContext!!, "AIzaSyByK0jz-yxjpZFX88W8zjzTwtzMtkPYC4w") }
+        if (!Places.isInitialized()) { Places.initialize(activity?.applicationContext!!, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
         var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
         var fView: View? = autocompleteFragment?.view
         var etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)

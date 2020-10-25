@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DingBring</string>
+    <string name="app_name">dingbring</string>
 
 
     <string name="facebook_application_id" translatable="false">3481097821967676</string>

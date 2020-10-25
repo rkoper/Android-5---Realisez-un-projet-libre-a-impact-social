@@ -191,7 +191,7 @@
 
 
     <style name="GreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/homeback</item>
+        <item name="android:windowBackground">@drawable/add</item>
     </style>
 
 
