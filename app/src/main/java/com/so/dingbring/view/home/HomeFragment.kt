@@ -80,18 +80,14 @@ class HomeFragment : Fragment() {
                     mNameUser  = mlmu.mNameUser
                     mEmailUser  = mlmu.mEmailUser
                     mPhotoUser  = mlmu.mPhotoUser
+                    mUserEvent = mlmu.mEventUser
 
 
                     println("( mPhotoUser------> )" + mPhotoUser )
                     initHeader()
                     initRV()
 
-                })}
-
-
-
-
-        })
+                })} })
 
 
         return mBg.root}
@@ -117,6 +113,7 @@ class HomeFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putString("GlobalIdEvent", data.mEventId)
                 bundle.putString("GlobalName", mNameUser)
+                bundle.putString("GlobalIdUSer", mIdUser)
                 mBg.root.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle) }
         loadRV()
 
@@ -127,6 +124,11 @@ class HomeFragment : Fragment() {
             mEventVM.getUserEvent(mUserEvent).observe(requireActivity(), { a ->
                 mDataEvent.clear()
                 mDataEvent.addAll(a)
+
+                println("------->||||||||<--------" + mUserEvent)
+                println("------->||||||||<--------" + mDataEvent)
+
+
                 mHomeAdapter.notifyDataSetChanged() })}
 
 }

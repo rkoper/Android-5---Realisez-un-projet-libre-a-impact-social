@@ -27,13 +27,7 @@ import java.util.*
 
 
 class DetailFragment : Fragment() {
-    var mEventName = ""
-    var mEventDate = ""
-    var mEventOrga = ""
-    var mEventAddress = ""
     var mEventId = ""
-    var mUserId = ""
-    var mNb = 0
 
     private lateinit var mBg: FragmentDetailBinding
     private lateinit var mDetailAdapter: DetailAdapter
@@ -50,7 +44,6 @@ class DetailFragment : Fragment() {
     var mListMyItem = arrayListOf<MyItem>()
     private lateinit var mBgMain: ActivityMainBinding
     var mNameUser = "..."
-    var mEmailUser = "..."
     var mPhotoUser = "..."
     var mIdUser = "////"
 
@@ -62,7 +55,7 @@ class DetailFragment : Fragment() {
         mBg = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
         mEventId = arguments?.get("GlobalIdEvent").toString()
-
+        mIdUser=  arguments?.get("GlobalIdUSer").toString()
         initHeader()
         return mBg.root}
 
@@ -82,6 +75,7 @@ class DetailFragment : Fragment() {
 
     private fun initBack() {
         mBg.detailBack.setOnClickListener {
+            println("--- initBack----> DetailFrag----> -----" + mIdUser + "/ / " )
             val mIntent = Intent(requireContext(), MainActivity::class.java)
             mIntent.putExtra(LoginActivity.USERID, mIdUser)
             startActivity(mIntent)

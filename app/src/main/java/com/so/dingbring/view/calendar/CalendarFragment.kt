@@ -101,9 +101,7 @@ class CalendarFragment : Fragment() {
             mlme.forEach { myevent ->
                 println("------M EVENT-----" + myevent.mEventDate)
 
-                val beforeDate = myevent.mEventDate
-                val z = beforeDate.split(".")[1]
-                val y = z.split(" ")[1]
+                val y = myevent.mEventDate
                 val a = y.split("/")[0]
                 val b = y.split("/")[1]
                 val c = y.split("/")[2]
@@ -165,6 +163,7 @@ class CalendarFragment : Fragment() {
 
         mBinding.textViewSelectedIcon.setOnClickListener {
             var bundle = bundleOf("GlobalIdEvent" to z3)
+            bundle.putString("GlobalIdUSer", mIdUser)
             mBinding.root.findNavController().navigate(R.id.action_calendar_to_detail, bundle)
         } }
 

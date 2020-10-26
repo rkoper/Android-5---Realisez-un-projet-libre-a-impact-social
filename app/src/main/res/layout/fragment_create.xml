@@ -18,25 +18,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.02"/>
+                app:layout_constraintGuide_percent="0.03"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_create_h_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.1"/>
+                app:layout_constraintGuide_percent="0.12"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_create_h_3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.17"/>
+                app:layout_constraintGuide_percent="0.205"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_create_h_35"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24"/>
+        app:layout_constraintGuide_percent="0.29"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_create_h_4"
                 android:layout_width="match_parent"
@@ -81,11 +81,11 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.9"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_v_33"
+        android:id="@+id/gl_create_v_25"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4"/>
+        app:layout_constraintGuide_percent="0.25"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_create_v_5"
                 android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.8"/>
+                app:layout_constraintGuide_percent="0.75"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_create_v_95"
                 android:layout_width="match_parent"
@@ -144,7 +144,121 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.93"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/create_txtV_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TxtViewPrincipalBlack"
+        android:text="Event Name"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
+        app:layout_constraintBottom_toBottomOf="@id/gl_create_h_2" />
+
+    <LinearLayout
+        android:background="@color/grey_300"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_name"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_name"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_name"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"/>
+
+    <LinearLayout
+        android:id="@+id/create_cont_name"
+        android:background="@color/white"
+        android:layout_margin="3dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_name"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_name"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_name"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
+        android:orientation="horizontal" />
+
+
+    <TextView
+        android:id="@+id/create_txtV_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TxtViewPrincipalBlack"
+        android:text="Event Address"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
+        app:layout_constraintBottom_toBottomOf="@id/gl_create_h_3" />
+
+    <LinearLayout
+        android:background="@color/grey_300"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_address"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_address"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_address"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"/>
+
+
+    <TextView
+        android:id="@+id/create_txtV_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TxtViewPrincipalBlack"
+        android:text="Date"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
+        app:layout_constraintBottom_toBottomOf="@id/gl_create_h_35" />
+
+    <LinearLayout
+        android:background="@color/grey_300"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_date"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_date"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_date"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_4"/>
+
+    <LinearLayout
+        android:id="@+id/create_cont_date"
+        android:background="@color/white"
+        android:layout_margin="3dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_date"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_date"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_date"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_4"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/create_txtV_orga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TxtViewPrincipalBlack"
+        android:text="Organizer"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_4"
+        app:layout_constraintBottom_toBottomOf="@id/gl_create_h_35" />
+
+    <LinearLayout
+        android:background="@color/grey_300"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_orga"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_orga"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_orga"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"/>
+
+    <LinearLayout
+        android:id="@+id/create_cont_orga"
+        android:background="@color/white"
+        android:layout_margin="3dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_orga"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_orga"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_orga"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
+        android:orientation="horizontal" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
                android:layout_marginBottom="10dp"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -374,94 +488,85 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        style="@style/TxtViewEditTxt2"
-        android:id="@+id/create_name_txt"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:singleLine="true"
-        android:text="Name Event"
-        android:textColor="@color/grey_500"
-        android:background="@drawable/rectanglewithlinegrey"
-        android:textSize="18sp"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_1"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_2"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
 
-    <EditText
-        android:visibility="invisible"
-        style="@style/TxtViewEditTxt2"
-        android:id="@+id/create_name_edit"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:background="@drawable/rectanglewithline"
-        android:singleLine="true"
-        android:textSize="18sp"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_1"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_2"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
 
 
     <fragment
         android:id="@+id/autocomplete_fragment"
-        android:background="@color/colorTransparent"
+        android:background="@color/black"
         android:layout_width="0dp"
-        android:elevation="20dp"
         android:layout_height="0dp"
         android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_3"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_2"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95" >
+        app:layout_constraintBottom_toBottomOf="@+id/create_cont_address"
+        app:layout_constraintTop_toTopOf="@+id/create_cont_address"
+        app:layout_constraintLeft_toLeftOf="@+id/create_cont_address"
+        app:layout_constraintRight_toRightOf="@+id/create_cont_address" >
     </fragment>
 
 
+    <LinearLayout
+        android:id="@+id/create_cont_address"
+        android:background="@color/white"
+        android:layout_margin="3dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_txtV_address"
+        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_address"
+        app:layout_constraintLeft_toRightOf="@+id/create_txtV_address"
+        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
+        android:orientation="horizontal" />
+    <TextView
+        android:id="@+id/create_name_txt"
+        style="@style/TxtViewPrincipalBlack"
+        android:layout_margin="2dp"
+        android:padding="1dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/create_cont_address"
+        app:layout_constraintTop_toTopOf="@+id/create_cont_address"
+        app:layout_constraintLeft_toLeftOf="@+id/create_cont_address"
+        app:layout_constraintRight_toRightOf="@+id/create_cont_address" >
+    </TextView>
+   <TextView
+       android:id="@+id/create_date_txt"
+       android:layout_margin="2dp"
+       android:padding="1dp"
+       style="@style/TxtViewPrincipalBlack"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       app:layout_constraintTop_toTopOf="@+id/create_cont_date"
+       app:layout_constraintBottom_toBottomOf="@+id/create_cont_date"
+       app:layout_constraintLeft_toLeftOf="@+id/create_cont_date"
+       app:layout_constraintRight_toRightOf="@+id/create_cont_date"
+       />
 
-     <TextView
-            style="@style/TxtViewEditTxt2"
-            android:id="@+id/create_date_txt"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:singleLine="true"
-         android:text="Date Event"
-         android:textColor="@color/grey_500"
-         android:background="@drawable/rectanglewithlinegrey"
-            android:textSize="18sp"
-         app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-         app:layout_constraintTop_toTopOf="@+id/gl_create_h_3"
-         app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"
-         app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
+    <TextView
+        android:id="@+id/create_orga_txt"
+        style="@style/TxtViewPrincipalBlack"
+        android:layout_width="0dp"
+        android:layout_margin="2dp"
+        android:padding="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_cont_orga"
+        app:layout_constraintBottom_toBottomOf="@+id/create_cont_orga"
+        app:layout_constraintLeft_toLeftOf="@+id/create_cont_orga"
+        app:layout_constraintRight_toRightOf="@+id/create_cont_orga"
+        />
 
-        <EditText
-            android:visibility="invisible"
-            style="@style/TxtViewEditTxt2"
-            android:id="@+id/create_date_edit"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:background="@drawable/rectanglewithline"
-            android:singleLine="true"
-            android:textSize="18sp"
-            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-            app:layout_constraintTop_toTopOf="@+id/gl_create_h_3"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
+    <EditText
+        android:id="@+id/create_name_edit"
+        style="@style/TxtViewEditTxt2"
+        android:layout_margin="2dp"
+        android:padding="1dp"
+        android:background="@null"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/create_cont_name"
+        app:layout_constraintBottom_toBottomOf="@+id/create_cont_name"
+        app:layout_constraintLeft_toLeftOf="@+id/create_cont_name"
+        app:layout_constraintRight_toRightOf="@+id/create_cont_name"
+        />
 
-
-        <EditText
-            android:text="Test"
-            style="@style/TxtViewEditTxt2"
-            android:id="@+id/create_orga_txt"
-            android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:background="@drawable/rectanglewithline"
-            android:singleLine="true"
-            android:textSize="18sp"
-            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-            app:layout_constraintTop_toTopOf="@+id/gl_create_h_35"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:background="@drawable/rectangle_corner_white"

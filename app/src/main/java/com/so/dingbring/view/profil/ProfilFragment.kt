@@ -118,7 +118,8 @@ private fun visibleButton() {
                 visibleButton()
                 // --------- 2
                 mNameUser = d.custom_dialog_txt.text.toString()
-                mBng!!.profilName.text = mNameUser}
+                mBng!!.profilName.text = mNameUser
+                mUserVM.updateUserName(mIdUser, mNameUser)}
 
         }
 
@@ -176,8 +177,6 @@ private fun visibleButton() {
         private fun saveNewUserInfo() {
             mBng.profilSave.setOnClickListener {
                 mUserVM.updateUserPhoto(mIdUser, mPhotoUser)
-                mUserVM.updateUserName(mIdUser, mNameUser)
-
 
                 invisibleButton()
 

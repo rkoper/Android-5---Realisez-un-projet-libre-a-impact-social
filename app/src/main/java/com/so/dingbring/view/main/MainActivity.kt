@@ -6,23 +6,16 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions.Builder
 import androidx.navigation.Navigation
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.google.android.libraries.places.api.Places
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.so.dingbring.R
-import com.so.dingbring.data.MyEventViewModel
-import com.so.dingbring.data.MyItem
-import com.so.dingbring.data.MyUser
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.ActivityMainBinding
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.*
-import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity(){
@@ -34,6 +27,8 @@ class MainActivity : AppCompatActivity(){
     var mIdUser = "...."
     private val mUserVM by viewModel<MyUserViewModel>()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
@@ -42,7 +37,7 @@ class MainActivity : AppCompatActivity(){
 
         mUserVM.getifUserExist(mIdUser)?.observe(this, { condition ->
             println("---------|mIdUser|--------" + mIdUser)
-            println("---------| IF USER DON'T EXIST|--------" + condition.toString())
+            println("---------| New User ? |--------" + condition.toString())
             if (condition){createFireStoreUser()} })
 
         initBottom(mBinding)
@@ -97,7 +92,7 @@ class MainActivity : AppCompatActivity(){
                 when (position) {
                     0 -> Navigation.findNavController(this, R.id.hostFragment)
                         .navigate(R.id.homeFragment, bundle, navBuilder.build())
-                    1 -> Navigation.findNavController(this, R.id.hostFragment)
+                    1 ->  Navigation.findNavController(this, R.id.hostFragment)
                         .navigate(R.id.createFragment, bundle, navBuilder.build())
                     2 -> Navigation.findNavController(this, R.id.hostFragment)
                         .navigate(R.id.calendar_fragment, bundle, navBuilder.build())
@@ -109,9 +104,7 @@ class MainActivity : AppCompatActivity(){
                 }
             }
         }
-
-
-    override fun onBackPressed() {
+ override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
         if (count == 0) {
             super.onBackPressed()

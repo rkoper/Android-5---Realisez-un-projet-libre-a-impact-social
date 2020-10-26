@@ -112,7 +112,7 @@
         app:tint="@color/black"
         android:contentDescription="@string/image_view" />
     <TextView
-        android:padding="10dp"
+        android:padding="5dp"
         android:id="@+id/profil_choose"
         app:layout_constraintTop_toTopOf="@+id/gl_profil_v_5"
         app:layout_constraintRight_toRightOf="parent"

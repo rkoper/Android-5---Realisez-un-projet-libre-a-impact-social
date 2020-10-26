@@ -5,37 +5,51 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isInvisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AutocompletePrediction
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.Place.*
 import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
+import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
+import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
 import com.so.dingbring.R
 import com.so.dingbring.Utils.FindDay
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.*
 import com.so.dingbring.databinding.FragmentCreateBinding
 import com.so.dingbring.view.detail.create.CreateAdapter
-import com.so.dingbring.view.home.HomeFragment
+import com.so.dingbring.view.login.LoginActivity
 import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_create.*
 import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.lang.reflect.Array
 import java.util.*
 
 
 class CreateFragment : Fragment() {
+
+
     private val mUserVM by viewModel<MyUserViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
     private val mItemVM by viewModel<MyItemViewModel>()
@@ -75,9 +89,9 @@ class CreateFragment : Fragment() {
         mNameUser  = MainActivity.mNameUser
         mEmailUser  = MainActivity.mEmailUser
         mPhotoUser  = MainActivity.mPhotoUser
-        println("( Create )" + mIdUser + "( - )" + mNameUser  + "( - )" + mEmailUser + "( - )" + mPhotoUser )
+        println("( Create )" + mIdUser + "( - )" + mNameUser + "( - )" + mEmailUser + "( - )" + mPhotoUser)
 
-        testprintln()
+      //  testprintln()
 
 
         return mBinding.root }
@@ -98,88 +112,94 @@ class CreateFragment : Fragment() {
         createEvent() }
 
     private fun initAdresse() {
-        var mStreetNumber = ""; var mStreetName = ""; var mCity = ""
-        if (!Places.isInitialized()) { Places.initialize(activity?.applicationContext!!, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
+        var mStreetNumber = "";
+        var mStreetName = "";
+        var mCity = ""
+        if (!Places.isInitialized()) {
+            Places.initialize(
+                requireActivity().applicationContext,
+                "AIzaSyDmX6nCTHfCYGTS4-LhPSA0y2lYwFRitPI"
+            )
+        }
         var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
-        var fView: View? = autocompleteFragment?.view
-        var etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)
-        etTextInput?.setBackgroundColor(resources.getColor(R.color.colorTransparent))
-        etTextInput?.setTextColor(resources.getColor(R.color.black))
-        etTextInput?.setHintTextColor(resources.getColor(R.color.black))
-        etTextInput?.gravity = Gravity.CENTER
-        etTextInput?.hint = " Event Adress"
-        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto)
-        etTextInput?.typeface = font
-        etTextInput?.textSize = 20f
-        val searchIcon =
-            (autocompleteFragment?.view as? LinearLayout)?.getChildAt(0) as? ImageView
-        searchIcon?.visibility = View.GONE
-        autocompleteFragment?.setTypeFilter(TypeFilter.ADDRESS)
+        var etTextInput: EditText? = autocompleteFragment?.view?.findViewById(R.id.places_autocomplete_search_input)
         autocompleteFragment?.setPlaceFields(
-            listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS_COMPONENTS))
+            listOf(
+                Field.ID,
+                Field.NAME,
+                Field.ADDRESS_COMPONENTS
+            )
+        )
         autocompleteFragment?.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 place.addressComponents?.asList()?.forEach { mAdressComp ->
                     Log.i("TAG", "AutoComplet: " + mAdressComp.types + " ")
-                    when {mAdressComp.types.contains("street_number") -> { mStreetNumber = mAdressComp.name }
-                        mAdressComp.types.contains("route") -> { mStreetName = mAdressComp.name }
-                        mAdressComp.types.contains("locality") -> { mCity = mAdressComp.name } } }
-
+                    when {
+                        mAdressComp.types.contains("street_number") -> {
+                            mStreetNumber = mAdressComp.name
+                        }
+                        mAdressComp.types.contains("route") -> {
+                            mStreetName = mAdressComp.name
+                        }
+                        mAdressComp.types.contains("locality") -> {
+                            mCity = mAdressComp.name
+                        }
+                    }
+                }
+                autocompleteFragment.view?.isInvisible
                 etTextInput?.visibility = View.INVISIBLE
+                create_name_txt.text = mStreetNumber +" " + mStreetName +", " + mCity
                 mEventAdress = "$mStreetNumber $mStreetName, $mCity "
-              //  create_address.text = mEventAdress
-                // create_address.visibility = View.VISIBLE
 
             }
 
             override fun onError(status: Status) {
-                Log.i("TAG", "An error occurred: $mItemStatus") } })
+                Log.i("TAG", "An error occurred: $mItemStatus")
+            }
+        })
     }
-    private fun initDate() {
+
+
+
+
+
+
+            private fun initDate() {
         create_date_txt?.setOnClickListener {
+
 
             val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
                 val newDate = formatDate(y, m, d)
                 val dayDate = FindDay(requireContext(), y, m, d)
-                create_date_txt.setText("$dayDate $newDate")
+                create_date_txt.setText("$newDate")
                 mEventDate = create_date_txt.text.toString() }
             val now = android.text.format.Time()
             now.setToNow()
-            val d = DatePickerDialog(requireContext(), R.style.MyAppThemeCalendar, dpd, now.year, now.month, now.monthDay)
+            val d = DatePickerDialog(
+                requireContext(),
+                R.style.MyAppThemeCalendar,
+                dpd,
+                now.year,
+                now.month,
+                now.monthDay
+            )
             d.show()
             d.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.black))
             d.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.black)) } }
 
 
     private fun initEvent() {
-        val animationD = AnimationUtils.loadAnimation(requireContext(), R.anim.animedittxt)
-        create_name_txt.setOnFocusChangeListener { view, b ->
-            if (b)
-            {
-                create_name_edit.visibility = View.VISIBLE
-                create_name_edit.startAnimation(animationD);
-            }
-            else
-            {
-                create_name_edit.visibility = View.INVISIBLE
-            }
-        }
-
         mEventName = create_name_edit.text.toString()
-
-
-
-
-        println("------mEventName------" + mEventName)
     }
 
     private fun initOrga() {
         mUserVM.getUserById(mIdUser)?.observe(requireActivity(), { mlmu ->
-            if (mlmu != null){
+            if (mlmu != null) {
                 mNameUser = mlmu.mNameUser
-                create_orga_txt.setText(mNameUser)
+                create_orga_txt.text = mNameUser
                 mEventOrga = create_orga_txt.text.toString()
-             } })}
+            }
+        })}
 
     private fun initCreateItem() {
         initItem()
@@ -188,7 +208,11 @@ class CreateFragment : Fragment() {
         initStatus()
         create_add?.setOnClickListener {
             initItem()
-            if (mItemName == "") { Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show()}
+            if (mItemName == "") { Toast.makeText(
+                requireContext(),
+                "Please add item <3",
+                Toast.LENGTH_LONG
+            ).show()}
 
             else {  var mMyItem = MyItem(
                 mItemStatus,
@@ -197,7 +221,8 @@ class CreateFragment : Fragment() {
                 mEventOrga,
                 mItemUniqueID,
                 mEventUniqueID,
-                mPhotoUser)
+                mPhotoUser
+            )
 
                 mListMyItem.add(mMyItem)
 
@@ -208,7 +233,7 @@ class CreateFragment : Fragment() {
         mItemName = create_item.text.toString() }
 
     private fun initRV() {
-        mCreateAdapter = CreateAdapter(requireActivity(),mListMyItem)
+        mCreateAdapter = CreateAdapter(requireActivity(), mListMyItem)
         create_recyclerView.layoutManager = LinearLayoutManager(context)
         create_recyclerView.adapter = mCreateAdapter }
 
@@ -244,25 +269,57 @@ class CreateFragment : Fragment() {
             initEvent()
             initOrga()
 
-            if (mEventDate== "") {Toast.makeText(requireContext(), "Please add date...", Toast.LENGTH_SHORT).show()}
-            if (mEventName == "") {Toast.makeText(requireContext(), "Please add event name...", Toast.LENGTH_SHORT).show()}
-            if (mEventOrga == "") {Toast.makeText(requireContext(), "Please add organizer...", Toast.LENGTH_SHORT).show()}
-            if (mEventAdress == "") {Toast.makeText(requireContext(), "Please add address...", Toast.LENGTH_SHORT).show()}
+            if (mEventDate== "") {Toast.makeText(
+                requireContext(),
+                "Please add date...",
+                Toast.LENGTH_SHORT
+            ).show()}
+            if (mEventName == "") {Toast.makeText(
+                requireContext(),
+                "Please add event name...",
+                Toast.LENGTH_SHORT
+            ).show()}
+            if (mEventOrga == "") {Toast.makeText(
+                requireContext(),
+                "Please add organizer...",
+                Toast.LENGTH_SHORT
+            ).show()}
+            if (mEventAdress == "") {Toast.makeText(
+                requireContext(),
+                "Please add address...",
+                Toast.LENGTH_SHORT
+            ).show()}
 
             else {
-                val mDataEvent = MyEvent (mEventDate, mEventName, mEventOrga, mEventAdress, mEmailUser, mEventUniqueID)
+                val mDataEvent = MyEvent(
+                    mEventDate,
+                    mEventName,
+                    mEventOrga,
+                    mEventAdress,
+                    mEmailUser,
+                    mEventUniqueID
+                )
+
                 mEventVM.createEvent(mDataEvent)
                 createItem()
-                addEventIdToUser(mIdUser,mEventUniqueID)
+                println("------|ADD US in Ev.|--  5  ----" + mIdUser + "/// " + mEventUniqueID)
 
-                val intent = Intent(requireContext(), MainActivity::class.java)
-                startActivity(intent) } } }
 
-    private fun addEventIdToUser(mIDUser: String, mEventUniqueID: String) {
-        mUserVM.upadateEventUser(mIDUser, mEventUniqueID)
+                val mIntent = Intent(requireContext(), MainActivity::class.java)
+                mIntent.putExtra(LoginActivity.USERID, mIdUser)
+                startActivity(mIntent)
+
+
+                addEventIdToUser()
+            } } }
+
+    private fun addEventIdToUser() {
+
+        println("------|ADD US in Ev.|--  3  ----" + mIdUser + "/// " + mEventUniqueID)
+
+
+        mUserVM.upadateEventUser(mIdUser, mEventUniqueID)
         }
 
-    private fun testprintln() {
-        println("--4--mIdUser----" + mIdUser)
-    }
+
 }

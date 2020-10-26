@@ -65,10 +65,12 @@ class MyUserRepository {
     }
 
     fun upadateEventUser(mIDUser: String, mEventUniqueID: String){
+        println("------|ADD US in Ev.|--  5  ----" + mIDUser + "/// " + mEventUniqueID)
         dbFire.collection("user")
             .document(mIDUser)
             .update("eventUser", FieldValue.arrayUnion(mEventUniqueID))
     }
+
 
 
 

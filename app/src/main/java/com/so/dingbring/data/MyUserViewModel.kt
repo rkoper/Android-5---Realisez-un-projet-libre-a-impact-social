@@ -16,7 +16,10 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
 
     fun updateUserPhoto(mUserId:String, mUserPhoto:String) { mUserRepository.updateUserPhoto(mUserId, mUserPhoto )  }
 
-    fun upadateEventUser(mIDUser: String, mEventUniqueID: String) { mUserRepository.upadateEventUser(mIDUser, mEventUniqueID )  }
+    fun upadateEventUser(mIDUser: String, mEventUniqueID: String) {
+
+        println("------|ADD US in Ev.|--  4  ----" + mIDUser + "/// " + mEventUniqueID)
+        mUserRepository.upadateEventUser(mIDUser, mEventUniqueID )  }
 
 
 }
