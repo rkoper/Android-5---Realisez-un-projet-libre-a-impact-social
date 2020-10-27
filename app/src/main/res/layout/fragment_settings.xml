@@ -115,6 +115,7 @@
     <TextView
         style="@style/TxtViewPrincipalBlack"
         android:padding="1dp"
+        android:textSize="16sp"
         android:id="@+id/settings_language_txt"
         app:layout_constraintLeft_toRightOf="@+id/gl_settings_v_5"
         app:layout_constraintTop_toTopOf="@+id/settings_language"
@@ -141,6 +142,7 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_en"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -152,6 +154,7 @@
             app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_fr"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -163,6 +166,7 @@
             app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_sp"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -174,6 +178,7 @@
             app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_ar"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -185,6 +190,7 @@
             app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_it"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -196,6 +202,7 @@
             app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_ch"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -207,6 +214,7 @@
             app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_de"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -218,6 +226,7 @@
             app:chipBackgroundColor="@color/green_50" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/setting_pt"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -245,6 +254,7 @@
     <TextView
         style="@style/TxtViewPrincipalBlack"
         android:padding="1dp"
+        android:textSize="16sp"
         android:id="@+id/settings_contact_txt"
         app:layout_constraintLeft_toRightOf="@+id/gl_settings_v_5"
         app:layout_constraintTop_toTopOf="@+id/settings_contact"
@@ -343,6 +353,7 @@
         android:text="@string/logout"/>
 
     <TextView
+        android:textSize="16sp"
         style="@style/TxtViewPrincipalBlack"
         android:padding="1dp"
         android:id="@+id/settings_logout_txt"

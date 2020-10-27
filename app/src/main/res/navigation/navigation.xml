@@ -68,8 +68,8 @@
     <fragment
         android:id="@+id/calendar_fragment"
         android:name="com.so.dingbring.view.calendar.CalendarFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
         <argument
             android:name="eventId"
             app:argType="string"/>
@@ -83,14 +83,19 @@
     <fragment
         android:id="@+id/profil_fragment"
         android:name="com.so.dingbring.view.profil.ProfilFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="fragment_profil"
+        tools:layout="@layout/fragment_profil" >
     </fragment>
 
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.so.dingbring.view.settings.SettingsFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_calendar_to_detail"
+            app:destination="@id/settings_fragment"
+            app:enterAnim="@anim/fui_slide_in_right"
+            app:exitAnim="@anim/stationary" />
     </fragment>
 </navigation>

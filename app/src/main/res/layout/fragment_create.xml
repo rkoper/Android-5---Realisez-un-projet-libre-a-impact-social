@@ -155,7 +155,7 @@
         app:layout_constraintBottom_toBottomOf="@id/gl_create_h_2" />
 
     <LinearLayout
-        android:background="@color/grey_300"
+        android:background="@drawable/rectangle_corner_white"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@+id/create_txtV_name"
@@ -187,7 +187,7 @@
         app:layout_constraintBottom_toBottomOf="@id/gl_create_h_3" />
 
     <LinearLayout
-        android:background="@color/grey_300"
+        android:background="@drawable/rectangle_corner_white"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@+id/create_txtV_address"
@@ -207,7 +207,7 @@
         app:layout_constraintBottom_toBottomOf="@id/gl_create_h_35" />
 
     <LinearLayout
-        android:background="@color/grey_300"
+        android:background="@drawable/rectangle_corner_white"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@+id/create_txtV_date"
@@ -238,7 +238,7 @@
         app:layout_constraintBottom_toBottomOf="@id/gl_create_h_35" />
 
     <LinearLayout
-        android:background="@color/grey_300"
+        android:background="@drawable/rectangle_corner_white"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="@+id/create_txtV_orga"
@@ -311,6 +311,12 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.54"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create2_h_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3"/>
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_create2_h_33"
                     android:layout_width="match_parent"
@@ -330,21 +336,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.25" />
+                    app:layout_constraintGuide_percent="0.31" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/gl_create2_h_75"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="297dp" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create2_h_75"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.68" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_create2_v_3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.5"/>
+                    app:layout_constraintGuide_percent="0.62"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create2_v_5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.43"/>
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_create2_v_6"
@@ -365,7 +378,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.2"/>
+                    app:layout_constraintGuide_percent="0.25"/>
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_create2_h_9"
                     android:layout_width="match_parent"
@@ -378,16 +391,20 @@
                     android:buttonTint="@color/black"
                     android:background="@color/colorTransparent"
                     style="@style/MyDialogTheme"
+                    android:padding="1dp"
+                    android:layout_margin="1dp"
                     android:gravity="center"
                     android:text="@string/i_bring"
                     android:id="@+id/create_status_bring"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/gl_create2_v_3"
+                    app:layout_constraintBottom_toBottomOf="@+id/gl_create2_v_5"
                     app:layout_constraintRight_toRightOf="@+id/gl_create2_h_25"
                     app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_01"/>
                 <CheckBox
+                    android:padding="1dp"
+                    android:layout_margin="1dp"
                     android:buttonTint="@color/black"
                     android:background="@color/colorTransparent"
                     style="@style/MyDialogTheme"
@@ -397,7 +414,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/gl_create2_v_3"
+                    app:layout_constraintBottom_toBottomOf="@+id/gl_create2_v_5"
                     app:layout_constraintRight_toRightOf="@+id/gl_create2_h_99"
                     app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_75"/>
                 <ImageView
@@ -414,22 +431,56 @@
                     app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_8"
                     android:contentDescription="@string/save"
                     app:tint="@color/black" />
-                <EditText
-                    android:theme="@style/TxtViewPrincipalBlack3"
-                    android:background="@null"
-                    android:hint="@string/type_item"
+                <TextView
+                    android:id="@+id/create_txtV_item"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:id="@+id/create_item"
-                    android:textColor="@color/black"
+                    style="@style/TxtViewPrincipalBlack"
+                    android:textColor="@color/grey_600"
+                    android:text="Add article"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/gl_create2_v_3"
-                    app:layout_constraintRight_toRightOf="@+id/gl_create2_h_8"
-                    app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_2"/>
+                    app:layout_constraintRight_toRightOf="@+id/gl_create2_h_2"
+                    app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_01"/>
+
+        <LinearLayout
+            android:id="@+id/ll_item"
+            android:background="@drawable/rectangle_corner_white"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gl_create2_v_3"
+            app:layout_constraintLeft_toRightOf="@+id/gl_create2_h_2"
+            app:layout_constraintRight_toRightOf="@+id/gl_create2_h_8"
+            android:orientation="horizontal" />
+        <LinearLayout
+            android:id="@+id/create_cont_article"
+            android:background="@color/white"
+            android:layout_margin="3dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_item"
+            app:layout_constraintTop_toTopOf="@+id/ll_item"
+            app:layout_constraintLeft_toLeftOf="@+id/ll_item"
+            app:layout_constraintRight_toRightOf="@+id/ll_item"
+            android:orientation="horizontal" />
+        <EditText
+            android:id="@+id/create_item"
+            style="@style/TxtViewEditTxt2"
+            android:layout_margin="3dp"
+            android:padding="1dp"
+            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/create_cont_article"
+            app:layout_constraintTop_toTopOf="@+id/create_cont_article"
+            app:layout_constraintLeft_toLeftOf="@+id/create_cont_article"
+            app:layout_constraintRight_toRightOf="@+id/create_cont_article" >
+        </EditText>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/gl_create2_v_3"
+                    app:layout_constraintBottom_toBottomOf="@+id/gl_create2_v_5"
                     app:layout_constraintRight_toRightOf="@+id/gl_create2_h_66"
                     app:layout_constraintLeft_toLeftOf="@+id/gl_create2_h_33"
                     android:layout_height="0dp"
@@ -516,7 +567,7 @@
         app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
         android:orientation="horizontal" />
     <TextView
-        android:id="@+id/create_name_txt"
+        android:id="@+id/create__txt"
         style="@style/TxtViewPrincipalBlack"
         android:layout_margin="2dp"
         android:padding="1dp"

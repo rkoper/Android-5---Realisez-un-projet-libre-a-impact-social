@@ -18,6 +18,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isInvisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Status
@@ -148,7 +149,7 @@ class CreateFragment : Fragment() {
                 }
                 autocompleteFragment.view?.isInvisible
                 etTextInput?.visibility = View.INVISIBLE
-                create_name_txt.text = mStreetNumber +" " + mStreetName +", " + mCity
+                create_txtV_address.text = mStreetNumber +" " + mStreetName +", " + mCity
                 mEventAdress = "$mStreetNumber $mStreetName, $mCity "
 
             }
@@ -195,9 +196,8 @@ class CreateFragment : Fragment() {
     private fun initOrga() {
         mUserVM.getUserById(mIdUser)?.observe(requireActivity(), { mlmu ->
             if (mlmu != null) {
-                mNameUser = mlmu.mNameUser
-                create_orga_txt.text = mNameUser
-                mEventOrga = create_orga_txt.text.toString()
+                mEventOrga = mlmu.mNameUser
+                create_orga_txt.text = mEventOrga
             }
         })}
 
@@ -304,10 +304,14 @@ class CreateFragment : Fragment() {
                 createItem()
                 println("------|ADD US in Ev.|--  5  ----" + mIdUser + "/// " + mEventUniqueID)
 
-
+/*
                 val mIntent = Intent(requireContext(), MainActivity::class.java)
                 mIntent.putExtra(LoginActivity.USERID, mIdUser)
                 startActivity(mIntent)
+
+ */
+
+                Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.homeFragment)
 
 
                 addEventIdToUser()

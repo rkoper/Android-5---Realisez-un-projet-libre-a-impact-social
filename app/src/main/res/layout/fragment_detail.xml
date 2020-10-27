@@ -171,49 +171,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="@drawable/rectangle_corner_yellow"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/gl_detail2_v_3"
-                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_33"
-                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_33"/>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:background="@drawable/rectangle_corner_yellow"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/gl_detail2_v_3"
-                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_66"
-                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_66"/>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@drawable/rectangle_corner_yellow"
-                app:layout_constraintTop_toTopOf="@+id/gl_detail2_v_3"
-                app:layout_constraintBottom_toBottomOf="@+id/gl_detail2_v_3"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@drawable/rectangle_corner_yellow"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@drawable/rectangle_corner_yellow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_h_01"
                 android:layout_width="match_parent"
@@ -276,13 +233,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.25" />
+                app:layout_constraintGuide_percent="0.31" />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_h_75"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75"/>
+                app:layout_constraintGuide_percent="0.68"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_h_8"
                 android:layout_width="match_parent"
@@ -300,14 +257,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.2"/>
+                app:layout_constraintGuide_percent="0.25"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_v_3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.5"/>
+                app:layout_constraintGuide_percent="0.45"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_detail2_v_4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_detail2_v_6"
@@ -321,6 +284,8 @@
                 android:buttonTint="@color/black"
                 android:background="@color/colorTransparent"
                 style="@style/MyDialogTheme"
+                android:padding="1dp"
+                android:layout_margin="1dp"
                 android:text="@string/i_bring"
                 android:gravity="center"
                 android:id="@+id/detail_status_bring"
@@ -333,6 +298,8 @@
             <CheckBox
                 android:buttonTint="@color/black"
                 android:background="@color/colorTransparent"
+                android:padding="1dp"
+                android:layout_margin="1dp"
                 style="@style/MyDialogTheme"
                 android:text="@string/i_need"
                 android:id="@+id/detail_status_need"
@@ -356,18 +323,51 @@
                 app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_8"
                 android:contentDescription="@string/save"
                 app:tint="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                style="@style/TxtViewPrincipalBlack"
+                android:textColor="@color/grey_600"
+                android:text="Add article"
+                app:layout_constraintTop_toTopOf="@+id/gl_detail2_v_4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_01"
+                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_2" />
+            <LinearLayout
+                android:id="@+id/detail_ll"
+                android:background="@color/grey_300"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_detail2_v_4"
+                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_8"
+                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_2"
+                android:orientation="horizontal" />
+            <LinearLayout
+                android:id="@+id/create_cont_article"
+                android:background="@color/white"
+                android:layout_margin="3dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_ll"
+                app:layout_constraintTop_toTopOf="@+id/detail_ll"
+                app:layout_constraintRight_toRightOf="@+id/detail_ll"
+                app:layout_constraintLeft_toLeftOf="@+id/detail_ll"
+                android:orientation="horizontal" />
             <EditText
-                android:theme="@style/TxtViewPrincipalBlack3"
+                style="@style/TxtViewEditTxt2"
                 android:background="@null"
-                android:hint="@string/type_item"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/detail_item"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/gl_detail2_v_3"
-                app:layout_constraintRight_toRightOf="@+id/gl_detail2_h_8"
-                app:layout_constraintLeft_toLeftOf="@+id/gl_detail2_h_2"
+                android:layout_margin="3dp"
+                android:padding="1dp"
+                app:layout_constraintBottom_toBottomOf="@+id/create_cont_article"
+                app:layout_constraintTop_toTopOf="@+id/create_cont_article"
+                app:layout_constraintRight_toRightOf="@+id/create_cont_article"
+                app:layout_constraintLeft_toLeftOf="@+id/create_cont_article"
                 android:importantForAutofill="no"
                 android:inputType="" />
 
@@ -436,24 +436,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@drawable/rectangle_corner_yellow"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_2"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
 
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@drawable/rectangle_corner_yellow"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_3"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
 
         <TextView
             android:id="@+id/detail_address"
@@ -479,15 +462,7 @@
             app:layout_constraintTop_toTopOf="@+id/gl_detail_h_3"
             app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_4"
             app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_05"/>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="@drawable/rectangle_corner_yellow"
-            app:layout_constraintTop_toTopOf="@+id/gl_detail_h_3"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_4"
-            app:layout_constraintRight_toRightOf="@+id/gl_detail_v_5"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_5"/>
+
         <TextView
             android:background="@null"
             android:hint="@string/enter_orga"
@@ -500,15 +475,6 @@
             app:layout_constraintTop_toTopOf="@+id/gl_detail_h_3"
             app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_4"
             app:layout_constraintLeft_toLeftOf="@+id/gl_detail_v_5"/>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@drawable/rectangle_corner_yellow"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_detail_h_5"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
 
 
 
