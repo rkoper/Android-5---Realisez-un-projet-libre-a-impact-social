@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "754452645457-vbrhi7glgg8vvnj5lkbp2qnlmp3v58jj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.so.dingbring",
+            "certificate_hash": "128cf14d3dc9570251b39d306b239052b124b8e0"
+          }
+        },
+        {
           "client_id": "754452645457-ivum7nmdea3uc3o763ngjkk4tpm3hjun.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

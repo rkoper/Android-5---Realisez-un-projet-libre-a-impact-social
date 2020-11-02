@@ -73,8 +73,6 @@ class LoginActivity : AppCompatActivity() {
         else { finish()}
 
 
-        testprintln()
-
 
 
         val mIntent = Intent(this, MainActivity::class.java)
@@ -82,9 +80,6 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(mIntent)
     }
 
-    private fun testprintln() {
-        println("-1--mIdUser--------------------" + mIdUser)
-    }
 
     companion object {
 

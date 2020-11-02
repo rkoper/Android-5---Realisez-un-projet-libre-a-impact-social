@@ -37,8 +37,6 @@ object Utils {
         val dayName2: Int = calendar.get(Calendar.DAY_OF_MONTH)
         val dayName3: Int = calendar.get(Calendar.DAY_OF_YEAR)
 
-        println("------------>> DATE <<------" +dayName + " // " +  dayName1 + " // " + dayName2 + " // " + dayName3)
-
 
         if (dayName == 2)
         {return mContext.resources.getText(string.day1).toString()}
@@ -73,7 +71,7 @@ object Utils {
         etTextInput?.setHintTextColor(resources.getColor(R.color.white))
         etTextInput?.gravity = Gravity.CENTER
         etTextInput?.hint = hint
-        val font: Typeface? = ResourcesCompat.getFont(mContext, R.font.roboto)
+        val font: Typeface? = ResourcesCompat.getFont(mContext, R.font.ace)
         etTextInput?.typeface = font
         etTextInput?.textSize = 18f
         val searchIcon =

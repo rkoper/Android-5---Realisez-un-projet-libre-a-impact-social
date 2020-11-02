@@ -42,11 +42,12 @@ class HomeAdapter(var context: Context, mDataEvent: MutableList<MyEvent>): Recyc
         var mDetailItem: ConstraintLayout = itemView.findViewById(R.id.cl2)
         fun bindView(myEvent: MyEvent) {
             itemView.home_name.text = myEvent.mEventName
-            itemView.home_date.text = myEvent.mEventDate
+            itemView.home_item_date.text = myEvent.mEventDate
             itemView.home_address.text = Utils.formatAdress(myEvent.mEventAdress, true)
             itemView.home_city.text = Utils.formatAdress(myEvent.mEventAdress, false)
             itemView.home_orga.text = myEvent.mEventOrga
-            itemView.home_item_round.text = position.plus(1).toString()}
+
+        }
 
     init {
         mDetailItem.setOnClickListener {

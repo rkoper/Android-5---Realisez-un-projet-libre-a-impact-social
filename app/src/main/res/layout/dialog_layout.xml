@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_corner_yellow"
+        android:background="@drawable/rectangle_corner_white"
         android:paddingTop="50dp"
         android:paddingBottom="50dp"
         android:paddingStart="90dp"

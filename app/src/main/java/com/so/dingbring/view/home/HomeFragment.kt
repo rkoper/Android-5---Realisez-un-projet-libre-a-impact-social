@@ -1,12 +1,12 @@
 package com.so.dingbring.view.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -14,9 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.robertlevonyan.views.customfloatingactionbutton.FloatingLayout
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
@@ -26,11 +23,8 @@ import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.*
-import kotlin.collections.HashMap
 
 class HomeFragment : Fragment() {
-
 
     private val mEventVM by viewModel<MyEventViewModel>()
     private val mUserVM by viewModel<MyUserViewModel>()
@@ -52,19 +46,12 @@ class HomeFragment : Fragment() {
         FirebaseApp.initializeApp(requireContext())
         mBg = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-
         mIdUser  = MainActivity.mIdUser
         mNameUser  = MainActivity.mNameUser
         mEmailUser  = MainActivity.mEmailUser
         mPhotoUser  = MainActivity.mPhotoUser
 
-
-        mUserVM.getifUserExist(mIdUser)?.observe(requireActivity(), { condition ->
-
-
-            println("( condition------> )" + condition )
-
-
+        mUserVM.getifNewUser(mIdUser)?.observe(requireActivity(), androidx.lifecycle.Observer { condition ->
             if (condition){
                 mIdUser  = MainActivity.mIdUser
                 mNameUser  = MainActivity.mNameUser
@@ -73,25 +60,17 @@ class HomeFragment : Fragment() {
                 initHeader()
                 initRV()}
 
-
-            else{
-                mUserVM.getUserById(mIdUser)?.observe(requireActivity(), {mlmu ->
+            else{ mUserVM.getUserById(mIdUser)?.observe(requireActivity(),androidx.lifecycle.Observer {mlmu ->
                     mIdUser  = mlmu.mUserId
                     mNameUser  = mlmu.mNameUser
                     mEmailUser  = mlmu.mEmailUser
                     mPhotoUser  = mlmu.mPhotoUser
                     mUserEvent = mlmu.mEventUser
 
-
-                    println("( mPhotoUser------> )" + mPhotoUser )
                     initHeader()
-                    initRV()
-
-                })} })
-
+                    initRV() })} })
 
         return mBg.root}
-
 
     private fun initHeader() {
         val animation100 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoominbacktofront)
@@ -110,26 +89,19 @@ class HomeFragment : Fragment() {
 
         mHomeAdapter.itemClick.subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread()).subscribe { data ->
-                val bundle = Bundle()
-                bundle.putString("GlobalIdEvent", data.mEventId)
-                bundle.putString("GlobalName", mNameUser)
-                bundle.putString("GlobalIdUSer", mIdUser)
-                mBg.root.findNavController().navigate(R.id.action_homeFragment_to_detail_fragment, bundle) }
-        loadRV()
-
-    }
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.putExtra("GlobalIdEvent", data.mEventId)
+                intent.putExtra("GlobalIdUser", mIdUser)
+                startActivity(intent) }
+        loadRV() }
 
 
     private fun loadRV() {
-            mEventVM.getUserEvent(mUserEvent).observe(requireActivity(), { a ->
+            mEventVM.getUserEvent(mUserEvent).observe(requireActivity(), androidx.lifecycle.Observer{ a ->
                 mDataEvent.clear()
                 mDataEvent.addAll(a)
 
-                println("------->||||||||<--------" + mUserEvent)
-                println("------->||||||||<--------" + mDataEvent)
-
-
-                mHomeAdapter.notifyDataSetChanged() })}
+             mHomeAdapter.notifyDataSetChanged() })}
 
 }
 

@@ -48,7 +48,6 @@ class ProfilFragment : Fragment() {
         mNameUser  = MainActivity.mNameUser
         mEmailUser  = MainActivity.mEmailUser
         mPhotoUser  = MainActivity.mPhotoUser
-        testprintln()
 
         checkFireStoreUser(mBng)
         saveNewUserInfo()
@@ -184,8 +183,5 @@ private fun visibleButton() {
 
         }
 
-    private fun testprintln() {
-        println("--6--mIdUser----" + mIdUser)
-    }
 
 }

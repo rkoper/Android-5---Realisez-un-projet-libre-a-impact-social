@@ -1,10 +1,10 @@
 package com.so.dingbring.view.detail
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
@@ -46,22 +46,26 @@ class DetailAdapter(
                 .apply(RequestOptions.circleCropTransform())
                 .into(mDetailImageUser)
 
-            println("----|mItemUserPhoto|-----" + mListMyItem[position].mItemUserPhoto)
-            println("----|mItemUser|-----" + mListMyItem[position].mItemUser)
 
-
-
-            if (mListMyItem[position].mItemStatus == "I need") {
+             if (mListMyItem[position].mItemStatus == "I need") {
                 mDetailBand.visibility = View.VISIBLE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.green_50))
+                zoomIn(mDetailBand)
+
+                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_blue))
             } else {
                 mDetailBand.visibility = View.GONE
-                mDetailColor.setBackgroundColor(mContext.resources.getColor(R.color.green_300))
+                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_blue_light))
             }
         }
 
 
 
+    }
+
+    private fun zoomIn(mDetailBand: ImageView) {
+        val aniSlide = AnimationUtils.loadAnimation(mContext, R.anim.zoomin_main)
+        aniSlide.repeatMode = ValueAnimator.INFINITE;
+        mDetailBand.startAnimation(aniSlide)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
@@ -70,12 +74,8 @@ class DetailAdapter(
     }
 
     override fun getItemCount(): Int {
-        println("mListMyItem.size------" + mListMyItem.size)
-        return if (mListMyItem.size > 0) {
-            mListMyItem.size
-        } else {
-            0
-        }
+        return if (mListMyItem.size > 0) { mListMyItem.size }
+        else { 0 }
     }
 
     inner class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -85,7 +85,7 @@ class DetailAdapter(
         var mDetailColor: ConstraintLayout = itemView.findViewById(R.id.detail_item_cl)
         var mDetailUser: TextView = itemView.findViewById(R.id.detail_item_personn)
         var mDetailImageUser: ImageView = itemView.findViewById(R.id.detail_item_photo)
-        var mDetailBand: TextView = itemView.findViewById(R.id.detail_item_band)
+        var mDetailBand: ImageView = itemView.findViewById(R.id.detail_item_band)
 
         var mDetailEdit: ImageView = itemView.findViewById(R.id.detail_item_global)
         var mDetailEditStatus: ImageView = itemView.findViewById(R.id.detail_item_status)

@@ -35,7 +35,7 @@ class CreateAdapter(
         if (mListMyItem[position].mItemStatus == "I need")
         {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.green_50))}
         else
-        {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.green_100))}
+        {holder.mDisplayColor.setBackgroundColor(mContext.resources.getColor(R.color.blue_A_100))}
 
 
     }

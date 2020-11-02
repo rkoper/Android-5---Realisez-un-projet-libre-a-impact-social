@@ -1,17 +1,18 @@
 package com.so.dingbring.view.calendar
 
-import android.animation.ValueAnimator
+import android.graphics.Bitmap
+import android.graphics.Rect
+import android.graphics.RectF
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.view.animation.DecelerateInterpolator
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.navigation.findNavController
-import com.so.dingbring.ItemSelectionAnimator.Companion.END_CIRCLE_SIZE_RATIO
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
@@ -40,6 +41,24 @@ class CalendarFragment : Fragment() {
     var mEventName = ""
     var mEventOrga = ""
     var mEventAddress = ""
+
+    // TEST ////
+
+     var circleColor = 0
+     var circleAlpha: Int = 0
+     var startAngle = 0f
+     var currentCircleAngle: Float = 0f
+     val originalCircleStrokeWidth: Float = 0f
+     var currentCircleStrokeWidth = 0f
+     val originalCircleRadius: Float= 0f
+     var currentCircleRadius: Float = 0f
+     var circleCenterX: Float = 0f
+     var circleCenterY: Float = 0f
+     val circleRect = RectF()
+     var currentIconBitmap: Bitmap? = null
+     var iconSourceRect: Rect? = null
+     val iconRect = RectF()
+     var isAnimating = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,28 +93,25 @@ class CalendarFragment : Fragment() {
 
 
 
-        mUserVM.getUserById(mIdUser)?.observe(requireActivity(),{myUser ->
-            println("-------------myUser----------" + myUser.mEventUser)
+        mUserVM.getUserById(mIdUser)?.observe(requireActivity()) { myUser ->
+            mEventVM.getUserEvent(myUser.mEventUser).observe(requireActivity(),androidx.lifecycle.Observer { mlme ->
+                mlme.forEach { myevent ->
 
+                    val initalDate = myevent.mEventDate
+                    val day = initalDate.split("/")[0]
+                    val month = initalDate.split("/")[1]
+                    val year = initalDate.split("/")[2]
 
-     mEventVM.getUserEvent(myUser.mEventUser).observe(requireActivity(), { mlme ->
-            mlme.forEach { myevent ->
+                    val afterDate = year + month + day
+                    val newDate = afterDate +
+                            "," + myevent.mEventName +
+                            "," + myevent.mEventId +
+                            "," + myevent.mEventDate +
+                            "," +myevent.mEventAdress +
+                            "," + myevent.mEventOrga
 
-                val initalDate = myevent.mEventDate
-                val day = initalDate.split("/")[0]
-                val month = initalDate.split("/")[1]
-                val year = initalDate.split("/")[2]
-
-                val afterDate = year + month + day
-                val newDate = afterDate +
-                        "," + myevent.mEventName +
-                        "," + myevent.mEventId +
-                        "," + myevent.mEventDate +
-                        "," +myevent.mEventAdress +
-                        "," + myevent.mEventOrga
-
-                mDataPass.add(newDate)
-            }     })
+                    mDataPass.add(newDate)
+                }     })
 
 
             var calendarRecyclerView = mBinding.calendarRecyclerView
@@ -113,7 +129,7 @@ class CalendarFragment : Fragment() {
 
             calendarRecyclerView.adapter = calendarAdapterVertical
 
-        })
+        }
     }
 
     private fun createAlert(event: String) {
@@ -127,7 +143,7 @@ class CalendarFragment : Fragment() {
 
         val animationL = AnimationUtils.loadAnimation(requireContext(), R.anim.slidelefttocal)
         mBinding.calendarLlBotoom.visibility = View.VISIBLE
-        mBinding.calendarLlBotoomCach.visibility = View.INVISIBLE
+    //    mBinding.calendarLlBotoomCach.visibility = View.INVISIBLE
         mBinding.calendarLlBotoom.startAnimation(animationL)
 
         mBinding.calendarEventDate.text = mDateDisplay
@@ -137,30 +153,15 @@ class CalendarFragment : Fragment() {
 
         mBinding.textViewSelectedIcon.setOnClickListener {
 
-            test(mBinding.textViewSelectedIcon.id)
+            val animationZ = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomoutbig)
+            mBinding.textViewSelectedIcon.startAnimation(animationZ)
+
+//            SpringAnimation(img, DynamicAnimation.TRANSLATION_Y, 0f)
+
             var bundle = bundleOf("GlobalIdEvent" to mEventID)
             bundle.putString("GlobalIdUSer", mIdUser)
             mBinding.root.findNavController().navigate(R.id.action_calendar_to_detail, bundle)
         } }
 
-    private fun test(id: Int) {
-        var currentCircleAngle: Float
-        val circleAngleAnimation = ValueAnimator.ofFloat(20.toFloat(), 360.toFloat())
-        circleAngleAnimation.duration = 1000.toLong()
-        circleAngleAnimation.interpolator = DecelerateInterpolator()
-        circleAngleAnimation.addUpdateListener { animation ->
-            currentCircleAngle = animation.animatedValue as Float
-            if (currentCircleAngle == 360.toFloat()) {
-                startExitAnimation(id)
-            }
-        }
-        circleAngleAnimation.start()
-    }
 
-    private fun startExitAnimation(buttonIndex: Int) {
-        val circleSizeAnimation = ValueAnimator.ofFloat(2.0f, END_CIRCLE_SIZE_RATIO)
-        circleSizeAnimation.duration = 1000.toLong()
-        circleSizeAnimation.interpolator = DecelerateInterpolator()
-
-        }
 }

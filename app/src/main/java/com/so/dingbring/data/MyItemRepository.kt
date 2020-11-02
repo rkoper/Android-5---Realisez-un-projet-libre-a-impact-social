@@ -35,7 +35,6 @@ class MyItemRepository {
                 mItemSet.value = mDetailMutableList
             }
         }
-        println("mItemSet--------" + mItemSet.toString())
         return mItemSet
     }
 

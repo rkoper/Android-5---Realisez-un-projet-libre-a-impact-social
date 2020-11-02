@@ -22,7 +22,6 @@ class MyUserRepository {
         dbFire.collection("user").whereEqualTo("DocIdUser", mUserId)
             .get()
             .addOnSuccessListener { documents ->
-                println("------------error 0 ")
                 for (doc in documents) {
                     val mNameUser: String? = doc.getString("NameUser")
                     val mMailUser: String? = doc.getString("EmailUser")
@@ -39,7 +38,7 @@ class MyUserRepository {
         return mUserSet
     }
 
-    fun getifUserExist(mUserId:String) : LiveData<Boolean>? {
+    fun getifNewUser(mUserId:String) : LiveData<Boolean>? {
         var a = false
         dbFire.collection("user").whereEqualTo("DocIdUser", mUserId)
             .get()
@@ -53,7 +52,7 @@ class MyUserRepository {
 
 
     fun updateUserName(mUserId: String, mUserName: String) {
-      dbFire.collection("user").document(mUserId)
+        dbFire.collection("user").document(mUserId)
             .update("NameUser", mUserName)
 
     }
@@ -65,7 +64,6 @@ class MyUserRepository {
     }
 
     fun upadateEventUser(mIDUser: String, mEventUniqueID: String){
-        println("------|ADD US in Ev.|--  5  ----" + mIDUser + "/// " + mEventUniqueID)
         dbFire.collection("user")
             .document(mIDUser)
             .update("eventUser", FieldValue.arrayUnion(mEventUniqueID))

@@ -2,20 +2,25 @@ package com.so.dingbring.view.detail
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.dynamiclinks.ktx.androidParameters
+import com.google.firebase.dynamiclinks.ktx.dynamicLink
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.dynamiclinks.ktx.iosParameters
+import com.google.firebase.ktx.Firebase
 import com.so.dingbring.R
-import com.so.dingbring.data.*
+import com.so.dingbring.data.MyEventViewModel
+import com.so.dingbring.data.MyItem
+import com.so.dingbring.data.MyItemViewModel
+import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.databinding.ActivityMainBinding
-import com.so.dingbring.databinding.FragmentDetailBinding
 import com.so.dingbring.view.login.LoginActivity
 import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,7 +34,6 @@ import java.util.*
 class DetailFragment : Fragment() {
     var mEventId = ""
 
-    private lateinit var mBg: FragmentDetailBinding
     private lateinit var mDetailAdapter: DetailAdapter
 
     private val mItemVM by viewModel<MyItemViewModel>()
@@ -52,47 +56,79 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBg = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
         mEventId = arguments?.get("GlobalIdEvent").toString()
-        mIdUser=  arguments?.get("GlobalIdUSer").toString()
+        mIdUser = arguments?.get("GlobalIdUSer").toString()
         initHeader()
-        return mBg.root}
+
+//        main_button.visibility = View.INVISIBLE
+
+        return inflater.inflate(R.layout.fragment_detail, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRetrieveItem()
         initCreateItem()
-        hideBottom()
+  //     hideBottom()
         initBack()
-        prepareToShare()}
+        prepareToShare()
+
+    }
+
 
     private fun prepareToShare() {
-       mBg.detailShare.setOnClickListener {
-           println("--- GO----> SHARE----> LINK -----")
-       }
+
+
+        detail_img_share.setOnClickListener {
+            val dynamicLink = Firebase.dynamicLinks.dynamicLink {
+                link = Uri.parse(   "https://dingbring.page.link/" + mEventId )
+
+                domainUriPrefix = "https://example.page.link"
+                // Open links with this app on Android
+                androidParameters { }
+                // Open links with com.example.ios on iOS
+            //    iosParameters("com.example.ios") { }
+            }
+
+
+
+
+            val dynamicLinkUri = dynamicLink.uri
+
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, dynamicLinkUri.toString())
+
+            startActivity(Intent.createChooser(intent, "Share Link"))
+
+
+
+        }
+
+
+
     }
 
     private fun initBack() {
-        mBg.detailBack.setOnClickListener {
-            println("--- initBack----> DetailFrag----> -----" + mIdUser + "/ / " )
-            val mIntent = Intent(requireContext(), MainActivity::class.java)
+        detail_img_home.setOnClickListener {
+
+            val mIntent = Intent(context, MainActivity::class.java)
             mIntent.putExtra(LoginActivity.USERID, mIdUser)
             startActivity(mIntent)
+
+
         }
     }
 
-    private fun hideBottom() {
-        val activity = activity as MainActivity?
-        activity?.hideBottomBar(true)
-    }
+
 
 
     @SuppressLint("CheckResult")
     private fun initRetrieveItem() {
         mDetailAdapter = DetailAdapter(requireContext(), mListMyItem)
-        mBg.recyclerViewDetailOne.layoutManager = LinearLayoutManager(context)
-        mBg.recyclerViewDetailOne.adapter = mDetailAdapter
+        detail_recyclerView.layoutManager = LinearLayoutManager(context)
+        detail_recyclerView.adapter = mDetailAdapter
         initRVObserver()
 
         mDetailAdapter.itemClickN.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
@@ -117,12 +153,12 @@ class DetailFragment : Fragment() {
         } }
 
   private fun initHeader() {
-        mEventVM.getEventrById(mEventId).observe(requireActivity(), { myevent ->
+        mEventVM.getEventrById(mEventId).observe(requireActivity(),androidx.lifecycle.Observer { myevent ->
 
-            mBg.detailNameEvent.text = myevent.mEventName
-            mBg.detailDate.text = myevent.mEventDate
-            mBg.detailAddress.text = myevent.mEventAdress
-            mBg.detailOrga.text = myevent.mEventOrga
+            detail_name_txt.text = myevent.mEventName
+            detail_date_txt.text = myevent.mEventDate
+            detail_address_txt.text = myevent.mEventAdress
+            detail_orga_txt.text = myevent.mEventOrga
 
         }) }
 
@@ -168,17 +204,14 @@ class DetailFragment : Fragment() {
         detail_quantity_item.sideTapEnabled = true
         detail_quantity_item.addStepCallback(object : OnStepCallback {
             override fun onStep(qty: Int, positive: Boolean) {
-                mItemQuantity = qty.toString()
-                println(" mItemQty ------>$mItemQuantity")
-            }
-        }) }
+                mItemQuantity = qty.toString() }}) }
 
     private fun initItem() {
         mItemName = detail_item.text.toString() }
 
 /*
     private fun initView(mBg: FragmentDetailBinding) {
-        mBg.detailReturn.setOnClickListener {
+        detailReturn.setOnClickListener {
             it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
  */
 
