@@ -1,5 +1,6 @@
 package com.so.dingbring.view.detail
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
@@ -7,7 +8,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.dynamiclinks.ktx.androidParameters
@@ -20,7 +28,6 @@ import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyItem
 import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.databinding.ActivityMainBinding
 import com.so.dingbring.view.login.LoginActivity
 import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -46,10 +53,11 @@ class DetailFragment : Fragment() {
     var mItemQuantity: String = "1"
     var mItemUniqueID = UUID.randomUUID().toString()
     var mListMyItem = arrayListOf<MyItem>()
-    private lateinit var mBgMain: ActivityMainBinding
     var mNameUser = "..."
     var mPhotoUser = "..."
     var mIdUser = "////"
+
+    var mSelected = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,8 +69,6 @@ class DetailFragment : Fragment() {
         mIdUser = arguments?.get("GlobalIdUSer").toString()
         initHeader()
 
-//        main_button.visibility = View.INVISIBLE
-
         return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
@@ -70,8 +76,13 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRetrieveItem()
         initCreateItem()
-  //     hideBottom()
-        initBack()
+        detail_status_bring.visibility = View.INVISIBLE
+        detail_status_need.visibility = View.INVISIBLE
+        detail_txtV_item.visibility = View.INVISIBLE
+        detail_edit_item.visibility = View.INVISIBLE
+        detail_qty_cl.visibility = View.INVISIBLE
+        detail_view.visibility = View.INVISIBLE
+        detail_add.visibility = View.INVISIBLE
         prepareToShare()
 
     }
@@ -80,7 +91,7 @@ class DetailFragment : Fragment() {
     private fun prepareToShare() {
 
 
-        detail_img_share.setOnClickListener {
+        detail_share.setOnClickListener {
             val dynamicLink = Firebase.dynamicLinks.dynamicLink {
                 link = Uri.parse(   "https://dingbring.page.link/" + mEventId )
 
@@ -108,17 +119,6 @@ class DetailFragment : Fragment() {
 
 
 
-    }
-
-    private fun initBack() {
-        detail_img_home.setOnClickListener {
-
-            val mIntent = Intent(context, MainActivity::class.java)
-            mIntent.putExtra(LoginActivity.USERID, mIdUser)
-            startActivity(mIntent)
-
-
-        }
     }
 
 
@@ -154,18 +154,98 @@ class DetailFragment : Fragment() {
 
   private fun initHeader() {
         mEventVM.getEventrById(mEventId).observe(requireActivity(),androidx.lifecycle.Observer { myevent ->
-
             detail_name_txt.text = myevent.mEventName
-            detail_date_txt.text = myevent.mEventDate
-            detail_address_txt.text = myevent.mEventAdress
-            detail_orga_txt.text = myevent.mEventOrga
+
+            // RAPEL
 
         }) }
 
 
+    private fun initButton() {
+        detail_button_add.setOnClickListener {
+            val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
+            val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
+            detail_status_bring.startAnimation(zoom1)
+            detail_status_bring.startAnimation(zoom2)
+            detail_status_need.startAnimation(zoom1)
+            detail_status_need.startAnimation(zoom2)
+        }
+    }
+
+
+    private fun initStatus() {
+        detail_status_bring?.setOnClickListener {
+            detail_status_bring.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.blue_800))
+            mItemStatus = "I bring"
+            detail_status_need.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.blue_200))
+
+            goAnimTxt(detail_txtV_item)
+            goAnimEdit(detail_edit_item)
+            goAnimView(detail_view)
+            detail_edit_item.visibility = View.VISIBLE
+
+        }
+
+        detail_status_need?.setOnClickListener {
+            detail_status_need.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.blue_800
+                )
+            )
+            mItemStatus = "I need"
+            detail_status_bring.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.blue_200))
+
+            goAnimTxt(detail_txtV_item)
+            goAnimEdit(detail_edit_item)
+            goAnimView(detail_view)
+            detail_edit_item.visibility = View.VISIBLE
+        }
+    }
+
+    private fun initItem() {
+        detail_edit_item.doOnTextChanged { text, start, before, count ->
+            if (count ==1)
+            {    goAnimLayout(detail_qty_cl)
+                goAnimImage(detail_add)
+        }
+        mItemName = detail_edit_item.text.toString() }
+    }
+
+    private fun initQuantity() {
+        detail_quantity_item.count = 1
+        detail_quantity_item.minValue = 1
+        detail_quantity_item.maxValue = 50
+        detail_quantity_item.sideTapEnabled = true
+        detail_quantity_item.addStepCallback(object : OnStepCallback {
+            override fun onStep(qty: Int, positive: Boolean) {
+                mItemQuantity = qty.toString() }}) }
+
+    private fun goAnimImage(mLink: ImageView?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
+        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
+        mLink?.startAnimation(zoom1)
+        mLink?.startAnimation(zoom2) }
+
+
+
+
     @SuppressLint("ResourceType")
     private fun initCreateItem() {
-        initItem(); initQuantity(); initStatus();
+        initButton()
+        initItem()
+        initQuantity()
+        initStatus()
+
         detail_add?.setOnClickListener {
             initItem()
             if (mItemName == "") { Toast.makeText(
@@ -184,36 +264,41 @@ class DetailFragment : Fragment() {
             )
                 mItemVM.createUniqueItem(mMyItem)
                 initRVObserver() }
+
+            detail_status_bring.visibility = View.INVISIBLE
+            detail_status_need.visibility = View.INVISIBLE
+            detail_txtV_item.visibility = View.INVISIBLE
+            detail_edit_item.visibility = View.INVISIBLE
+            detail_qty_cl.visibility = View.INVISIBLE
+            detail_view.visibility = View.INVISIBLE
+            detail_add.visibility = View.INVISIBLE
         }
     }
+    private fun goAnimLayout(mLink: ConstraintLayout?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
+        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
+        mLink?.startAnimation(zoom1)
+        mLink?.startAnimation(zoom2) }
+
+    private fun goAnimView(mLink: View?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
+        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
+        mLink?.startAnimation(zoom1)
+        mLink?.startAnimation(zoom2) }
+
+    private fun goAnimTxt(mLink: TextView?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
+        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
+        mLink?.startAnimation(zoom1)
+        mLink?.startAnimation(zoom2) }
+
+    private fun goAnimEdit(mLink: EditText?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
+        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
+        mLink?.startAnimation(zoom1)
+        mLink?.startAnimation(zoom2) }
 
 
-    private fun initStatus() {
-        detail_status_bring?.isChecked = true
-        mItemStatus = "I bring"
-        detail_status_need?.setOnCheckedChangeListener { _, b -> if (b) { mItemStatus = "I need"
-            detail_status_bring.isChecked = false; } }
-
-        detail_status_bring?.setOnCheckedChangeListener { _, b -> if (b) { mItemStatus = "I bring"
-            detail_status_need.isChecked = false; } } }
-
-    private fun initQuantity() {
-        detail_quantity_item.count = 1
-        detail_quantity_item.minValue = 1
-        detail_quantity_item.maxValue = 50
-        detail_quantity_item.sideTapEnabled = true
-        detail_quantity_item.addStepCallback(object : OnStepCallback {
-            override fun onStep(qty: Int, positive: Boolean) {
-                mItemQuantity = qty.toString() }}) }
-
-    private fun initItem() {
-        mItemName = detail_item.text.toString() }
-
-/*
-    private fun initView(mBg: FragmentDetailBinding) {
-        detailReturn.setOnClickListener {
-            it.findNavController().navigate(R.id.action_detailFragment_to_homeFragment) } }
- */
 
 
 }

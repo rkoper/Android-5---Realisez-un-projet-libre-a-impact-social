@@ -20,52 +20,64 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.gauravk.bubblenavigation.BubbleToggleView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.databinding.FragmentProfilBinding
 import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_layout.*
+import kotlinx.android.synthetic.main.fragment_profil.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class ProfilFragment : Fragment() {
 
-    private lateinit var mBng: FragmentProfilBinding
     private val mUserVM by viewModel<MyUserViewModel>()
     var mNameUser = "..."
     var mEmailUser = "..."
     var mPhotoUser = "..."
     var mIdUser = "..."
+    var varbutton : ImageView ? = null
+    var mItemSelect : BubbleToggleView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         FirebaseApp.initializeApp(requireContext())
-        mBng = DataBindingUtil.inflate(inflater, R.layout.fragment_profil, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_profil, container, false)
+
 
         mIdUser  = MainActivity.mIdUser
         mNameUser  = MainActivity.mNameUser
         mEmailUser  = MainActivity.mEmailUser
         mPhotoUser  = MainActivity.mPhotoUser
 
-        checkFireStoreUser(mBng)
-        saveNewUserInfo()
-        refreshInfo()
+
+
+
+    //    mItemSelect = activity?.findViewById(R.id.main_item_personn)
+       varbutton = activity?.findViewById(R.id.main_button)
+
+        return  view
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         invisibleButton()
+        varbutton = activity?.findViewById(R.id.main_button)
+        varbutton?.visibility  = View.VISIBLE
+        changeUserProfil()}
 
-        editNameUser(mBng)
-
-        return mBng.root}
 
     private fun invisibleButton() {
-        mBng.profilRefresh.visibility = View.INVISIBLE
-        mBng.profilSave.visibility = View.INVISIBLE
+        profil_refresh.visibility = View.INVISIBLE
+        profil_save.visibility = View.INVISIBLE
     }
     /*
 private fun invisibleAnimButton() {
     val animationD = AnimationUtils.loadAnimation(requireContext(), R.anim.zoominbig)
-    mBng.profilSave.startAnimation(animationD)
+    mBng.profil_save.startAnimation(animationD)
     mBng.profilRefresh.startAnimation(animationD)
 }
 
@@ -73,23 +85,24 @@ private fun invisibleAnimButton() {
 
 private fun visibleAnimButton() {
     val animationD = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomoutbig)
-    mBng.profilSave.startAnimation(animationD)
+    mBng.profil_save.startAnimation(animationD)
     mBng.profilRefresh.startAnimation(animationD)
 }
 
      */
 private fun visibleButton() {
-    mBng.profilRefresh.visibility = View.VISIBLE
-    mBng.profilSave.visibility = View.VISIBLE }
+        varbutton?.visibility  = View.VISIBLE
+        profil_refresh.visibility = View.VISIBLE
+    profil_save.visibility = View.VISIBLE }
 
 
 
     private fun refreshInfo() {
-        mBng.profilRefresh.setOnClickListener {
-            checkFireStoreUser(mBng) } }
+        profil_refresh.setOnClickListener {
+            checkFireStoreUser() } }
 
-    private fun editNameUser(mBng: FragmentProfilBinding?) {
-        mBng?.profilEditName?.setOnClickListener {
+    private fun editNameUser() {
+        profil_edit_name?.setOnClickListener {
             val d = Dialog(requireContext())
             d.requestWindowFeature(Window.FEATURE_NO_TITLE)
             d.window?.setBackgroundDrawable( ColorDrawable(Color.TRANSPARENT))
@@ -117,31 +130,29 @@ private fun visibleButton() {
                 visibleButton()
                 // --------- 2
                 mNameUser = d.custom_dialog_txt.text.toString()
-                mBng!!.profilName.text = mNameUser
+                profil_name.text = mNameUser
                 mUserVM.updateUserName(mIdUser, mNameUser)}
 
         }
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        changeUserProfil()
-        super.onViewCreated(view, savedInstanceState) }
 
-    private fun checkFireStoreUser(mBng: FragmentProfilBinding?) {
+
+    private fun checkFireStoreUser() {
         mUserVM.getUserById(mIdUser)?.observeForever { mlmu ->
                 if (mlmu != null){
                     mNameUser = mlmu.mNameUser
                     mPhotoUser = mlmu.mPhotoUser
                     mIdUser = mlmu.mUserId
-                    createDisplay(mBng)} }}
+                    createDisplay()} }}
 
-    private fun createDisplay(mBng: FragmentProfilBinding?) {
-     mBng!!.profilName.text = mNameUser
+    private fun createDisplay() {
+     profil_name.text = mNameUser
         Glide.with(requireContext())
             .load(mPhotoUser)
             .apply(RequestOptions.circleCropTransform())
-            .into(mBng.profilImage)
+            .into(profil_image)
 
     }
 
@@ -155,7 +166,14 @@ private fun visibleButton() {
             "https://i.ibb.co/nsbNLwq/c2.png",
             "https://i.ibb.co/WDjtfWR/c1.png",
             "https://i.ibb.co/7YHdHKt/C7.png")
-        var mLstImageV = arrayListOf(mBng.profilImg1,mBng.profilImg2,mBng.profilImg3,mBng.profilImg4,mBng.profilImg5,mBng.profilImg6,mBng.profilImg7)
+        var mLstImageV = arrayListOf(
+            profil_img1,
+            profil_img2,
+            profil_img3,
+            profil_img4,
+            profil_img5,
+            profil_img6,
+            profil_img7)
 
            for (i in 0..6) { c[mLstDrawable[i]] = mLstImageV[i] }
 
@@ -170,11 +188,11 @@ private fun visibleButton() {
         it.value.setOnClickListener {view ->
             visibleButton()
             Glide.with(requireContext())
-                .load(key).apply(RequestOptions.circleCropTransform()).into( mBng.profilImage)
+                .load(key).apply(RequestOptions.circleCropTransform()).into( profil_image)
                 mPhotoUser = key } }
 
         private fun saveNewUserInfo() {
-            mBng.profilSave.setOnClickListener {
+            profil_save.setOnClickListener {
                 mUserVM.updateUserPhoto(mIdUser, mPhotoUser)
 
                 invisibleButton()

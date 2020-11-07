@@ -51,10 +51,10 @@ class DetailAdapter(
                 mDetailBand.visibility = View.VISIBLE
                 zoomIn(mDetailBand)
 
-                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_blue))
+                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_white))
             } else {
                 mDetailBand.visibility = View.GONE
-                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_blue_light))
+                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_yellow_light))
             }
         }
 

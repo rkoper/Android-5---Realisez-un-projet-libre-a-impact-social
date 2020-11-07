@@ -10,12 +10,13 @@ class MyEventRepository {
     private var mEventSet: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
     private var mEventIDSet: MutableLiveData<MyEvent> = MutableLiveData()
     var eventDate: String? = ""
-    var eventUserMail: String? = ""
     var eventName: String? = ""
-    var eventOrga: String? = ""
     var eventAddress: String? = ""
     var eventId: String? = ""
-    var myData = MyEvent(eventDate!!, eventName!!, eventOrga!!, eventAddress!!, eventUserMail!!, eventId!!)
+    var eventUserId: String? = ""
+    var eventUserName: String? = ""
+    var eventUserPhoto: String? = ""
+    var myData = MyEvent(eventDate!!, eventName!!, eventAddress!!, eventId!!,eventUserId!!, eventUserName!!, eventUserPhoto!!)
 
     private val dbFire = FirebaseFirestore.getInstance()
 
@@ -26,19 +27,20 @@ class MyEventRepository {
             if (querySnapshot != null) {
                 for (document in querySnapshot.documents) {
                     eventDate = document.getString("eventDate")
-                    eventUserMail = document.getString("eventUserMail")
                     eventName = document.getString("eventName")
-                    eventOrga = document.getString("eventOrga")
                     eventAddress = document.getString("eventAddress")
                     eventId = document.getString("eventId")
+                    eventUserId = document.getString("eventUserId")
+                    eventUserName = document.getString("eventUserName")
+                    eventUserPhoto = document.getString("eventUserPhoto")
                     myData = MyEvent(
-                        eventDate!!,
-                        eventName!!,
-                        eventOrga!!,
                         eventAddress!!,
-                        eventUserMail!!,
-                        eventId!!
-                    )
+                        eventDate!!,
+                        eventId!!,
+                        eventName!!,
+                        eventUserId!!,
+                        eventUserName!!,
+                        eventUserPhoto!!)
                     mutableList.add(myData)
                 }
                 mEventSet.value = mutableList
@@ -53,9 +55,9 @@ class MyEventRepository {
         items["eventName"] = myData.mEventName
         items["eventDate"] = myData.mEventDate
         items["eventAddress"] = myData.mEventAdress
-        items["eventOrga"] = myData.mEventOrga
-        items["eventUserMail"] = myData.mEventUserMail
         items["eventId"] = myData.mEventId
+        items["eventUserId"] = myData.mEventUserId
+        items["eventUserPhoto"] = myData.mEventUserPhoto
 
         dbFire.collection("event").document(myData.mEventId).set(items)
 
@@ -69,19 +71,25 @@ class MyEventRepository {
                 for (document in querySnapshot.documents) {
                     if (mEventUser.contains(document.getString("eventId")) ){
                         eventDate = document.getString("eventDate")
-                        eventUserMail = document.getString("eventUserMail")
                         eventName = document.getString("eventName")
-                        eventOrga = document.getString("eventOrga")
                         eventAddress = document.getString("eventAddress")
                         eventId = document.getString("eventId")
+                        eventUserId = document.getString("eventUserId")
+                        eventUserName = document.getString("eventUserName")
+                        eventUserPhoto = document.getString("eventUserPhoto")
+
+                        if (eventUserName.isNullOrBlank()){
+                            println("-------> NOT ok " + eventName)}
+                        else
+                        {    println("-------> ok " + eventName + eventUserName)}
                         myData = MyEvent(
-                            eventDate!!,
-                            eventName!!,
-                            eventOrga!!,
                             eventAddress!!,
-                            eventUserMail!!,
-                            eventId!!
-                        )
+                         eventDate!!,
+                         eventId!!,
+                         eventName!!,
+                         eventUserId!!,
+                         eventUserName!!,
+                         eventUserPhoto!!)
 
                         mutableList.add(myData)}
                 }
@@ -99,19 +107,20 @@ class MyEventRepository {
                 for (document in documents) {
 
                     eventDate = document.getString("eventDate")
-                    eventUserMail = document.getString("eventUserMail")
                     eventName = document.getString("eventName")
-                    eventOrga = document.getString("eventOrga")
                     eventAddress = document.getString("eventAddress")
                     eventId = document.getString("eventId")
+                    eventUserId = document.getString("eventUserId")
+                    eventUserName = document.getString("eventUserName")
+                    eventUserPhoto = document.getString("eventUserPhoto")
                     myData = MyEvent(
-                        eventDate!!,
-                        eventName!!,
-                        eventOrga!!,
                         eventAddress!!,
-                        eventUserMail!!,
-                        eventId!!
-                    )
+                        eventDate!!,
+                        eventId!!,
+                        eventName!!,
+                        eventUserId!!,
+                        eventUserName!!,
+                        eventUserPhoto!!)
 
                     mEventIDSet.value = myData
                 } }

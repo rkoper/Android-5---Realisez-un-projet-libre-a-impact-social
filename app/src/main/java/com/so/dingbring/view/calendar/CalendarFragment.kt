@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,16 +17,15 @@ import androidx.navigation.findNavController
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.databinding.FragmentCalendarBinding
 import com.so.dingbring.view.main.MainActivity
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
+import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 
 class CalendarFragment : Fragment() {
 
-    private lateinit var mBinding: FragmentCalendarBinding
     val mDataPass = arrayListOf<String>()
     var startCal = Calendar.getInstance()
     var endCal = Calendar.getInstance()
@@ -37,42 +37,36 @@ class CalendarFragment : Fragment() {
     var mEmailUser = "..."
     var mPhotoUser = "..."
     var mIdUser = ""
+    var varbutton : ImageView? = null
 
-    var mEventName = ""
-    var mEventOrga = ""
-    var mEventAddress = ""
-
-    // TEST ////
-
-     var circleColor = 0
-     var circleAlpha: Int = 0
-     var startAngle = 0f
-     var currentCircleAngle: Float = 0f
-     val originalCircleStrokeWidth: Float = 0f
-     var currentCircleStrokeWidth = 0f
-     val originalCircleRadius: Float= 0f
-     var currentCircleRadius: Float = 0f
-     var circleCenterX: Float = 0f
-     var circleCenterY: Float = 0f
-     val circleRect = RectF()
-     var currentIconBitmap: Bitmap? = null
-     var iconSourceRect: Rect? = null
-     val iconRect = RectF()
-     var isAnimating = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-        mIdUser = arguments?.get(MainActivity.USERID).toString()
-        mBinding.calendarLlBotoom.visibility = View.INVISIBLE
-        initCal()
-        initRV()
-        return mBinding.root
+
+        val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
+
+
+   //     mIdUser = arguments?.get(MainActivity.USERID).toString()
+
+
+        varbutton = activity?.findViewById(R.id.main_button)
+        return  view
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        calendar_ll_botoom.visibility = View.INVISIBLE
+
+      //  varbutton = activity?.findViewById(R.id.main_button)
+        varbutton?.visibility  = View.VISIBLE
+        initCal()
+        initRV()
+
+    }
 
     private fun initCal() {
         date = Date()
@@ -108,13 +102,13 @@ class CalendarFragment : Fragment() {
                             "," + myevent.mEventId +
                             "," + myevent.mEventDate +
                             "," +myevent.mEventAdress +
-                            "," + myevent.mEventOrga
+                            "," + myevent.mEventUserId
 
                     mDataPass.add(newDate)
                 }     })
 
 
-            var calendarRecyclerView = mBinding.calendarRecyclerView
+            var calendarRecyclerView = calendarRecyclerView
             val calendarAdapterVertical = CalendarAdapter(
                 requireContext(),
                 startCal.time,
@@ -142,25 +136,25 @@ class CalendarFragment : Fragment() {
         val mEventOrga = event.split(",")[6]
 
         val animationL = AnimationUtils.loadAnimation(requireContext(), R.anim.slidelefttocal)
-        mBinding.calendarLlBotoom.visibility = View.VISIBLE
+        calendar_ll_botoom.visibility = View.VISIBLE
     //    mBinding.calendarLlBotoomCach.visibility = View.INVISIBLE
-        mBinding.calendarLlBotoom.startAnimation(animationL)
+        calendar_ll_botoom.startAnimation(animationL)
 
-        mBinding.calendarEventDate.text = mDateDisplay
-        mBinding.calendarEventName.text = mEventName
-        mBinding.calendarEventOrga.text = mEventOrga
-        mBinding.calendarEventAdress.text = mEventAddress +", "+mEventCity
+        calendar_event_date.text = mDateDisplay
+        calendar_event_name.text = mEventName
+        calendar_event_orga.text = mEventOrga
+        calendar_event_adress.text = mEventAddress +", "+mEventCity
 
-        mBinding.textViewSelectedIcon.setOnClickListener {
+        textViewSelectedIcon.setOnClickListener {
 
             val animationZ = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomoutbig)
-            mBinding.textViewSelectedIcon.startAnimation(animationZ)
+            textViewSelectedIcon.startAnimation(animationZ)
 
 //            SpringAnimation(img, DynamicAnimation.TRANSLATION_Y, 0f)
 
             var bundle = bundleOf("GlobalIdEvent" to mEventID)
             bundle.putString("GlobalIdUSer", mIdUser)
-            mBinding.root.findNavController().navigate(R.id.action_calendar_to_detail, bundle)
+            view?.findNavController()?.navigate(R.id.action_calendar_to_detail, bundle)
         } }
 
 

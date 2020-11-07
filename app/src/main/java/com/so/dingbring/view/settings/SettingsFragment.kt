@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,7 +14,6 @@ import androidx.navigation.Navigation
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.chip.Chip
 import com.so.dingbring.R
-import com.so.dingbring.databinding.FragmentSettingsBinding
 import com.so.dingbring.view.login.LoginActivity
 import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -22,7 +22,6 @@ import java.util.*
 
 class SettingsFragment : Fragment() {
 
-    private lateinit var mBinding: FragmentSettingsBinding
     lateinit var locale: Locale
     private var currentLanguage = "en"
     private var mCheckedID = 1
@@ -31,30 +30,40 @@ class SettingsFragment : Fragment() {
     var mPhotoUser = "..."
     var mIdUser = "..."
     var fragmentStatus = ""
+    var varbutton : ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
 
         mIdUser  = MainActivity.mIdUser
         mNameUser  = MainActivity.mNameUser
         mEmailUser  = MainActivity.mEmailUser
         mPhotoUser  = MainActivity.mPhotoUser
 
-        return mBinding.root}
+
+
+      varbutton = activity?.findViewById(R.id.main_button)
+
+        return  view
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+      //  varbutton = activity?.findViewById(R.id.main_button)
+        varbutton?.visibility  = View.VISIBLE
         goLanguage()
         goContactUs()
         goLogOut()
         fragmentStatus = "onViewCreated"
-        super.onViewCreated(view, savedInstanceState) }
+   }
 
     private fun goLogOut() {
-        mBinding.settingsLogoutButton.setOnClickListener {
+        settings_logout_button.setOnClickListener {
             AuthUI.getInstance().signOut(requireContext()).addOnCompleteListener {
                 Toast.makeText(requireContext(), "Bye bye", Toast.LENGTH_SHORT).show()
                 val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -66,7 +75,7 @@ class SettingsFragment : Fragment() {
         val subject = settings_mail_object.text.toString().trim()
         val message = settings_mail_txt.text.toString().trim()
 
-        mBinding.settingsSend.setOnClickListener {
+        settings_send.setOnClickListener {
 
             Toast.makeText(requireContext(), "Send eMail", Toast.LENGTH_SHORT).show()
 
@@ -86,17 +95,17 @@ class SettingsFragment : Fragment() {
 
     private fun goLanguage() {
 
-        mBinding.settingsLanguageChip.setOnCheckedChangeListener { group, Id ->
-            mBinding.settingsLanguageChip.isSingleSelection
+        settings_language_chip.setOnCheckedChangeListener { group, Id ->
+            settings_language_chip.isSingleSelection
            when (group.checkedChipId) {
-             mBinding.settingEn.id  ->   setLocale("en")
-             mBinding.settingFr.id   ->  setLocale("fr")
-             mBinding.settingIt.id   ->  setLocale("it")
-             mBinding.settingSp.id   ->  setLocale("es")
-             mBinding.settingDe.id   ->  setLocale("de")
-               mBinding.settingPt.id   ->  setLocale("pt")
-               mBinding.settingCh.id   ->  setLocale("zh")
-               mBinding.settingAr.id   ->  setLocale("ar")
+               setting_en.id  ->   setLocale("en")
+               setting_fr.id   ->  setLocale("fr")
+               setting_it.id   ->  setLocale("it")
+               setting_sp.id   ->  setLocale("es")
+               setting_de.id   ->  setLocale("de")
+               setting_pt.id   ->  setLocale("pt")
+               setting_ch.id   ->  setLocale("zh")
+               setting_ar.id   ->  setLocale("ar")
            }
         }
     }

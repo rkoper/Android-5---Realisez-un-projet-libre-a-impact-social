@@ -11,7 +11,9 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.core.view.setPadding
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions.Builder
 import androidx.navigation.Navigation
 import com.google.firebase.FirebaseApp
@@ -22,6 +24,7 @@ import com.so.dingbring.data.MyUserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import com.so.dingbring.R
+import com.so.dingbring.view.create.CreateFragment
 
 class MainActivity : AppCompatActivity(){
 
@@ -30,24 +33,21 @@ class MainActivity : AppCompatActivity(){
     var mPhotoUser = "...."
     var mIdUser = "...."
     var mIdEvent = "...."
+    var mTest = "...."
     private val mUserVM by viewModel<MyUserViewModel>()
-//    var menuMain = findViewById<ImageView>(R.id.floating_top_bar_navigation)
-    //  var buttonMain = findViewById<ImageView>(R.id.main_button)
 
     var isOpen = false
     var toDetail = true
 
-    @SuppressLint("WrongConstant")
+    @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
 
-
-
         mIdEvent = intent?.getStringExtra("GlobalIdEvent").toString()
         mIdUser = intent?.getStringExtra("GlobalIdUser").toString()
-
 
         if (mIdEvent != "null") { toDetail = false }
 
@@ -56,28 +56,12 @@ class MainActivity : AppCompatActivity(){
         initDynamicLink()
 
         if (mIdUser != "null"){
-
-        mUserVM.getifNewUser(mIdUser)?.observe(this, androidx.lifecycle.Observer{ condition ->
-
-            println(" ---------|  Main  / condition / ----------" + mIdUser)
-            println(" ---------|  Main  / condition / ----------" + condition)
-
-
-            if (condition){
-
-                println(" ---------|  Main  / condition / ----------   GO ")
-
-               createFireStoreUser()
-
-
-            } })}
+            mUserVM.getifNewUser(mIdUser)?.observe(this, androidx.lifecycle.Observer{ condition ->
+                if (condition){createFireStoreUser() } })}
 
         hideMenuBottomBar(isOpen)
 
         initBottom(toDetail)
-
-        main_button.visibility =  View.VISIBLE
-        floating_top_bar_navigation.visibility = View.INVISIBLE
 
         main_button.setOnClickListener {
             if (!isOpen) { scalerIn()
@@ -97,20 +81,39 @@ class MainActivity : AppCompatActivity(){
                 isOpen = false } }
     }
 
+
+    @SuppressLint("ResourceType")
     fun initBottom(b: Boolean) {
-        floating_top_bar_navigation.setTypeface(ResourcesCompat.getFont(this, R.font.ace))
+        main_button.visibility =  View.INVISIBLE
+        floating_top_bar_navigation.visibility = View.INVISIBLE
+        floating_top_bar_navigation.setTypeface(ResourcesCompat.getFont(this, R.font.roboto))
         val navBuilder = Builder();
         navBuilder.setEnterAnim(R.anim.slideright)
         val bundle = Bundle()
         bundle.putString(USERID, Companion.mIdUser)
         if (b){
             floating_top_bar_navigation.setNavigationChangeListener { view, position ->
-
-                if (position == 0 ) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.homeFragment, bundle, navBuilder.build()) }
-                if (position == 1 ) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment, bundle, navBuilder.build()) }
-                if (position == 2 ) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment, bundle, navBuilder.build()) }
-                if (position == 3 ) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.profil_fragment, bundle, navBuilder.build()) }
-                if (position == 4 ) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment, bundle, navBuilder.build()) } }}
+                if (position == 0 ) {
+                    finish();
+                    startActivity(intent);
+                    main_bottom_cl.visibility =  View.INVISIBLE
+                }
+                if (position == 1 ) {
+                    Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.event_fragment, bundle, navBuilder.build())
+                    main_button.visibility =  View.VISIBLE
+                }
+                if (position == 2 ) {
+                     main_button.visibility =  View.VISIBLE
+                    Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment, bundle, navBuilder.build()) }
+                if (position == 3 ) {
+                     main_button.visibility =  View.VISIBLE
+                    Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment, bundle, navBuilder.build()) }
+                if (position == 4 ) {
+                     main_button.visibility =  View.VISIBLE
+                    Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.profil_fragment, bundle, navBuilder.build()) }
+                if (position == 5 ) {
+                     main_button.visibility =  View.VISIBLE
+                    Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment, bundle, navBuilder.build()) } }}
 
         else{
             bundle.putString("GlobalIdEvent", mIdEvent)
@@ -118,6 +121,7 @@ class MainActivity : AppCompatActivity(){
             main_bottom_cl.visibility =  View.INVISIBLE
 
         }
+
     }
 
 
@@ -221,12 +225,10 @@ class MainActivity : AppCompatActivity(){
     }
     companion object {
         val USERID = "GlobalId"
-
         val mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()
         val mEmailUser  = FirebaseAuth.getInstance().currentUser?.email.toString()
         val mPhotoUser   = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
         val mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
-
 
     }
 }
