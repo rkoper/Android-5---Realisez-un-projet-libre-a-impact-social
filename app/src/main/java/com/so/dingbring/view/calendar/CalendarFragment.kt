@@ -1,23 +1,20 @@
 package com.so.dingbring.view.calendar
 
-import android.graphics.Bitmap
-import android.graphics.Rect
-import android.graphics.RectF
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
+import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.main.MainActivity
+import com.so.dingbring.view.main.ItemActivity
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -37,7 +34,7 @@ class CalendarFragment : Fragment() {
     var mEmailUser = "..."
     var mPhotoUser = "..."
     var mIdUser = ""
-    var varbutton : ImageView? = null
+    var varbutton : BubbleNavigationConstraintView? = null
 
 
     override fun onCreateView(
@@ -48,25 +45,28 @@ class CalendarFragment : Fragment() {
 
         val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
 
+        mIdUser = ItemActivity.mIdUser
 
-   //     mIdUser = arguments?.get(MainActivity.USERID).toString()
+        initCal()
+        initRV()
 
-
-        varbutton = activity?.findViewById(R.id.main_button)
         return  view
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        calendar_ll_botoom.visibility = View.INVISIBLE
+        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    //Handle back event from any fragment
+                    view?.findNavController()?.navigate(R.id.action_calendar_to_home)
+                    varbutton?.setCurrentActiveItem(1)
+                }
+            })
 
-      //  varbutton = activity?.findViewById(R.id.main_button)
-        varbutton?.visibility  = View.VISIBLE
-        initCal()
-        initRV()
-
-    }
+        calendar_ll_botoom.visibility = View.INVISIBLE }
 
     private fun initCal() {
         date = Date()
@@ -134,6 +134,11 @@ class CalendarFragment : Fragment() {
         val mEventAddress = event.split(",")[4]
         val mEventCity = event.split(",")[5]
         val mEventOrga = event.split(",")[6]
+//        val mEventOrga1 = event.split(",")[7]
+//        val mEventOrga2 = event.split(",")[8]
+
+
+        println("------|mEventOrga|-----" +mEventOrga + "------|mEventOrga1|-----"   + "------|mEventOrga2|-----" )
 
         val animationL = AnimationUtils.loadAnimation(requireContext(), R.anim.slidelefttocal)
         calendar_ll_botoom.visibility = View.VISIBLE
@@ -156,6 +161,11 @@ class CalendarFragment : Fragment() {
             bundle.putString("GlobalIdUSer", mIdUser)
             view?.findNavController()?.navigate(R.id.action_calendar_to_detail, bundle)
         } }
+
+
+
+
+
 
 
 }

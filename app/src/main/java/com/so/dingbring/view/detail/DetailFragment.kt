@@ -1,6 +1,5 @@
 package com.so.dingbring.view.detail
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
@@ -13,23 +12,24 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
 import com.google.firebase.dynamiclinks.ktx.androidParameters
 import com.google.firebase.dynamiclinks.ktx.dynamicLink
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
-import com.google.firebase.dynamiclinks.ktx.iosParameters
 import com.google.firebase.ktx.Firebase
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyItem
 import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.login.LoginActivity
-import com.so.dingbring.view.main.MainActivity
+import com.so.dingbring.view.main.ItemActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -56,7 +56,7 @@ class DetailFragment : Fragment() {
     var mNameUser = "..."
     var mPhotoUser = "..."
     var mIdUser = "////"
-
+    var varbutton : BubbleNavigationConstraintView? = null
     var mSelected = false
 
     override fun onCreateView(
@@ -66,8 +66,12 @@ class DetailFragment : Fragment() {
     ): View? {
 
         mEventId = arguments?.get("GlobalIdEvent").toString()
-        mIdUser = arguments?.get("GlobalIdUSer").toString()
+        mIdUser = ItemActivity.mIdUser
         initHeader()
+
+
+        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+
 
         return inflater.inflate(R.layout.fragment_detail, container, false)
     }
@@ -76,6 +80,9 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRetrieveItem()
         initCreateItem()
+
+        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+
         detail_status_bring.visibility = View.INVISIBLE
         detail_status_need.visibility = View.INVISIBLE
         detail_txtV_item.visibility = View.INVISIBLE
@@ -84,6 +91,15 @@ class DetailFragment : Fragment() {
         detail_view.visibility = View.INVISIBLE
         detail_add.visibility = View.INVISIBLE
         prepareToShare()
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    view?.findNavController()?.navigate(R.id.action_detail_to_home)
+                    varbutton?.setCurrentActiveItem(1)
+
+                }
+            })
 
     }
 

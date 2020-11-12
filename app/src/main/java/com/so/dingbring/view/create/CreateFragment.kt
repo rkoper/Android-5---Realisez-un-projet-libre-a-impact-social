@@ -1,23 +1,30 @@
 package com.so.dingbring.view.create
 
 import android.app.DatePickerDialog
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.Place.Field
+import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.so.dingbring.R
@@ -25,9 +32,8 @@ import com.so.dingbring.Utils.FindDay
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.*
 import com.so.dingbring.view.detail.create.CreateAdapter
-import com.so.dingbring.view.main.MainActivity
+import com.so.dingbring.view.main.ItemActivity
 import kotlinx.android.synthetic.main.fragment_create.*
-import kotlinx.android.synthetic.main.fragment_detail.*
 import nl.dionsegijn.steppertouch.OnStepCallback
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -60,7 +66,7 @@ class CreateFragment : Fragment() {
     var mEventUniqueID = UUID.randomUUID().toString()
     var mItemUniqueID = UUID.randomUUID().toString()
 
-    var varbutton : ImageView ? = null
+    var varbutton : BubbleNavigationConstraintView? = null
 
     var mListMyItem = arrayListOf<MyItem>()
 
@@ -72,19 +78,16 @@ class CreateFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         val view: View = inflater.inflate(R.layout.fragment_create, container, false)
 
-        mIdUser  = MainActivity.mIdUser
-        mNameUser  = MainActivity.mNameUser
-        mEmailUser  = MainActivity.mEmailUser
-        mPhotoUser  = MainActivity.mPhotoUser
+        mIdUser = ItemActivity.mIdUser
+        mNameUser =ItemActivity.mNameUser
+        mEmailUser = ItemActivity.mEmailUser
+        mPhotoUser = ItemActivity.mPhotoUser
 
 
-
-
-        varbutton = activity?.findViewById(R.id.main_button)
+        println("mNameUser----1--->" + mNameUser)
+   //     varbutton = activity?.findViewById(R.id.main_button)
 
 
 
@@ -94,19 +97,24 @@ class CreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        varbutton = activity?.findViewById(R.id.main_button)
-        varbutton?.visibility  = View.VISIBLE
-        create_status_bring.visibility = View.INVISIBLE
-        create_status_need.visibility = View.INVISIBLE
-        create_txtV_item.visibility = View.INVISIBLE
-        create_edit_item.visibility = View.INVISIBLE
-        create_qty_cl.visibility = View.INVISIBLE
-        create_view.visibility = View.INVISIBLE
-        create_add_b.visibility = View.INVISIBLE
+        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+
+        iteminvisible()
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    //Handle back event from any fragment
+
+                    view?.findNavController()?.navigate(R.id.action_create_to_home)
+                    varbutton?.setCurrentActiveItem(1)
+                }
+            })
 
 
         initCreateEvent()
         initCreateItem() }
+
+
 
     private fun initCreateEvent() {
 
@@ -120,12 +128,30 @@ class CreateFragment : Fragment() {
         var mStreetNumber = "";
         var mStreetName = "";
         var mCity = ""
-        if (!Places.isInitialized()) { Places.initialize(requireActivity().applicationContext, "AIzaSyDmX6nCTHfCYGTS4-LhPSA0y2lYwFRitPI") }
-        var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
-       var etTextInput: EditText? = autocompleteFragment?.view?.findViewById(R.id.places_autocomplete_search_input)
+    if (!Places.isInitialized()) { Places.initialize(requireActivity().applicationContext, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
+
+        /*
+     var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
+    var etTextInput: EditText? = autocompleteFragment?.view?.findViewById(R.id.places_autocomplete_search_input)
+     val searchIcon = (autocompleteFragment?.view as LinearLayout).getChildAt(0) as ImageView
+     searchIcon.visibility = View.GONE
+     autocompleteFragment?.setPlaceFields(listOf(Field.ID, Field.NAME, Field.ADDRESS_COMPONENTS))
+
+   */
+
+        val autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
+        val fView: View? = autocompleteFragment?.view
+        val etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)
+        etTextInput?.setBackgroundColor(resources.getColor(R.color.white))
+        etTextInput?.setTextColor(resources.getColor(R.color.white))
+        etTextInput?.setHintTextColor(resources.getColor(R.color.white))
+        etTextInput?.gravity = Gravity.CENTER
+      //  etTextInput?.hint = hint
+        val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto)
+        etTextInput?.setTypeface(font, Typeface.BOLD)
         val searchIcon = (autocompleteFragment?.view as LinearLayout).getChildAt(0) as ImageView
         searchIcon.visibility = View.GONE
-        etTextInput?.gravity = Gravity.CENTER
+        autocompleteFragment.setTypeFilter(TypeFilter.ADDRESS)
         autocompleteFragment?.setPlaceFields(listOf(Field.ID, Field.NAME, Field.ADDRESS_COMPONENTS))
         autocompleteFragment?.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) { place.addressComponents?.asList()?.forEach { mAdressComp ->
@@ -136,25 +162,27 @@ class CreateFragment : Fragment() {
 
               //  autocompleteFragment?.isVisible =  false
                 etTextInput?.visibility = View.INVISIBLE
-                create_address_txt.text = mStreetNumber +" " + mStreetName +", " + mCity
+                create_address_txt_display.visibility = View.VISIBLE
+                create_address_txt_display.text = mStreetNumber +" " + mStreetName +", " + mCity
                 mEventAddress = "$mStreetNumber $mStreetName, $mCity "
 
             }
 
             override fun onError(status: Status) { Log.i("TAG", "An error occurred: $mItemStatus") }
         })
+
+
     }
 
 
             private fun initDate() {
-        create_date_txt?.setOnClickListener {
 
-
+                create_date_txt?.setOnClickListener {
             val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
                 val newDate = formatDate(y, m, d)
                 val dayDate = FindDay(requireContext(), y, m, d)
-                create_date_txt.setText("$newDate")
-                mEventDate = create_date_txt.text.toString() }
+                create_date_edit.setText("$newDate")
+                mEventDate = create_date_edit.text.toString() }
             val now = android.text.format.Time()
             now.setToNow()
             val d = DatePickerDialog(
@@ -187,12 +215,9 @@ class CreateFragment : Fragment() {
     }
 
     private fun initOrga() {
-        mUserVM.getUserById(mIdUser)?.observe(requireActivity(), androidx.lifecycle.Observer{ mlmu ->
-            if (mlmu != null) {
-                mEventOrga = mlmu.mNameUser
-                mEventOrga = create_orga_txt.text.toString()
+        println("mNameUser----1--->" + mNameUser)
+        create_orga_txt_display.text = mNameUser
             }
-        })}
 
     private fun initCreateItem() {
         initButton()
@@ -208,26 +233,47 @@ class CreateFragment : Fragment() {
                 Toast.LENGTH_LONG
             ).show()}
 
-            else {  var mMyItem = MyItem(
+            else {
+
+                println("mNameUser----initCreateItem--->" + mNameUser)
+                println("mPhotoUser----initCreateItem--->" + mPhotoUser)
+
+
+                var mMyItem = MyItem(
                 mItemStatus,
                 mItemQuantity,
                 mItemName,
-                mEventOrga,
+                mEmailUser,
                 mItemUniqueID,
                 mEventUniqueID,
                 mPhotoUser
             )
 
+
                    mListMyItem.add(mMyItem)
-                   mCreateAdapter.notifyDataSetChanged()} } }
+                   mCreateAdapter.notifyDataSetChanged()
+
+                iteminvisible()
+
+                val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_main)
+
+                create_status_bring.startAnimation(zoom1)
+                create_status_need.startAnimation(zoom1)
+                test1.startAnimation(zoom1)
+                create_qty_cl.startAnimation(zoom1)
+                test.startAnimation(zoom1)
+                create_add_b.startAnimation(zoom1)
+
+
+            } } }
 
     private fun initItem() {
-        create_edit_item.doOnTextChanged { text, start, before, count ->
+        test1.doOnTextChanged { text, start, before, count ->
             if (count ==1)
             {    goAnimImage(create_add_b)
                 goAnimLayout(create_qty_cl)
             }
-            mItemName = create_edit_item.text.toString() }
+            mItemName = test1.text.toString() }
     }
 
 
@@ -262,10 +308,10 @@ class CreateFragment : Fragment() {
                     requireContext(),
                     R.color.blue_200))
 
-            goAnimTxt(create_txtV_item)
-            goAnimEdit(create_edit_item)
-            goAnimView(create_view)
-            create_edit_item.visibility = View.VISIBLE
+            goAnimTxt(test1)
+            goAnimEdit(test1)
+            test1.visibility = View.VISIBLE
+            test.visibility = View.VISIBLE
 
         }
 
@@ -282,10 +328,10 @@ class CreateFragment : Fragment() {
                     requireContext(),
                     R.color.blue_200))
 
-            goAnimTxt(create_txtV_item)
-            goAnimEdit(create_edit_item)
-            goAnimView(create_view)
-            create_edit_item.visibility = View.VISIBLE
+            goAnimTxt(test1)
+            goAnimEdit(test1)
+          //  goAnimView(create_view)
+            test1.visibility = View.VISIBLE
         }
     }
 
@@ -311,7 +357,7 @@ class CreateFragment : Fragment() {
                 "Please add event name...",
                 Toast.LENGTH_SHORT
             ).show()}
-            if (mEventOrga == "") {Toast.makeText(
+            if (mNameUser == "") {Toast.makeText(
                 requireContext(),
                 "Please add organizer...",
                 Toast.LENGTH_SHORT
@@ -323,11 +369,18 @@ class CreateFragment : Fragment() {
             ).show()}
 
             else {
+                println("mEventDate------->" + mEventDate)
+                println("mEventName------->" + mEventName)
+                println("mEventAddress------->" + mEventAddress)
+                println("mEventUniqueID------->" + mEventUniqueID)
+                println("mIdUser------->" + mIdUser)
+                println("mNameUser------->" + mNameUser)
+                println("mPhotoUser------->" + mPhotoUser)
                 val mDataEvent = MyEvent(
-                    mEventDate,
-                    mEventName,
                     mEventAddress,
+                    mEventDate,
                     mEventUniqueID,
+                    mEventName,
                     mIdUser,
                     mNameUser,
                     mPhotoUser
@@ -336,14 +389,8 @@ class CreateFragment : Fragment() {
                 mEventVM.createEvent(mDataEvent)
                 createItem()
 
-/*
-                val mIntent = Intent(requireContext(), MainActivity::class.java)
-                mIntent.putExtra(LoginActivity.USERID, mIdUser)
-                startActivity(mIntent)
-
- */
-
-            //    Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.homeFragment)
+                view?.findNavController()?.navigate(R.id.action_create_to_home)
+                varbutton?.setCurrentActiveItem(1)
 
 
                 addEventIdToUser()
@@ -352,6 +399,17 @@ class CreateFragment : Fragment() {
 
 
     private fun addEventIdToUser() { mUserVM.upadateEventUser(mIdUser, mEventUniqueID) }
+
+
+    private fun iteminvisible() {
+        create_status_bring.visibility = View.INVISIBLE
+        create_status_need.visibility = View.INVISIBLE
+        test1.visibility = View.INVISIBLE
+        create_qty_cl.visibility = View.INVISIBLE
+        test.visibility = View.INVISIBLE
+        create_add_b.visibility = View.INVISIBLE
+    }
+
 
     private fun goAnimView(createView: View?) {
         val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
@@ -384,6 +442,11 @@ class CreateFragment : Fragment() {
         val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
         detailAdd?.startAnimation(zoom1)
         detailAdd?.startAnimation(zoom2)
+
+    }
+
+    private fun goAnimZoomOut(detailAdd: ImageView?) {
+
 
     }
 

@@ -45,7 +45,7 @@ class EventAdapter(
         holder.mDisEventName.text = mDataEvent[position].mEventName
         holder.mDisEventUser.text = mDataEvent[position].mEventUserName
         Glide.with(holder.itemView.context)
-            .load(mDataEvent[position].mEventUserPhoto).centerCrop().thumbnail(1f).into(holder.mDisEventPhoto);
+            .load(mDataEvent[position].mEventUserPhoto).centerCrop().into(holder.mDisEventPhoto);
 
         holder.mDetailItem.setOnClickListener {
            println("click----------" + mDataEvent[position].mEventName)

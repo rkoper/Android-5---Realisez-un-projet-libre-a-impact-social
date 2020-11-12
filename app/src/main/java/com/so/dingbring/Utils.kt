@@ -58,36 +58,40 @@ object Utils {
     }
 
     fun configureAutoCompleteFrag(
+
         childFragmentManager: FragmentManager,
         resources: Resources,
         mContext: Context,
         hint: String
-    ) : AutocompleteSupportFragment? {
-        var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
-        var fView: View? = autocompleteFragment?.view
-        var etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)
-        etTextInput?.setBackgroundColor(resources.getColor(R.color.colorTransparent))
-        etTextInput?.setTextColor(resources.getColor(R.color.white))
-        etTextInput?.setHintTextColor(resources.getColor(R.color.white))
-        etTextInput?.gravity = Gravity.CENTER
-        etTextInput?.hint = hint
-        val font: Typeface? = ResourcesCompat.getFont(mContext, R.font.ace)
-        etTextInput?.typeface = font
-        etTextInput?.textSize = 18f
-        val searchIcon =
-           (autocompleteFragment?.view as? LinearLayout)?.getChildAt(0) as? ImageView
-        searchIcon?.visibility = View.GONE
-        autocompleteFragment?.setTypeFilter(TypeFilter.ADDRESS)
-        autocompleteFragment?.setPlaceFields(
-            listOf(
-                Place.Field.ID,
-                Place.Field.NAME,
-                Place.Field.ADDRESS_COMPONENTS
-            )
-        )
+    ) : String? {
+        /*
+       var autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
+       var fView: View? = autocompleteFragment?.view
+       var etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)
+       etTextInput?.setBackgroundColor(resources.getColor(R.color.colorTransparent))
+       etTextInput?.setTextColor(resources.getColor(R.color.white))
+       etTextInput?.setHintTextColor(resources.getColor(R.color.white))
+       etTextInput?.gravity = Gravity.CENTER
+       etTextInput?.hint = hint
+       val font: Typeface? = ResourcesCompat.getFont(mContext, R.font.ace)
+       etTextInput?.typeface = font
+       etTextInput?.textSize = 18f
+       val searchIcon =
+          (autocompleteFragment?.view as? LinearLayout)?.getChildAt(0) as? ImageView
+       searchIcon?.visibility = View.GONE
+       autocompleteFragment?.setTypeFilter(TypeFilter.ADDRESS)
+       autocompleteFragment?.setPlaceFields(
+           listOf(
+               Place.Field.ID,
+               Place.Field.NAME,
+               Place.Field.ADDRESS_COMPONENTS
+           )
+       )
+
+        */
+       return "a"
 
 
-        return autocompleteFragment
     }
 
     fun formatAdress(adress:String, case:Boolean) : String {

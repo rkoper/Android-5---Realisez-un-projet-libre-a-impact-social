@@ -8,7 +8,6 @@
         android:orientation="vertical">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/white"
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -17,7 +16,15 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:id="@+id/calendar_h_05"
-            app:layout_constraintGuide_percent="0.0"/>
+            app:layout_constraintGuide_percent="0.06"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rectangle_corner_rd_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/calendar_h_05"
+            app:layout_constraintBottom_toBottomOf="parent"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,7 +46,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/calendarRecyclerView"
-            android:background="@color/blue_A_50"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="10dp"
@@ -54,7 +60,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/calendar_h_5"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@color/blue_A_200"
+            android:background="@color/red_200"
             android:orientation="horizontal" />
 
 
@@ -84,6 +90,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/calendar_ll_botoom"
             android:background="@drawable/rectangle_corner_blue_light"
+            android:backgroundTint="@color/red_50"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
@@ -192,7 +199,7 @@
                 app:layout_constraintLeft_toLeftOf="@+id/calendar_v_5"
                 app:layout_constraintRight_toRightOf="@+id/calendar_v_5"
                 android:id="@+id/textViewSelectedIcon"
-                android:backgroundTint="@color/blue_A_200"
+                android:backgroundTint="@color/red_500"
                 android:background="@drawable/circle"
                 app:tint="@color/white"
                 android:src="@drawable/eye"

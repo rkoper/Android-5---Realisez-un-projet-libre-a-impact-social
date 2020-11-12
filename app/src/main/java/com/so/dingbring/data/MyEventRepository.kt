@@ -58,11 +58,15 @@ class MyEventRepository {
         items["eventId"] = myData.mEventId
         items["eventUserId"] = myData.mEventUserId
         items["eventUserPhoto"] = myData.mEventUserPhoto
+        items["eventUserName"] = myData.mEventUserName
 
         dbFire.collection("event").document(myData.mEventId).set(items)
 
         return dbFire.collection("event").document().id
     }
+
+
+
     fun getUserEvent(mEventUser: ArrayList<String>): LiveData<MutableList<MyEvent>> {
 
         dbFire.collection("event").addSnapshotListener { querySnapshot, exception ->
@@ -81,7 +85,7 @@ class MyEventRepository {
                         if (eventUserName.isNullOrBlank()){
                             println("-------> NOT ok " + eventName)}
                         else
-                        {    println("-------> ok " + eventName + eventUserName)}
+                        {    println("-------> ok " + eventName + eventUserName)
                         myData = MyEvent(
                             eventAddress!!,
                          eventDate!!,
@@ -92,7 +96,7 @@ class MyEventRepository {
                          eventUserPhoto!!)
 
                         mutableList.add(myData)}
-                }
+                }}
                 mEventSet.value = mutableList
             }
         }

@@ -62,6 +62,8 @@ class CalendarAdapter(
             monthViewHolder.textViewDay.setPadding(0, 10, 0, 10)
             monthViewHolder.textViewDay.text = year.toString()
             monthViewHolder.textViewDate.setPadding(0, 10, 0, 10)
+
+            println("--------------|month|month|month|month|-------------" + month)
             monthViewHolder.textViewDate.text = month
         } else if (calendarItem.isEmpty) {
             monthViewHolder.itemView.visibility = View.GONE
@@ -97,7 +99,7 @@ class CalendarAdapter(
                 val z = event.split(",")[0]
                 if (z == dateInt) {
                     monthViewHolder.viewEvent.visibility = View.VISIBLE
-                    monthViewHolder.viewEvent.setBackgroundColor(mContext.resources.getColor(R.color.blue_A_200))
+                    monthViewHolder.viewEvent.setBackgroundColor(mContext.resources.getColor(R.color.red_400))
 
                     monthViewHolder.itemView.setOnClickListener {
 

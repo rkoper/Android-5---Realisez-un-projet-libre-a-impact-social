@@ -1,507 +1,559 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".view.create.CreateFragment">
-<androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_h_07"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.07"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_h_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.07"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_h_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.12"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_h_3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.18"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_h_35"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_h_25"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.245"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_h_4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.31"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_h_42"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.37"/>
-              
-              <androidx.constraintlayout.widget.Guideline
-                  android:id="@+id/gl_create_h_45"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.44"/>
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_h_8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.85"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_h_9"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.85"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_v_25"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_v_65"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_v_85"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_v_4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_v_6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.55"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_v_8"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.85"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_v_95"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.95"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_v_05"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.05"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_create_h_98"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.98"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_h_93"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85"/>
-
-        <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_create_h_95"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85"/>
-
-    <View
-        android:background="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_07"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_07"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/black" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_create_v3_01"
+            android:id="@+id/gl_create_h_07"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rectangle_corner_bu_light"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_07"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.14"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.19"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_35"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.245"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.31"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_42"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_45"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.44"/>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_25"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.075"/>
-
+            app:layout_constraintGuide_percent="0.3"/>
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_create_v3_02"
+            android:id="@+id/gl_create_v_65"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_85"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.45"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_95"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="620dp"
-        android:layout_height="220dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_42"
-        app:layout_constraintTop_toTopOf="@+id/create_date_txt"
-        android:background="@color/white"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_15"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_75"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75"/>
 
-    <TextView
-        android:backgroundTint="@color/blue_300"
-        android:background="@drawable/rectangle_corner_white"
-        android:buttonTint="@color/black"
-        android:text="@string/i_bring"
-        android:gravity="center"
-        android:id="@+id/create_status_bring"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        style="@style/TxtViewPrincipalBlack"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_25"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
-        app:layout_constraintRight_toLeftOf="@+id/create_add_button"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_v_05"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05"/>
 
-    <TextView
-        android:backgroundTint="@color/blue_300"
-        android:background="@drawable/rectangle_corner_white"
-        android:buttonTint="@color/black"
-        style="@style/TxtViewPrincipalBlack"
-        android:text="@string/i_need"
-        android:gravity="center"
-        android:id="@+id/create_status_need"
-        android:layout_width="0dp"
-        android:layout_margin="10dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_25"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-        app:layout_constraintLeft_toRightOf="@+id/create_add_button"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_98"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.98"/>
 
-    <ImageView
-        android:id="@+id/create_add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_red_small"
-        android:backgroundTint="@color/blue_400"
-        android:src="@drawable/add"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_25"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
-        app:tint="@color/black" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_93"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85"/>
 
-
-    <TextView
-        android:id="@+id/create_txtV_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TxtViewPrincipalBlack"
-        android:textColor="@color/Green"
-        android:text="Event Name"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_07"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_2" />
-
-    <TextView
-        android:id="@+id/create_txtV_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TxtViewPrincipalBlack"
-        android:background="@color/colorTransparent"
-        android:textColor="@color/Green"
-        android:text="Event Address"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_2"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_3" />
-
-
-    <TextView
-        android:id="@+id/create_txtV_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TxtViewPrincipalBlack"
-        android:textColor="@color/Green"
-        android:text="Date"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_3"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"/>
-
-
-
-    <TextView
-        android:id="@+id/create_txtV_orga"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TxtViewPrincipalBlack"
-        android:textColor="@color/Green"
-        android:text="Organizer"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_6"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_3"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35" />
-
-
-
-
-
-                <ImageView
-                    android:layout_margin="10dp"
-                    android:padding="5dp"
-                    android:id="@+id/create_add_b"
-                    android:elevation="10dp"
-                    android:background="@drawable/round_black_small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/blue_400"
-                    android:src="@drawable/check"
-                    app:layout_constraintTop_toTopOf="@+id/gl_create_h_42"
-                    app:layout_constraintBottom_toBottomOf="@id/gl_create_h_45"
-                    app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-                    android:contentDescription="@string/save"
-                    app:tint="@color/Green" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_create_h_95"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85"/>
 
         <View
-            android:id="@+id/create_view"
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_07"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_07"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/white" >
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_create_v3_01"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.075"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_create_v3_02"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_35" />
+
+        <TextView
             android:backgroundTint="@color/blue_300"
-            android:layout_margin="2dp"
             android:background="@drawable/rectangle_corner_white"
+            android:buttonTint="@color/black"
+            android:text="@string/i_bring"
+            android:gravity="center"
+            android:id="@+id/create_status_bring"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            style="@style/TxtViewPrincipalBlack"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_25"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
+            app:layout_constraintRight_toLeftOf="@+id/create_add_button"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
+
+        <TextView
+            android:backgroundTint="@color/blue_300"
+            android:background="@drawable/rectangle_corner_white"
+            android:buttonTint="@color/black"
+            style="@style/TxtViewPrincipalBlack"
+            android:text="@string/i_need"
+            android:gravity="center"
+            android:id="@+id/create_status_need"
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_25"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
+            app:layout_constraintLeft_toRightOf="@+id/create_add_button"/>
+
+        <ImageView
+            android:id="@+id/create_add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_red_small"
+            android:backgroundTint="@color/blue_400"
+            android:src="@drawable/add"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_25"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_4"
+            app:tint="@color/black" />
+
+
+
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:id="@+id/create_add_b"
+            android:elevation="10dp"
+            android:background="@drawable/round_black_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue_400"
+            android:src="@drawable/check"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_42"
+            app:layout_constraintBottom_toBottomOf="@id/gl_create_h_45"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
+            android:contentDescription="@string/save"
+            app:tint="@color/Green" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/test"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_42"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
             app:layout_constraintTop_toTopOf="@id/gl_create_h_4"
             app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
-            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"/>
-                <TextView
-                    android:id="@+id/create_txtV_item"
-                    android:layout_width="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_height="0dp"
-                    android:elevation="3dp"
-                    style="@style/TxtViewPrincipalBlack"
-                    android:textColor="@color/Green"
-                    android:text="Add article"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_42"
-                    app:layout_constraintTop_toTopOf="@id/gl_create_h_4"
-                    app:layout_constraintRight_toRightOf="@+id/gl_create_v_25"
-                    app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"/>
+            android:hint="Article"
+            android:textColorHint="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:elevation="3dp"
-            android:id="@+id/create_edit_item"
-            style="@style/TxtViewEditTxt2"
-            android:layout_margin="5dp"
-            android:padding="1dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/test1"
+            style="@style/TxtViewPrincipalBlack"
+            android:gravity="left"
+            android:textSize="18dp"
+            android:text=" "
+            android:background="@drawable/rectangle_corner_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_qty_cl"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_42"
+            app:layout_constraintBottom_toBottomOf="@id/gl_create_h_45"
+            app:layout_constraintRight_toRightOf="@id/gl_create_v_65"
+            app:layout_constraintLeft_toLeftOf="@id/gl_create_v_25"
+            android:layout_height="0dp"
+            android:layout_width="0dp">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_create3_h_1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.4" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_create3_h_2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.2" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_create3_v_2"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_create3_v_8"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.9" />
+            <TextView
+                android:padding="0dp"
+                android:gravity="center"
+                android:theme="@style/TxtViewPrincipalBlack"
+                android:text="@string/quantity"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/gl_create3_h_1" />
+            <nl.dionsegijn.steppertouch.StepperTouch
+                android:id="@+id/create_quantity_item"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:stepperTextSize="6sp"
+                app:layout_constraintTop_toTopOf="@id/gl_create3_h_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/gl_create3_v_8"
+                app:layout_constraintLeft_toLeftOf="@+id/gl_create3_v_2"
+                app:stepperBackgroundColor="@color/white"
+                app:stepperButtonColor="@color/blue_400"
+                app:stepperActionsColor="@color/black"
+                app:stepperActionsDisabledColor="@color/white"
+                app:stepperTextColor="@color/black"
+                app:stepperAllowNegative="true"
+                app:stepperAllowPositive="true"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:layout_constraintTop_toBottomOf="@+id/gl_create_h_07"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/outlinedTextField1"
+            android:layout_width="400dp"
+            android:layout_height="50dp"
+            android:hint="label"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_address_txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_15"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_15"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_3"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_85"
+            android:hint="Address"
+            android:textColorHint="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_address_edit"
+                style="@style/TxtViewPrincipalBlack"
+                android:gravity="left"
+                android:textSize="18dp"
+                android:text=" "
+                android:background="@drawable/rectangle_corner_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            style="@style/TxtViewPrincipalBlack"
+            app:layout_constraintLeft_toLeftOf="@+id/create_address_txt"
+            app:layout_constraintTop_toTopOf="@+id/create_address_txt"
+            app:layout_constraintBottom_toBottomOf="@+id/create_address_txt"
+            app:layout_constraintRight_toRightOf="@+id/create_address_txt"
+            android:id="@+id/create_address_txt_display"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <fragment
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:visibility="invisible"
+            android:elevation="2dp"
+            android:id="@+id/autocomplete_fragment"
             android:background="@drawable/rectangle_corner_white"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_42"
-            app:layout_constraintTop_toTopOf="@id/gl_create_h_4"
-            app:layout_constraintLeft_toRightOf="@+id/create_txtV_item"
-            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95" >
-        </EditText>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/create_qty_cl"
-                    app:layout_constraintTop_toTopOf="@+id/gl_create_h_42"
-                    app:layout_constraintBottom_toBottomOf="@id/gl_create_h_45"
-                    app:layout_constraintRight_toRightOf="@id/gl_create_v_65"
-                    app:layout_constraintLeft_toLeftOf="@id/gl_create_v_25"
-                    android:layout_height="0dp"
-                    android:layout_width="0dp">
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/gl_create3_h_1"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintGuide_percent="0.4" />
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/gl_create3_h_2"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintGuide_percent="0.2" />
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/gl_create3_v_2"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintGuide_percent="0.1" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/gl_create3_v_8"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintGuide_percent="0.9" />
-                    <TextView
-                        android:padding="0dp"
-                        android:gravity="center"
-                        android:theme="@style/TxtViewPrincipalBlack"
-                        android:text="@string/quantity"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@+id/gl_create3_h_1" />
-                    <nl.dionsegijn.steppertouch.StepperTouch
-                        android:id="@+id/create_quantity_item"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:stepperTextSize="6sp"
-                        app:layout_constraintTop_toTopOf="@id/gl_create3_h_1"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="@+id/gl_create3_v_8"
-                        app:layout_constraintLeft_toLeftOf="@+id/gl_create3_v_2"
-                        app:stepperBackgroundColor="@color/white"
-                        app:stepperButtonColor="@color/blue_400"
-                        app:stepperActionsColor="@color/black"
-                        app:stepperActionsDisabledColor="@color/white"
-                        app:stepperTextColor="@color/black"
-                        app:stepperAllowNegative="true"
-                        app:stepperAllowPositive="true"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_15"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_15"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_3"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_85"
+            >
+        </fragment>
 
 
 
 
 
-    <fragment
-        android:elevation="5dp"
-        android:id="@+id/autocomplete_fragment"
-        android:background="@drawable/rectangle_corner_white"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-        app:layout_constraintTop_toTopOf="@+id/create_txtV_address"
-        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_address"
-        app:layout_constraintLeft_toRightOf="@+id/create_txtV_address"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95" >
-    </fragment>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/create_name_txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_15"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_1"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_2"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_85"
+            android:hint="Event Name"
+            android:textColorHint="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/create_name_edit"
+                style="@style/TxtViewPrincipalBlack"
+                android:gravity="left"
+                android:text=" "
+                android:background="@drawable/rectangle_corner_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <TextView
-        android:elevation="5dp"
-        android:id="@+id/create_address_txt"
-        style="@style/TxtViewPrincipalBlack"
-        android:textColor="@color/Green"
-        android:background="@drawable/rectangle_corner_white"
-        android:layout_margin="3dp"
-        android:padding="1dp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@+id/create_txtV_address"
-        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_address"
-        app:layout_constraintLeft_toRightOf="@+id/create_txtV_address"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95" >
-    </TextView>
-   <TextView
-       android:background="@drawable/rectangle_corner_white"
-       android:elevation="10dp"
-       android:id="@+id/create_date_txt"
-       android:layout_margin="5dp"
-       android:padding="1dp"
-       style="@style/TxtViewPrincipalBlack"
-       android:textColor="@color/Green"
-       android:layout_width="0dp"
-       android:layout_height="0dp"
-       app:layout_constraintTop_toTopOf="@+id/create_txtV_date"
-       app:layout_constraintBottom_toBottomOf="@+id/create_txtV_date"
-       app:layout_constraintLeft_toRightOf="@+id/create_txtV_date"
-       app:layout_constraintRight_toRightOf="@+id/gl_create_v_4"
-       />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="left"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_21"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_4"
+            android:hint="Date"
+            android:textColorHint="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <TextView
-        android:text=""
-        android:background="@drawable/rectangle_corner_white"
-        android:elevation="10dp"
-        android:id="@+id/create_orga_txt"
-        style="@style/TxtViewPrincipalBlack"
-        android:textColor="@color/Green"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        app:layout_constraintTop_toTopOf="@+id/create_txtV_orga"
-        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_orga"
-        app:layout_constraintLeft_toRightOf="@+id/create_txtV_orga"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-        />
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/TxtViewPrincipalBlack"
+                android:id="@+id/create_date_edit"
+                android:gravity="left"
+                android:textSize="18dp"
+                android:text=" "
+                android:background="@drawable/rectangle_corner_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    <EditText
-        android:id="@+id/create_name_edit"
-        style="@style/TxtViewEditTxt2"
-        android:layout_margin="5dp"
-        android:padding="1dp"
-        android:background="@drawable/rectangle_corner_white"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@+id/create_txtV_name"
-        app:layout_constraintBottom_toBottomOf="@+id/create_txtV_name"
-        app:layout_constraintLeft_toRightOf="@+id/create_txtV_name"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
-        />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/create_rv_create_test"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_8"
-        app:layout_constraintTop_toTopOf="@+id/gl_create_h_45">
+        <TextView
+            android:id="@+id/create_date_txt"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_05"
+            app:layout_constraintTop_toTopOf="@+id/outlinedTextField3"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_4"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlinedTextField4"
+            android:gravity="left"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_6"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_21"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
+            android:hint="Organizer"
+            android:textColorHint="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/TxtViewPrincipalBlack"
+                android:gravity="left"
+                android:textSize="18dp"
+                android:id="@+id/create_orga_edit"
+                android:text=" "
+                android:background="@drawable/rectangle_corner_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            style="@style/TxtViewPrincipalBlack"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="2dp"
+            android:text="tessqt"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_create_v_6"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_21"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_35"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"
+            android:id="@+id/create_orga_txt_display"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_rv_create_test"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_8"
+            app:layout_constraintTop_toTopOf="@+id/gl_create_h_45">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -512,19 +564,19 @@
                 app:layout_constraintTop_toTopOf="@+id/create_rv_create_test"
                 app:layout_constraintLeft_toLeftOf="@+id/create_rv_create_test"
                 android:id="@+id/create_recyclerView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:background="@drawable/round_black"
-        android:id="@+id/create_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:tint ="@color/Green"
-        android:backgroundTint="@color/blue_A_200"
-        app:srcCompat="@drawable/save"
-        android:padding="6dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_07"
-        app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:background="@drawable/round_black"
+            android:id="@+id/create_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tint ="@color/Green"
+            android:src="@drawable/save"
+            android:backgroundTint="@color/blue_A_200"
+            android:padding="6dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/gl_create_h_07"
+            app:layout_constraintRight_toRightOf="@+id/gl_create_v_95"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

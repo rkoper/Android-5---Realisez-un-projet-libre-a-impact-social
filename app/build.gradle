@@ -7,12 +7,12 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.so.dingbring"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion 19
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.fragment_home.xml.runner.AndroidJUnitRunner"
@@ -46,8 +46,8 @@ android {
     }
     compileOptions {
 
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 
@@ -67,6 +67,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'com.google.firebase:firebase-functions:19.1.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.fragment_home.xml.ext:junit:1.1.2'
     androidTestImplementation 'androidx.fragment_home.xml.espresso:espresso-core:3.3.0'
@@ -159,7 +160,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
 
 // external services
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.facebook.android:facebook-android-sdk:8.1.0'
 
 // googel and firebase
@@ -181,5 +182,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
     implementation 'com.google.firebase:firebase-dynamic-links-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
 }

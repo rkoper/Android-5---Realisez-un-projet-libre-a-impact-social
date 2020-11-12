@@ -28,8 +28,9 @@ class MyUserRepository {
                     val mPicUser: String? = doc.getString("PhotoUser")
                     val mDocIdUser: String? = doc.getString("DocIdUser")
                     val mEventUser = doc.get("eventUser")
+                    val mNbUserEvent  = doc.get("eventNbEvent") as Long?
                     val myUser = MyUser(mNameUser!!, mMailUser!!, mPicUser!!, mDocIdUser!!,
-                        mEventUser as ArrayList<String>
+                        mEventUser as ArrayList<String>, mNbUserEvent!!
                     )
 
                     mUserSet?.value = myUser

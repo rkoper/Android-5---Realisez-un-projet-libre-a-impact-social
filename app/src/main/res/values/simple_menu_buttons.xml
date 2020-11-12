@@ -2,9 +2,9 @@
 <resources>
 
     <array name="simple_menu_icons">
-        <item>@drawable/check</item>
-        <item>@drawable/plus</item>
-        <item>@drawable/delete</item>
+        <item>@drawable/calendar</item>
+        <item>@drawable/calendar</item>
+        <item>@drawable/calendar</item>
     </array>
 
     <array name="simple_menu_colors">

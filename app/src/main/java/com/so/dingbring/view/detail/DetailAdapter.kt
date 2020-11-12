@@ -54,7 +54,7 @@ class DetailAdapter(
                 mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_white))
             } else {
                 mDetailBand.visibility = View.GONE
-                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_yellow_light))
+                mDetailColor.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.rectangle_corner_brown_light))
             }
         }
 

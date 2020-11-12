@@ -1,7 +1,5 @@
 package com.so.dingbring.view.profil
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,21 +10,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
 import com.gauravk.bubblenavigation.BubbleToggleView
 import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
-import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.main.MainActivity
+import com.so.dingbring.view.main.ItemActivity
 import kotlinx.android.synthetic.main.dialog_layout.*
 import kotlinx.android.synthetic.main.fragment_profil.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -39,24 +36,14 @@ class ProfilFragment : Fragment() {
     var mEmailUser = "..."
     var mPhotoUser = "..."
     var mIdUser = "..."
-    var varbutton : ImageView ? = null
+    var varbutton : BubbleNavigationConstraintView? = null
     var mItemSelect : BubbleToggleView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         FirebaseApp.initializeApp(requireContext())
         val view: View = inflater.inflate(R.layout.fragment_profil, container, false)
 
-
-        mIdUser  = MainActivity.mIdUser
-        mNameUser  = MainActivity.mNameUser
-        mEmailUser  = MainActivity.mEmailUser
-        mPhotoUser  = MainActivity.mPhotoUser
-
-
-
-
-    //    mItemSelect = activity?.findViewById(R.id.main_item_personn)
-       varbutton = activity?.findViewById(R.id.main_button)
+        mIdUser = ItemActivity.mIdUser
 
         return  view
 
@@ -64,9 +51,21 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkFireStoreUser()
+        saveNewUserInfo()
+        refreshInfo()
         invisibleButton()
-        varbutton = activity?.findViewById(R.id.main_button)
-        varbutton?.visibility  = View.VISIBLE
+        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    //Handle back event from any fragment
+                    view?.findNavController()?.navigate(R.id.action_profil_to_home)
+                    varbutton?.setCurrentActiveItem(1)
+                }
+            })
+
+        editNameUser()
         changeUserProfil()}
 
 
@@ -74,23 +73,8 @@ class ProfilFragment : Fragment() {
         profil_refresh.visibility = View.INVISIBLE
         profil_save.visibility = View.INVISIBLE
     }
-    /*
-private fun invisibleAnimButton() {
-    val animationD = AnimationUtils.loadAnimation(requireContext(), R.anim.zoominbig)
-    mBng.profil_save.startAnimation(animationD)
-    mBng.profilRefresh.startAnimation(animationD)
-}
 
-
-
-private fun visibleAnimButton() {
-    val animationD = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomoutbig)
-    mBng.profil_save.startAnimation(animationD)
-    mBng.profilRefresh.startAnimation(animationD)
-}
-
-     */
-private fun visibleButton() {
+    private fun visibleButton() {
         varbutton?.visibility  = View.VISIBLE
         profil_refresh.visibility = View.VISIBLE
     profil_save.visibility = View.VISIBLE }
@@ -190,6 +174,8 @@ private fun visibleButton() {
             Glide.with(requireContext())
                 .load(key).apply(RequestOptions.circleCropTransform()).into( profil_image)
                 mPhotoUser = key } }
+
+
 
         private fun saveNewUserInfo() {
             profil_save.setOnClickListener {

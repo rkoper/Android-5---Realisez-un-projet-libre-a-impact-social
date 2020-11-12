@@ -200,8 +200,8 @@
 
 
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/black</item>
-        <item name="android:windowBackground">@color/black</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:windowBackground">@drawable/loginback</item>
     </style>
 
     <style name="sign_up_buttons_style" parent="Theme.AppCompat.Light.NoActionBar">

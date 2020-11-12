@@ -6,16 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.firebase.ui.auth.AuthUI
-import com.google.android.material.chip.Chip
+import com.gauravk.bubblenavigation.BubbleNavigationConstraintView
 import com.so.dingbring.R
 import com.so.dingbring.view.login.LoginActivity
-import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.util.*
 
@@ -30,7 +29,7 @@ class SettingsFragment : Fragment() {
     var mPhotoUser = "..."
     var mIdUser = "..."
     var fragmentStatus = ""
-    var varbutton : ImageView? = null
+    var varbutton : BubbleNavigationConstraintView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,14 +38,9 @@ class SettingsFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        mIdUser  = MainActivity.mIdUser
-        mNameUser  = MainActivity.mNameUser
-        mEmailUser  = MainActivity.mEmailUser
-        mPhotoUser  = MainActivity.mPhotoUser
 
+        mIdUser = arguments?.get("GlobalIdUSer").toString()
 
-
-      varbutton = activity?.findViewById(R.id.main_button)
 
         return  view
 
@@ -54,8 +48,18 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      //  varbutton = activity?.findViewById(R.id.main_button)
-        varbutton?.visibility  = View.VISIBLE
+
+
+
+        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    //Handle back event from any fragment
+                    view?.findNavController()?.navigate(R.id.action_settings_to_home)
+                    varbutton?.setCurrentActiveItem(1)
+                }
+            })
         goLanguage()
         goContactUs()
         goLogOut()

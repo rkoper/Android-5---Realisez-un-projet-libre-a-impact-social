@@ -5,19 +5,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.home.HomeFragment">
+
+        tools:context=".view.main.MainActivity">
+
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_margin="8dp"
             android:layout_height="match_parent">
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_home_h_05"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.05"/>
+                app:layout_constraintGuide_percent="0.06"/>
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_home_h_1"
                 android:layout_width="match_parent"
@@ -90,7 +91,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.95"/>
-
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/rectangle_corner_yl_light"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_home_h_05"
+                app:layout_constraintBottom_toBottomOf="parent"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:paddingBottom="15dp"
                 android:background="@drawable/rectangle_corner"
