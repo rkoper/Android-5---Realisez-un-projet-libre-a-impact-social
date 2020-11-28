@@ -10,10 +10,12 @@ import kotlin.collections.HashMap
 class MyItemRepository {
 
     private var mItemSet: MutableLiveData<MutableList<MyItem>> = MutableLiveData()
-
+    var mMegaListItem: ArrayList<ArrayList<String>> = arrayListOf()
     private val dbFire = FirebaseFirestore.getInstance()
     private val storage = FirebaseStorage.getInstance()
     private val userId = UUID.randomUUID().toString()
+    var mMegaListStringSend: MutableLiveData<ArrayList<ArrayList<String>>> =  MutableLiveData()
+
 
     fun getAllItem(): LiveData<MutableList<MyItem>> {
         val mDetailMutableList = mutableListOf<MyItem>()
@@ -24,12 +26,11 @@ class MyItemRepository {
                     val mIStatus: String? = doc.getString("itemStatus")
                     val mIQty: String? = doc.getString("itemQty")
                     val mIName: String? = doc.getString("itemName")
-                    val mEUser: String? = doc.getString("itemUser")
+                    val mUserId: String? = doc.getString("itemUserId")
                     val mIEventId: String? = doc.getString("itemEventId")
                     val mIDocId: String? = doc.id
-                    val mUserPhoto:String? = doc.getString("itemUserPhoto")
                     val myDetail =
-                        MyItem(mIStatus!!, mIQty!!, mIName!!, mEUser!!, mIDocId!!, mIEventId!!,mUserPhoto)
+                        MyItem(mIStatus!!, mIQty!!, mIName!!, mUserId!!, mIDocId!!, mIEventId!!)
                     mDetailMutableList.add(myDetail)
                 }
                 mItemSet.value = mDetailMutableList
@@ -38,77 +39,105 @@ class MyItemRepository {
         return mItemSet
     }
 
+    fun getItem(mEventId:String) : LiveData<ArrayList<ArrayList<String>>> {
 
-    fun getTestItem(mEventId:String) : LiveData<MutableList<MyItem>>  {
-        val mDetailMutableList = mutableListOf<MyItem>()
+
+        var mItemStatus = ""
+        var mItemName = ""
+        var mItemQty = ""
+        var mItemId = ""
+        var mItemUserId = ""
+        var mItemEventId = ""
+        var mUserId = ""
+        var mUserName = ""
+
+        var mUserPic = ""
+    //    mMegaListItem.clear()
+
+
+
         dbFire.collection("item")
             .whereEqualTo("itemEventId", mEventId)
             .get()
             .addOnSuccessListener { documents ->
-                for (doc in documents) {
-                    val mIStatus: String? = doc.getString("itemStatus")
-                    val mIQty: String? = doc.getString("itemQty")
-                    val mIName: String? = doc.getString("itemName")
-                    val mEUser: String? = doc.getString("itemUser")
-                    val mIEventId: String? = doc.getString("itemEventId")
-                    val mIDocId: String? = doc.id
-                    val mUserPhoto:String? = doc.getString("itemUserPhoto")
-                    val myDetail =
-                        MyItem(mIStatus, mIQty, mIName, mEUser, mIDocId, mIEventId, mUserPhoto)
-                    mDetailMutableList.add(myDetail)
-                }
-                mItemSet.value = mDetailMutableList
-            }
+                for (docItem in documents) {
+                    mMegaListStringSend.value?.clear()
+                    var mListItem: ArrayList<String> = arrayListOf()
+                    mListItem.clear()
+                    mUserId = docItem.getString("itemUserId").toString()
+                    mListItem.add(mItemStatus)
+                    mItemStatus = docItem.getString("itemStatus").toString()
+                    mListItem.add(mItemStatus)
+                    mItemName = docItem.getString("itemName").toString()
+                    mListItem.add(mItemName)
+                    mItemQty = docItem.getString("itemQty").toString()
+                    mListItem.add(mItemQty)
+                    mItemId = docItem.getString("itemId").toString()
+                    mListItem.add(mItemId)
+                    mItemUserId = docItem.getString("itemUser").toString()
+                    mListItem.add(mItemUserId)
+                    mItemEventId = docItem.getString("itemEventId").toString()
+                    mListItem.add(mItemEventId)
+
+                    dbFire.collection("user").whereEqualTo("DocIdUser", mUserId)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (docUser in documents) {
+                                mUserPic = docUser.getString("PhotoUser").toString()
+                                mListItem.add(mUserPic)
+                                mUserName = docUser.getString("NameUser").toString()
+                                mListItem.add(mUserName)
+
+                                mMegaListItem.add(mListItem)
+                               }
+
+                            mMegaListStringSend.postValue(mMegaListItem)
+                        } } }
+
             .addOnFailureListener { exception -> println("Error getting documents: " + exception) }
-        return mItemSet
+        return mMegaListStringSend
     }
-
-
-    fun createItem(mListItem: ArrayList<MyItem>) {
-        mListItem.forEach { mMyItem ->
-            var mItemEach = HashMap<String, String>()
-            var mUniqueID = UUID.randomUUID().toString()
-            mItemEach["itemStatus"] = mMyItem.mItemStatus.toString()
-            mItemEach["itemName"] = mMyItem.mItemName.toString()
-            mItemEach["itemUser"] = mMyItem.mItemUser.toString()
-            mItemEach["itemQty"] = mMyItem.mItemQty.toString()
-            mItemEach["itemId"] = mUniqueID
-            mItemEach["itemEventId"] = mMyItem.mItemEventId.toString()
-            mItemEach["itemUserPhoto"] = mMyItem.mItemUserPhoto.toString()
-            dbFire.collection("item").document(mUniqueID).set(mItemEach) } }
 
     fun createUniqueItem(mListItem: MyItem) {
         var mItemEach = HashMap<String, String>()
         var mUniqueID = UUID.randomUUID().toString()
         mItemEach["itemStatus"] = mListItem.mItemStatus.toString()
         mItemEach["itemName"] = mListItem.mItemName.toString()
-        mItemEach["itemUser"] = mListItem.mItemUser.toString()
+        mItemEach["itemUserId"] = mListItem.mItemUserId.toString()
         mItemEach["itemQty"] = mListItem.mItemQty.toString()
         mItemEach["itemId"] = mUniqueID
         mItemEach["itemEventId"] = mListItem.mItemEventId.toString()
-        mItemEach["itemUserPhoto"] = mListItem.mItemUserPhoto.toString()
         dbFire.collection("item").document(mUniqueID).set(mItemEach) }
 
 
 
-    fun updateStatusItem(mData: HashMap<Int, MyItem>) {
-       if (mData.containsKey(0)) { var i=0
-            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
-            if (mData[i]!!.mItemStatus == "I need" ){mShortLink.update("itemStatus", "I bring")}
-            else {mShortLink.update("itemStatus", "I need")}}
+    fun updateStatusItem(mData: HashMap<Int, ArrayList<String>>) {
+        if (mData.containsKey(0)) { var i=0
+            var mItemStatus = mData[i]!![1]
+            var mItemId = mData[i]!![4]
+        var mShortLink = dbFire.collection("item").document(mItemId)
+        if (mItemStatus == "I need" ){mShortLink.update("itemStatus", "I bring")}
+        else {mShortLink.update("itemStatus", "I need")}}
+
+
 
         if (mData.containsKey(1)) {    var i=1
-            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
-            mShortLink.update("itemQty", mData[i]!!.mItemQty.toString().toInt().plus(1).toString()) }
+            var mItemQty = mData[i]!![3]
+            var mItemId = mData[i]!![4]
+            var mShortLink = dbFire.collection("item").document(mItemId)
+            mShortLink.update("itemQty", mItemQty.toInt().plus(1).toString()) }
 
         if (mData.containsKey(2)) {    var i=2
-            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
-            if (mData[i]!!.mItemQty!!.toInt() > 1)
-            {  mShortLink.update("itemQty", mData[i]!!.mItemQty.toString().toInt().minus(1).toString())}}
+            var mItemQty = mData[i]!![3]
+            var mItemId = mData[i]!![4]
+            var mShortLink = dbFire.collection("item").document(mItemId)
+            if (mItemQty.toInt() > 1)
+            {  mShortLink.update("itemQty", mItemQty.toInt().minus(1).toString())}}
 
 
         if (mData.containsKey(3)) {    var i=3
-            var mShortLink = dbFire.collection("item").document(mData[i]!!.mItemId!!)
+            var mItemId = mData[i]!![4]
+            var mShortLink = dbFire.collection("item").document(mItemId)
             mShortLink.delete()}
 
 

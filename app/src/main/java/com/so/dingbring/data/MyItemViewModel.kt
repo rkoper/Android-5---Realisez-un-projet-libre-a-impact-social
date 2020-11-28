@@ -12,19 +12,15 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
             mMutableData.value= it }
         return mMutableData }
 
-    fun  getTestItem(mEventId:String): LiveData<MutableList<MyItem>> {
-        val mMutableData= MutableLiveData<MutableList<MyItem>>()
-        mItemRepository.getTestItem(mEventId).observeForever{
-            mMutableData.value= it }
-        return mMutableData }
+    fun  getItem(mEventId:String): LiveData<ArrayList<ArrayList<String>>>  {
+        return mItemRepository.getItem(mEventId) }
 
 
     // ON A GARFE TOUTE LES ITMES !!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    fun createItem(mMyItem :ArrayList<MyItem>) { mItemRepository.createItem(mMyItem) }
 
     fun createUniqueItem(mMyItem :MyItem) { mItemRepository.createUniqueItem(mMyItem) }
 
-    fun updateStatus(myItem: HashMap<Int, MyItem>) { mItemRepository.updateStatusItem( myItem) }
+    fun updateStatus(myItem: HashMap<Int, java.util.ArrayList<String>>) { mItemRepository. updateStatusItem( myItem) }
 
 }

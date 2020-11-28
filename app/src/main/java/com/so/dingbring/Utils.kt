@@ -1,8 +1,12 @@
 package com.so.dingbring
 
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Typeface
+import android.os.Build
+import android.os.LocaleList
 import android.view.Gravity
 import android.view.View
 import android.widget.EditText
@@ -13,6 +17,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.material.internal.ContextUtils
 import com.so.dingbring.R.string
 import java.text.SimpleDateFormat
 import java.util.*
@@ -103,4 +108,10 @@ object Utils {
         {return formataddress[1]}
         else
         { return ""} }
+
+
+
+    fun updateLocale(c: Context, localeToSwitchTo: Locale) {
+
+    }
 }

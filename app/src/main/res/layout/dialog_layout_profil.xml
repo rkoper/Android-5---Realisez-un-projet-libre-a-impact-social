@@ -1,0 +1,245 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    style="@style/MyDialogTheme"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorTransparent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="250sp"
+        android:layout_height="400sp"
+        android:background="@drawable/rectangle_corner_grey_600"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_h_1"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_h_25"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_h_4"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_h_5"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.63"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_h_55"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.72"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_h_65"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.74"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_v_5"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_v_15"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_v_85"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_profil_h_85"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.99"/>
+
+        <TextView
+            android:textSize="16sp"
+            style="@style/TxtViewPrincipalBlack"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change your name :"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/test_profil_edit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_25"
+            app:layout_constraintLeft_toLeftOf="@+id/dialog_profil_v_15"
+            app:layout_constraintRight_toRightOf="@+id/dialog_profil_v_85"
+            app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_1"
+            android:hint="Name"
+            style="@style/LoginTextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/setting_profil_edit"
+                style="@style/TxtViewPrincipalBlack"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:gravity="left"
+                android:text=" "
+                android:textSize="18dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/dialog_setting_img_profil"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_25"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_4"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <TextView
+            android:textSize="16sp"
+            style="@style/TxtViewPrincipalBlack"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_5"
+            app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change your profile picture :"/>
+
+        <ImageView
+            android:id="@+id/setting_img_profil_1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55"
+            app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_2"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <ImageView
+            android:id="@+id/setting_img_profil_2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_1"
+            app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_3"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55" />
+        <ImageView
+            android:id="@+id/setting_img_profil_3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_2"
+            app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_4"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55" />
+        <ImageView
+            android:id="@+id/setting_img_profil_4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55"
+            app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_3"
+            app:layout_constraintRight_toRightOf="parent" />
+        <ImageView
+            android:id="@+id/setting_img_profil_5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_profil_h_65"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_6"/>
+        <ImageView
+            android:id="@+id/setting_img_profil_6"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_profil_h_65"
+            app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_7"
+            app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_5" />
+        <ImageView
+            android:id="@+id/setting_img_profil_7"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round"
+            android:backgroundTint="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_profil_h_65"
+            app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_6"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:layout_constraintLeft_toLeftOf="@+id/dialog_profil_v_5"
+            app:layout_constraintRight_toRightOf="@+id/dialog_profil_v_5"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_85"
+            android:id="@+id/settings_refresh"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:fabCustomSize="25dp"
+            app:borderWidth="3dp"
+            android:tint="@color/green_500"
+            app:backgroundTint="@color/green_500"
+            app:srcCompat="@drawable/logo_refresh"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:layout_constraintLeft_toLeftOf="@+id/dialog_profil_v_5"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_85"
+            android:id="@+id/settings_check"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:fabCustomSize="25dp"
+            app:borderWidth="3dp"
+            android:tint="@color/green_500"
+            app:backgroundTint="@color/green_500"
+            app:srcCompat="@drawable/logo_check"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/dialog_profil_v_5"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_85"
+            android:id="@+id/settings_cancel"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:fabCustomSize="25dp"
+            app:borderWidth="3dp"
+            android:tint="@color/green_500"
+            app:backgroundTint="@color/green_500"
+            android:rotation="45"
+            app:srcCompat="@drawable/logo_add"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

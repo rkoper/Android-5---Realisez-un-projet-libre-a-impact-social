@@ -23,15 +23,6 @@
         android:name="com.so.dingbring.view.create.CreateFragment"
         android:label="fragment_image"
         tools:layout="@layout/fragment_create" >
-        <argument
-            android:name="mEventSize"
-            app:argType="string"/>
-        <argument
-            android:name="mUserMail"
-            app:argType="string"/>
-        <argument
-            android:name="mUserName"
-            app:argType="string"/>
         <action
             android:id="@+id/action_create_to_home"
             app:destination="@id/event_fragment"
@@ -85,28 +76,17 @@
             app:exitAnim="@anim/stationary" />
     </fragment>
 
-    <fragment
-        android:id="@+id/profil_fragment"
-        android:name="com.so.dingbring.view.profil.ProfilFragment"
-        android:label="fragment_profil"
-        tools:layout="@layout/fragment_profil" >
-        <action
-            android:id="@+id/action_profil_to_home"
-            app:destination="@id/event_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-    </fragment>
 
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.so.dingbring.view.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
-    <action
-        android:id="@+id/action_settings_to_home"
-        app:destination="@id/event_fragment"
-        app:enterAnim="@anim/fui_slide_in_right"
-        app:exitAnim="@anim/stationary" />
+        <action
+            android:id="@+id/action_settings_to_home"
+            app:destination="@id/event_fragment"
+            app:enterAnim="@anim/fui_slide_in_right"
+            app:exitAnim="@anim/stationary" />
 
-</fragment>
+    </fragment>
 </navigation>

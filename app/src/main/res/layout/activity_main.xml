@@ -1,181 +1,469 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.main.ItemActivity">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/main_h_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.85" />
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/grey_600"
+    android:orientation="horizontal">
 
 
-                <fragment
-                    android:id="@+id/hostFragment"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/home_gl_h_97"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.93" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/home_gl_h_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.92" />
+
+        <ImageButton
+            android:elevation="1dp"
+            android:id="@+id/ic_facebook"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@android:dimen/notification_large_icon_width"
+            android:layout_marginLeft="@android:dimen/notification_large_icon_width"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/logo_facebook"
+            app:layout_constraintBottom_toBottomOf="@+id/home_gl_h_97"
+            app:layout_constraintEnd_toStartOf="@+id/ic_twitter"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:elevation="5dp"
+            android:id="@+id/ic_twitter"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/logo_twitter"
+            app:layout_constraintBottom_toBottomOf="@+id/home_gl_h_97"
+            app:layout_constraintEnd_toStartOf="@+id/ic_linkedin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ic_facebook"/>
+
+
+
+        <ImageButton
+            android:elevation="9dp"
+            android:id="@+id/ic_linkedin"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/logo_linkedin"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_twitter"
+            app:layout_constraintEnd_toStartOf="@+id/ic_youtube"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ic_twitter"
+            app:layout_constraintTop_toTopOf="@+id/ic_twitter" />
+
+        <ImageButton
+            android:elevation="14dp"
+            android:id="@+id/ic_youtube"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/logo_youtube"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_linkedin"
+            app:layout_constraintEnd_toStartOf="@+id/ic_sms"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ic_linkedin"
+            app:layout_constraintTop_toTopOf="@+id/ic_linkedin" />
+
+        <ImageButton
+            android:elevation="19dp"
+            android:id="@+id/ic_sms"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/logo_sms"
+            android:backgroundTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_youtube"
+            app:layout_constraintEnd_toStartOf="@+id/ic_mail"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ic_youtube"
+            app:layout_constraintTop_toTopOf="@+id/ic_youtube" />
+
+        <ImageButton
+            android:elevation="24dp"
+            android:id="@+id/ic_mail"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="@android:dimen/notification_large_icon_width"
+            android:layout_marginRight="@android:dimen/notification_large_icon_width"
+            android:background="@drawable/logo_envelope"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_sms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ic_sms"
+            app:layout_constraintTop_toTopOf="@+id/ic_sms" />
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="@color/colorTransparent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
-                    app:defaultNavHost="true"
-                    app:navGraph="@navigation/navigation" />
+                    android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/main_gl_h_85"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.88"/>
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/main_gl_h_95"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.95"/>
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/main_gl_v_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.95"/>
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/main_gl_v_8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.05"/>
 
-                <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
-                    android:id="@+id/floating_top_bar_navigation"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:elevation="10dp"
-                    app:bnc_mode="packed"
-                    app:layout_constraintTop_toTopOf="@+id/main_gl_h_85"
-                    app:layout_constraintLeft_toLeftOf="@+id/main_gl_v_8"
-                    app:layout_constraintRight_toRightOf="@+id/main_gl_v_2"
-                    app:layout_constraintBottom_toBottomOf="@+id/main_gl_h_95">
-
-                        <com.gauravk.bubblenavigation.BubbleToggleView
-                            android:id="@+id/main_item_home"
-                            android:layout_width="wrap_content"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/card_t_top_profil"
+                            android:layout_width="0dp"
                             android:layout_height="0dp"
-                            app:bt_titleSize="22sp"
-                            app:bt_colorActive="@color/black"
-                            app:bt_colorInactive="@color/grey_800"
-                            app:bt_icon="@drawable/home"
-                            app:bt_shape="@drawable/rounded_rect"
-                            app:bt_shapeColor="@color/grey_50"
-                            app:bt_title="Home"
-                            android:elevation="3dp"
-                            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-                            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintRight_toLeftOf="@+id/main_item_event"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                           android:background="@drawable/rectangle_corner_grey_700"
+                            app:layout_constraintBottom_toTopOf="@+id/guideline"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/guideline2">
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                        <androidx.constraintlayout.widget.Guideline
+                                            android:id="@+id/guideline11"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            app:layout_constraintGuide_percent="0.5" />
+                                        <ImageView
+                                            android:background="@drawable/round"
+                                            android:backgroundTint="@color/black"
+                                            app:layout_constraintTop_toBottomOf="@+id/guideline11"
+                                            app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintEnd_toStartOf="@+id/card_t_profil_name"
+                                            android:layout_gravity="left|center_vertical"
+                                            android:id="@+id/card_t_profil_photo"
+                                            android:layout_width="75dp"
+                                            android:layout_height="75dp"
+                                            android:scaleType="fitXY"
+                                            tools:ignore="RtlHardcoded" />
+                                        <TextView
+                                            android:text="Nom Prénon"
+                                            style="@style/TxtViewPrincipalBlack"
+                                            android:textColor="@color/white"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                                            app:layout_constraintStart_toEndOf="@+id/card_t_profil_photo"
+                                            android:id="@+id/card_t_profil_name"
+                                            android:layout_width="225dp"
+                                            android:layout_height="40dp"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_gravity="center"
+                                            android:textAlignment="center"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                                        <TextView
+                                            android:textColor="@color/white"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            style="@style/TxtViewPrincipalBlack"
+                                            app:layout_constraintTop_toBottomOf="@+id/guideline11"
+                                            app:layout_constraintStart_toEndOf="@+id/card_t_profil_photo"
+                                            android:id="@+id/card_t_profil_status"
+                                            android:layout_width="wrap_content"
+                                            android:layout_margin="2dp"
+                                            android:padding="2dp"
+                                            android:layout_height="25dp"
+                                            android:layout_marginTop="8dp"
+                                            android:text="Newbie"
+                                            android:textAlignment="center"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                            android:layout_gravity="center|bottom" />
+                                        <ImageView
+                                            style="@style/TxtViewPrincipalBlack"
+                                            app:layout_constraintTop_toTopOf="@+id/card_t_profil_status"
+                                            app:layout_constraintBottom_toBottomOf="@+id/card_t_profil_status"
+                                            app:layout_constraintStart_toEndOf="@+id/card_t_profil_status"
+                                            android:id="@+id/img3"
+                                            android:background="@drawable/medalone"
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:text="BringDring"
+                                            android:textAlignment="center"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                            android:layout_gravity="center|bottom" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                            />
-
-
-                        <com.gauravk.bubblenavigation.BubbleToggleView
-                            app:layout_constraintLeft_toRightOf="@+id/main_item_home"
-                            app:layout_constraintRight_toLeftOf="@+id/main_item_add"
-                            android:id="@+id/main_item_event"
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_v_33"
                             android:layout_width="wrap_content"
-                            app:bt_titleSize="22sp"
-                            android:layout_height="0dp"
-                            app:bt_colorActive="@color/yellow_900"
-                            app:bt_colorInactive="@color/grey_800"
-                            app:bt_shapeColor="@color/yellow_50"
-                            app:bt_icon="@drawable/star"
-                            android:background="@drawable/rounded_r_green"
-                            app:bt_shape="@drawable/rounded_rect"
-                            android:elevation="3dp"
-                            app:bt_title="Event"
-                            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-                            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation" />
-
-
-
-                        <com.gauravk.bubblenavigation.BubbleToggleView
-                            app:layout_constraintLeft_toRightOf="@+id/main_item_event"
-                            app:layout_constraintRight_toLeftOf="@+id/main_item_calendar"
-                            android:id="@+id/main_item_add"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.35" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_v_2"
                             android:layout_width="wrap_content"
-                            app:bt_titleSize="22sp"
-                            android:layout_height="0dp"
-                            app:bt_colorActive="@color/blue_300"
-                            app:bt_colorInactive="@color/Green"
-                            app:bt_icon="@drawable/addcircle"
-                            android:background="@drawable/rounded_r_green"
-                            app:bt_shape="@drawable/rounded_rect"
-                            app:bt_shapeColor="@color/blue_50"
-                            android:elevation="3dp"
-                            app:bt_title="Create"
-                            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-                            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation" />
-
-                        <com.gauravk.bubblenavigation.BubbleToggleView
-                            app:layout_constraintLeft_toRightOf="@+id/main_item_add"
-                            app:layout_constraintRight_toLeftOf="@+id/main_item_personn"
-                            android:id="@+id/main_item_calendar"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.2" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_v_5"
                             android:layout_width="wrap_content"
-                            app:bt_titleSize="22sp"
-                            android:layout_height="0dp"
-                            app:bt_colorActive="@color/red_300"
-                            app:bt_colorInactive="@color/Green"
-                            app:bt_icon="@drawable/calendar"
-                            app:bt_shape="@drawable/rounded_rect"
-                            app:bt_shapeColor="@color/red_50"
-                            android:elevation="3dp"
-                            app:bt_title="Calendar"
-                            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-                            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"
-
-
-                            />
-
-                        <com.gauravk.bubblenavigation.BubbleToggleView
-                            app:layout_constraintLeft_toRightOf="@+id/main_item_calendar"
-                            app:layout_constraintRight_toLeftOf="@+id/main_item_setting"
-                            android:id="@+id/main_item_personn"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_v_8"
                             android:layout_width="wrap_content"
-                            app:bt_titleSize="22sp"
-                            android:layout_height="0dp"
-                            app:bt_colorActive="@color/purple_300"
-                            app:bt_colorInactive="@color/Green"
-                            app:bt_icon="@drawable/personn"
-                            app:bt_shapeColor="@color/purple_50"
-                            app:bt_shape="@drawable/rounded_rect"
-                            android:elevation="3dp"
-                            app:bt_title="Profil"
-                            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-                            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"/>
-
-                        <com.gauravk.bubblenavigation.BubbleToggleView
-                            app:layout_constraintLeft_toRightOf="@+id/main_item_personn"
-                            app:layout_constraintRight_toRightOf="parent"
-                            android:id="@+id/main_item_setting"
-                            app:bt_titleSize="22sp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.8" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_v_66"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.65" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_v_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.05" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_v_9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.95" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.25" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.35" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline47"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.47" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.03" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.6" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline65"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.6" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline72"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.72" />
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline81"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.85" />
+
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/card_t_setting"
+                            android:layout_width="0dp"
                             android:layout_height="0dp"
-                            app:bt_colorActive="@color/green_300"
-                            app:bt_shapeColor="@color/green_50"
-                            app:bt_colorInactive="@color/Green"
-                            app:bt_icon="@drawable/settings"
-                            app:bt_shape="@drawable/rounded_rect"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            app:layout_constraintEnd_toEndOf="@+id/guideline_v_66"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_v_33"
+                            app:layout_constraintTop_toTopOf="@+id/guideline65"
+                            app:layout_constraintBottom_toBottomOf="@+id/guideline81"
                             android:elevation="3dp"
-                            app:bt_title="Settings"
-                            app:layout_constraintTop_toTopOf="@+id/floating_top_bar_navigation"
-                            app:layout_constraintBottom_toBottomOf="@+id/floating_top_bar_navigation"/>
+                            >
 
-                </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
+                                <LinearLayout
+                                    android:background="@drawable/rectangle_corner_grey_700"
+                                    android:id="@+id/card_t_settings_click"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:orientation="vertical"
+                                    >
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                                        <ImageView
+                                            android:padding="10dp"
+                                            android:layout_weight="3"
+                                            android:id="@+id/img__speakers"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            app:srcCompat="@drawable/logo_settings"
+                                            app:tint="@color/green_300"/>
 
-</layout>
+                                        <TextView
+                                            android:textColor="@color/green_300"
+                                            android:layout_marginEnd="10dp"
+                                            style="@style/TxtViewPrincipalWhite"
+                                            android:textStyle="bold"
+                                            android:textAlignment="textEnd"
+                                            android:id="@+id/text__speakers"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Settings"
+                                            android:textSize="16sp" />
+                                </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:id="@+id/card_t_event"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:elevation="3dp"
+                            app:layout_constraintEnd_toEndOf="@+id/guideline_v_66"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_v_33"
+                            app:layout_constraintTop_toTopOf="@+id/guideline5"
+                            app:layout_constraintBottom_toBottomOf="@+id/guideline6"
+                            >
+
+                                <LinearLayout
+                                    android:background="@drawable/rectangle_corner_grey_700"
+                                    android:id="@+id/card_t_event_click"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:orientation="vertical">
+
+                                        <ImageView
+                                            android:padding="10dp"
+                                            android:layout_weight="3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            app:srcCompat="@drawable/logo_star"
+                                            app:tint="@color/yellow_900"/>
+
+                                        <TextView
+                                            android:textColor="@color/yellow_900"
+                                            android:layout_marginEnd="10dp"
+                                            style="@style/TxtViewPrincipalWhite"
+                                            android:textStyle="bold"
+                                            android:textAlignment="textEnd"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Event"
+                                            android:textSize="16sp" />
+                                </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:id="@+id/card_t_create"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintEnd_toEndOf="@+id/guideline_v_33"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_v_1"
+                            app:layout_constraintTop_toTopOf="@+id/guideline47"
+                            app:layout_constraintBottom_toBottomOf="@+id/guideline72"
+
+                            >
+                                <LinearLayout
+                                    android:background="@drawable/rectangle_corner_grey_700"
+                                    android:id="@+id/card_t_create_click"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:orientation="vertical">
+
+                                        <ImageView
+                                            android:padding="10dp"
+                                            android:layout_weight="3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            app:srcCompat="@drawable/logo_addcircle"
+                                            app:tint="@color/blue_300"/>
+
+                                        <TextView
+                                            android:textColor="@color/blue_300"
+                                            android:layout_marginEnd="10dp"
+                                            style="@style/TxtViewPrincipalWhite"
+                                            android:textStyle="bold"
+                                            android:textAlignment="textEnd"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Create"
+                                            android:textSize="16sp" />
+                                </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:id="@+id/card_t_calendar"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:elevation="3dp"
+                            app:layout_constraintEnd_toEndOf="@+id/guideline_v_9"
+                            app:layout_constraintStart_toStartOf="@+id/guideline_v_66"
+                            app:layout_constraintTop_toTopOf="@+id/guideline47"
+                            app:layout_constraintBottom_toBottomOf="@+id/guideline72"
+                            >
+
+                                <LinearLayout
+                                    android:background="@drawable/rectangle_corner_grey_700"
+                                    android:id="@+id/card_t_calendar_click"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:orientation="vertical">
+                                        <ImageView
+                                            android:padding="10dp"
+                                            android:layout_weight="3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            app:srcCompat="@drawable/logo_calendar"
+                                            app:tint="@color/red_300"/>
+
+                                        <TextView
+                                            android:textColor="@color/red_300"
+                                            android:layout_marginEnd="10dp"
+                                            style="@style/TxtViewPrincipalWhite"
+                                            android:textStyle="bold"
+                                            android:textAlignment="textEnd"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="Calendar"
+                                            android:textSize="16sp" />
+                                </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

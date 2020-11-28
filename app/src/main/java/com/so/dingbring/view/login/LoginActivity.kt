@@ -25,19 +25,30 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+
+        val mUser = FirebaseAuth.getInstance().currentUser
+        mUser?.let{
+            launchMainActivity()
+        } ?: showSignInOptions()
+
+    }
+
+    private fun showSignInOptions() {
+
         val providers = arrayListOf(
             AuthUI.IdpConfig.GoogleBuilder().build(),
-            AuthUI.IdpConfig.FacebookBuilder().build(),
-            AuthUI.IdpConfig.TwitterBuilder().build()
+            AuthUI.IdpConfig.FacebookBuilder().build()
         )
+
+
+
         startActivityForResult(AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .setTheme(R.style.MyTheme)
-                .setIsSmartLockEnabled(false)
-                .build(), RC_SIGN_IN)
-
-
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .setTheme(R.style.MyTheme)
+            .setIsSmartLockEnabled(false)
+            .build(), RC_SIGN_IN)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -55,35 +66,24 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun launchMainActivity() {
-        if (FirebaseAuth.getInstance().currentUser?.displayName != null)
-        { mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()}
-        else {mNameUser = "x"}
-        if (FirebaseAuth.getInstance().currentUser?.email != null)
-        { mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()}
-        else {mEmailUser = "xx"}
-        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
-        { mPhotoUser = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()}
-        else {mPhotoUser = "xxx"}
+        if (FirebaseAuth.getInstance().currentUser?.uid != null)
+        { mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+            println("----mIdUser--Login---" + mIdUser)
+            val mIntent = Intent(this, MainActivity::class.java)
+            mIntent.putExtra("GlobalIdUser", mIdUser)
+            startActivity(mIntent)
 
-        if (FirebaseAuth.getInstance().currentUser?.photoUrl != null)
-        { mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()}
+
+        }
         else { finish()}
 
 
-
-
-        val mIntent = Intent(this, MainActivity::class.java)
-        mIntent.putExtra("GlobalIdUser", mIdUser)
-                startActivity(mIntent)
     }
 
 
-    companion object {
+companion object {
 
-        val USERNAME = "GlobalName"
-        val USERPHOTO = "GlobalEmail"
-        val USERMAIL = "GlobalPhoto"
-        val USERID = "GlobalId"
+        var mIdUser= FirebaseAuth.getInstance().currentUser?.uid.toString()
 
     }
 

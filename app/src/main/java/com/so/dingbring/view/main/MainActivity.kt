@@ -12,7 +12,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.data.MyUserViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import com.so.dingbring.R
-import kotlinx.android.synthetic.main.activity_test.*
+import com.so.dingbring.view.login.LoginActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.card_t_calendar
+import kotlinx.android.synthetic.main.activity_main.card_t_create
+import kotlinx.android.synthetic.main.activity_main.card_t_event
+import kotlinx.android.synthetic.main.activity_main.card_t_setting
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 class MainActivity : AppCompatActivity(){
 
@@ -32,30 +38,30 @@ class MainActivity : AppCompatActivity(){
 
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
-        setContentView(R.layout.activity_test)
+        setContentView(R.layout.activity_main)
 
 
-        mIdUser = intent?.getStringExtra("GlobalIdUser").toString()
-
+        mIdUser = LoginActivity.mIdUser
 
         testCloud()
-
-
-
+        println("==================================mIdUser" + mIdUser)
 
 
         if (mIdUser != "null"){
-
-            println("--------|Test USER|--------" + mIdUser)
             mUserVM.getifNewUser(mIdUser)?.observe(this, androidx.lifecycle.Observer{ condition ->
                 if (condition){
+
 
                     mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()
                     mEmailUser  = FirebaseAuth.getInstance().currentUser?.email.toString()
                     mPhotoUser = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
                     mIdUser= FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+                    println("==================================conditin" + condition)
+                    println("==================================mNameUser 0  " + mNameUser)
                     initHeader()
-                    createFireStoreUser() }
+                    createFireStoreUser()
+                }
 
                 else{ mUserVM.getUserById(mIdUser)?.observe(this,androidx.lifecycle.Observer {mlmu ->
                     mIdUser  = mlmu.mUserId
@@ -63,6 +69,9 @@ class MainActivity : AppCompatActivity(){
                     mEmailUser  = mlmu.mEmailUser
                     mPhotoUser  = mlmu.mPhotoUser
                     mUserEvent = mlmu.mEventUser
+
+                    println("==================================mNameUser " + mNameUser)
+
                     initHeader()})}
 
             })}
@@ -71,41 +80,31 @@ class MainActivity : AppCompatActivity(){
         card_t_event.setOnClickListener {
             val intent = Intent(this, ItemActivity::class.java)
             intent.putExtra("msg", 1)
-            intent.putExtra("GlobalIdUser", mIdUser)
             startActivity(intent)
         }
         card_t_create.setOnClickListener {
             val intent = Intent(this, ItemActivity::class.java)
             intent.putExtra("msg", 2)
-            intent.putExtra("GlobalIdUser", mIdUser)
             startActivity(intent)
         }
         card_t_calendar.setOnClickListener {
             val intent = Intent(this, ItemActivity::class.java)
             intent.putExtra("msg", 3)
-            intent.putExtra("GlobalIdUser", mIdUser)
             startActivity(intent)
         }
-        card_t_profil.setOnClickListener {
-            val intent = Intent(this, ItemActivity::class.java)
-            intent.putExtra("msg", 4)
-            intent.putExtra("GlobalIdUser", mIdUser)
-            startActivity(intent)
-        }
+
         card_t_setting.setOnClickListener {
             val intent = Intent(this, ItemActivity::class.java)
-            intent.putExtra("msg", 5)
-            intent.putExtra("GlobalIdUser", mIdUser)
+            intent.putExtra("msg", 4)
             startActivity(intent)
         }
     }
 
-    private fun testCloud() {
-//        TODO("Not yet implemented")
-    }
+    private fun testCloud() { }
 
     private fun initHeader() {
-        println("--------|Test mNameUser|--------" + mNameUser)
+        println("==================================mNameUser 1 " + mNameUser)
+
         card_t_profil_name.text = mNameUser
         Glide.with(this).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_profil_photo)
     }
@@ -124,8 +123,10 @@ class MainActivity : AppCompatActivity(){
         mDataUser["eventNbEvent"] = 0
 
 
-        mUserVM.createUser(mDataUser)
+      //  mUserVM.createUser(mDataUser)
 
     }
+
+
 
     }

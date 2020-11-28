@@ -1,16 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <array name="simple_menu_icons">
-        <item>@drawable/calendar</item>
-        <item>@drawable/calendar</item>
-        <item>@drawable/calendar</item>
-    </array>
-
-    <array name="simple_menu_colors">
-        <item>@color/blue_A_100</item>
-        <item>@color/blue_A_100</item>
-        <item>@color/blue_A_100</item>
-    </array>
-
 </resources>

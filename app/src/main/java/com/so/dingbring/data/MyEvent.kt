@@ -5,6 +5,8 @@ data class MyEvent(
     val mEventDate:String,
     val mEventId:String,
     val mEventName:String,
+    val mEventHour:String,
+    val mEventDesc:String,
     val mEventUserId:String,
-    val mEventUserName:String,
-    val mEventUserPhoto:String)
+    val mEventOrga:String
+ )

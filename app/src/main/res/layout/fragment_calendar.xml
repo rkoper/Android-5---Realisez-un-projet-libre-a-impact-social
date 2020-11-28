@@ -16,11 +16,11 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:id="@+id/calendar_h_05"
-            app:layout_constraintGuide_percent="0.06"/>
+            app:layout_constraintGuide_percent="0.1"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/rectangle_corner_rd_light"
+            android:background="@drawable/rectangle_corner_grey_600"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/calendar_h_05"
@@ -29,186 +29,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:id="@+id/calendar_h_5"
-            app:layout_constraintGuide_percent="0.67"/>
+            android:id="@+id/calendar_h_2_10"
+            app:layout_constraintGuide_percent="0.10"/>
+
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:id="@+id/calendar_h_61"
-            app:layout_constraintGuide_percent="0.66"/>
-
-
-
+            android:id="@+id/calendar_h_2_85"
+            app:layout_constraintGuide_percent="0.85"/>
+        <TextView
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/calendar_h_2_10"
+            app:layout_constraintRight_toRightOf="parent"
+            android:hint="Calendar"
+            android:textColorHint="@color/red_300"
+            style="@style/TxtViewPrincipalWhite"/>
         <com.tejpratapsingh.recyclercalendar.views.InfiniteRecyclerCalendarView
-            app:layout_constraintTop_toTopOf="@+id/calendar_h_05"
-            app:layout_constraintBottom_toTopOf="@+id/calendar_h_61"
+            app:layout_constraintTop_toTopOf="@+id/calendar_h_2_10"
+            app:layout_constraintBottom_toTopOf="@+id/calendar_h_2_85"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/calendarRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="10dp"
-            android:layout_marginTop="0dp" />
+            android:layout_marginTop="15dp" />
 
 
-        <LinearLayout
-            android:id="@+id/calendar_ll"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="@+id/calendar_h_61"
-            app:layout_constraintBottom_toBottomOf="@+id/calendar_h_5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:background="@color/red_200"
-            android:orientation="horizontal" />
-
-
-
-
-
-                  <androidx.constraintlayout.widget.Guideline
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="horizontal"
-                      android:id="@+id/calendar_h_2_75"
-                      app:layout_constraintGuide_percent="0.67"/>
-                  <androidx.constraintlayout.widget.Guideline
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="horizontal"
-                      android:id="@+id/calendar_h_2_08"
-                      app:layout_constraintGuide_percent="0.85"/>
-                  <androidx.constraintlayout.widget.Guideline
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical"
-                      android:id="@+id/calendar_v_2_33"
-                      app:layout_constraintGuide_percent="0.1"/>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/calendar_ll_botoom"
-            android:background="@drawable/rectangle_corner_blue_light"
-            android:backgroundTint="@color/red_50"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            app:layout_constraintTop_toTopOf="@+id/calendar_h_2_75"
-            app:layout_constraintBottom_toBottomOf="@+id/calendar_h_2_08"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-            <androidx.constraintlayout.widget.ConstraintLayout
-
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="@+id/calendar_ll_botoom"
-                app:layout_constraintBottom_toBottomOf="@+id/calendar_ll_botoom"
-                app:layout_constraintLeft_toLeftOf="@+id/calendar_ll_botoom"
-                app:layout_constraintRight_toRightOf="@+id/calendar_ll_botoom"/>
-
-            <androidx.constraintlayout.widget.Guideline
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/calendar_h_6"
-                app:layout_constraintGuide_percent="0.05"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/calendar_h_7"
-                app:layout_constraintGuide_percent="0.35"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/calendar_h_8"
-                app:layout_constraintGuide_percent="0.65"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/calendar_h_75"
-                app:layout_constraintGuide_percent="0.7"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:id="@+id/calendar_h_9"
-                app:layout_constraintGuide_percent="0.86"/>
-            <androidx.constraintlayout.widget.Guideline
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/calendar_v_5"
-                app:layout_constraintGuide_percent="0.5"/>
-
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@+id/calendar_h_6"
-                app:layout_constraintBottom_toBottomOf="@+id/calendar_h_7"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="@+id/calendar_v_5"
-                android:layout_width="0dp"
-                android:textAlignment="center"
-                android:id="@+id/calendar_event_name"
-                android:layout_height="0dp"
-                style="@style/TxtViewPrincipalBlack"
-                tools:text="Party" />
-            <TextView
-                android:layout_margin="2dp"
-                android:textAlignment="center"
-                app:layout_constraintTop_toTopOf="@+id/calendar_h_6"
-                app:layout_constraintBottom_toBottomOf="@+id/calendar_h_7"
-                app:layout_constraintLeft_toLeftOf="@+id/calendar_v_5"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:id="@+id/calendar_event_date"
-                android:layout_marginStart="10dp"
-                style="@style/TxtViewPrincipalBlack"
-                tools:text="01/01/2020" />
-            <TextView
-                android:layout_margin="2dp"
-                app:layout_constraintTop_toTopOf="@+id/calendar_h_7"
-                app:layout_constraintBottom_toBottomOf="@+id/calendar_h_8"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="@+id/calendar_v_5"
-                android:layout_width="0dp"
-                android:textAlignment="center"
-                android:id="@+id/calendar_event_adress"
-                android:layout_height="0dp"
-                style="@style/TxtViewPrincipalBlack"
-                tools:text="Adress" />
-            <TextView
-                android:layout_margin="2dp"
-                android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@+id/calendar_h_7"
-                app:layout_constraintBottom_toBottomOf="@+id/calendar_h_8"
-                app:layout_constraintLeft_toLeftOf="@+id/calendar_v_5"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:id="@+id/calendar_event_orga"
-                android:layout_marginStart="10dp"
-                style="@style/TxtViewPrincipalBlack"
-                tools:text="Orga" />
-            <ImageView
-                app:layout_constraintTop_toBottomOf="@+id/calendar_h_8"
-                app:layout_constraintLeft_toLeftOf="@+id/calendar_v_5"
-                app:layout_constraintRight_toRightOf="@+id/calendar_v_5"
-                android:id="@+id/textViewSelectedIcon"
-                android:backgroundTint="@color/red_500"
-                android:background="@drawable/circle"
-                app:tint="@color/white"
-                android:src="@drawable/eye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/TxtViewPrincipalBlack"
-                tools:text="11" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
