@@ -155,6 +155,7 @@ class DetailFragment : BaseFragment() {
 
 
 
+
             }
 
             mItemName= detail_item_edit.text.toString()
