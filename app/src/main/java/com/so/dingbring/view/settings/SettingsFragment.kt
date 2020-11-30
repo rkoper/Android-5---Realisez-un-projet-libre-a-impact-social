@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,13 +20,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.auth.AuthUI
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
+import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.login.LoginActivity
 import kotlinx.android.synthetic.main.dialog_layout_language.*
 import kotlinx.android.synthetic.main.dialog_layout_profil.*
-import kotlinx.android.synthetic.main.fragment_create.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -42,14 +43,15 @@ class SettingsFragment : BaseFragment() {
     var mNameUser = "..."
     var mEmailUser = "..."
     var mPhotoUser = "..."
-    var mIdUser = "..."
+    var mNbUser = 0
+    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var fragmentStatus = ""
     var varbutton: BubbleNavigationLinearView? = null
     private val mUserVM by viewModel<MyUserViewModel>()
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "-"
     lateinit var sharedPref:SharedPreferences
-
+    lateinit var mDrawable: Drawable
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +59,6 @@ class SettingsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
-        mIdUser = ITEMACTIVITY.mIdUser
         return view
     }
 
@@ -70,7 +71,10 @@ class SettingsFragment : BaseFragment() {
                 override fun handleOnBackPressed() {
                     view?.findNavController()?.navigate(R.id.action_settings_to_home)
                     varbutton?.setCurrentActiveItem(1) } })
-        goHeader() }
+        goHeader()
+       }
+
+
 
     private fun goHeader() {
         mUserVM.getUserById(mIdUser)
@@ -79,12 +83,38 @@ class SettingsFragment : BaseFragment() {
                 mNameUser = mlmu.mNameUser
                 mEmailUser = mlmu.mEmailUser
                 mPhotoUser = mlmu.mPhotoUser
+                mNbUser = mlmu.mNbEvent!!.toInt()
                 card_t_settings_name.text = mNameUser
                 Glide.with(this).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_settings_photo)
+                initMedal(mNbUser)
                 card_t_setting_personn?.setOnClickListener { loadProfil() }
                 card_t_setting_logOut?.setOnClickListener { loadLogOut() }
                 card_t_setting_lang?.setOnClickListener { loadLanguage() }
                 card_t_setting_contact?.setOnClickListener { loadContact() } }) }
+
+
+    private fun initMedal(mNbUser: Int) {
+        if(mNbUser in 0..4)   { mDrawable = resources.getDrawable(R.drawable.medalone)
+            card_t_settings_status.text = "Newbie"
+            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
+        if(mNbUser in 5..9)   { mDrawable = resources.getDrawable(R.drawable.medaltwo)
+            card_t_settings_status.text = "Beginner"
+            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
+        if(mNbUser in 10..14) { mDrawable = resources.getDrawable(R.drawable.medalthree)
+            card_t_settings_status.text = "Intermediate"
+            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
+        if(mNbUser in 15..19)   { mDrawable = resources.getDrawable(R.drawable.medalfour)
+            card_t_settings_status.text = "Experienced"
+            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
+        if(mNbUser in 20..24)   { mDrawable = resources.getDrawable(R.drawable.medalfive)
+            card_t_settings_status.text = "Advanced"
+            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
+        if(mNbUser > 24)   { mDrawable = resources.getDrawable(R.drawable.medalsix)
+            card_t_settings_status.text = "Expert"
+            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal)}
+    }
+
+
 
     private fun loadProfil() {
         d_profil= Dialog(requireContext())
@@ -214,10 +244,6 @@ class SettingsFragment : BaseFragment() {
                 d_profil.settings_check.setOnClickListener {
                     mNameUser = d_profil.setting_profil_edit.text.toString()
 
-
-
-                    println("----------=======| "+ mNameUser +" |======--------")
-                    println("----------=======| "+ mPhotoUser +" |======--------")
                     card_t_settings_name.text = mNameUser
                     Glide.with(requireActivity()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_settings_photo)
                     mUserVM.updateUserName(mIdUser, mNameUser)

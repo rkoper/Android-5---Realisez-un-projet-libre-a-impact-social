@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
+import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
@@ -38,7 +39,7 @@ class CalendarFragment : BaseFragment() {
     var mNameUser = "..."
     var mEmailUser = "..."
     var mPhotoUser = "..."
-    var mIdUser = ""
+    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mUserEvent = arrayListOf("", "")
     var varbutton: BubbleNavigationLinearView? = null
     var mDataEventTest : MutableList<MutableList<String>> = mutableListOf()
@@ -50,7 +51,7 @@ class CalendarFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
-        mIdUser = LoginActivity.mIdUser
+
         return view
     }
 

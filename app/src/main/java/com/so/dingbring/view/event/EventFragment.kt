@@ -48,6 +48,10 @@ class EventFragment : BaseFragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_event, container, false)
         mIdUser = LoginActivity.mIdUser
+
+        println("=====-=====-====------------------------------------=====-======------->")
+
+
         return view }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -97,45 +101,45 @@ class EventFragment : BaseFragment() {
 }
 
 
-    /*
+/*
 
-    mUserVM.getUserById(mIdUser)?.observe(requireActivity(), Observer { mlmu ->
-        if (mlmu != null) {
-            mUserEvent = mlmu.mEventUser
+mUserVM.getUserById(mIdUser)?.observe(requireActivity(), Observer { mlmu ->
+    if (mlmu != null) {
+        mUserEvent = mlmu.mEventUser
 
-            mEventVM.getUserEvent(mUserEvent)
-                .observe(requireActivity(), androidx.lifecycle.Observer { listMyEvent ->
-                    var mLEU = arrayListOf<MyEvent>()
-                    var aaa = arrayListOf<String>()
-                    var bbb: String = ""
+        mEventVM.getUserEvent(mUserEvent)
+            .observe(requireActivity(), androidx.lifecycle.Observer { listMyEvent ->
+                var mLEU = arrayListOf<MyEvent>()
+                var aaa = arrayListOf<String>()
+                var bbb: String = ""
 
-                    listMyEvent.forEach { lmyevent -> mLEU.add(lmyevent) }
+                listMyEvent.forEach { lmyevent -> mLEU.add(lmyevent) }
 
-                    println("--------------mLEU------->" + mLEU)
+                println("--------------mLEU------->" + mLEU)
 
-                    mLEU.forEach { mye ->
-                        aaa.add(mye.mEventUserId)
-                    }
-                    println("--------------aaa------->" + aaa)
+                mLEU.forEach { mye ->
+                    aaa.add(mye.mEventUserId)
+                }
+                println("--------------aaa------->" + aaa)
 
-                    aaa.forEach { bbb ->
-                        println("--------------bbb------->" + bbb)
+                aaa.forEach { bbb ->
+                    println("--------------bbb------->" + bbb)
 
-                        mUserVM.getUserPhotoById(bbb).observe(requireActivity(), Observer { s ->
+                    mUserVM.getUserPhotoById(bbb).observe(requireActivity(), Observer { s ->
 
-                            if (bbb == mLEU[5].mEventUserId) {
-                                println("--------------photo-----1-->" + s)
-                                println("--------------photo--2----->" + mLEU[4].mEventUserId)
-                            }
+                        if (bbb == mLEU[5].mEventUserId) {
+                            println("--------------photo-----1-->" + s)
+                            println("--------------photo--2----->" + mLEU[4].mEventUserId)
+                        }
 
 
-                        })
-                    }
-                })
-        }
-    })
+                    })
+                }
+            })
+    }
+})
 
-    */
+*/
 
 
 

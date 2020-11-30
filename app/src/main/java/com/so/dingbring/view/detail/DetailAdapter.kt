@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -76,32 +77,25 @@ class DetailAdapter(
 
                if (mItemStatus== "I need") {
                 mDetailBand.visibility = View.VISIBLE
-                // mDetailColor.visibility = View.VISIBLE
-               }
+                   mDetailCache.visibility = View.VISIBLE }
 
                else { mDetailBand.visibility = View.INVISIBLE
-                 //  mDetailColor.visibility = View.INVISIBLE
-               }
-        } }
-
-
+                   mDetailCache.visibility = View.INVISIBLE} } }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.detail_item, parent, false)
-        return DetailViewHolder(view)
-    }
+        return DetailViewHolder(view) }
 
     override fun getItemCount(): Int {
         return if (mListMyItem.size > 0) { mListMyItem.size }
-        else { 0 }
-    }
+        else { 0 } }
 
     inner class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var animShow= false
         var mDetailItem: TextView = itemView.findViewById(R.id.detail_item_type)
         var mDetailQuantity: TextView = itemView.findViewById(R.id.detail_item_quantity)
-    //    var mDetailColor: ImageView = itemView.findViewById(R.id.detail_item_status_color)
-      //  var mDetailUser: TextView = itemView.findViewById(R.id.detail_item_personn)
+        var mDetailColor: ConstraintLayout = itemView.findViewById(R.id.detail_item_cl)
+        var mDetailCache: ImageView = itemView.findViewById(R.id.detail_item_cache)
         var mDetailImageUser: ImageView = itemView.findViewById(R.id.detail_item_photo)
         var mDetailBand: ImageView = itemView.findViewById(R.id.detail_item_band)
 

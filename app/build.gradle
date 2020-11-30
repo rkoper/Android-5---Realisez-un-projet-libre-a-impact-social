@@ -182,5 +182,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-dynamic-links-ktx'
 
+    implementation 'com.github.florent37:diagonallayout:1.0.9'
+
 
 }

@@ -15,6 +15,7 @@ import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.login.LoginActivity
+import com.so.dingbring.view.login.LoginActivity.Companion.mIdUser
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -24,7 +25,7 @@ class ItemActivity : AppCompatActivity() {
     var mNameUser = " ..mNameUser.. "
     var mEmailUser = "..mEmailUser.."
     var mPhotoUser = "..mPhotoUser.."
-    var mIdUser = "..mIdUser.."
+    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mIdEvent = "..mIdEvent.."
     var mTest = "..mTest.."
     private val mUserVM by viewModel<MyUserViewModel>()
@@ -40,7 +41,7 @@ class ItemActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.item_main)
         mclick = intent?.getIntExtra("msg", 99)!!
-        mIdUser = LoginActivity.mIdUser
+
         retrieveData()
         initClickOnItem()
         initBottomBar() }
@@ -58,12 +59,20 @@ class ItemActivity : AppCompatActivity() {
     private fun initClickOnItem() {
         val navBuilder = Builder();
         navBuilder.setEnterAnim(R.anim.slideright)
-        if (mclick == 1) { floating_top_bar_navigation.setCurrentActiveItem(1) }
-        if (mclick == 2) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment)
+        if (mclick == 1) {
+            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+            floating_top_bar_navigation.setCurrentActiveItem(1) }
+        if (mclick == 2) {
+            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+            Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment)
             floating_top_bar_navigation.setCurrentActiveItem(2) }
-        if (mclick == 3) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment)
+        if (mclick == 3) {
+            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+            Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment)
             floating_top_bar_navigation.setCurrentActiveItem(3) }
-        if (mclick == 4) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment)
+        if (mclick == 4) {
+            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+            Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment)
             floating_top_bar_navigation.setCurrentActiveItem(4) }}
 
 

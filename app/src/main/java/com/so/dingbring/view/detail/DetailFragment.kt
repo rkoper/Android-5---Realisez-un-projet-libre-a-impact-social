@@ -18,7 +18,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.dynamiclinks.ktx.androidParameters
 import com.google.firebase.dynamiclinks.ktx.dynamicLink
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
@@ -35,6 +37,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DetailFragment : BaseFragment() {
@@ -48,7 +51,7 @@ class DetailFragment : BaseFragment() {
     var mItemUniqueID = UUID.randomUUID().toString()
     var mListMyItem: ArrayList<ArrayList<String>> = arrayListOf()
     var mNameUser = "..."
-    var mIdUser = "////"
+    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mBubble : BubbleNavigationLinearView? = null
     var mItemQuantity = 1
 
@@ -58,7 +61,6 @@ class DetailFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         mEventId = arguments?.get("GlobalIdEvent").toString()
-        mIdUser = LoginActivity.mIdUser
         initHeader()
         return inflater.inflate(R.layout.fragment_detail, container, false) }
 
@@ -104,10 +106,14 @@ class DetailFragment : BaseFragment() {
                     initRVObserver() } }
 
     private fun initRVObserver() {
-        mItemVM.getItem(mEventId).observe(requireActivity(), androidx.lifecycle.Observer {   mlmi ->
+        mItemVM.getItem(mEventId).observe(requireActivity(), androidx.lifecycle.Observer {mlmi ->
+
+
+            mlmi.sortByDescending { it[1] }
             mListMyItem.clear()
             mListMyItem.addAll(mlmi)
-            mDetailAdapter.notifyDataSetChanged() }) }
+            mDetailAdapter.notifyDataSetChanged()})
+    }
 
 
     private fun initHeader() {
@@ -148,14 +154,10 @@ class DetailFragment : BaseFragment() {
         detail_item_edit.doOnTextChanged { text, start, before, count ->
             if (start == 1) {
                 goAnimTxt(detail_qty_txt)
-            //    goAnimImage(detail_check)
                 goAnimView(detail_quantity_item)
                 goAnimView(detail_quantity_minus)
                 goAnimView(detail_quantity_plus)
-
-
-
-
+                goAnimFloating(detail_check)
             }
 
             mItemName= detail_item_edit.text.toString()
@@ -165,13 +167,12 @@ class DetailFragment : BaseFragment() {
         detail_quantity_txt.text =  mItemQuantity.toString()
 
         detail_quantity_minus.setOnClickListener {
-            goAnimImage(detail_check)
+
             if (mItemQuantity > 1){
                 mItemQuantity = mItemQuantity - 1
                 detail_quantity_txt.text = mItemQuantity.toString()} }
 
         detail_quantity_plus .setOnClickListener {
-            goAnimImage(detail_check)
             mItemQuantity = mItemQuantity + 1
              detail_quantity_txt.text = mItemQuantity.toString()} }
 
@@ -235,5 +236,12 @@ class DetailFragment : BaseFragment() {
         val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
         mLink?.startAnimation(zoom1)
         mLink?.startAnimation(zoom2) }
+
+    private fun goAnimFloating(mLink: FloatingActionButton?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_v2)
+        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_2)
+        mLink?.startAnimation(zoom1)
+        mLink?.startAnimation(zoom2) }
+
 
 }

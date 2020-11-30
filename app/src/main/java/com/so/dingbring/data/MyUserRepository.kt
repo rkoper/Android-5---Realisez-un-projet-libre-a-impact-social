@@ -27,6 +27,9 @@ class MyUserRepository {
     private var mUserTest: MutableLiveData<String> = MutableLiveData()
 
     fun createUser(mDataUser: MutableMap<String, Any>){
+
+        println("mDataUser---=====-=====-=====-=====-==-========-=========------->" + mDataUser)
+
         dbFire.collection("user").document(mDataUser["DocIdUser"].toString()).set(mDataUser)
     }
 

@@ -2,6 +2,7 @@ package com.so.dingbring.view.create
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -25,12 +26,15 @@ import com.google.android.libraries.places.api.model.Place.Field
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
+import com.so.dingbring.view.main.ItemActivity
+import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -46,7 +50,7 @@ class CreateFragment : BaseFragment() {
     private var mEventHour = ""
     private var mEventDescription = ""
     var mNameUser = ""
-    var mIdUser = ""
+    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mItemStatus: String = "I bring"
     var mEventUniqueID = UUID.randomUUID().toString()
     var varbutton: BubbleNavigationLinearView? = null
@@ -57,8 +61,6 @@ class CreateFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_create, container, false)
-
-        mIdUser = ITEMACTIVITY.mIdUser
         return view }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -174,8 +176,14 @@ class CreateFragment : BaseFragment() {
 
                     mEventVM.createEvent(mDataEvent)
                     mUserVM.upadateEventUser(mIdUser,mEventUniqueID )
-                    view?.findNavController()?.navigate(R.id.action_create_to_home)
-                    varbutton?.setCurrentActiveItem(1) } } }
+
+                 view?.findNavController()?.navigate(R.id.action_create_to_home)
+                 varbutton?.setCurrentActiveItem(1)
+
+
+
+
+                } } }
 
 
     }

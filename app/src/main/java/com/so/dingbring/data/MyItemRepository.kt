@@ -41,7 +41,7 @@ class MyItemRepository {
 
     fun getItem(mEventId:String) : LiveData<ArrayList<ArrayList<String>>> {
 
-
+        var itemUserId = ""
         var mItemStatus = ""
         var mItemName = ""
         var mItemQty = ""
@@ -65,7 +65,7 @@ class MyItemRepository {
                     var mListItem: ArrayList<String> = arrayListOf()
                     mListItem.clear()
                     mUserId = docItem.getString("itemUserId").toString()
-                    mListItem.add(mItemStatus)
+                    mListItem.add(itemUserId)
                     mItemStatus = docItem.getString("itemStatus").toString()
                     mListItem.add(mItemStatus)
                     mItemName = docItem.getString("itemName").toString()
@@ -87,7 +87,6 @@ class MyItemRepository {
                                 mListItem.add(mUserPic)
                                 mUserName = docUser.getString("NameUser").toString()
                                 mListItem.add(mUserName)
-
                                 mMegaListItem.add(mListItem)
                                }
 

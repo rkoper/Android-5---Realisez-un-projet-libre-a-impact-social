@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/fui_transparent"
     android:layout_height="60dp"
     android:layout_margin="2dp">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detail_item_cl"
         android:layout_width="match_parent"
         android:background="@color/fui_transparent"
         android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/detail_item_cache"
+            app:layout_constraintTop_toTopOf="@+id/topV"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomV"
+            app:layout_constraintLeft_toLeftOf="@+id/item_view_1"
+            app:layout_constraintRight_toRightOf="@+id/item_view_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/purple_100"
+            android:background="@drawable/rectangle_corner"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/detail_gl_h_02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.02"/>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/detail_gl_h_03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.03"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/detail_gl_h_98"
             android:layout_width="wrap_content"
@@ -63,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1"/>
+            app:layout_constraintGuide_percent="0.18"/>
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/detail_gl_h_8"
             android:layout_width="wrap_content"
@@ -158,6 +177,20 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.99"/>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/detail_gl_v_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.39"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/detail_gl_v_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55"/>
+
 
         <TextView
             android:id="@+id/detail_item_type"
@@ -202,7 +235,7 @@
             android:layout_margin="5dp"
             android:visibility="invisible"
             android:id="@+id/detail_item_band"
-            android:backgroundTint="@color/yellow_800"
+            android:backgroundTint="@color/purple_300"
             android:background="@drawable/logo_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -211,17 +244,7 @@
             app:layout_constraintLeft_toRightOf="@+id/detail_item_global"
             app:layout_constraintRight_toLeftOf="@+id/detail_item_type" />
 
-        <ImageView
-            android:visibility="invisible"
-            android:id="@+id/detail_item_cache"
-            app:layout_constraintTop_toTopOf="@+id/topV"
-            app:layout_constraintBottom_toBottomOf="@+id/bottomV"
-            app:layout_constraintLeft_toLeftOf="@+id/item_view_1"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:backgroundTint="@color/purple_300"
-            android:background="@drawable/rectangle_corner"/>
+
 
 
         <ImageView
@@ -303,9 +326,6 @@
 
 
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
