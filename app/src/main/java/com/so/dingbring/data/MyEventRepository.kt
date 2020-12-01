@@ -63,94 +63,6 @@ class MyEventRepository {
     }
 
 
-
-
-
-
-    fun getUserEventv2(mEventUser: ArrayList<String>, requireActivity: FragmentActivity): MutableLiveData<ArrayList<ArrayList<String>>> {
-        var mEventU: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
-        var mVtest: MutableLiveData<ArrayList<ArrayList<String>>> = MutableLiveData()
-
-        dbFire.collection("event").addSnapshotListener { querySnapshot, exception ->
-            if (querySnapshot != null) {
-                val mutableList = mutableListOf<MyEvent>()
-                for (document in querySnapshot.documents) {
-                    if (mEventUser.contains(document.getString("eventId"))) {
-
-                        mEventAdress = document.getString("eventAddress")
-                        mEventDate = document.getString("eventDate")
-                        mEventId = document.getString("eventId")
-                        mEventName = document.getString("eventName")
-                        mEventHour = document.getString("eventHour")
-                        mEventDesc = document.getString("eventDesc")
-                        mEventUserId = document.getString("eventUserId")
-                        mEventOrga = document.getString("eventOrga")
-                        myData = MyEvent(mEventAdress!!, mEventDate!!, mEventId!!, mEventName!!, mEventHour!!, mEventDesc!!, mEventUserId!!,mEventOrga!!)
-                        mutableList.add(myData)
-                    }
-                }
-                mEventU.value = mutableList
-
-            }
-        }
-
-
-        val mAllList = arrayListOf<ArrayList<String>>()
-        mEventU.observe(requireActivity, Observer {listmyevent ->
-            println("     ---------------0-------------")
-            listmyevent.forEach { myevent ->
-                println("     ---------------1-------------")
-                mEventUserId = myevent.mEventUserId
-                dbFire.collection("user").addSnapshotListener { querySnapshot, exception ->
-                    println("     ---------------2-------------")
-                    if (querySnapshot != null) {
-                        println("     ---------------3-------------")
-                        for (doc in querySnapshot.documents) {
-                            println("     ---------------4-------------")
-                            if (mEventUserId == doc.getString("DocIdUser")) {
-                                println("     ---------------5-------------")
-                                val mList = arrayListOf<String>()
-                                mEventAdress = myData.mEventAdress
-                                mEventDate = myData.mEventDate
-                                mEventId = myData.mEventId
-                                mEventName = myData.mEventName
-                                mEventHour = myData.mEventHour
-                                mEventDesc = myData.mEventDesc
-                                mEventUserId = myData.mEventUserId
-                                mEventOrga = myData.mEventOrga
-                                mNameUser = doc.getString("NameUser")
-                                mPicUser = doc.getString("PhotoUser")
-
-                                mList.add(mEventAdress!!)
-                                mList.add(mEventDate!!)
-                                mList.add(mEventId!!)
-                                mList.add(mEventName!!)
-                                mList.add(mEventHour!!)
-                                mList.add(mEventDesc!!)
-                                mList.add(mEventUserId!!)
-                                mList.add(mEventOrga!!)
-                                mList.add(mNameUser.toString())
-                                mList.add(mPicUser.toString())
-
-                                mAllList.add(mList)
-
-
-                                println("     YYYYYYYYYYYYYYYYYYYYYYYYYYY    " + mAllList)
-                            }
-                        }
-
-
-
-
-
-                    }
-                        }
-                    }
-                    mVtest.value = mAllList
-        })
-        return mVtest}
-
-
     fun getUserEvent(
         mEventUser: ArrayList<String>,
         requireActivity: FragmentActivity
@@ -160,22 +72,27 @@ class MyEventRepository {
 
         var mVtest: MutableLiveData<ArrayList<ArrayList<String>>> = MutableLiveData()
 
-        dbFire.collection("event").addSnapshotListener { querySnapshot, exception ->
-            if (querySnapshot != null) {
-                val mutableList = mutableListOf<MyEvent>()
-                for (document in querySnapshot.documents) {
-                    if (mEventUser.contains(document.getString("eventId"))) {
-                        val  eventDate = document.getString("eventDate")
-                        val   eventName = document.getString("eventName")
-                        val  eventAddress = document.getString("eventAddress")
-                        val  eventId = document.getString("eventId")
-                        val  eventUserId = document.getString("eventUserId")
-                        val eventHour = document.getString("eventHour")
-                        val eventDesc = document.getString("eventDesc")
-                        val eventOrga = document.getString("eventOrga")
-                        myData = MyEvent(eventAddress!!, eventDate!!, eventId!!, eventName!!, eventHour!!, eventDesc!!, eventUserId!!, eventOrga!!)
-                        mutableList.add(myData) } }
-                mEventU.value = mutableList } }
+        dbFire.collection("event").get().addOnSuccessListener {
+            val mutableList = mutableListOf<MyEvent>()
+            for (document in it.documents) {
+                if (mEventUser.contains(document.getString("eventId"))) {
+                    val  eventDate = document.getString("eventDate")
+                    val   eventName = document.getString("eventName")
+                    val  eventAddress = document.getString("eventAddress")
+                    val  eventId = document.getString("eventId")
+                    val  eventUserId = document.getString("eventUserId")
+                    val eventHour = document.getString("eventHour")
+                    val eventDesc = document.getString("eventDesc")
+                    val eventOrga = document.getString("eventOrga")
+
+
+                    println("======------Repo EVENT -------- 1 =========" + eventName)
+
+
+
+                    myData = MyEvent(eventAddress!!, eventDate!!, eventId!!, eventName!!, eventHour!!, eventDesc!!, eventUserId!!, eventOrga!!)
+                    mutableList.add(myData) } }
+            mEventU.value = mutableList }
 
         val lfDEventMega = arrayListOf<ArrayList<String>>()
         mEventU.observe(requireActivity, Observer {listmyevent ->
@@ -195,6 +112,8 @@ class MyEventRepository {
                                 val mNameUser: String? = doc.getString("NameUser")
                                 val mPicUser: String? = doc.getString("PhotoUser")
 
+                                println("======------Repo EVENT -------- 2 =========" + mPicUser)
+
                                 lfDEvent.add(mEventAddress)
                                 lfDEvent.add(mEventDate)
                                 lfDEvent.add(mEventId)
@@ -206,7 +125,12 @@ class MyEventRepository {
                                 lfDEvent.add(mEventDesc)
                                 lfDEvent.add(mEventOrga)
 
-                                lfDEventMega.add(lfDEvent) }}
+                                lfDEventMega.add(lfDEvent)
+
+                                println("======------Repo EVENT -------- 3 =========" + lfDEventMega)
+
+
+                            }}
                         mVtest.value = lfDEventMega }} } })
         return mVtest }
 

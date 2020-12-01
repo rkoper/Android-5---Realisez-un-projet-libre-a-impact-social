@@ -92,8 +92,6 @@ class EventFragment : BaseFragment() {
         mEventVM.getUserEvent(mUserEvent, requireActivity())
             .observe(requireActivity(), androidx.lifecycle.Observer {listMyEvent ->
 
-                println("======------listMyEvent-------- 1 =========" + listMyEvent)
-
                 mDataEvent.clear()
                 mDataEvent.addAll(listMyEvent)
                 mEventAdapter.notifyDataSetChanged() }) }
