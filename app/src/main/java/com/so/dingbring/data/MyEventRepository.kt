@@ -86,10 +86,6 @@ class MyEventRepository {
                     val eventOrga = document.getString("eventOrga")
 
 
-                    println("======------Repo EVENT -------- 1 =========" + eventName)
-
-
-
                     myData = MyEvent(eventAddress!!, eventDate!!, eventId!!, eventName!!, eventHour!!, eventDesc!!, eventUserId!!, eventOrga!!)
                     mutableList.add(myData) } }
             mEventU.value = mutableList }
@@ -97,8 +93,10 @@ class MyEventRepository {
         val lfDEventMega = arrayListOf<ArrayList<String>>()
         mEventU.observe(requireActivity, Observer {listmyevent ->
             listmyevent.forEach {myevent -> val  a = myevent.mEventUserId
-                dbFire.collection("user").addSnapshotListener { querySnapshot, exception ->
-                    if (querySnapshot != null) { for (doc in querySnapshot.documents) {
+                dbFire.collection("user").get().addOnSuccessListener { querySnapshot ->
+                    if (querySnapshot != null) {
+                        val mutableList = mutableListOf<MyEvent>()
+                    for (doc in querySnapshot.documents) {
                             val lfDEvent = arrayListOf<String>()
                             if (a == doc.getString("DocIdUser")) {
                                 val mEventAddress = myevent.mEventAdress
