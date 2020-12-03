@@ -11,69 +11,42 @@
         android:label="fragment_event"
         tools:layout="@layout/fragment_event" >
         <action
-            android:id="@+id/action_eventFragment_to_detail_fragment"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary"
-            app:launchSingleTop="false" />
+            android:id="@+id/action_event_fragment_to_settings_fragment"
+            app:destination="@id/settings_fragment" />
+        <action
+            android:id="@+id/action_event_fragment_to_createFragment"
+            app:destination="@id/create_Fragment" />
+        <action
+            android:id="@+id/action_event_fragment_to_calendar_fragment"
+            app:destination="@id/calendar_fragment" />
+        <action
+            android:id="@+id/action_event_fragment_to_detailFragment"
+            app:destination="@id/detail_Fragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/createFragment"
+        android:id="@+id/create_Fragment"
         android:name="com.so.dingbring.view.create.CreateFragment"
         android:label="fragment_image"
-        tools:layout="@layout/fragment_create" >
-        <action
-            android:id="@+id/action_create_to_home"
-            app:destination="@id/event_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-    </fragment>
+        tools:layout="@layout/fragment_create" />
+
+
     <fragment
-        android:id="@+id/detailFragment"
+        android:id="@+id/detail_Fragment"
         android:name="com.so.dingbring.view.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
-        <argument
-            android:name="eventId"
-            app:argType="string"/>
-        <argument
-            android:name="eventDate"
-            app:argType="string"/>
-        <argument
-            android:name="eventName"
-            app:argType="string" />
-        <argument
-            android:name="eventAdress"
-            app:argType="string" />
-        <argument
-            android:name="eventOrga"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_detail_to_home"
-            app:destination="@id/event_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
     </fragment>
+
 
     <fragment
         android:id="@+id/calendar_fragment"
         android:name="com.so.dingbring.view.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" >
-        <argument
-            android:name="eventId"
-            app:argType="string"/>
         <action
-            android:id="@+id/action_calendar_to_detail"
-            app:destination="@id/detailFragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
-        <action
-            android:id="@+id/action_calendar_to_home"
-            app:destination="@id/event_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
+            android:id="@+id/action_calendar_fragment_to_detail_Fragment"
+            app:destination="@id/detail_Fragment" />
     </fragment>
 
 
@@ -81,12 +54,7 @@
         android:id="@+id/settings_fragment"
         android:name="com.so.dingbring.view.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_settings_to_home"
-            app:destination="@id/event_fragment"
-            app:enterAnim="@anim/fui_slide_in_right"
-            app:exitAnim="@anim/stationary" />
+        tools:layout="@layout/fragment_settings" />
 
-    </fragment>
+
 </navigation>

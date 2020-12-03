@@ -10,7 +10,6 @@ import kotlin.collections.HashMap
 class MyEventRepository {
 
     private var mEventSet: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
-    private var mEventIDSet: MutableLiveData<MyEvent> = MutableLiveData()
     var mEventDate: String? = ""
     var mEventName: String? = ""
     var mEventAdress: String? = ""
@@ -130,6 +129,7 @@ class MyEventRepository {
 
 
     fun getEventById(mEventIdS:String) : LiveData<MyEvent>  {
+        var mEventIDSet: MutableLiveData<MyEvent> = MutableLiveData()
         dbFire.collection("event").whereEqualTo("eventId", mEventIdS)
             .get()
             .addOnSuccessListener { documents ->

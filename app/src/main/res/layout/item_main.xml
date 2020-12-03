@@ -63,19 +63,63 @@
                     app:layout_constraintGuide_percent="0.1"/>
 
                 <androidx.appcompat.widget.Toolbar
-                    app:title="123"
-                    android:gravity="center"
-                    android:id="@+id/item_tool_bar"
-                    style="@style/TxtViewPrincipalBlack"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="@+id/main_h_2"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"/>
+                        app:layout_constraintRight_toRightOf="parent">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        <TextView
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:gravity="center"
+                            android:id="@+id/item_tool_bar"
+                            style="@style/TxtViewPrincipalBlack"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                           android:layout_marginEnd="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fabCustomSize="40dp"
+                            app:borderWidth="2dp"
+                            app:maxImageSize="25dp"
+                            android:id="@+id/item_tb_fb_action"
+                            app:tint="@android:color/white"
+                            android:backgroundTint="@color/grey_600" />
+
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    android:layout_marginEnd="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:fabCustomSize="40dp"
+                                    app:borderWidth="2dp"
+                                    app:maxImageSize="25dp"
+                                    android:id="@+id/item_tb_fb_back"
+                                    app:srcCompat="@drawable/logo_back"
+                                    app:tint="@android:color/white"
+                                    android:backgroundTint="@color/grey_600" />
+
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.appcompat.widget.Toolbar>
 
                 <com.gauravk.bubblenavigation.BubbleNavigationLinearView
                     android:orientation="vertical"
-                    android:id="@+id/floating_top_bar_navigation"
+                    android:id="@+id/float_bottom_bar"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:elevation="10dp"

@@ -38,6 +38,9 @@ class EventFragment : BaseFragment() {
     var mIdUser = "////"
     var mUserEvent = arrayListOf("", "")
 
+    var mIdEvent = ""
+    var mGoDetail = ""
+
  override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,7 +48,10 @@ class EventFragment : BaseFragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_event, container, false)
         mIdUser = LoginActivity.mIdUser
+
         return view }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,8 +79,7 @@ class EventFragment : BaseFragment() {
         mEventAdapter.itemClick.subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread()).subscribe { data ->
                 var bundle = bundleOf("GlobalIdEvent" to data)
-                bundle.putString("GlobalIdUSer", mIdUser)
-                view?.findNavController()?.navigate(R.id.action_eventFragment_to_detail_fragment, bundle) }
+                view?.findNavController()?.navigate(R.id.action_event_fragment_to_detailFragment, bundle) }
         loadRV() }
 
 
@@ -87,6 +92,8 @@ class EventFragment : BaseFragment() {
                 mDataEvent.clear()
                 mDataEvent.addAll(listMyEvent)
                 mEventAdapter.notifyDataSetChanged() }) }}
+
+
 
 }
 

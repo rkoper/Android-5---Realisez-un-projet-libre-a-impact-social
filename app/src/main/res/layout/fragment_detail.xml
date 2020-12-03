@@ -5,8 +5,7 @@
     android:background="@drawable/rectangle_corner_grey_600"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.main.MainActivity">
+    android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -118,7 +117,7 @@
                 style="@style/TxtViewPrincipalWhitev2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="Event Name"
+                android:text=""
                 app:layout_constraintTop_toTopOf="@+id/detail_gl_08"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

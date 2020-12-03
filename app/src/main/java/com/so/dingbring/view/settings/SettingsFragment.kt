@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -65,14 +66,27 @@ class SettingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+        varbutton = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    view?.findNavController()?.navigate(R.id.action_settings_to_home)
+                 //   view?.findNavController()?.navigate(R.id.action_settings_to_home)
                     varbutton?.setCurrentActiveItem(1) } })
         goHeader()
-       }
+
+
+        onBackPressed()
+    }
+
+    private fun onBackPressed() {
+        varbutton = activity?.findViewById(R.id.float_bottom_bar)
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+                    varbutton?.setCurrentActiveItem(1) } })
+    }
+
 
 
 

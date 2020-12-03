@@ -3,22 +3,24 @@ package com.so.dingbring.view.detail
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.AnimationUtils
-import android.widget.*
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
@@ -38,6 +40,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_layout_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.*
+import kotlinx.android.synthetic.main.item_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -45,6 +48,7 @@ import java.util.*
 class DetailFragment : BaseFragment() {
 
     var mEventId = ""
+    var mEventName = ""
     private lateinit var mDetailAdapter: DetailAdapter
     private val mItemVM by viewModel<MyItemViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
@@ -54,10 +58,21 @@ class DetailFragment : BaseFragment() {
     var mListMyItem: ArrayList<ArrayList<String>> = arrayListOf()
     var mNameUser = "..."
     var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+
     var mBubble : BubbleNavigationLinearView? = null
-    var mTopBar : Toolbar? = null
+    var mTopBarTxt : TextView? = null
+
+    var mFloat_back : FloatingActionButton? = null
+    var mFloat_action : FloatingActionButton? = null
+
+
     var mItemQuantity = 1
     lateinit var d_detail:Dialog
+    private var thisView: View? = null
+
+     var mTextName: TextView? = null
+
 
 
     override fun onCreateView(
@@ -65,32 +80,67 @@ class DetailFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mEventId = arguments?.get("GlobalIdEvent").toString()
-        initHeader()
-        return inflater.inflate(R.layout.fragment_detail, container, false) }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
+        mEventId = arguments?.get("GlobalIdEvent").toString()
+
+
+
+
+        mBubble = activity?.findViewById(R.id.float_bottom_bar)
+        mBubble!!.visibility = View.INVISIBLE
+       // mBubble!!.setCurrentActiveItem(1)
+
+           mTopBarTxt = activity?.findViewById(R.id.item_tool_bar)
+           mTopBarTxt?.text  = "Detail"
+           mTopBarTxt?.setTextColor(resources.getColor(R.color.red_300))
+
+
+           mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+           mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
+           mFloat_back?.setColorFilter(Color.argb(255, 255, 255, 255))
+
+
+           mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
+           mFloat_action?.visibility = View.VISIBLE
+           mFloat_action?.setImageResource(R.drawable.logo_share)
+           mFloat_action?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
+
+
+
+
+
+
+
+
+
+
+
+
+        thisView =  inflater.inflate(R.layout.fragment_detail, container, false)
+
+            return thisView
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRetrieveItem()
+        mTextName = view?.findViewById(R.id.detail_name_txt)
         initCreateItem()
-        mBubble = activity?.findViewById(R.id.floating_top_bar_navigation)
-        mBubble!!.setCurrentActiveItem(1)
-        mTopBar = activity?.findViewById(R.id.item_tool_bar)
-        mTopBar?.title  = "Detail"
-        mTopBar?.setTitleTextColor(resources.getColor(R.color.red_300))
-      //  invisible()
+        initRetrieveItem()
         prepareToShare()
-        backpressed()
-        }
-
-    private fun backpressed() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() { goBack() } }) }
-
-    private fun goBack() {
-        view?.findNavController()?.navigate(R.id.action_detail_to_home)
+        onBackPressed()
+        initHeader()
     }
+
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+               Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+                    mBubble!!.visibility = View.VISIBLE
+                    mBubble?.setCurrentActiveItem(1) } })
+    }
+
 
 
     private fun prepareToShare() {
@@ -128,8 +178,9 @@ class DetailFragment : BaseFragment() {
                             d_detail.dismiss()}
 
                         d_detail.dialog_down.setOnClickListener { d_detail.dismiss()}
-                    }
 
+
+                    }
                     else { mItemVM.updateStatus(data)
                     initRVObserver()  }} }
 
@@ -148,8 +199,8 @@ class DetailFragment : BaseFragment() {
 
 
     private fun initHeader() {
-        mEventVM.getEventrById(mEventId).observe(requireActivity(),androidx.lifecycle.Observer { myevent ->
-            detail_name_txt.text = myevent.mEventName }) }
+        mEventVM.getEventrById(mEventId).observe(requireActivity(), androidx.lifecycle.Observer { myevent ->
+            mTextName!!.text = myevent.mEventName }) }
 
     private fun initButton() {
         detail_button_add.setOnClickListener {
@@ -223,8 +274,6 @@ class DetailFragment : BaseFragment() {
         detail_status_bring.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.fui_transparent))
         detail_quantity_txt.text = "1"
         detail_item_edit.setText(" ")
-
-
         goAnimTxtBack(detail_status_need)
         goAnimTxtBack(detail_status_bring)
         goAnimTxtLayoutBack(detail_item_txt)
@@ -233,15 +282,7 @@ class DetailFragment : BaseFragment() {
         goAnimViewBack(detail_quantity_item)
         goAnimViewBack(detail_quantity_minus)
         goAnimViewBack(detail_quantity_plus)
-        goAnimFloatingBack(detail_check)
-
-
-
-
-        }
-
-
-
+        goAnimFloatingBack(detail_check) }
 
     private fun goAnimView(mLink: View?) {
         val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_1)

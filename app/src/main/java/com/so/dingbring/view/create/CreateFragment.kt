@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.gms.common.api.Status
@@ -65,15 +66,24 @@ class CreateFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        varbutton = activity?.findViewById(R.id.floating_top_bar_navigation)
+        initCreateEvent()
+        onBackPressed()
+    }
+
+    private fun onBackPressed() {
+        varbutton = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    view?.findNavController()?.navigate(R.id.action_create_to_home)
-                    varbutton?.setCurrentActiveItem(1) } })
-        initCreateEvent() }
+                  navToHome() } })
+    }
 
-        private fun initCreateEvent() {
+    private fun navToHome() {
+        Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+        varbutton?.setCurrentActiveItem(1)
+    }
+
+    private fun initCreateEvent() {
             initAdresse()
             initDate()
             initEvent()
@@ -180,8 +190,7 @@ class CreateFragment : BaseFragment() {
                     mEventVM.createEvent(mDataEvent)
                     mUserVM.upadateEventUser(mIdUser,mEventUniqueID )
 
-                 view?.findNavController()?.navigate(R.id.action_create_to_home)
-                 varbutton?.setCurrentActiveItem(1)
+                    navToHome()
 
 
 

@@ -2,23 +2,16 @@ package com.so.dingbring.view.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toolbar
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import androidx.navigation.NavOptions.Builder
 import androidx.navigation.Navigation
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
-import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import kotlinx.android.synthetic.main.item_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -38,53 +31,53 @@ class ItemActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.item_main)
+
         mclick = intent?.getIntExtra("msg", 99)!!
 
         retrieveData()
-        initClickOnItem()
+        initClickOnItem(mclick)
         initBottomBar() }
 
     private fun initBottomBar() {
-        floating_top_bar_navigation.visibility = View.VISIBLE
-        floating_top_bar_navigation.setTypeface(ResourcesCompat.getFont(this, R.font.roboto))
-        floating_top_bar_navigation.setNavigationChangeListener { view, position ->
-            if (position == 0) { val intent = Intent(this, MainActivity::class.java) ; startActivity(intent) }
-            if (position == 1) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.event_fragment)
-                item_tool_bar.title =  "Event"
-                item_tool_bar.setTitleTextColor(resources.getColor(R.color.red_300))}
-            if (position == 2) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment)
-                item_tool_bar.title =  "Create"
-                item_tool_bar.setTitleTextColor(resources.getColor(R.color.blue_600))}
-            if (position == 3) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment)
-                item_tool_bar.title =  "Calendar"
-                item_tool_bar.setTitleTextColor(resources.getColor(R.color.green_300))}
-            if (position == 4) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment)
-                item_tool_bar.title =  "Settings"
-                item_tool_bar.setTitleTextColor(resources.getColor(R.color.yellow_900))} }}
+        float_bottom_bar.visibility = View.VISIBLE
+        float_bottom_bar.setTypeface(ResourcesCompat.getFont(this, R.font.roboto))
+        float_bottom_bar.setNavigationChangeListener { view, position ->
+
+            if (position == 1) { initClickOnItem(11)}
+            else { initClickOnItem(position)}
 
 
-    private fun initClickOnItem() {
-        val navBuilder = Builder();
-        navBuilder.setEnterAnim(R.anim.slideright)
-        if (mclick == 1) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
-            floating_top_bar_navigation.setCurrentActiveItem(1)
-            item_tool_bar.title = "Event"
-            item_tool_bar.setTitleTextColor(resources.getColor(R.color.red_300)) }
-        if (mclick == 2) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
-            Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment)
-            floating_top_bar_navigation.setCurrentActiveItem(2)
-            item_tool_bar.title = "Create"
-            item_tool_bar.setTitleTextColor(resources.getColor(R.color.blue_600)) }
-        if (mclick == 3) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
-            Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment)
-            floating_top_bar_navigation.setCurrentActiveItem(3)
-            item_tool_bar.title = "Calendar"
-            item_tool_bar.setTitleTextColor(resources.getColor(R.color.green_300)) }
-        if (mclick == 4) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
-            Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment)
-            floating_top_bar_navigation.setCurrentActiveItem(4)
-            item_tool_bar.title = "Settings"
-            item_tool_bar.setTitleTextColor(resources.getColor(R.color.yellow_900)) } }
+        }}
+
+    private fun initClickOnItem(mclick: Int) {
+
+        if (mclick == 0 ) { val intent = Intent(this, MainActivity::class.java) ; startActivity(intent) }
+        if (mclick == 1 ) { initBar(0,1, "Event", R.color.red_300,View.INVISIBLE) }
+        if (mclick == 11 ) { initBar(R.id.event_fragment,1, "Event", R.color.red_300,View.INVISIBLE) }
+        if (mclick == 2 ) {
+
+            initBar(R.id.create_Fragment, mclick, "Create", R.color.blue_600,View.VISIBLE)
+            item_tb_fb_action.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_300))
+            item_tb_fb_action.setImageResource(R.drawable.logo_save)
+            item_tb_fb_action.setColorFilter(Color.argb(255, 255, 255, 255)) }
+        if (mclick == 3 ) {initBar(R.id.calendar_fragment, mclick, "Calendar", R.color.green_300,View.INVISIBLE)}
+        if (mclick == 4) { initBar(R.id.settings_fragment, mclick, "Settings", R.color.yellow_900,View.INVISIBLE)}
+    }
+
+    private fun initBar(
+        mFrag: Int,
+        mClick: Int,
+        mFragName: String,
+        mColor: Int,
+        mVisible: Int
+    ) {
+        if (mFrag != 0){ Navigation.findNavController(this, R.id.hostFragment).navigate(mFrag)}
+        float_bottom_bar.setCurrentActiveItem(mClick)
+        item_tool_bar.text = mFragName
+        item_tool_bar.setTextColor(resources.getColor(mColor))
+        item_tb_fb_back.backgroundTintList = ColorStateList.valueOf(resources.getColor(mColor))
+        item_tb_fb_action.visibility = mVisible
+    }
 
 
     private fun retrieveData() {
