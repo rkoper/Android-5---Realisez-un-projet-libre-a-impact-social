@@ -4,120 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/rectangle_corner_grey_600"
     android:orientation="horizontal">
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/home_gl_h_10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
-
-    <TextView
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/home_gl_h_10"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="Settings"
-        android:textColorHint="@color/green_600"
-        style="@style/TxtViewPrincipalWhite"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/rectangle_corner_grey_600"
-        app:layout_constraintTop_toTopOf="@+id/home_gl_h_10"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="0dp"
         android:layout_height="0dp">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/card_t_top_settings"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:background="@drawable/rectangle_corner_grey_700"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.5" />
-                <ImageView
-                    android:background="@drawable/round"
-                    android:backgroundTint="@color/black"
-                    app:layout_constraintTop_toBottomOf="@+id/guideline11"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline11"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/card_t_settings_name"
-                    android:layout_gravity="left|center_vertical"
-                    android:id="@+id/card_t_settings_photo"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:scaleType="fitXY"
-                    tools:ignore="RtlHardcoded" />
-                <TextView
-                    style="@style/TxtViewPrincipalBlack"
-                    android:textColor="@color/white"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline11"
-                    app:layout_constraintStart_toEndOf="@+id/card_t_settings_photo"
-                    android:id="@+id/card_t_settings_name"
-                    android:layout_width="225dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-                <TextView
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    style="@style/TxtViewPrincipalBlack"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toBottomOf="@+id/guideline11"
-                    app:layout_constraintStart_toEndOf="@+id/card_t_settings_photo"
-                    android:id="@+id/card_t_settings_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:layout_gravity="center|bottom" />
-                <ImageView
-                    style="@style/TxtViewPrincipalBlack"
-                    app:layout_constraintTop_toTopOf="@+id/card_t_settings_status"
-                    app:layout_constraintBottom_toBottomOf="@+id/card_t_settings_status"
-                    app:layout_constraintStart_toEndOf="@+id/card_t_settings_status"
-                    android:id="@+id/settings_medal"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:layout_gravity="center|bottom" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
+    <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_v_33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,39 +58,35 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35" />
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline47"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.47" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.10" />
+            app:layout_constraintGuide_percent="0.03" />
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
+            android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.25" />
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline65"
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline47"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -202,13 +96,113 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.72" />
+            app:layout_constraintGuide_percent="0.7" />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline81"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.85" />
+            app:layout_constraintGuide_percent="0.9" />
+
+
+
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/card_t_top_settings"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/rectangle_corner_grey_700"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.5" />
+                <ImageView
+                    android:background="@drawable/round"
+                    android:backgroundTint="@color/yellow_900"
+
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
+                    tools:ignore="RtlHardcoded"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline11"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/card_t_settings_name"/>
+
+                <ImageView
+                    android:background="@drawable/round"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline11"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/card_t_settings_name"
+                    android:layout_gravity="left|center_vertical"
+                    android:id="@+id/card_t_settings_photo"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:scaleType="fitXY"
+                    tools:ignore="RtlHardcoded" />
+                <TextView
+                    android:textSize="28sp"
+                    style="@style/TxtViewPrincipalBlackv2"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                    app:layout_constraintStart_toEndOf="@+id/card_t_settings_photo"
+                    android:id="@+id/card_t_settings_name"
+                    android:layout_width="225dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                <TextView
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    style="@style/TxtViewPrincipalBlack"
+                    android:textSize="17sp"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline11"
+                    app:layout_constraintStart_toEndOf="@+id/card_t_settings_photo"
+                    android:id="@+id/card_t_settings_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_gravity="center|bottom" />
+                <ImageView
+                    style="@style/TxtViewPrincipalBlack"
+                    app:layout_constraintTop_toTopOf="@+id/card_t_settings_status"
+                    app:layout_constraintBottom_toBottomOf="@+id/card_t_settings_status"
+                    app:layout_constraintStart_toEndOf="@+id/card_t_settings_status"
+                    android:id="@+id/settings_medal"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_gravity="center|bottom" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 
@@ -222,7 +216,7 @@
             android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="@+id/guideline_v_66"
             app:layout_constraintStart_toStartOf="@+id/guideline_v_33"
-            app:layout_constraintTop_toTopOf="@+id/guideline65"
+            app:layout_constraintTop_toTopOf="@+id/guideline6"
             app:layout_constraintBottom_toBottomOf="@+id/guideline81"
             android:background="@drawable/rectangle_corner_grey_600"
             >
@@ -242,10 +236,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/logo_exit"
-                    app:tint="@color/green_300"/>
+                    app:tint="@color/yellow_900"/>
 
                 <TextView
-                    android:textColor="@color/green_300"
+                    android:textColor="@color/yellow_900"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"
@@ -287,10 +281,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/logo_personn"
-                    app:tint="@color/green_300"/>
+                    app:tint="@color/yellow_900"/>
 
                 <TextView
-                    android:textColor="@color/green_300"
+                    android:textColor="@color/yellow_900"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"
@@ -332,10 +326,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/logo_mail"
-                    app:tint="@color/green_300"/>
+                    app:tint="@color/yellow_900"/>
 
                 <TextView
-                    android:textColor="@color/green_300"
+                    android:textColor="@color/yellow_900"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"
@@ -376,10 +370,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/logo_language"
-                    app:tint="@color/green_300"/>
+                    app:tint="@color/yellow_900"/>
 
                 <TextView
-                    android:textColor="@color/green_300"
+                    android:textColor="@color/yellow_900"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"
@@ -391,4 +385,11 @@
             </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/settings_guide_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
     </androidx.constraintlayout.widget.ConstraintLayout>

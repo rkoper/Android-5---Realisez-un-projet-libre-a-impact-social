@@ -108,12 +108,10 @@ class CalendarAdapter(
                     if (dateInt == mCompareDate) {
                         monthViewHolder.viewEvent.visibility = View.VISIBLE
                        // monthViewHolder.viewEvent.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.round_small))
-                        monthViewHolder.viewEvent.setBackgroundColor(mContext.resources.getColor(R.color.red_300))
+                        monthViewHolder.viewEvent.setBackgroundColor(mContext.resources.getColor(R.color.green_300))
 
 
-                        monthViewHolder.itemView.setOnClickListener {
-
-                            dateSelectListener.onDateSelected(data) }
+                        monthViewHolder.itemView.setOnClickListener { dateSelectListener.onDateSelected(data) }
 
                     }
                 }

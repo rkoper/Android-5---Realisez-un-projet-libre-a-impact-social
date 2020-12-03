@@ -23,7 +23,6 @@ class MyEventRepository {
     var mPicUser: String? = ""
 
     var myData = MyEvent(mEventAdress!!, mEventDate!!, mEventId!!, mEventName!!, mEventHour!!, mEventDesc!!, mEventUserId!!,mEventOrga!!)
-    private var mUserSet: MutableLiveData<MyUser> = MutableLiveData()
     private val dbFire = FirebaseFirestore.getInstance()
 
 
@@ -110,8 +109,6 @@ class MyEventRepository {
                                 val mNameUser: String? = doc.getString("NameUser")
                                 val mPicUser: String? = doc.getString("PhotoUser")
 
-                                println("======------Repo EVENT -------- 2 =========" + mPicUser)
-
                                 lfDEvent.add(mEventAddress)
                                 lfDEvent.add(mEventDate)
                                 lfDEvent.add(mEventId)
@@ -124,9 +121,6 @@ class MyEventRepository {
                                 lfDEvent.add(mEventOrga)
 
                                 lfDEventMega.add(lfDEvent)
-
-                                println("======------Repo EVENT -------- 3 =========" + lfDEventMega)
-
 
                             }}
                         mVtest.value = lfDEventMega }} } })

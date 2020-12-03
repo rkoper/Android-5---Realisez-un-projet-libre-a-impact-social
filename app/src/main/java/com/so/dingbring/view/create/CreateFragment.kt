@@ -86,7 +86,10 @@ class CreateFragment : BaseFragment() {
     private fun initDescription() { create_info_edit.doOnTextChanged { text, start, before, count ->
             if (count > 0) {mEventDescription = create_info_edit.text.toString() } } }
 
-    private fun initEvent() { create_name_edit.doOnTextChanged { text, start, before, count ->
+    private fun initEvent() {
+        create_name_edit.setText(" ")
+
+        create_name_edit.doOnTextChanged { text, start, before, count ->
             if (count > 0) {mEventName = create_name_edit.text.toString() } } }
 
     private fun initOrga() { create_orga_edit.doOnTextChanged { text, start, before, count ->
@@ -183,7 +186,11 @@ class CreateFragment : BaseFragment() {
 
 
 
-                } } }
+                } }
+                }
+
+
+
 
 
     }

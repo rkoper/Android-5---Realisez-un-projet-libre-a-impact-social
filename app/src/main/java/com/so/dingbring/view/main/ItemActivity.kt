@@ -2,23 +2,27 @@ package com.so.dingbring.view.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavOptions.Builder
 import androidx.navigation.Navigation
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.login.LoginActivity
-import com.so.dingbring.view.login.LoginActivity.Companion.mIdUser
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class ItemActivity : AppCompatActivity() {
     var mUserEvent = arrayListOf("", "")
@@ -26,14 +30,8 @@ class ItemActivity : AppCompatActivity() {
     var mEmailUser = "..mEmailUser.."
     var mPhotoUser = "..mPhotoUser.."
     var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    var mIdEvent = "..mIdEvent.."
-    var mTest = "..mTest.."
     private val mUserVM by viewModel<MyUserViewModel>()
-    var isOpen = false
     var mclick = 0
-    var toDetail = true
-    private val mEventVM by viewModel<MyEventViewModel>()
-    var mDataEvent: MutableList<MutableList<String>> = mutableListOf()
 
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,29 +49,42 @@ class ItemActivity : AppCompatActivity() {
         floating_top_bar_navigation.setTypeface(ResourcesCompat.getFont(this, R.font.roboto))
         floating_top_bar_navigation.setNavigationChangeListener { view, position ->
             if (position == 0) { val intent = Intent(this, MainActivity::class.java) ; startActivity(intent) }
-            if (position == 1) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.event_fragment) }
-            if (position == 2) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment) }
-            if (position == 3) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment) }
-            if (position == 4) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment) } }}
+            if (position == 1) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.event_fragment)
+                item_tool_bar.title =  "Event"
+                item_tool_bar.setTitleTextColor(resources.getColor(R.color.red_300))}
+            if (position == 2) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment)
+                item_tool_bar.title =  "Create"
+                item_tool_bar.setTitleTextColor(resources.getColor(R.color.blue_600))}
+            if (position == 3) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment)
+                item_tool_bar.title =  "Calendar"
+                item_tool_bar.setTitleTextColor(resources.getColor(R.color.green_300))}
+            if (position == 4) { Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment)
+                item_tool_bar.title =  "Settings"
+                item_tool_bar.setTitleTextColor(resources.getColor(R.color.yellow_900))} }}
+
 
     private fun initClickOnItem() {
         val navBuilder = Builder();
         navBuilder.setEnterAnim(R.anim.slideright)
-        if (mclick == 1) {
-            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
-            floating_top_bar_navigation.setCurrentActiveItem(1) }
-        if (mclick == 2) {
-            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+        if (mclick == 1) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+            floating_top_bar_navigation.setCurrentActiveItem(1)
+            item_tool_bar.title = "Event"
+            item_tool_bar.setTitleTextColor(resources.getColor(R.color.red_300)) }
+        if (mclick == 2) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
             Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.createFragment)
-            floating_top_bar_navigation.setCurrentActiveItem(2) }
-        if (mclick == 3) {
-            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+            floating_top_bar_navigation.setCurrentActiveItem(2)
+            item_tool_bar.title = "Create"
+            item_tool_bar.setTitleTextColor(resources.getColor(R.color.blue_600)) }
+        if (mclick == 3) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
             Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.calendar_fragment)
-            floating_top_bar_navigation.setCurrentActiveItem(3) }
-        if (mclick == 4) {
-            mIdUser = intent.getStringExtra("GlobalIdUser").toString()
+            floating_top_bar_navigation.setCurrentActiveItem(3)
+            item_tool_bar.title = "Calendar"
+            item_tool_bar.setTitleTextColor(resources.getColor(R.color.green_300)) }
+        if (mclick == 4) { mIdUser = intent.getStringExtra("GlobalIdUser").toString()
             Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.settings_fragment)
-            floating_top_bar_navigation.setCurrentActiveItem(4) }}
+            floating_top_bar_navigation.setCurrentActiveItem(4)
+            item_tool_bar.title = "Settings"
+            item_tool_bar.setTitleTextColor(resources.getColor(R.color.yellow_900)) } }
 
 
     private fun retrieveData() {
@@ -84,37 +95,8 @@ class ItemActivity : AppCompatActivity() {
             mPhotoUser  = mlmu.mPhotoUser
             mUserEvent = mlmu.mEventUser }) }
 
-    private fun initDynamicLink() {
-        /*
 
-        Firebase.dynamicLinks
-            .getDynamicLink(intent)
-            .addOnSuccessListener(this) { pendingDynamicLinkData ->
-                println(" Main  / LINKS / -----------3---------" + pendingDynamicLinkData)
-                var deepLink: Uri? = null
-                if (pendingDynamicLinkData != null) {
-                    deepLink = pendingDynamicLinkData.link
-                    "https://dingbring.page.link/00349ac2-8839-4847-95c0-9db2cf368e78"
-                    println(" Main  / LINKS / ----------1----------" + deepLink)
-                    println(" Main  / LINKS / -----------2---------" + pendingDynamicLinkData)
-
-                    var deep = deepLink.toString()               deep.split("/")[1]
-
-
-                    //mUserVM.upadateEventUser(mIdUser, deep)
-
-                    val navBuilder = Builder();
-                    navBuilder.setEnterAnim(R.anim.slideright)
-                    val bundle = Bundle()
-                    bundle.putString(USERID, Companion.mIdUser)
-                    Navigation.findNavController(this, R.id.hostFragment).navigate(R.id.homeFragment) }}
-
-            .addOnFailureListener(this) { e -> Log.w(ContentValues.TAG, "getDynamicLink:onFailure", e)
-
-         */
-            }
-
-    }
+}
 
 
 

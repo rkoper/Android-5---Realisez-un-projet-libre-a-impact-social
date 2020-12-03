@@ -107,10 +107,8 @@
                     android:background="@color/colorTransparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/card_t_top_profil"
+                            android:id="@+id/card_t_top_settings"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginStart="16dp"
@@ -118,12 +116,12 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginRight="16dp"
-                           android:background="@drawable/rectangle_corner_grey_700"
                             app:layout_constraintBottom_toTopOf="@+id/guideline"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/guideline2">
                                 <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:background="@drawable/rectangle_corner_grey_700"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                                         <androidx.constraintlayout.widget.Guideline
@@ -134,19 +132,34 @@
                                             app:layout_constraintGuide_percent="0.5" />
                                         <ImageView
                                             android:background="@drawable/round"
-                                            android:backgroundTint="@color/grey_700"
+                                            android:backgroundTint="@color/grey_600"
+
+                                            android:layout_gravity="left|center_vertical"
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:scaleType="fitXY"
+                                            tools:ignore="RtlHardcoded"
+                                            app:layout_constraintTop_toBottomOf="@+id/guideline11"
+                                            app:layout_constraintBottom_toTopOf="@+id/guideline11"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintEnd_toStartOf="@+id/card_t_profil_name"/>
+
+                                        <ImageView
+                                            android:background="@drawable/round"
+                                            android:backgroundTint="@color/white"
                                             app:layout_constraintTop_toBottomOf="@+id/guideline11"
                                             app:layout_constraintBottom_toTopOf="@+id/guideline11"
                                             app:layout_constraintStart_toStartOf="parent"
                                             app:layout_constraintEnd_toStartOf="@+id/card_t_profil_name"
                                             android:layout_gravity="left|center_vertical"
                                             android:id="@+id/card_t_profil_photo"
-                                            android:layout_width="75dp"
-                                            android:layout_height="75dp"
+                                            android:layout_width="72dp"
+                                            android:layout_height="72dp"
                                             android:scaleType="fitXY"
                                             tools:ignore="RtlHardcoded" />
                                         <TextView
-                                            style="@style/TxtViewPrincipalBlack"
+                                            android:textSize="28sp"
+                                            style="@style/TxtViewPrincipalBlackv2"
                                             android:textColor="@color/white"
                                             app:layout_constraintTop_toTopOf="parent"
                                             app:layout_constraintEnd_toEndOf="parent"
@@ -160,10 +173,10 @@
                                             android:textAlignment="center"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
                                         <TextView
-                                            android:textSize="18sp"
                                             android:textColor="@color/white"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             style="@style/TxtViewPrincipalBlack"
+                                            android:textSize="17sp"
                                             app:layout_constraintTop_toBottomOf="@+id/guideline11"
                                             app:layout_constraintStart_toEndOf="@+id/card_t_profil_photo"
                                             android:id="@+id/card_t_profil_status"
@@ -171,21 +184,21 @@
                                             android:layout_height="wrap_content"
                                             android:textAlignment="center"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                                            android:layout_gravity="center|bottom"  />
+                                            android:layout_gravity="center|bottom" />
                                         <ImageView
                                             style="@style/TxtViewPrincipalBlack"
                                             app:layout_constraintTop_toTopOf="@+id/card_t_profil_status"
                                             app:layout_constraintBottom_toBottomOf="@+id/card_t_profil_status"
                                             app:layout_constraintStart_toEndOf="@+id/card_t_profil_status"
                                             android:id="@+id/main_medal"
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:text="BringDring"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
                                             android:textAlignment="center"
                                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                             android:layout_gravity="center|bottom" />
                                 </androidx.constraintlayout.widget.ConstraintLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guideline_v_33"
@@ -313,10 +326,10 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             app:srcCompat="@drawable/logo_settings"
-                                            app:tint="@color/green_300"/>
+                                            app:tint="@color/yellow_900"/>
 
                                         <TextView
-                                            android:textColor="@color/green_300"
+                                            android:textColor="@color/yellow_900"
                                             android:layout_marginEnd="10dp"
                                             style="@style/TxtViewPrincipalWhite"
                                             android:textStyle="bold"
@@ -359,10 +372,10 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             app:srcCompat="@drawable/logo_star"
-                                            app:tint="@color/yellow_900"/>
+                                            app:tint="@color/red_300"/>
 
                                         <TextView
-                                            android:textColor="@color/yellow_900"
+                                            android:textColor="@color/red_300"
                                             android:layout_marginEnd="10dp"
                                             style="@style/TxtViewPrincipalWhite"
                                             android:textStyle="bold"
@@ -445,10 +458,10 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             app:srcCompat="@drawable/logo_calendar"
-                                            app:tint="@color/red_300"/>
+                                            app:tint="@color/green_300"/>
 
                                         <TextView
-                                            android:textColor="@color/red_300"
+                                            android:textColor="@color/green_300"
                                             android:layout_marginEnd="10dp"
                                             style="@style/TxtViewPrincipalWhite"
                                             android:textStyle="bold"

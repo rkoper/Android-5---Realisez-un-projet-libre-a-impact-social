@@ -15,6 +15,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="220dp"
+            android:layout_height="180sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,12 +82,12 @@
             android:layout_margin="5dp"
             android:id="@+id/dialog_cal_photouser"
             android:text="Name"
-            app:srcCompat="@drawable/round_small"
-            android:layout_width="25sp"
-            android:layout_height="25sp"
+            android:background="@drawable/round_small"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             app:layout_constraintRight_toRightOf="@+id/dialog_cal_v_8"
             app:layout_constraintTop_toTopOf="@id/dialog_cal_h_1"
-            app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_2"/>
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_2" />
 
         <TextView
             android:textColor="@color/white"
@@ -139,10 +146,10 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             style="@style/TxtViewPrincipalWhite"
-            android:text="Address"
+            android:text="Addrddddddddddddddddddddddddddess"
             android:id="@+id/dialog_cal_addressevent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_cal_v_1"
             app:layout_constraintRight_toRightOf="@+id/dialog_cal_v_9"
             app:layout_constraintTop_toTopOf="@id/dialog_cal_h_6"
@@ -151,32 +158,38 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/dialog_cal_cancel"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:tint="@color/white"
-            app:backgroundTint="@color/red_300"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_cal_v_1"
             app:layout_constraintTop_toTopOf="@id/dialog_cal_h_8"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_9"
             app:layout_constraintRight_toLeftOf="@+id/dialog_cal_see"
-            app:fabCustomSize="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="35dp"
+            app:borderWidth="2dp"
+            app:maxImageSize="22dp"
             app:srcCompat="@drawable/logo_add"
-            android:rotation="45"/>
+            android:rotation="45"
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/grey_600"
+            app:backgroundTint="@color/green_300" />
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/dialog_cal_see"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:tint="@color/white"
-            app:backgroundTint="@color/red_300"
-            app:fabCustomSize="30dp"
             app:layout_constraintLeft_toRightOf="@+id/dialog_cal_cancel"
             app:layout_constraintRight_toRightOf="@+id/dialog_cal_v_9"
             app:layout_constraintTop_toTopOf="@id/dialog_cal_h_8"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="35dp"
+            app:borderWidth="2dp"
+            app:maxImageSize="22dp"
             app:srcCompat="@drawable/logo_eye"
-            tools:layout_editor_absoluteX="13dp" />
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/grey_600"
+            app:backgroundTint="@color/green_300" />
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

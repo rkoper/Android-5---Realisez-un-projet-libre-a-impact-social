@@ -12,11 +12,7 @@ class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel(
             mMutableData.value= it }
         return mMutableData }
 
-    fun  getItem(mEventId:String): LiveData<ArrayList<ArrayList<String>>>  {
-        return mItemRepository.getItem(mEventId) }
-
-
-    // ON A GARFE TOUTE LES ITMES !!!!!!!!!!!!!!!!!!!!!!!!!!
+    fun  getItem(mEventId:String): LiveData<ArrayList<ArrayList<String>>>  { return mItemRepository.getItem(mEventId) }
 
 
     fun createUniqueItem(mMyItem :MyItem) { mItemRepository.createUniqueItem(mMyItem) }

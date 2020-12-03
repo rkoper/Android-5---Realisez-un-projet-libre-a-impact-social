@@ -162,12 +162,12 @@ class SettingsFragment : BaseFragment() {
         mCurrentLanguage =  sharedPref.getString("localeName","en")
         if (mCurrentLanguage=="en") {changecolor(d_lang.setting_en) ; d_lang.dialog_lang_current_lang.text = "English" }
         if (mCurrentLanguage=="fr") {changecolor(d_lang.setting_fr) ; d_lang.dialog_lang_current_lang.text = "Français" }
-        if (mCurrentLanguage=="it") {changecolor(d_lang.setting_it) ; d_lang.dialog_lang_current_lang.text = "Italiano" }
+       // if (mCurrentLanguage=="it") {changecolor(d_lang.setting_it) ; d_lang.dialog_lang_current_lang.text = "Italiano" }
         if (mCurrentLanguage=="sp") {changecolor(d_lang.setting_sp) ; d_lang.dialog_lang_current_lang.text = "Español" }
-        if (mCurrentLanguage=="de") {changecolor(d_lang.setting_de) ; d_lang.dialog_lang_current_lang.text = "Duitse" }
-        if (mCurrentLanguage=="zh") {changecolor(d_lang.setting_ch) ; d_lang.dialog_lang_current_lang.text = "中文" }
+       // if (mCurrentLanguage=="de") {changecolor(d_lang.setting_de) ; d_lang.dialog_lang_current_lang.text = "Duitse" }
+       // if (mCurrentLanguage=="zh") {changecolor(d_lang.setting_ch) ; d_lang.dialog_lang_current_lang.text = "中文" }
         if (mCurrentLanguage=="pt") {changecolor(d_lang.setting_pt) ; d_lang.dialog_lang_current_lang.text = "Português" }
-        if (mCurrentLanguage=="ar") {changecolor(d_lang.setting_ar) ; d_lang.dialog_lang_current_lang.text = "عربى" }
+        // if (mCurrentLanguage=="ar") {changecolor(d_lang.setting_ar) ; d_lang.dialog_lang_current_lang.text = "عربى" }
         goLanguage() }
 
     private fun changecolor(mTxtLang: TextView?) {
@@ -179,22 +179,24 @@ class SettingsFragment : BaseFragment() {
     private fun initcolor() {
         d_lang.setting_en.setBackgroundColor(Color.GRAY) ; d_lang.setting_en.setTextColor(Color.BLACK)
         d_lang.setting_fr.setBackgroundColor(Color.GRAY) ; d_lang.setting_fr.setTextColor(Color.BLACK)
-        d_lang.setting_it.setBackgroundColor(Color.GRAY) ; d_lang.setting_it.setTextColor(Color.BLACK)
+      //  d_lang.setting_it.setBackgroundColor(Color.GRAY) ; d_lang.setting_it.setTextColor(Color.BLACK)
         d_lang.setting_sp.setBackgroundColor(Color.GRAY) ; d_lang.setting_sp.setTextColor(Color.BLACK)
-        d_lang.setting_de.setBackgroundColor(Color.GRAY) ; d_lang.setting_de.setTextColor(Color.BLACK)
-        d_lang.setting_ch.setBackgroundColor(Color.GRAY) ; d_lang.setting_ch.setTextColor(Color.BLACK)
+       // d_lang.setting_de.setBackgroundColor(Color.GRAY) ; d_lang.setting_de.setTextColor(Color.BLACK)
+       // d_lang.setting_ch.setBackgroundColor(Color.GRAY) ; d_lang.setting_ch.setTextColor(Color.BLACK)
         d_lang.setting_pt.setBackgroundColor(Color.GRAY) ; d_lang.setting_pt.setTextColor(Color.BLACK)
-        d_lang.setting_ar.setBackgroundColor(Color.GRAY) ; d_lang.setting_ar.setTextColor(Color.BLACK) }
+       // d_lang.setting_ar.setBackgroundColor(Color.GRAY) ; d_lang.setting_ar.setTextColor(Color.BLACK)
+        }
 
     private fun goLanguage( ) {
             d_lang.setting_en.setOnClickListener { setLocale("en") }
             d_lang.setting_fr.setOnClickListener { setLocale("fr") }
-            d_lang.setting_it.setOnClickListener { setLocale("it") }
+          //  d_lang.setting_it.setOnClickListener { setLocale("it") }
             d_lang.setting_sp.setOnClickListener { setLocale("es") }
-            d_lang.setting_de.setOnClickListener { setLocale("de") }
-            d_lang.setting_ch.setOnClickListener { setLocale("zh") }
+        //    d_lang.setting_de.setOnClickListener { setLocale("de") }
+      //      d_lang.setting_ch.setOnClickListener { setLocale("zh") }
             d_lang.setting_pt.setOnClickListener { setLocale("pt") }
-            d_lang.setting_ar.setOnClickListener { setLocale("ar") } }
+    //        d_lang.setting_ar.setOnClickListener { setLocale("ar") }
+    }
 
 
     private fun setLocale(localeName: String) {

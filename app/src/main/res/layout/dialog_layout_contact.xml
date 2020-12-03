@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/dialog_profil_h_25"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2"/>
+            app:layout_constraintGuide_percent="0.15"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
@@ -41,42 +41,60 @@
             android:id="@+id/dialog_profil_v_75"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.8"/>
-        <EditText
-            android:layout_margin="10dp"
-            android:id="@+id/custom_dialog_subject"
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ccontact1"
+            android:layout_margin="15dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/colorTransparent"
-            android:hint="Subject"
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            android:inputType="textNoSuggestions"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textCursorDrawable="@null"
-            android:textAlignment="center"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_25"/>
-        <EditText
-            android:textAlignment="viewStart"
-            android:layout_margin="10dp"
-            android:id="@+id/custom_dialog_message"
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_25"
+            android:hint="Subject"
+            style="@style/LoginTextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/custom_dialog_subject"
+                style="@style/TxtViewPrincipalBlack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:text=" "
+                android:textSize="18dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ccontact2"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/colorTransparent"
-            android:hint="Message"
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            android:inputType="textNoSuggestions"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:textCursorDrawable="@null"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_25"
-            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h85"/>
+            app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h85"
+            android:hint="Message"
+            style="@style/LoginTextInputLayoutStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/custom_dialog_message"
+                style="@style/TxtViewPrincipalBlack"
+                android:maxLines="20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:text=" "
+                android:textSize="18dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:layout_constraintTop_toTopOf="@+id/dialog_profil_h85"
@@ -84,14 +102,16 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_profil_v_5"
             android:id="@+id/settings_send_mail"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:fabCustomSize="30dp"
-            app:borderWidth="3dp"
-            app:maxImageSize="18dp"
-            android:tint="@color/white"
-            app:backgroundTint="@color/green_500"
-            app:srcCompat="@drawable/logo_send"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="35dp"
+            app:borderWidth="2dp"
+            app:maxImageSize="22dp"
+            app:srcCompat="@drawable/logo_send"
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/grey_600"
+            app:backgroundTint="@color/yellow_900" />
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:layout_constraintTop_toTopOf="@+id/dialog_profil_h85"
@@ -99,16 +119,16 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="@+id/dialog_profil_v_5"
             android:id="@+id/settings_cancel_mail"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:fabCustomSize="30dp"
-            app:borderWidth="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="35dp"
+            app:borderWidth="2dp"
             app:maxImageSize="22dp"
-            android:tint="@color/white"
-            app:backgroundTint="@color/green_500"
+            app:srcCompat="@drawable/logo_add"
             android:rotation="45"
-            app:srcCompat="@drawable/logo_add"/>
-
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/grey_600"
+            app:backgroundTint="@color/yellow_900" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,42 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorTransparent"
+    android:background="@drawable/rectangle_corner_grey_600"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.main.MainActivity">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/detail_gl_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1" />
-        <TextView
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/detail_gl_1"
-            app:layout_constraintRight_toRightOf="parent"
-            android:hint="Detail"
-            android:textColorHint="@color/purple_400"
-            style="@style/TxtViewPrincipalWhite"/>
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@drawable/rectangle_corner_grey_600"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/detail_gl_1"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/detail_guide_9"
             android:layout_width="0dp"
             android:layout_height="0dp">
             <androidx.constraintlayout.widget.Guideline
@@ -88,12 +62,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.34" />
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/detail_gl_85"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.85" />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/detail_gl_v_50"
                 android:layout_width="wrap_content"
@@ -147,7 +115,7 @@
             <TextView
                 android:layout_margin="2dp"
                 android:id="@+id/detail_name_txt"
-                style="@style/TxtViewPrincipalWhite"
+                style="@style/TxtViewPrincipalWhitev2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:text="Event Name"
@@ -164,15 +132,15 @@
                 app:layout_constraintLeft_toRightOf="@+id/detail_status_bring"
                 app:layout_constraintRight_toLeftOf="@+id/detail_status_need"
                 android:id="@+id/detail_button_add"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:fabCustomSize="35dp"
-                app:borderWidth="3dp"
-                app:maxImageSize="20dp"
-                android:backgroundTint="@color/white"
-                android:tint="@color/white"
-                app:backgroundTint="@color/purple_400"
-                app:srcCompat="@drawable/logo_add"  />
+                app:borderWidth="2dp"
+                app:maxImageSize="22dp"
+                app:srcCompat="@drawable/logo_add"
+                app:tint="@android:color/white"
+                android:backgroundTint="@color/grey_600"
+                app:backgroundTint="@color/red_300" />
 
 
             <TextView
@@ -186,6 +154,7 @@
                 android:padding="5dp"
                 android:layout_margin="5dp"
                 android:textSize="20sp"
+                android:visibility="invisible"
                 android:id="@+id/detail_status_bring"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -203,6 +172,7 @@
                 android:layout_margin="5dp"
                 android:textSize="20sp"
                 android:id="@+id/detail_status_need"
+                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -213,6 +183,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:id="@+id/detail_item_txt"
+                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -225,7 +196,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/detail_item_edit"
-                    style="@style/TxtViewPrincipalWhite"
+                    style="@style/TxtViewPrincipalBlack"
+                    android:textSize="25dp"
+                    android:textColor="@color/white"
                     android:gravity="left"
                     android:text=" "
                     android:layout_width="match_parent"
@@ -238,9 +211,9 @@
                 app:layout_constraintBottom_toBottomOf="@+id/detail_gl_35"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                style="@style/TxtViewPrincipalBlack"
-                android:layout_margin="1dp"
-                android:padding="1dp"
+                android:visibility="invisible"
+                style="@style/TxtViewPrincipalBlackv2"
+                android:textSize="18sp"
                 android:textColor="@color/colorWhite"
                 android:text="Quantity"
                 android:gravity="center"
@@ -248,6 +221,7 @@
                 android:layout_height="0dp" />
 
             <LinearLayout
+                android:visibility="invisible"
                 android:id="@+id/detail_quantity_item"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -268,6 +242,7 @@
                     android:id="@+id/detail_quantity_txt"
                     android:layout_margin="1dp"
                     android:padding="1dp"
+                    android:textSize="5sp"
                     android:textStyle="bold"
                     android:text="1"
                     style="@style/TxtViewPrincipalWhite"
@@ -290,13 +265,16 @@
                 app:layout_constraintBottom_toBottomOf="@+id/detail_gl_40"
                 app:layout_constraintRight_toRightOf="parent"
                 android:id="@+id/detail_check"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                app:borderWidth="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
                 app:fabCustomSize="35dp"
-                android:backgroundTint="@color/white"
-                app:backgroundTint="@color/purple_400"
-                app:srcCompat="@drawable/logo_check"/>
+                app:borderWidth="2dp"
+                app:maxImageSize="22dp"
+                app:srcCompat="@drawable/logo_check"
+                app:tint="@android:color/white"
+                android:backgroundTint="@color/grey_600"
+                app:backgroundTint="@color/red_300" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -305,29 +283,48 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintTop_toBottomOf="@+id/detail_gl_40"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_gl_85"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:id="@+id/detail_recyclerView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_marginRight="15dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/detail_gl_1"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/detail_share"
-            app:fabCustomSize="38dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="bottom|center"
-            app:borderWidth="3dp"
-            android:backgroundTint="@color/white"
-            android:layout_marginBottom="10dp"
-            android:tint="@color/white"
-            app:backgroundTint="@color/purple_400"
-            app:srcCompat="@drawable/logo_share"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/detail_guide_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/detail_guide_v_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/detail_guide_v_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:layout_constraintTop_toTopOf="@+id/detail_guide_9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/detail_guide_v_9"
+        android:id="@+id/detail_share"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:fabCustomSize="50dp"
+        app:borderWidth="2dp"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/logo_share"
+        app:tint="@android:color/white"
+        android:backgroundTint="@color/grey_600"
+        app:backgroundTint="@color/red_300" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

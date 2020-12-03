@@ -41,14 +41,12 @@ class LoginActivity : AppCompatActivity() {
         showSignInOptions()
 
 
-/*
-
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser?.let{
             launchMainActivity()
-        } ?:
+        } ?: showSignInOptions()
 
- */
+
 
     }
 

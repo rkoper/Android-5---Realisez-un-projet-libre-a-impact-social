@@ -8,7 +8,6 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
 
     fun createUser(mDataUser: MutableMap<String, Any>) { mUserRepository.createUser(mDataUser) }
 
-
     fun getUserById(mUserId : String) : LiveData<MyUser> { return mUserRepository.getUserById(mUserId) }
 
     fun getifNewUser(mUserId : String) : LiveData<Boolean>? { return mUserRepository.getifNewUser(mUserId) }
@@ -18,13 +17,5 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
     fun updateUserPhoto(mUserId:String, mUserPhoto:String) { mUserRepository.updateUserPhoto(mUserId, mUserPhoto )  }
 
     fun upadateEventUser(mIDUser: String, mEventUniqueID: String) { mUserRepository.upadateEventUser(mIDUser, mEventUniqueID )  }
-
-    fun getUserByEvent(mUserId : String) : LiveData<MyUser> { return mUserRepository.getUserById(mUserId) }
-
-   // fun getUserEventById(mUserId : String) :  LiveData<ArrayList<String>>  { return mUserRepository.getUserEventById(mUserId) }
-
-    fun getUserPhotoById(mUserId : String) : LiveData<String> { return mUserRepository.getUserNamePhotoById(mUserId) }
-
-    fun test(mUserId : String) : LiveData<String> { return mUserRepository.getUserNamePhotoById(mUserId) }
 
 }

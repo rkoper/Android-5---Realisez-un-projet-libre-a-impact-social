@@ -9,18 +9,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/main_h_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.08" />
+
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/main_h_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.85" />
+                    app:layout_constraintGuide_percent="0.92" />
 
 
                 <fragment
                     android:id="@+id/hostFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="@+id/main_h_2"
+                    app:layout_constraintBottom_toBottomOf="@+id/main_h_8"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:name="androidx.navigation.fragment.NavHostFragment"
                     app:defaultNavHost="true"
                     app:navGraph="@navigation/navigation" />
@@ -30,13 +42,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.86"/>
+                    app:layout_constraintGuide_percent="0.93"/>
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/main_gl_h_95"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.96"/>
+                    app:layout_constraintGuide_percent="0.99"/>
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/main_gl_v_2"
                     android:layout_width="match_parent"
@@ -49,6 +61,17 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.1"/>
+
+                <androidx.appcompat.widget.Toolbar
+                    app:title="123"
+                    android:gravity="center"
+                    android:id="@+id/item_tool_bar"
+                    style="@style/TxtViewPrincipalBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/main_h_2"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"/>
 
                 <com.gauravk.bubblenavigation.BubbleNavigationLinearView
                     android:orientation="vertical"
@@ -85,8 +108,8 @@
                             android:layout_width="wrap_content"
                             app:bt_titleSize="16sp"
                             android:layout_height="wrap_content"
-                            app:bt_colorActive="@color/yellow_900"
-                            app:bt_colorInactive="@color/yellow_900"
+                            app:bt_colorActive="@color/red_300"
+                            app:bt_colorInactive="@color/red_300"
                             app:bt_icon="@drawable/logo_star"
                             android:elevation="3dp"
                             app:bt_title="Event"/>
@@ -115,8 +138,8 @@
                             android:layout_width="wrap_content"
                             app:bt_titleSize="16sp"
                             android:layout_height="wrap_content"
-                            app:bt_colorActive="@color/red_300"
-                            app:bt_colorInactive="@color/red_300"
+                            app:bt_colorActive="@color/green_300"
+                            app:bt_colorInactive="@color/green_300"
                             app:bt_icon="@drawable/logo_calendar"
                             android:elevation="3dp"
                             app:bt_title="Calendar" />
@@ -129,8 +152,8 @@
                             app:bt_titleSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:bt_colorActive="@color/green_300"
-                            app:bt_colorInactive="@color/green_300"
+                            app:bt_colorActive="@color/yellow_900"
+                            app:bt_colorInactive="@color/yellow_900"
                             app:bt_icon="@drawable/logo_settings"
                             android:elevation="3dp"
                             app:bt_title="Settings"/>

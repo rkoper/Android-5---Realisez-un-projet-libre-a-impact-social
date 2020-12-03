@@ -131,14 +131,14 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:id="@+id/setting_it"
+            android:id="@+id/setting_pt"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_lang_v_1"
             app:layout_constraintRight_toRightOf="@+id/dialog_lang_v_5"
             app:layout_constraintTop_toTopOf="@+id/dialog_lang_h_3"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_lang_h_4"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@string/italian"
+            android:text="@string/portuguese"
                android:background="@color/grey_200"
                   style="@style/TxtViewPrincipalBlack"
             />
@@ -162,6 +162,7 @@
             />
 
         <TextView
+            android:visibility="invisible"
                  android:textSize="12sp"
             android:padding="10dp"
             android:layout_marginTop="10dp"
@@ -180,6 +181,7 @@
                   style="@style/TxtViewPrincipalBlack"
             />
         <TextView
+            android:visibility="invisible"
                  android:textSize="12sp"
             android:padding="10dp"
             android:layout_marginTop="10dp"
@@ -198,24 +200,26 @@
                   style="@style/TxtViewPrincipalBlack"
             />
         <TextView
+            android:visibility="invisible"
                  android:textSize="12sp"
             android:padding="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:id="@+id/setting_pt"
+            android:id="@+id/setting_it"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_lang_v_1"
             app:layout_constraintRight_toRightOf="@+id/dialog_lang_v_5"
             app:layout_constraintTop_toTopOf="@+id/dialog_lang_h_6"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_lang_h_7"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="@string/portuguese"
+            android:text="@string/italian"
                android:background="@color/grey_200"
                   style="@style/TxtViewPrincipalBlack"
             />
         <TextView
+            android:visibility="invisible"
             android:textSize="12sp"
             android:padding="11dp"
             android:layout_marginTop="10dp"
@@ -274,28 +278,30 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_lang_v_5"
             android:id="@+id/settings_check_lang"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:fabCustomSize="30dp"
-            app:borderWidth="3dp"
-            app:maxImageSize="18dp"
-            android:tint="@color/white"
-            app:backgroundTint="@color/green_500"
-            app:srcCompat="@drawable/logo_send"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="35dp"
+            app:borderWidth="2dp"
+            app:maxImageSize="22dp"
+            app:srcCompat="@drawable/logo_check"
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/grey_600"
+            app:backgroundTint="@color/yellow_900" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="@+id/dialog_lang_v_5"
             android:id="@+id/settings_cancel_lang"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:fabCustomSize="30dp"
-            app:borderWidth="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="35dp"
+            app:borderWidth="2dp"
             app:maxImageSize="22dp"
-            android:tint="@color/white"
-            app:backgroundTint="@color/green_500"
+            app:srcCompat="@drawable/logo_add"
             android:rotation="45"
-            app:srcCompat="@drawable/logo_add"/>
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/grey_600"
+            app:backgroundTint="@color/yellow_900" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -111,6 +111,10 @@ class MyItemRepository {
 
 
     fun updateStatusItem(mData: HashMap<Int, ArrayList<String>>) {
+
+        println("------===(++( mData )++)===-------" + mData)
+
+
         if (mData.containsKey(0)) { var i=0
             var mItemStatus = mData[i]!![1]
             var mItemId = mData[i]!![4]
