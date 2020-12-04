@@ -90,7 +90,7 @@ class DetailFragment : BaseFragment() {
         // mBubble!!.setCurrentActiveItem(1)
 
         mTopBarTxt = activity?.findViewById(R.id.item_tool_bar)
-        mTopBarTxt?.text  = "Detail"
+        mTopBarTxt?.text  = getString(R.string.detail)
         mTopBarTxt?.setTextColor(resources.getColor(R.color.red_300))
 
 
@@ -129,7 +129,7 @@ class DetailFragment : BaseFragment() {
     }
     private fun navToHome() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
-        mTopBarTxt?.text  = "Event"
+        mTopBarTxt?.text  = getString(R.string.event)
         mBubble!!.visibility = View.VISIBLE
         mBubble?.setCurrentActiveItem(1)
     }

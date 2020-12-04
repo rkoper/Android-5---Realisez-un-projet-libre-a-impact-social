@@ -29,7 +29,6 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="@android:dimen/notification_large_icon_width"
-            android:layout_marginLeft="@android:dimen/notification_large_icon_width"
             android:layout_marginTop="32dp"
             android:background="@drawable/logo_facebook"
             app:layout_constraintBottom_toBottomOf="@+id/home_gl_h_97"
@@ -93,7 +92,6 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="@android:dimen/notification_large_icon_width"
-            android:layout_marginRight="@android:dimen/notification_large_icon_width"
             android:background="@drawable/logo_envelope"
             app:layout_constraintBottom_toBottomOf="@+id/ic_sms"
             app:layout_constraintEnd_toEndOf="parent"
@@ -337,7 +335,7 @@
                                             android:id="@+id/text__speakers"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Settings"
+                                            android:text="@string/settings"
                                             android:textSize="16sp" />
                                 </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -382,7 +380,7 @@
                                             android:textAlignment="textEnd"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Event"
+                                            android:text="@string/event"
                                             android:textSize="16sp" />
                                 </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -425,7 +423,7 @@
                                             android:textAlignment="textEnd"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Create"
+                                            android:text="@string/create"
                                             android:textSize="16sp" />
                                 </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -468,7 +466,7 @@
                                             android:textAlignment="textEnd"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Calendar"
+                                            android:text="@string/calendar"
                                             android:textSize="16sp" />
                                 </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>

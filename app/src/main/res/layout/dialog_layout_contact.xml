@@ -52,7 +52,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_25"
-            android:hint="Subject"
+            android:hint="@string/subject"
             style="@style/LoginTextInputLayoutStyle">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -62,8 +62,8 @@
                 android:layout_margin="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="left"
-                android:text=" "
+                android:gravity="start"
+              android:text=" "
                 android:textSize="14sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -80,7 +80,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_25"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h85"
-            android:hint="Message"
+            android:hint="@string/message"
             style="@style/LoginTextInputLayoutStyle">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -91,8 +91,8 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/roboto"
                 android:ellipsize="end"
-                android:gravity="left"
-                android:text=" "
+                android:gravity="start"
+              android:text=" "
                 android:textSize="14sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

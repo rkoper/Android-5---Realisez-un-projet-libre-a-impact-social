@@ -1,6 +1,7 @@
 package com.so.dingbring.view.event
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.login.LoginActivity
+import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_event.*
@@ -62,7 +64,7 @@ class EventFragment : BaseFragment() {
     private fun onBackBarPressed() {
         mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
         mFloat_back?.setOnClickListener {
-            navToHome()
+            navToMain()
         }
     }
 
@@ -71,12 +73,12 @@ class EventFragment : BaseFragment() {
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    navToHome() } })
+                    navToMain() } })
     }
 
-    private fun navToHome() {
-        Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
-        mPosBottomBar?.setCurrentActiveItem(1)
+    private fun navToMain() {
+        val intent = Intent (activity, MainActivity::class.java)
+        activity?.startActivity(intent)
     }
 
 

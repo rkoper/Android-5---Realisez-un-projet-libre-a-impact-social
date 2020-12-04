@@ -60,7 +60,7 @@
             android:layout_height="0dp">
 
             <TextView
-                android:text="No Event yet"
+                android:text="@string/no_event_yet"
                 style="@style/TxtViewPrincipalBlack"
                 android:textColor="@color/grey_700"
                 app:layout_constraintLeft_toLeftOf="parent"

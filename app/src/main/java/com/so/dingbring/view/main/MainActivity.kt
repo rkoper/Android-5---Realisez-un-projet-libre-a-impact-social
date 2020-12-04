@@ -4,6 +4,7 @@ package com.so.dingbring.view.main
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.facebook.AccessToken
@@ -28,7 +31,10 @@ import kotlinx.android.synthetic.main.activity_main.card_t_create
 import kotlinx.android.synthetic.main.activity_main.card_t_event
 import kotlinx.android.synthetic.main.activity_main.card_t_profil_name
 import kotlinx.android.synthetic.main.activity_main.card_t_setting
+import kotlinx.android.synthetic.main.dialog_layout_language.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,6 +48,9 @@ class MainActivity : AppCompatActivity() {
     private val mUserVM by viewModel<MyUserViewModel>()
     private var mUserEvent = arrayListOf("", "")
 
+
+
+
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +60,10 @@ class MainActivity : AppCompatActivity() {
         initUser()
         initItemClick()
 
+
     }
+
+
 
     private fun initItemClick() {
         val intent = Intent(this, ItemActivity::class.java)
@@ -120,26 +132,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMedal() {
-
-        if(mNbUser in 0..4)   { mDrawable = resources.getDrawable(medalone)
-            card_t_profil_status.text = "Newbie"
+        if(mNbUser in 0..4)   { mDrawable = ContextCompat.getDrawable(this, medalone )!!
+            card_t_profil_status.text = getString(R.string.newbie)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 5..9)   { mDrawable = resources.getDrawable(medaltwo)
-            card_t_profil_status.text = "Beginner"
+        if(mNbUser in 5..9)   { mDrawable = ContextCompat.getDrawable(this, medaltwo )!!
+            card_t_profil_status.text = getString(R.string.beginner)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 10..14) { mDrawable = resources.getDrawable(medalthree)
-            card_t_profil_status.text = "Intermediate"
+        if(mNbUser in 10..14) { mDrawable = ContextCompat.getDrawable(this, medalthree )!!
+            card_t_profil_status.text = getString(R.string.intermediate)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 15..19)   { mDrawable = resources.getDrawable(medalfour)
-            card_t_profil_status.text = "Experienced"
+        if(mNbUser in 15..19)   { mDrawable = ContextCompat.getDrawable(this, medalfour )!!
+            card_t_profil_status.text = getString(R.string.experienced)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 20..24)   { mDrawable = resources.getDrawable(medalfive)
-            card_t_profil_status.text = "Advanced"
+        if(mNbUser in 20..24)   { mDrawable = ContextCompat.getDrawable(this, medalfive )!!
+            card_t_profil_status.text = getString(R.string.advanced)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser > 24)   { mDrawable = resources.getDrawable(medalsix)
-            card_t_profil_status.text = "Expert"
+        if(mNbUser > 24)   { mDrawable =ContextCompat.getDrawable(this, medalsix )!!
+            card_t_profil_status.text = getString(R.string.expert)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal)}
-
 
         goAnimImage(main_medal)
 
@@ -179,6 +189,8 @@ class MainActivity : AppCompatActivity() {
 
             }
     }
+
+
 
     private fun goAnimText(mLink: TextView?) {
         val zoom1 = AnimationUtils.loadAnimation(this, R.anim.zoomin_1)

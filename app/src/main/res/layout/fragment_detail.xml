@@ -115,7 +115,7 @@
                 style="@style/TxtViewPrincipalWhitev2"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="OOOO"
+                android:text=""
                 app:layout_constraintTop_toTopOf="@+id/detail_gl_08"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -227,8 +227,8 @@
                     style="@style/TxtViewPrincipalBlack"
                     android:textSize="25sp"
                     android:textColor="@color/white"
-                    android:gravity="left"
-                    android:text=" "
+                    android:gravity="start"
+                  android:text=" "
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -243,7 +243,7 @@
                 style="@style/TxtViewPrincipalBlackv2"
                 android:textSize="18sp"
                 android:textColor="@color/colorWhite"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp" />
@@ -271,7 +271,7 @@
                     android:padding="1dp"
                     android:textSize="5sp"
                     android:textStyle="bold"
-                    android:text="1"
+                    android:text="@string/_1"
                     style="@style/TxtViewPrincipalWhite"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            tools:text="Mon" />
+            tools:text="@string/Mon" />
 
         <TextView
             style="@style/TxtViewPrincipalBlack"
@@ -45,7 +45,7 @@
             android:gravity="center"
             android:textSize="@dimen/text_size_20"
             android:textStyle="bold"
-            tools:text="23" />
+            tools:text="" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

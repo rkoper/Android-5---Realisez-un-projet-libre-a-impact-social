@@ -2,6 +2,7 @@ package com.so.dingbring.view.login
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.view.main.MainActivity
+import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -17,12 +19,17 @@ class LoginActivity : AppCompatActivity() {
     private val RC_SIGN_IN = 19840521
     var mNameUser = " ... "
     private var mIdUser = "..."
+    private lateinit var sharedPref: SharedPreferences
+    private var mCurrentLanguage :String? = ""
+    private lateinit var locale: Locale
+    private var PRIVATEMODE = 0
+    private val PREFNAME = "-"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        initLang()
         showSignInOptions()
 
 
@@ -34,6 +41,30 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
+    private fun initLang() {
+        sharedPref = this.getSharedPreferences(PREFNAME, PRIVATEMODE)
+        mCurrentLanguage =  sharedPref.getString("localeName","en")
+
+        if (mCurrentLanguage=="en") {setLocale("en")}
+        if (mCurrentLanguage=="fr") {setLocale("fr")}
+        if (mCurrentLanguage=="es") {setLocale("es")}
+        if (mCurrentLanguage=="pt") {setLocale("pt")}
+
+
+
+    }
+
+    private fun setLocale(localeName: String) {
+        locale = Locale(localeName)
+        val res = resources
+        val dm = res.displayMetrics
+        val conf = res.configuration
+        conf.locale = locale
+        res.updateConfiguration(conf, dm)
+        val editor = sharedPref.edit()
+        editor.putString("localeName",localeName)
+        editor.apply() }
 
     private fun showSignInOptions() {
 

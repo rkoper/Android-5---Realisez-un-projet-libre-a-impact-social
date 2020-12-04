@@ -52,16 +52,16 @@ class ItemActivity : AppCompatActivity() {
     private fun initClickOnItem(mclick: Int) {
 
         if (mclick == 0 ) { val intent = Intent(this, MainActivity::class.java) ; startActivity(intent) }
-        if (mclick == 1 ) { initBar(0,1, "Event", R.color.red_300,View.INVISIBLE) }
-        if (mclick == 11 ) { initBar(R.id.event_fragment,1, "Event", R.color.red_300,View.INVISIBLE) }
+        if (mclick == 1 ) { initBar(0,1, getString(R.string.event), R.color.red_300,View.INVISIBLE) }
+        if (mclick == 11 ) { initBar(R.id.event_fragment,1, getString(R.string.event), R.color.red_300,View.INVISIBLE) }
         if (mclick == 2 ) {
 
             initBar(R.id.create_Fragment, mclick, "Create", R.color.blue_600,View.VISIBLE)
             item_tb_fb_action.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_300))
             item_tb_fb_action.setImageResource(R.drawable.logo_save)
             item_tb_fb_action.setColorFilter(Color.argb(255, 255, 255, 255)) }
-        if (mclick == 3 ) {initBar(R.id.calendar_fragment, mclick, "Calendar", R.color.green_300,View.INVISIBLE)}
-        if (mclick == 4) { initBar(R.id.settings_fragment, mclick, "Settings", R.color.yellow_900,View.INVISIBLE)}
+        if (mclick == 3 ) {initBar(R.id.calendar_fragment, mclick, getString(R.string.calendar), R.color.green_300,View.INVISIBLE)}
+        if (mclick == 4) { initBar(R.id.settings_fragment, mclick,getString(R.string.settings) , R.color.yellow_900,View.INVISIBLE)}
     }
 
     private fun initBar(

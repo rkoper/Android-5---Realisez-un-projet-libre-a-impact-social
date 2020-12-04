@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DingBring</string>
-    <string name="day1">Lun.</string>
-    <string name="day2">Mar.</string>
-    <string name="day3">Mer.</string>
-    <string name="day4">Jeu.</string>
-    <string name="day5">Ven.</string>
-    <string name="day6">Sam.</string>
-    <string name="day7">Dim.</string>
-    <string name="i_bring">J\'apporte</string>
-    <string name="i_need">J\'ai besoin</string>
     <string name="english">Anglais</string>
     <string name="french">Français</string>
-    <string name="spanish">Espagnol</string>
-    <string name="arabic">Arabe</string>
     <string name="italian">Italien</string>
-    <string name="chinese">Chinois</string>
-    <string name="deutsch">Allemand</string>
+    <string name="spanish">Espagnol</string>
+    <string name="deutsch">Deutch</string>
+    <string name="chinese">chinois</string>
     <string name="portuguese">Portugais</string>
-    <string name="event">Envenement</string>
+    <string name="arabic">Arabe</string>
+    <string name="newbie">Débutant</string>
+    <string name="beginner">Junior</string>
+    <string name="intermediate">Intermédiaire</string>
+    <string name="experienced">Expérimenté</string>
+    <string name="advanced">Avancée</string>
+    <string name="expert">Expert</string>
+    <string name="settings">Réglages</string>
+    <string name="create">Créer</string>
+    <string name="calendar">Calendrier</string>
+    <string name="can_you_bring_it">Pouvez-vous l\'apporter?</string>
+    <string name="change_language">Changer de langue:</string>
+    <string name="current_language">Langue actuelle:</string>
+    <string name="change_your_name">Changez votre nom:</string>
+    <string name="change_your_profile_picture">Changez votre profil</string>
+    <string name="quantity">Quantité</string>
+    <string name="no_event_yet">Pas encore d\'événement</string>
+    <string name="log_out">Se déconnecter</string>
+    <string name="profil">Profil</string>
+    <string name="contact_us">Nous contacter</string>
+    <string name="language">Langue</string>
+    <string name="i_bring">J\'apporte</string>
+    <string name="i_need">J\'ai besoin</string>
+    <string name="event">Evénement</string>
+    <string name="detail">Detail</string>
+    <string name="test">Calendar</string>
+    <string name="description">Description</string>
+    <string name="event_name">Nom de l\'événement</string>
+    <string name="organizer">Organisateur</string>
+    <string name="address">Adresse</string>
+    <string name="date">Date</string>
+    <string name="hour">Heure</string>
+    <string name="message">Message</string>
+    <string name="subject">Sujet</string>
+    <string name="new_name">Nouveau nom</string>
+
 
 </resources>

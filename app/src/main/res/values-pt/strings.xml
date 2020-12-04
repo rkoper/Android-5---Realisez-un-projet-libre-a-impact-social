@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">DingBring</string>
-    <string name="day1">Seg.</string>
-    <string name="day2">Ter.</string>
-    <string name="day3">Mar.</string>
-    <string name="day4">Jogos.</string>
-    <string name="day5">Sex.</string>
-    <string name="day6">Sentou.</string>
-    <string name="day7">Sol.</string>
-    <string name="i_bring">Eu trago</string>
-    <string name="i_need">eu preciso</string>
     <string name="english">Inglês</string>
-    <string name="french">francês</string>
-    <string name="spanish">espanhol</string>
-    <string name="arabic">árabe</string>
-    <string name="italian">italiano</string>
-    <string name="chinese">chinês</string>
-    <string name="deutsch">alemão</string>
+    <string name="french">Francês</string>
+    <string name="italian">Italiano</string>
+    <string name="spanish">Espanhol</string>
+    <string name="deutsch">Deutch</string>
+    <string name="chinese">Chinês</string>
     <string name="portuguese">Português</string>
+    <string name="arabic">Arabe</string>
+    <string name="newbie">Novato</string>
+    <string name="beginner">Principiante</string>
+    <string name="intermediate">Intermediário</string>
+    <string name="experienced">Com experiência</string>
+    <string name="advanced">Avançado</string>
+    <string name="expert">Especialista</string>
+    <string name="settings">Definições</string>
+    <string name="create">Crio</string>
+    <string name="calendar">Calendário</string>
+    <string name="can_you_bring_it">Você pode trazer?</string>
+    <string name="change_language">Mudar idioma:</string>
+    <string name="current_language">Idioma atual:</string>
+    <string name="change_your_name">Altera o teu nome:</string>
+    <string name="change_your_profile_picture">Mude o seu perfil</string>
+    <string name="quantity">Quantidade</string>
+    <string name="no_event_yet">Nenhum evento ainda</string>
+    <string name="log_out">Sair</string>
+    <string name="profil">Perfil</string>
+    <string name="contact_us">Contate-Nos</string>
+    <string name="language">Língua</string>
+    <string name="i_bring">Eu trago</string>
+    <string name="i_need">Eu preciso</string>
     <string name="event">Evento</string>
+    <string name="detail">Detail</string>
+    <string name="test">Calendar</string>
+    <string name="description">Descrição</string>
+    <string name="event_name">Nome do evento</string>
+    <string name="organizer">Organizador</string>
+    <string name="address">Endereço</string>
+    <string name="date">Datado</string>
+    <string name="hour">Hora</string>
+    <string name="message">Mensagem</string>
+    <string name="subject">Tema</string>
+    <string name="new_name">Novo nome</string>
+
+
 
 </resources>

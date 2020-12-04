@@ -1,5 +1,6 @@
 package com.so.dingbring.view.settings
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -28,6 +29,7 @@ import com.so.dingbring.R
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.login.LoginActivity
+import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.dialog_layout_contact.*
 import kotlinx.android.synthetic.main.dialog_layout_language.*
 import kotlinx.android.synthetic.main.dialog_layout_profil.*
@@ -119,24 +121,25 @@ class SettingsFragment : BaseFragment() {
     }
 
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initMedal(mNbUser: Int) {
         if(mNbUser in 0..4)   { mDrawable = resources.getDrawable(R.drawable.medalone)
-            card_t_settings_status.text = "Newbie"
+            card_t_settings_status.text = getString(R.string.newbie)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
         if(mNbUser in 5..9)   { mDrawable = resources.getDrawable(R.drawable.medaltwo)
-            card_t_settings_status.text = "Beginner"
+            card_t_settings_status.text = getString(R.string.beginner)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
         if(mNbUser in 10..14) { mDrawable = resources.getDrawable(R.drawable.medalthree)
-            card_t_settings_status.text = "Intermediate"
+            card_t_settings_status.text = getString(R.string.intermediate)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
         if(mNbUser in 15..19)   { mDrawable = resources.getDrawable(R.drawable.medalfour)
-            card_t_settings_status.text = "Experienced"
+            card_t_settings_status.text = getString(R.string.experienced)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
         if(mNbUser in 20..24)   { mDrawable = resources.getDrawable(R.drawable.medalfive)
-            card_t_settings_status.text = "Advanced"
+            card_t_settings_status.text = getString(R.string.advanced)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
         if(mNbUser > 24)   { mDrawable = resources.getDrawable(R.drawable.medalsix)
-            card_t_settings_status.text = "Expert"
+            card_t_settings_status.text = getString(R.string.expert)
             Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal)}
     }
 
@@ -179,7 +182,6 @@ class SettingsFragment : BaseFragment() {
 
     private fun initProfil() {
         d_profil.setting_profil_edit.hint = ""
-
         Glide.with(requireContext()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(d_profil.dialog_setting_img_profil)
         editprofil() }
 
@@ -187,47 +189,69 @@ class SettingsFragment : BaseFragment() {
     private fun initLang() {
         sharedPref = requireActivity().getSharedPreferences(PREFNAME, PRIVATEMODE)
         mCurrentLanguage =  sharedPref.getString("localeName","en")
-        if (mCurrentLanguage=="en") {changecolor(d_lang.setting_en) ; d_lang.dialog_lang_current_lang.text = "English" }
-        if (mCurrentLanguage=="fr") {changecolor(d_lang.setting_fr) ; d_lang.dialog_lang_current_lang.text = "Français" }
-       // if (mCurrentLanguage=="it") {changecolor(d_lang.setting_it) ; d_lang.dialog_lang_current_lang.text = "Italiano" }
-        if (mCurrentLanguage=="sp") {changecolor(d_lang.setting_sp) ; d_lang.dialog_lang_current_lang.text = "Español" }
-       // if (mCurrentLanguage=="de") {changecolor(d_lang.setting_de) ; d_lang.dialog_lang_current_lang.text = "Duitse" }
-       // if (mCurrentLanguage=="zh") {changecolor(d_lang.setting_ch) ; d_lang.dialog_lang_current_lang.text = "中文" }
-        if (mCurrentLanguage=="pt") {changecolor(d_lang.setting_pt) ; d_lang.dialog_lang_current_lang.text = "Português" }
-        // if (mCurrentLanguage=="ar") {changecolor(d_lang.setting_ar) ; d_lang.dialog_lang_current_lang.text = "عربى" }
+        println("mCurrentLanguage------------------>" + mCurrentLanguage)
+        if (mCurrentLanguage=="en") {
+            changecolor(d_lang.setting_en)
+
+            d_lang.dialog_lang_current_lang.text = getString(R.string.eng) }
+        if (mCurrentLanguage=="fr") {
+            changecolor(d_lang.setting_fr)
+            d_lang.dialog_lang_current_lang.text = getString(R.string.fra) }
+        if (mCurrentLanguage=="es") {
+            changecolor(d_lang.setting_sp)
+            d_lang.dialog_lang_current_lang.text = getString(R.string.spa) }
+        if (mCurrentLanguage=="pt") {
+            changecolor(d_lang.setting_pt)
+            d_lang.dialog_lang_current_lang.text = getString(R.string.pot) }
         goLanguage() }
 
-    private fun changecolor(mTxtLang: TextView?) {
-        initcolor()
-        mTxtLang?.setBackgroundColor(Color.BLACK)
-        mTxtLang?.setTextColor(Color.WHITE)
-        d_lang.dialog_lang_current_lang.text = mCurrentLang }
+
 
     private fun initcolor() {
-        d_lang.setting_en.setBackgroundColor(Color.GRAY) ; d_lang.setting_en.setTextColor(Color.BLACK)
-        d_lang.setting_fr.setBackgroundColor(Color.GRAY) ; d_lang.setting_fr.setTextColor(Color.BLACK)
-      //  d_lang.setting_it.setBackgroundColor(Color.GRAY) ; d_lang.setting_it.setTextColor(Color.BLACK)
-        d_lang.setting_sp.setBackgroundColor(Color.GRAY) ; d_lang.setting_sp.setTextColor(Color.BLACK)
-       // d_lang.setting_de.setBackgroundColor(Color.GRAY) ; d_lang.setting_de.setTextColor(Color.BLACK)
-       // d_lang.setting_ch.setBackgroundColor(Color.GRAY) ; d_lang.setting_ch.setTextColor(Color.BLACK)
-        d_lang.setting_pt.setBackgroundColor(Color.GRAY) ; d_lang.setting_pt.setTextColor(Color.BLACK)
-       // d_lang.setting_ar.setBackgroundColor(Color.GRAY) ; d_lang.setting_ar.setTextColor(Color.BLACK)
+        d_lang.setting_en.setBackgroundColor(Color.GRAY)
+        d_lang.setting_en.setTextColor(Color.WHITE)
+        d_lang.setting_fr.setBackgroundColor(Color.GRAY)
+        d_lang.setting_fr.setTextColor(Color.WHITE)
+        d_lang.setting_sp.setBackgroundColor(Color.GRAY)
+        d_lang.setting_sp.setTextColor(Color.WHITE)
+        d_lang.setting_pt.setBackgroundColor(Color.GRAY)
+        d_lang.setting_pt.setTextColor(Color.WHITE)
         }
 
+    private fun changecolor(mTxtLang: TextView?) {
+
+        println("mTxtLang------------------>" + mTxtLang.toString())
+        initcolor()
+        mTxtLang?.setBackgroundColor(resources.getColor(R.color.orange_300))
+        mTxtLang?.setTextColor(Color.BLACK)
+        d_lang.dialog_lang_current_lang.text = mCurrentLang }
+
+
     private fun goLanguage( ) {
-            d_lang.setting_en.setOnClickListener { setLocale("en") }
-            d_lang.setting_fr.setOnClickListener { setLocale("fr") }
-          //  d_lang.setting_it.setOnClickListener { setLocale("it") }
-            d_lang.setting_sp.setOnClickListener { setLocale("es") }
-        //    d_lang.setting_de.setOnClickListener { setLocale("de") }
-      //      d_lang.setting_ch.setOnClickListener { setLocale("zh") }
-            d_lang.setting_pt.setOnClickListener { setLocale("pt") }
-    //        d_lang.setting_ar.setOnClickListener { setLocale("ar") }
+            d_lang.setting_en.setOnClickListener {
+                upadateColor(d_lang.setting_en, R.string.eng)
+                setLocale("en") }
+            d_lang.setting_fr.setOnClickListener {
+                upadateColor(d_lang.setting_fr, R.string.fra)
+                setLocale("fr") }
+            d_lang.setting_sp.setOnClickListener {
+                upadateColor(d_lang.setting_sp, R.string.spa)
+                setLocale("es") }
+            d_lang.setting_pt.setOnClickListener {
+                upadateColor(d_lang.setting_pt, R.string.pot)
+                setLocale("pt") }
     }
+
+    private fun upadateColor (mTxtLang: TextView?, lang: Int) {
+        initcolor()
+        mTxtLang?.setBackgroundColor(resources.getColor(R.color.orange_300))
+        mTxtLang?.setTextColor(Color.BLACK)
+        d_lang.dialog_lang_current_lang.text = getString(lang) }
 
 
     private fun setLocale(localeName: String) {
-        settings_check_lang.setOnClickListener {
+
+        d_lang.settings_check_lang.setOnClickListener {
             if (localeName != mCurrentLang) {
              locale = Locale(localeName)
              val res = resources
@@ -238,7 +262,13 @@ class SettingsFragment : BaseFragment() {
         val editor = sharedPref.edit()
         editor.putString("localeName",localeName)
         editor.apply()
-        initcolor() }
+        initcolor()
+
+                val intent = Intent (activity, MainActivity::class.java)
+                activity?.startActivity(intent)
+
+
+            }
          else { Toast.makeText(requireContext(), "Language, , already, , selected)!", Toast.LENGTH_SHORT).show() }
     d_lang.dismiss() } }
 

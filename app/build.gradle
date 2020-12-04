@@ -60,7 +60,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10"
     implementation 'androidx.fragment:fragment-ktx:1.3.0-beta01'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.core:core-ktx:1.3.2'
@@ -68,12 +68,12 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation 'com.google.firebase:firebase-functions:19.1.0'
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.fragment_home.xml.ext:junit:1.1.2'
     androidTestImplementation 'androidx.fragment_home.xml.espresso:espresso-core:3.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
     implementation 'com.android.support:multidex:1.0.3'
 
 
@@ -96,7 +96,7 @@ dependencies {
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
 
     // New Material Design
 
@@ -110,7 +110,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.5"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
 
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
     testImplementation 'androidx.test:core:1.3.0'
     testImplementation 'androidx.test.ext:junit:1.1.2'
     testImplementation "com.google.truth:truth:1.0"
@@ -132,7 +132,7 @@ dependencies {
 
     implementation 'com.firebaseui:firebase-ui-auth:6.0.2'
     implementation 'com.firebaseui:firebase-ui-database:4.3.2'
-    implementation 'com.google.firebase:firebase-auth:19.4.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation "com.google.android.gms:play-services-location:17.1.0"
     implementation "com.google.android.gms:play-services-maps:17.0.0"
     implementation 'com.google.android.libraries.places:places:2.4.0'
@@ -154,7 +154,7 @@ dependencies {
     implementation 'com.roomorama:caldroid:3.0.1'
     implementation 'com.github.tejpratap46:RecyclerCalendarAndroid:1.5'
     implementation 'com.robertlevonyan.view:CustomFloatingActionButton:3.0.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.51"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.0"
     implementation 'com.github.imangazalievm:circlemenu:3.0.0'
     implementation 'com.karumi:dexter:6.2.1'
 
@@ -167,22 +167,22 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
 
 // external services
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.facebook.android:facebook-android-sdk:8.1.0'
 
 // googel and firebase
 
 
 
-    implementation 'com.google.firebase:firebase-auth-ktx:19.4.0'
-    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:20.0.1'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.3.9-native-mt-2'
-    implementation 'com.google.firebase:firebase-perf:19.0.9'
+    implementation 'com.google.firebase:firebase-perf:19.0.10'
 
 
     implementation 'com.google.firebase:firebase-storage:19.2.0'
-    implementation 'com.google.firebase:firebase-core:17.5.1'
-    implementation 'com.google.firebase:firebase-firestore-ktx:21.7.1'
+    implementation 'com.google.firebase:firebase-core:18.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:22.0.0'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'com.google.android.gms:play-services-basement:17.5.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'

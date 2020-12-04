@@ -246,7 +246,7 @@
                     android:textAlignment="textEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Log Out"
+                    android:text="@string/log_out"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -292,7 +292,7 @@
                     android:id="@+id/text__speakers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Profil"
+                    android:text="@string/profil"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -336,7 +336,7 @@
                     android:textAlignment="textEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contact Us"
+                    android:text="@string/contact_us"
                     android:textSize="16sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -380,7 +380,7 @@
                     android:textAlignment="textEnd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Language"
+                    android:text="@string/language"
                     android:textSize="16sp" />
             </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

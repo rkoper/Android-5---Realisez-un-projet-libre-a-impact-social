@@ -124,6 +124,7 @@
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">2dp</item>
+        <item name="colorControlActivated">@color/white</item>
         <item name="android:textColorHint"> @color/white</item>
         <item name="hintTextColor"> @color/white</item>
         <item name="hintEnabled">true</item>

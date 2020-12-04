@@ -86,7 +86,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change your name :"/>
+            android:text="@string/change_your_name"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_marginTop="20dp"
@@ -98,7 +98,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/dialog_profil_v_15"
             app:layout_constraintRight_toRightOf="@+id/dialog_profil_v_85"
             app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_1"
-            android:hint="New name"
+            android:hint="@string/new_name"
             style="@style/LoginTextInputLayoutStyle">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -108,8 +108,8 @@
                 android:layout_margin="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="left"
-                android:text=" "
+                android:gravity="start"
+              android:text=" "
                 android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -133,7 +133,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change your profile picture :"/>
+            android:text="@string/change_your_profile_picture"/>
 
         <ImageView
             android:id="@+id/setting_img_profil_1"

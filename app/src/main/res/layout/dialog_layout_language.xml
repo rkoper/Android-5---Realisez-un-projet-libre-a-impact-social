@@ -247,7 +247,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change Language :"/>
+            android:text="@string/change_language"/>
 
         <TextView
             android:id="@+id/dialog_lang_current_lang"
@@ -271,7 +271,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current Language :"/>
+            android:text="@string/current_language"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:layout_constraintBottom_toBottomOf="parent"
