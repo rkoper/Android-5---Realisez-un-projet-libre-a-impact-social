@@ -19,12 +19,12 @@ class CalendarAdapter(
     mCtxt: Context,
     startDate: Date,
     endDate: Date,
-    val configuration: RecyclerCalendarConfiguration,
-    val mDataPass: MutableList<MutableList<String>>,
-    val dateSelectListener: OnDateSelected
+    private val configuration: RecyclerCalendarConfiguration,
+    private val mDataPass: MutableList<MutableList<String>>,
+    private val dateSelectListener: OnDateSelected
 ) : RecyclerCalendarBaseAdapter(startDate, endDate, configuration) {
 
-    val mContext = mCtxt
+    private val mContext = mCtxt
 
     interface OnDateSelected { fun onDateSelected(mEvent: MutableList<String>) }
 
@@ -41,8 +41,8 @@ class CalendarAdapter(
         monthViewHolder.itemView.visibility = View.VISIBLE
         monthViewHolder.viewEvent.visibility = View.GONE
         monthViewHolder.itemView.setOnClickListener(null)
-        monthViewHolder.textViewDay.setTextColor(Color.WHITE);
-        monthViewHolder.textViewDate.setTextColor(Color.WHITE);
+        monthViewHolder.textViewDay.setTextColor(Color.WHITE)
+        monthViewHolder.textViewDate.setTextColor(Color.WHITE)
 
         if (calendarItem.isHeader) {
             val selectedCalendar = Calendar.getInstance(Locale.getDefault())

@@ -18,13 +18,13 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class ItemActivity : AppCompatActivity() {
-    var mUserEvent = arrayListOf("", "")
+    private var mUserEvent = arrayListOf("", "")
     var mNameUser = " ..mNameUser.. "
-    var mEmailUser = "..mEmailUser.."
-    var mPhotoUser = "..mPhotoUser.."
-    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var mEmailUser = "..mEmailUser.."
+    private var mPhotoUser = "..mPhotoUser.."
+    private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private val mUserVM by viewModel<MyUserViewModel>()
-    var mclick = 0
+    private var mclick = 0
 
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,12 +81,13 @@ class ItemActivity : AppCompatActivity() {
 
 
     private fun retrieveData() {
-        mUserVM.getUserById(mIdUser)?.observe(this,androidx.lifecycle.Observer {mlmu ->
+        mUserVM.getUserById(mIdUser).observe(this,androidx.lifecycle.Observer { mlmu ->
             mIdUser  = mlmu.mUserId
             mNameUser  = mlmu.mNameUser
             mEmailUser  = mlmu.mEmailUser
             mPhotoUser  = mlmu.mPhotoUser
-            mUserEvent = mlmu.mEventUser }) }
+            mUserEvent = mlmu.mEventUser })
+    }
 
 
 }

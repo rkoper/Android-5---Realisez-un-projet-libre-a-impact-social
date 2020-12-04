@@ -18,7 +18,6 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.auth.AuthUI
@@ -38,33 +37,30 @@ import java.util.*
 
 
 class SettingsFragment : BaseFragment() {
-    lateinit var locale: Locale
+    private lateinit var locale: Locale
     private var mCurrentLanguage :String? = ""
     private var mCurrentLang = ""
-    private var mCheckedID = 1
-    lateinit var d_contact:Dialog
-    lateinit var d_profil:Dialog
-    lateinit var d_lang:Dialog
+    private lateinit var d_contact:Dialog
+    private lateinit var d_profil:Dialog
+    private lateinit var d_lang:Dialog
     var mNameUser = "..."
-    var mEmailUser = "..."
-    var mPhotoUser = "..."
-    var mNbUser = 0
-    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    var fragmentStatus = ""
+    private var mEmailUser = "..."
+    private var mPhotoUser = "..."
+    private var mNbUser = 0
+    private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mPosBottomBar: BubbleNavigationLinearView? = null
     private val mUserVM by viewModel<MyUserViewModel>()
-    private var PRIVATE_MODE = 0
-    private val PREF_NAME = "-"
-    lateinit var sharedPref:SharedPreferences
-    lateinit var mDrawable: Drawable
-    var mFloat_back : FloatingActionButton? = null
+    private var PRIVATEMODE = 0
+    private val PREFNAME = "-"
+    private lateinit var sharedPref:SharedPreferences
+    private lateinit var mDrawable: Drawable
+    private var mFloat_back : FloatingActionButton? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_settings, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,7 +103,7 @@ class SettingsFragment : BaseFragment() {
 
     private fun goHeader() {
         mUserVM.getUserById(mIdUser)
-            ?.observe(requireActivity(), androidx.lifecycle.Observer { mlmu ->
+            .observe(requireActivity(), androidx.lifecycle.Observer { mlmu ->
                 mIdUser = mlmu.mUserId
                 mNameUser = mlmu.mNameUser
                 mEmailUser = mlmu.mEmailUser
@@ -119,7 +115,8 @@ class SettingsFragment : BaseFragment() {
                 card_t_setting_personn?.setOnClickListener { loadProfil() }
                 card_t_setting_logOut?.setOnClickListener { loadLogOut() }
                 card_t_setting_lang?.setOnClickListener { loadLanguage() }
-                card_t_setting_contact?.setOnClickListener { loadContact() } }) }
+                card_t_setting_contact?.setOnClickListener { loadContact() } })
+    }
 
 
     private fun initMedal(mNbUser: Int) {
@@ -188,7 +185,7 @@ class SettingsFragment : BaseFragment() {
 
 
     private fun initLang() {
-        sharedPref = requireActivity().getSharedPreferences(PREF_NAME, PRIVATE_MODE)
+        sharedPref = requireActivity().getSharedPreferences(PREFNAME, PRIVATEMODE)
         mCurrentLanguage =  sharedPref.getString("localeName","en")
         if (mCurrentLanguage=="en") {changecolor(d_lang.setting_en) ; d_lang.dialog_lang_current_lang.text = "English" }
         if (mCurrentLanguage=="fr") {changecolor(d_lang.setting_fr) ; d_lang.dialog_lang_current_lang.text = "Français" }
@@ -238,7 +235,7 @@ class SettingsFragment : BaseFragment() {
              val conf = res.configuration
              conf.locale = locale
              res.updateConfiguration(conf, dm)
-        var editor = sharedPref.edit()
+        val editor = sharedPref.edit()
         editor.putString("localeName",localeName)
         editor.apply()
         initcolor() }
@@ -248,13 +245,13 @@ class SettingsFragment : BaseFragment() {
     private fun editprofil() {
         val c = HashMap<String, ImageView>()
 
-        var mLstDrawable = arrayListOf(
+        val mLstDrawable = arrayListOf(
             "https://i.ibb.co/Vtwz7tL/C6.png", "https://i.ibb.co/PN1dfmb/C5.png",
             "https://i.ibb.co/SywTtCy/C4.png", "https://i.ibb.co/XjFxB00/C3.png",
             "https://i.ibb.co/nsbNLwq/c2.png", "https://i.ibb.co/WDjtfWR/c1.png",
             "https://i.ibb.co/7YHdHKt/C7.png")
 
-        var mLstImageV = arrayListOf(d_profil.setting_img_profil_1, d_profil.setting_img_profil_2, d_profil.setting_img_profil_3,
+        val mLstImageV = arrayListOf(d_profil.setting_img_profil_1, d_profil.setting_img_profil_2, d_profil.setting_img_profil_3,
             d_profil.setting_img_profil_4, d_profil.setting_img_profil_5, d_profil.setting_img_profil_6, d_profil.setting_img_profil_7)
 
         for (i in 0..6) { c[mLstDrawable[i]] = mLstImageV[i] }
@@ -263,7 +260,7 @@ class SettingsFragment : BaseFragment() {
 
 
             private fun loadUserChange(map: Map.Entry<String, ImageView>) {
-                var key = map.key
+                val key = map.key
                 Glide.with(requireContext()).load(map.key).apply(RequestOptions.circleCropTransform()).into(map.value)
 
                 map.value.setOnClickListener {

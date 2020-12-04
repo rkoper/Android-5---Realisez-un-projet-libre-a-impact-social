@@ -33,17 +33,14 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mDrawable: Drawable
+    private lateinit var mDrawable: Drawable
     var mNameUser = " .... "
-    var mEmailUser = "...."
-    var mPhotoUser = "...."
-    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    var mNbUser = 0
-    var mTest = "...."
+    private var mEmailUser = "...."
+    private var mPhotoUser = "...."
+    private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var mNbUser = 0
     private val mUserVM by viewModel<MyUserViewModel>()
-    var mUserEvent = arrayListOf("", "")
-    var isOpen = false
-    var toDetail = true
+    private var mUserEvent = arrayListOf("", "")
 
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                         val mPhotoUserSplit3 = mPhotoUserSplit2[0]
                         if (mPhotoUserSplit3 == "graph.facebook") {
                             val token = AccessToken.getCurrentAccessToken().token
-                            var mImageUrl = mPhotoUser + "?access_token=" + token
+                            val mImageUrl = "$mPhotoUser?access_token=$token"
                             mPhotoUser = mImageUrl } }
 
                     mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()
@@ -96,14 +93,16 @@ class MainActivity : AppCompatActivity() {
                     initHeader()
                     createFireStoreUser()
 
-                } else { mUserVM.getUserById(mIdUser)?.observe(this, androidx.lifecycle.Observer { mlmu ->
-                    mIdUser = mlmu.mUserId
-                    mNameUser = mlmu.mNameUser
-                    mEmailUser = mlmu.mEmailUser
-                    mPhotoUser = mlmu.mPhotoUser
-                    mUserEvent = mlmu.mEventUser
-                    mNbUser = mlmu.mNbEvent!!.toInt()
-                    initHeader() }) } }) }
+                } else {
+                    mUserVM.getUserById(mIdUser).observe(this, androidx.lifecycle.Observer { mlmu ->
+                        mIdUser = mlmu.mUserId
+                        mNameUser = mlmu.mNameUser
+                        mEmailUser = mlmu.mEmailUser
+                        mPhotoUser = mlmu.mPhotoUser
+                        mUserEvent = mlmu.mEventUser
+                        mNbUser = mlmu.mNbEvent!!.toInt()
+                        initHeader() })
+                } }) }
     }
 
 
@@ -167,7 +166,7 @@ class MainActivity : AppCompatActivity() {
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData ->
                 if (pendingDynamicLinkData != null) {
-                   var deepLink = pendingDynamicLinkData.link.toString()
+                   val deepLink = pendingDynamicLinkData.link.toString()
                     val mDeepId =  deepLink.split("link/")[1]
                     mUserVM.upadateEventUser(mIdUser, mDeepId)
                     Toast.makeText(this, "New Event !", Toast.LENGTH_SHORT).show()

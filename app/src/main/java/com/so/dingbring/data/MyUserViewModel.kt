@@ -1,7 +1,6 @@
 package com.so.dingbring.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel() {

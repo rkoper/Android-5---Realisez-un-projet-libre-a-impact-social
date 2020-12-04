@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".DingBringApplication"
-        android:theme="@style/Theme.DingBring">
+        android:theme="@style/Theme.DingBring"
+        android:fullBackupContent="@xml/backup_descriptor">
 
 
     <activity android:name=".view.main.ItemActivity"

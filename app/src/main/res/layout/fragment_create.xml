@@ -233,7 +233,7 @@
             style="@style/TxtViewPrincipalWhite"
             android:id="@+id/create_hour_edit"
             android:gravity="left"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:text=" "
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

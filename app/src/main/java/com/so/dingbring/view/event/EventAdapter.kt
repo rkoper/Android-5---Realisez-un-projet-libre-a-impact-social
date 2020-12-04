@@ -10,9 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.facebook.internal.Mutable
 import com.so.dingbring.R
-import com.so.dingbring.data.MyEvent
 import io.reactivex.subjects.BehaviorSubject
 
 class EventAdapter(
@@ -20,12 +18,7 @@ class EventAdapter(
     mDataEvent: MutableList<MutableList<String>>
 ): RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
     private var mDataEvent = mDataEvent
-    private var mContext = context
-
     val itemClick: BehaviorSubject<String> = BehaviorSubject.create()
-    val itemUser: BehaviorSubject<HashMap<Int, String>> = BehaviorSubject.create()
-
-    var mMapUser = HashMap<Int, String>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

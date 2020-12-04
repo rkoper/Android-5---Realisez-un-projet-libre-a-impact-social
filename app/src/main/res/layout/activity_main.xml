@@ -324,7 +324,7 @@
                                             android:layout_weight="3"
                                             android:id="@+id/img__speakers"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="0dp"
                                             app:srcCompat="@drawable/logo_settings"
                                             app:tint="@color/yellow_900"/>
 
@@ -370,7 +370,7 @@
                                             android:padding="10dp"
                                             android:layout_weight="3"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="0dp"
                                             app:srcCompat="@drawable/logo_star"
                                             app:tint="@color/red_300"/>
 
@@ -413,7 +413,7 @@
                                             android:padding="10dp"
                                             android:layout_weight="3"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="0dp"
                                             app:srcCompat="@drawable/logo_addcircle"
                                             app:tint="@color/blue_300"/>
 
@@ -456,7 +456,7 @@
                                             android:padding="10dp"
                                             android:layout_weight="3"
                                             android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
+                                            android:layout_height="0dp"
                                             app:srcCompat="@drawable/logo_calendar"
                                             app:tint="@color/green_300"/>
 

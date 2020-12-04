@@ -10,11 +10,9 @@ import kotlin.collections.HashMap
 class MyItemRepository {
 
     private var mItemSet: MutableLiveData<MutableList<MyItem>> = MutableLiveData()
-    var mMegaListItem: ArrayList<ArrayList<String>> = arrayListOf()
+    private var mMegaListItem: ArrayList<ArrayList<String>> = arrayListOf()
     private val dbFire = FirebaseFirestore.getInstance()
-    private val storage = FirebaseStorage.getInstance()
-    private val userId = UUID.randomUUID().toString()
-    var mMegaListStringSend: MutableLiveData<ArrayList<ArrayList<String>>> =  MutableLiveData()
+    private var mMegaListStringSend: MutableLiveData<ArrayList<ArrayList<String>>> =  MutableLiveData()
 
 
     fun getAllItem(): LiveData<MutableList<MyItem>> {
@@ -41,7 +39,7 @@ class MyItemRepository {
 
     fun getItem(mEventId:String) : LiveData<ArrayList<ArrayList<String>>> {
 
-        var itemUserId = ""
+        val itemUserId = ""
         var mItemStatus = ""
         var mItemName = ""
         var mItemQty = ""
@@ -62,7 +60,7 @@ class MyItemRepository {
             .addOnSuccessListener { documents ->
                 for (docItem in documents) {
                     mMegaListStringSend.value?.clear()
-                    var mListItem: ArrayList<String> = arrayListOf()
+                    val mListItem: ArrayList<String> = arrayListOf()
                     mListItem.clear()
                     mUserId = docItem.getString("itemUserId").toString()
                     mListItem.add(itemUserId)
@@ -93,13 +91,13 @@ class MyItemRepository {
                             mMegaListStringSend.postValue(mMegaListItem)
                         } } }
 
-            .addOnFailureListener { exception -> println("Error getting documents: " + exception) }
+            .addOnFailureListener { exception -> println("Error getting documents: $exception") }
         return mMegaListStringSend
     }
 
     fun createUniqueItem(mListItem: MyItem) {
-        var mItemEach = HashMap<String, String>()
-        var mUniqueID = UUID.randomUUID().toString()
+        val mItemEach = HashMap<String, String>()
+        val mUniqueID = UUID.randomUUID().toString()
         mItemEach["itemStatus"] = mListItem.mItemStatus.toString()
         mItemEach["itemName"] = mListItem.mItemName.toString()
         mItemEach["itemUserId"] = mListItem.mItemUserId.toString()
@@ -112,35 +110,35 @@ class MyItemRepository {
 
     fun updateStatusItem(mData: HashMap<Int, ArrayList<String>>) {
 
-        println("------===(++( mData )++)===-------" + mData)
+        println("------===(++( mData )++)===-------$mData")
 
 
-        if (mData.containsKey(0)) { var i=0
-            var mItemStatus = mData[i]!![1]
-            var mItemId = mData[i]!![4]
-        var mShortLink = dbFire.collection("item").document(mItemId)
+        if (mData.containsKey(0)) { val i=0
+            val mItemStatus = mData[i]!![1]
+            val mItemId = mData[i]!![4]
+        val mShortLink = dbFire.collection("item").document(mItemId)
         if (mItemStatus == "I need" ){mShortLink.update("itemStatus", "I bring")}
         else {mShortLink.update("itemStatus", "I need")}}
 
 
 
-        if (mData.containsKey(1)) {    var i=1
-            var mItemQty = mData[i]!![3]
-            var mItemId = mData[i]!![4]
-            var mShortLink = dbFire.collection("item").document(mItemId)
+        if (mData.containsKey(1)) {    val i=1
+            val mItemQty = mData[i]!![3]
+            val mItemId = mData[i]!![4]
+            val mShortLink = dbFire.collection("item").document(mItemId)
             mShortLink.update("itemQty", mItemQty.toInt().plus(1).toString()) }
 
-        if (mData.containsKey(2)) {    var i=2
-            var mItemQty = mData[i]!![3]
-            var mItemId = mData[i]!![4]
-            var mShortLink = dbFire.collection("item").document(mItemId)
+        if (mData.containsKey(2)) {    val i=2
+            val mItemQty = mData[i]!![3]
+            val mItemId = mData[i]!![4]
+            val mShortLink = dbFire.collection("item").document(mItemId)
             if (mItemQty.toInt() > 1)
             {  mShortLink.update("itemQty", mItemQty.toInt().minus(1).toString())}}
 
 
-        if (mData.containsKey(3)) {    var i=3
-            var mItemId = mData[i]!![4]
-            var mShortLink = dbFire.collection("item").document(mItemId)
+        if (mData.containsKey(3)) {    val i=3
+            val mItemId = mData[i]!![4]
+            val mShortLink = dbFire.collection("item").document(mItemId)
             mShortLink.delete()}
 
 

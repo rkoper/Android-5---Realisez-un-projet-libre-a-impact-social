@@ -10,18 +10,17 @@ import kotlin.collections.HashMap
 class MyEventRepository {
 
     private var mEventSet: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
-    var mEventDate: String? = ""
-    var mEventName: String? = ""
-    var mEventAdress: String? = ""
-    var mEventId: String? = ""
-    var mEventUserId: String? = ""
-    var mEventHour: String? = ""
-    var mEventDesc: String? = ""
-    var mEventOrga: String? = ""
+    private var mEventDate: String? = ""
+    private var mEventName: String? = ""
+    private var mEventAdress: String? = ""
+    private var mEventId: String? = ""
+    private var mEventUserId: String? = ""
+    private var mEventHour: String? = ""
+    private var mEventDesc: String? = ""
+    private var mEventOrga: String? = ""
     var mNameUser: String? = ""
-    var mPicUser: String? = ""
 
-    var myData = MyEvent(mEventAdress!!, mEventDate!!, mEventId!!, mEventName!!, mEventHour!!, mEventDesc!!, mEventUserId!!,mEventOrga!!)
+    private var myData = MyEvent(mEventAdress!!, mEventDate!!, mEventId!!, mEventName!!, mEventHour!!, mEventDesc!!, mEventUserId!!,mEventOrga!!)
     private val dbFire = FirebaseFirestore.getInstance()
 
 
@@ -66,9 +65,9 @@ class MyEventRepository {
         requireActivity: FragmentActivity
     ): MutableLiveData<ArrayList<ArrayList<String>>> {
 
-        var mEventU: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
+        val mEventU: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
 
-        var mVtest: MutableLiveData<ArrayList<ArrayList<String>>> = MutableLiveData()
+        val mVtest: MutableLiveData<ArrayList<ArrayList<String>>> = MutableLiveData()
 
         dbFire.collection("event").get().addOnSuccessListener {
             val mutableList = mutableListOf<MyEvent>()
@@ -129,7 +128,7 @@ class MyEventRepository {
 
 
     fun getEventById(mEventIdS:String) : LiveData<MyEvent>  {
-        var mEventIDSet: MutableLiveData<MyEvent> = MutableLiveData()
+        val mEventIDSet: MutableLiveData<MyEvent> = MutableLiveData()
         dbFire.collection("event").whereEqualTo("eventId", mEventIdS)
             .get()
             .addOnSuccessListener { documents ->

@@ -234,7 +234,7 @@
                     android:padding="10dp"
                     android:layout_weight="3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_exit"
                     app:tint="@color/yellow_900"/>
 
@@ -279,7 +279,7 @@
                     android:layout_weight="3"
                     android:id="@+id/img__speakers"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_personn"
                     app:tint="@color/yellow_900"/>
 
@@ -324,7 +324,7 @@
                     android:padding="10dp"
                     android:layout_weight="3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_mail"
                     app:tint="@color/yellow_900"/>
 
@@ -368,7 +368,7 @@
                     android:padding="10dp"
                     android:layout_weight="3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_language"
                     app:tint="@color/yellow_900"/>
 

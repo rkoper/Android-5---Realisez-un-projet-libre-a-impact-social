@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/rectangle_corner_grey_600"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rectangle_corner_grey_600"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -226,7 +225,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/detail_item_edit"
                     style="@style/TxtViewPrincipalBlack"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textColor="@color/white"
                     android:gravity="left"
                     android:text=" "
@@ -276,7 +275,8 @@
                     style="@style/TxtViewPrincipalWhite"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    tools:ignore="SmallSp" />
                 <ImageView
                     android:id="@+id/detail_quantity_plus"
                     android:backgroundTint="@color/white"

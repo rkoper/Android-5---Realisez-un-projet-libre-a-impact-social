@@ -18,15 +18,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
@@ -42,42 +37,39 @@ import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.view.base.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.dialog_layout_calendar.*
 import kotlinx.android.synthetic.main.dialog_layout_detail.*
 import kotlinx.android.synthetic.main.dialog_layout_detail_info.*
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.android.synthetic.main.item_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 
 class DetailFragment : BaseFragment() {
 
-    var mEventId = ""
-    var mEventName = ""
+    private var mEventId = ""
     private lateinit var mDetailAdapter: DetailAdapter
     private val mItemVM by viewModel<MyItemViewModel>()
     private val mEventVM by viewModel<MyEventViewModel>()
-    var mItemStatus: String = "I bring"
-    var mItemName: String = "<3"
-    var mItemUniqueID = UUID.randomUUID().toString()
-    var mListMyItem: ArrayList<ArrayList<String>> = arrayListOf()
+    private var mItemStatus: String = "I bring"
+    private var mItemName: String = "<3"
+    private var mItemUniqueID = UUID.randomUUID().toString()
+    private var mListMyItem: ArrayList<ArrayList<String>> = arrayListOf()
     var mNameUser = "..."
-    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
 
-    var mBubble : BubbleNavigationLinearView? = null
-    var mTopBarTxt : TextView? = null
+    private var mBubble : BubbleNavigationLinearView? = null
+    private var mTopBarTxt : TextView? = null
 
-    var mFloat_back : FloatingActionButton? = null
-    var mFloat_action : FloatingActionButton? = null
+    private var mFloat_back : FloatingActionButton? = null
+    private var mFloat_action : FloatingActionButton? = null
 
 
-    var mItemQuantity = 1
-    lateinit var d_detail:Dialog
+    private var mItemQuantity = 1
+    private lateinit var d_detail:Dialog
     private var thisView: View? = null
 
-     var mTextName: TextView? = null
+     private var mTextName: TextView? = null
 
 
 
@@ -115,7 +107,7 @@ class DetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mTextName = view?.findViewById(R.id.detail_name_txt)
+        mTextName = view.findViewById(R.id.detail_name_txt)
         initCreateItem()
         initRetrieveItem()
         prepareToShare()
@@ -146,7 +138,7 @@ class DetailFragment : BaseFragment() {
     private fun prepareToShare() {
         mFloat_action?.setOnClickListener {
             val dynamicLink = Firebase.dynamicLinks.dynamicLink {
-                link = Uri.parse(   "https://dingbring.page.link/" + mEventId )
+                link = Uri.parse("https://dingbring.page.link/$mEventId")
                 domainUriPrefix = "https://dingbring.page.link/"
                 androidParameters { } }
 
@@ -200,11 +192,11 @@ class DetailFragment : BaseFragment() {
 
     private fun initHeader() {
         mEventVM.getEventrById(mEventId).observe(requireActivity(), androidx.lifecycle.Observer { myevent ->
-            var mEventAdress = myevent.mEventAdress
-            var mEventDate = myevent.mEventDate
-            var mEventHour = myevent.mEventHour
-            var mEventName = myevent.mEventName
-            var mEventDesc = myevent.mEventDesc
+            val mEventAdress = myevent.mEventAdress
+            val mEventDate = myevent.mEventDate
+            val mEventHour = myevent.mEventHour
+            val mEventName = myevent.mEventName
+            val mEventDesc = myevent.mEventDesc
 
             mTextName!!.text = mEventName
             detail_button_info.setOnClickListener {
@@ -270,11 +262,11 @@ class DetailFragment : BaseFragment() {
         detail_quantity_minus.setOnClickListener {
 
             if (mItemQuantity > 1){
-                mItemQuantity = mItemQuantity - 1
+                mItemQuantity -= 1
                 detail_quantity_txt.text = mItemQuantity.toString()} }
 
         detail_quantity_plus .setOnClickListener {
-            mItemQuantity = mItemQuantity + 1
+            mItemQuantity += 1
              detail_quantity_txt.text = mItemQuantity.toString()} }
 
     private fun initCreateItem() {

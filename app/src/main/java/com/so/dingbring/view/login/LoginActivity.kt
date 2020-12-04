@@ -2,36 +2,21 @@ package com.so.dingbring.view.login
 
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.navigation.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
-import com.so.dingbring.data.MyUser
 import com.so.dingbring.view.main.MainActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlin.system.exitProcess
 
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var mDrawable: Drawable
-    val RC_SIGN_IN = 19840521
-    val TEST = 0
+    private val RC_SIGN_IN = 19840521
     var mNameUser = " ... "
-    var mEmailUser = "..."
-    var mPhotoUser = "..."
-    var mIdUser = "..."
-
-
-    val a =   AuthUI.IdpConfig.FacebookBuilder().build()
-    val b =   AuthUI.IdpConfig.GoogleBuilder().build()
+    private var mIdUser = "..."
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

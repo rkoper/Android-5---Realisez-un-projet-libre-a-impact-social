@@ -1,13 +1,10 @@
 package com.so.dingbring.view.event
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -17,15 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.so.dingbring.ItemActivityController
 import com.so.dingbring.R
-import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.login.LoginActivity
-import com.so.dingbring.view.main.ItemActivity
-import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_event.*
@@ -36,14 +29,12 @@ class EventFragment : BaseFragment() {
     private val mEventVM by viewModel<MyEventViewModel>()
     private val mUserVM by viewModel<MyUserViewModel>()
     private lateinit var mEventAdapter: EventAdapter
-    var mDataEvent: MutableList<MutableList<String>> = mutableListOf()
+    private var mDataEvent: MutableList<MutableList<String>> = mutableListOf()
     var mNameUser = "///"
-    var mIdUser = "////"
-    var mUserEvent = arrayListOf("", "")
-    var mFloat_back : FloatingActionButton? = null
-    var mIdEvent = ""
-    var mGoDetail = ""
-    var mPosBottomBar: BubbleNavigationLinearView? = null
+    private var mIdUser = "////"
+    private var mUserEvent = arrayListOf("", "")
+    private var mFloat_back : FloatingActionButton? = null
+    private var mPosBottomBar: BubbleNavigationLinearView? = null
 
  override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +50,7 @@ class EventFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mUserVM.getUserById(mIdUser)?.observe(requireActivity(), Observer { mlmu ->
+        mUserVM.getUserById(mIdUser).observe(requireActivity(), Observer { mlmu ->
             if (mlmu != null) {
                 mUserEvent = mlmu.mEventUser
                 initRV() } })
@@ -91,7 +82,7 @@ class EventFragment : BaseFragment() {
 
     @SuppressLint("CheckResult")
     private fun initRV() {
-        var mRecyclerView = view?.findViewById<RecyclerView>(R.id.recyclerview_event)
+        val mRecyclerView = view?.findViewById<RecyclerView>(R.id.recyclerview_event)
         mEventAdapter = EventAdapter(requireActivity(), mDataEvent)
         mRecyclerView?.setHasFixedSize(true)
         mRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
@@ -99,7 +90,7 @@ class EventFragment : BaseFragment() {
 
         mEventAdapter.itemClick.subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread()).subscribe { data ->
-                var bundle = bundleOf("GlobalIdEvent" to data)
+                val bundle = bundleOf("GlobalIdEvent" to data)
                 view?.findNavController()?.navigate(R.id.action_event_fragment_to_detailFragment, bundle) }
         loadRV() }
 

@@ -2,13 +2,8 @@ package com.so.dingbring.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import bolts.Task
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class MyUserRepository {
@@ -35,7 +30,7 @@ class MyUserRepository {
                     val myUser = MyUser(mNameUser!!, mMailUser!!, mPicUser!!, mDocIdUser!!,
                         mEventUser as ArrayList<String>, mNbUserEvent!!
                     )
-                    mUserSet?.value = myUser
+                    mUserSet.value = myUser
                 } }
         return mUserSet
     }
@@ -68,18 +63,6 @@ class MyUserRepository {
         dbFire.collection("user")
             .document(mIDUser)
             .update("eventUser", FieldValue.arrayUnion(mEventUniqueID))
-    }
-
-    fun getUserNamePhotoById(mUserId:String) : LiveData<String> {
-        dbFire.collection("user").whereEqualTo("DocIdUser", mUserId)
-            .get()
-            .addOnSuccessListener { documents ->
-                for (doc in documents) {
-                    val mNameUser: String? = doc.getString("NameUser")
-                    val mPicUser: String? = doc.getString("PhotoUser")
-                    mUserSring?.value = mNameUser
-                } }
-        return mUserSring
     }
 
 

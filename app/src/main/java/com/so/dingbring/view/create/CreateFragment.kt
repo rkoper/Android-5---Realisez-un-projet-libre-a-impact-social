@@ -2,7 +2,6 @@ package com.so.dingbring.view.create
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +17,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -35,8 +33,6 @@ import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
-import com.so.dingbring.view.main.ItemActivity
-import com.so.dingbring.view.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -52,12 +48,12 @@ class CreateFragment : BaseFragment() {
     private var mEventHour = ""
     private var mEventDescription = ""
     var mNameUser = ""
-    var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mItemStatus: String = "I bring"
-    var mEventUniqueID = UUID.randomUUID().toString()
-    var mPosBottomBar: BubbleNavigationLinearView? = null
-    var mFloat_action : FloatingActionButton? = null
-    var mFloat_back : FloatingActionButton? = null
+    private var mEventUniqueID = UUID.randomUUID().toString()
+    private var mPosBottomBar: BubbleNavigationLinearView? = null
+    private var mFloat_action : FloatingActionButton? = null
+    private var mFloat_back : FloatingActionButton? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,8 +62,8 @@ class CreateFragment : BaseFragment() {
     ): View? {
 
 
-        val view: View = inflater.inflate(R.layout.fragment_create, container, false)
-        return view }
+        return inflater.inflate(R.layout.fragment_create, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -120,9 +116,9 @@ class CreateFragment : BaseFragment() {
             if (count > 0) {mEventOrga = create_orga_edit.text.toString() } } }
 
     private fun initAdresse() {
-            var mStreetNumber = "";
-            var mStreetName = "";
-            var mCity = ""
+            var mStreetNumber = ""
+        var mStreetName = ""
+        var mCity = ""
             if (!Places.isInitialized()) { Places.initialize(requireActivity().applicationContext, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
 
             val autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
@@ -138,28 +134,29 @@ class CreateFragment : BaseFragment() {
             val searchIcon = (autocompleteFragment?.view as LinearLayout).getChildAt(0) as ImageView
             searchIcon.visibility = View.GONE
             autocompleteFragment.setTypeFilter(TypeFilter.ADDRESS)
-            autocompleteFragment?.setPlaceFields(
-                listOf(Field.ID, Field.NAME, Field.ADDRESS_COMPONENTS))
-            autocompleteFragment?.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-                override fun onPlaceSelected(place: Place) {
-                    place.addressComponents?.asList()?.forEach { mAdressComp ->
-                        Log.i("TAG", "AutoComplet: " + mAdressComp.types + " ")
-                        when {
-                            mAdressComp.types.contains("street_number") -> {
-                                mStreetNumber = mAdressComp.name }
-                            mAdressComp.types.contains("route") -> {
-                                mStreetName = mAdressComp.name }
-                            mAdressComp.types.contains("locality") -> {
-                                mCity = mAdressComp.name } } }
+        autocompleteFragment.setPlaceFields(
+            listOf(Field.ID, Field.NAME, Field.ADDRESS_COMPONENTS))
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                place.addressComponents?.asList()?.forEach { mAdressComp ->
+                    Log.i("TAG", "AutoComplet: " + mAdressComp.types + " ")
+                    when {
+                        mAdressComp.types.contains("street_number") -> {
+                            mStreetNumber = mAdressComp.name }
+                        mAdressComp.types.contains("route") -> {
+                            mStreetName = mAdressComp.name }
+                        mAdressComp.types.contains("locality") -> {
+                            mCity = mAdressComp.name } } }
 
-                    etTextInput?.visibility = View.INVISIBLE
-                    create_address_txt_display.visibility = View.VISIBLE
-                    create_address_txt_display.text =
-                        mStreetNumber + " " + mStreetName + ", " + mCity
-                    mEventAddress = "$mStreetNumber $mStreetName, $mCity "}
+                etTextInput?.visibility = View.INVISIBLE
+                create_address_txt_display.visibility = View.VISIBLE
+                create_address_txt_display.text =
+                    "$mStreetNumber $mStreetName, $mCity"
+                mEventAddress = "$mStreetNumber $mStreetName, $mCity "}
 
-                override fun onError(status: Status) {
-                    Log.i("TAG", "An error occurred: $mItemStatus") } }) }
+            override fun onError(status: Status) {
+                Log.i("TAG", "An error occurred: $mItemStatus") } })
+    }
 
 
         private fun initDate() {
@@ -167,7 +164,7 @@ class CreateFragment : BaseFragment() {
 
                 val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
                     val newDate = formatDate(y, m, d)
-                    create_date_txt.text = "$newDate"
+                    create_date_txt.text = newDate
                     mEventDate = newDate   }
                 val now = android.text.format.Time()
                 now.setToNow()
@@ -189,7 +186,7 @@ class CreateFragment : BaseFragment() {
                 mEventHour =  create_hour_txt.text.toString() }
             TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show() } }
 
-        fun createEvent() {
+        private fun createEvent() {
             mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
             mFloat_action?.setOnClickListener {
                 if (mEventAddress == "" ) { Toast.makeText(requireContext(), "Please complete address...", Toast.LENGTH_SHORT).show() }

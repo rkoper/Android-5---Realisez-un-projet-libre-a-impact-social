@@ -1,33 +1,20 @@
 package com.so.dingbring.view.detail
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.maps.CameraUpdateFactory.zoomIn
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.so.dingbring.ItemSelectionAnimator
 import com.so.dingbring.R
-import com.so.dingbring.data.MyItem
 import io.reactivex.subjects.BehaviorSubject
-import kotlinx.android.synthetic.main.dialog_layout_detail.*
-import kotlinx.android.synthetic.main.dialog_layout_profil.*
 import java.util.ArrayList
 
 
@@ -39,9 +26,6 @@ class DetailAdapter(
 
 
     val itemClickN: BehaviorSubject<HashMap<Int,ArrayList<String>>> = BehaviorSubject.create()
-
-
-    private val itemSelectionAnimator: ItemSelectionAnimator = ItemSelectionAnimator(mContext)
     var mItemStatus = ""
     var mItemName = ""
     var mItemQty = ""
@@ -97,32 +81,32 @@ class DetailAdapter(
         else { 0 } }
 
     inner class DetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var animShow= false
+        private var animShow= false
         var mDetailItem: TextView = itemView.findViewById(R.id.detail_item_type)
         var mDetailQuantity: TextView = itemView.findViewById(R.id.detail_item_quantity)
         var mDetailImageUser: ImageView = itemView.findViewById(R.id.detail_item_photo)
-        var mDetailB1: ImageView = itemView.findViewById(R.id.detail_item_b)
-        var mDetailB2: ImageView = itemView.findViewById(R.id.detail_item_band)
-        var mDetailB3: ImageView = itemView.findViewById(R.id.detail_item_bandb)
+        private var mDetailB1: ImageView = itemView.findViewById(R.id.detail_item_b)
+        private var mDetailB2: ImageView = itemView.findViewById(R.id.detail_item_band)
+        private var mDetailB3: ImageView = itemView.findViewById(R.id.detail_item_bandb)
 
-        var mDetailEdit: FloatingActionButton = itemView.findViewById(R.id.detail_item_global)
+        private var mDetailEdit: FloatingActionButton = itemView.findViewById(R.id.detail_item_global)
         var mDetailEditPlus: FloatingActionButton = itemView.findViewById(R.id.detail_item_plus)
         var mDetailEditMinus: FloatingActionButton = itemView.findViewById(R.id.detail_item_minus)
         var mDetailEditDelete: FloatingActionButton = itemView.findViewById(R.id.detail_item_delete)
-        var mDetailEditSub: ImageView = itemView.findViewById(R.id.detail_item_sub)
+        private var mDetailEditSub: ImageView = itemView.findViewById(R.id.detail_item_sub)
 
         init {
 
 
         mDetailEdit.setOnClickListener {
-         if (!animShow) {
+         animShow = if (!animShow) {
              val animation = AnimationUtils.loadAnimation(mContext, R.anim.zoomout)
              mDetailEdit.startAnimation(animation)
-             animShow = true}
-
-         else { val animation = AnimationUtils.loadAnimation(mContext, R.anim.zoomin)
+             true
+         } else { val animation = AnimationUtils.loadAnimation(mContext, R.anim.zoomin)
              mDetailEdit.startAnimation(animation)
-             animShow = false}
+             false
+         }
 
             if (mDetailEditMinus.isVisible) { iconInvisible()}
 
@@ -136,8 +120,8 @@ class DetailAdapter(
 
             } } }
 
-         fun initMapUp(i: Int) {
-            var mChangeHashMap = hashMapOf<Int, ArrayList<String>>()
+         private fun initMapUp(i: Int) {
+            val mChangeHashMap = hashMapOf<Int, ArrayList<String>>()
             mChangeHashMap.clear()
             mChangeHashMap[i] = mListMyItem[position]
             itemClickN.onNext(mChangeHashMap)
@@ -157,7 +141,7 @@ class DetailAdapter(
              mDetailB3.setOnClickListener { initMapUp(0) }
          }
 
-        fun iconVisible() {
+        private fun iconVisible() {
             val animation100right = AnimationUtils.loadAnimation(mContext, R.anim.slideright100)
             val animation100 = AnimationUtils.loadAnimation(mContext, R.anim.slideleft100)
             val animation200 = AnimationUtils.loadAnimation(mContext, R.anim.slideleft200)

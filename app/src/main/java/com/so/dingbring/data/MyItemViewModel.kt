@@ -6,12 +6,6 @@ import androidx.lifecycle.ViewModel
 
 class MyItemViewModel(private val mItemRepository: MyItemRepository): ViewModel() {
 
-    fun getAllItem(): LiveData<MutableList<MyItem>> {
-        val mMutableData= MutableLiveData<MutableList<MyItem>>()
-        mItemRepository.getAllItem().observeForever{
-            mMutableData.value= it }
-        return mMutableData }
-
     fun  getItem(mEventId:String): LiveData<ArrayList<ArrayList<String>>>  { return mItemRepository.getItem(mEventId) }
 
 

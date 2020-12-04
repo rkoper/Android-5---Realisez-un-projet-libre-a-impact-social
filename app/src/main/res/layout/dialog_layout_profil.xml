@@ -110,7 +110,7 @@
                 android:layout_height="match_parent"
                 android:gravity="left"
                 android:text=" "
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

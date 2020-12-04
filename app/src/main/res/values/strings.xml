@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">dingbring</string>
 
-    <string name="facebook_application_id" translatable="false">3481097821967676</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb3481097821967676</string>
+    <string name="facebook_application_id" translatable="false">3481097821967676</string>
+
 
     <string name="day1">Mon.</string>
     <string name="day2">Tue.</string>

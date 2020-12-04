@@ -11,7 +11,6 @@ import android.view.Window
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
@@ -29,32 +28,26 @@ import java.util.*
 
 
 class CalendarFragment : BaseFragment() {
-    var mDataEvent: MutableList<MutableList<String>> = mutableListOf()
-    var mDataPass = arrayListOf<String>()
-    var startCal = Calendar.getInstance()
-    var endCal = Calendar.getInstance()
-    var date = Date()
-    lateinit var configuration: RecyclerCalendarConfiguration
+    private var mDataEvent: MutableList<MutableList<String>> = mutableListOf()
+    private var startCal = Calendar.getInstance()
+    private var endCal = Calendar.getInstance()
+    private var date = Date()
+    private lateinit var configuration: RecyclerCalendarConfiguration
     private val mEventVM by viewModel<MyEventViewModel>()
     private val mUserVM by viewModel<MyUserViewModel>()
     var mNameUser = "..."
-    var mEmailUser = "..."
-    var mPhotoUser = "..."
-    var mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    var mUserEvent = arrayListOf("", "")
-    var mPosBottomBar: BubbleNavigationLinearView? = null
-    var mDataEventTest: MutableList<MutableList<String>> = mutableListOf()
-    lateinit var mBundle: Bundle
-    var mFloat_back : FloatingActionButton? = null
+    private var mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var mUserEvent = arrayListOf("", "")
+    private var mPosBottomBar: BubbleNavigationLinearView? = null
+    private var mFloat_back : FloatingActionButton? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
 
-        return view
+        return inflater.inflate(R.layout.fragment_calendar, container, false)
     }
 
 
@@ -114,7 +107,7 @@ class CalendarFragment : BaseFragment() {
             true
         )
 
-        var calendarRecyclerView = calendarRecyclerView
+        val calendarRecyclerView = calendarRecyclerView
         val calendarAdapterVertical = CalendarAdapter(
             requireContext(), startCal.time, endCal.time, configuration, mDataEvent,
             object : CalendarAdapter.OnDateSelected {
@@ -169,7 +162,7 @@ class CalendarFragment : BaseFragment() {
 
         d.dialog_cal_see.setOnClickListener {
 
-            var bundle = bundleOf("GlobalIdEvent" to datalist[2])
+            val bundle = bundleOf("GlobalIdEvent" to datalist[2])
 
             Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.detail_Fragment, bundle)
 
