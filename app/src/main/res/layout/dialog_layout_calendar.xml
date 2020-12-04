@@ -1,4 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
+   <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,7 @@
     android:background="@color/colorTransparent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="250sp"
-        android:layout_height="200sp"
+        android:layout_height="400dp"
         android:background="@drawable/rectangle_corner_grey_600"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -17,7 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="220dp"
-            android:layout_height="180sp"
+            android:layout_height="350dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,56 +27,62 @@
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_h_1"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.08"/>
+            app:layout_constraintGuide_percent="0.025"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_h_2"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.27"/>
+            app:layout_constraintGuide_percent="0.15"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_h_4"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.44"/>
+            app:layout_constraintGuide_percent="0.3"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_h_6"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6"/>
+            app:layout_constraintGuide_percent="0.4"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_h_8"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.8"/>
+            app:layout_constraintGuide_percent="0.5"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dialog_cal_h_81"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_h_9"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.95"/>
+            app:layout_constraintGuide_percent="0.975"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_v_1"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1"/>
+            app:layout_constraintGuide_percent="0.03"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_v_8"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85"/>
+            app:layout_constraintGuide_percent="0.97"/>
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dialog_cal_v_9"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9"/>
+            app:layout_constraintGuide_percent="0.97"/>
 
         <ImageView
             android:layout_margin="5dp"
@@ -141,25 +147,41 @@
             app:layout_constraintTop_toTopOf="@id/dialog_cal_h_4"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_6"/>
         <TextView
-
             android:padding="1dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/white"
             style="@style/TxtViewPrincipalWhite"
-            android:text="Addrddddddddddddddddddddddddddess"
+            android:text="10 rue XXXXXXXX, Paris"
             android:id="@+id/dialog_cal_addressevent"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_margin="2dp"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_cal_v_1"
             app:layout_constraintRight_toRightOf="@+id/dialog_cal_v_9"
             app:layout_constraintTop_toTopOf="@id/dialog_cal_h_6"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_8"/>
 
+            <TextView
+                android:layout_margin="4dp"
+                android:padding="1dp"
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:text="Description"
+                android:id="@+id/dialog_cal_descevent"
+                android:fontFamily="@font/roboto"
+                android:ellipsize="end"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintLeft_toLeftOf="@+id/dialog_cal_v_1"
+                app:layout_constraintRight_toRightOf="@+id/dialog_cal_v_9"
+                app:layout_constraintTop_toTopOf="@id/dialog_cal_h_8"
+                app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_81"/>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/dialog_cal_cancel"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_cal_v_1"
-            app:layout_constraintTop_toTopOf="@id/dialog_cal_h_8"
+            app:layout_constraintTop_toTopOf="@id/dialog_cal_h_81"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_9"
             app:layout_constraintRight_toLeftOf="@+id/dialog_cal_see"
             android:layout_width="wrap_content"
@@ -178,7 +200,7 @@
             android:id="@+id/dialog_cal_see"
             app:layout_constraintLeft_toRightOf="@+id/dialog_cal_cancel"
             app:layout_constraintRight_toRightOf="@+id/dialog_cal_v_9"
-            app:layout_constraintTop_toTopOf="@id/dialog_cal_h_8"
+            app:layout_constraintTop_toTopOf="@id/dialog_cal_h_81"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_cal_h_9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

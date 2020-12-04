@@ -26,27 +26,21 @@ class CalendarAdapter(
 
     val mContext = mCtxt
 
-    interface OnDateSelected {
-        fun onDateSelected(mEvent: MutableList<String>)
-    }
+    interface OnDateSelected { fun onDateSelected(mEvent: MutableList<String>) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.calendar_item, parent, false)
-        return MonthCalendarViewHolder(view)
-    }
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.calendar_item, parent, false)
+        return MonthCalendarViewHolder(view) }
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
         position: Int,
         calendarItem: RecyclerCalenderViewItem
-    ) {
-        val monthViewHolder: MonthCalendarViewHolder = holder as MonthCalendarViewHolder
+
+    ) { val monthViewHolder: MonthCalendarViewHolder = holder as MonthCalendarViewHolder
         monthViewHolder.itemView.visibility = View.VISIBLE
         monthViewHolder.viewEvent.visibility = View.GONE
-
         monthViewHolder.itemView.setOnClickListener(null)
-
         monthViewHolder.textViewDay.setTextColor(Color.WHITE);
         monthViewHolder.textViewDate.setTextColor(Color.WHITE);
 
@@ -54,49 +48,27 @@ class CalendarAdapter(
             val selectedCalendar = Calendar.getInstance(Locale.getDefault())
             selectedCalendar.time = calendarItem.date
 
-            val month: String = CalendarUtils.dateStringFromFormat(
-                configuration.calendarLocale,
-                selectedCalendar.time,
-                CalendarUtils.DISPLAY_MONTH_FORMAT
-            ) ?: ""
+            val month: String = CalendarUtils.dateStringFromFormat(configuration.calendarLocale, selectedCalendar.time, CalendarUtils.DISPLAY_MONTH_FORMAT) ?: ""
+
             val year = selectedCalendar[Calendar.YEAR].toLong()
             monthViewHolder.textViewDay.setPadding(0, 10, 0, 10)
             monthViewHolder.textViewDay.text = year.toString()
             monthViewHolder.textViewDate.setPadding(0, 10, 0, 10)
+            monthViewHolder.textViewDate.text = month }
 
-            monthViewHolder.textViewDate.text = month
-        } else if (calendarItem.isEmpty) {
+        else if (calendarItem.isEmpty) {
             monthViewHolder.itemView.visibility = View.GONE
             monthViewHolder.textViewDay.text = ""
-            monthViewHolder.textViewDate.text = ""
+            monthViewHolder.textViewDate.text = "" }
 
-        } else {
-
-            val calendarDate = Calendar.getInstance(Locale.getDefault())
+        else { val calendarDate = Calendar.getInstance(Locale.getDefault())
             calendarDate.time = calendarItem.date
-
-            val day: String = CalendarUtils.dateStringFromFormat(
-                configuration.calendarLocale,
-                calendarDate.time,
-                CalendarUtils.DISPLAY_WEEK_DAY_FORMAT
-            ) ?: ""
-
+            val day: String = CalendarUtils.dateStringFromFormat(configuration.calendarLocale, calendarDate.time, CalendarUtils.DISPLAY_WEEK_DAY_FORMAT) ?: ""
             monthViewHolder.textViewDay.text = day
-            val dateInt = (CalendarUtils.dateStringFromFormat(
-                configuration.calendarLocale,
-                calendarDate.time,
-                CalendarUtils.DB_DATE_FORMAT
-            ) ?: "0").toString()
-
-            monthViewHolder.textViewDate.text =
-                CalendarUtils.dateStringFromFormat(
-                    configuration.calendarLocale,
-                    calendarDate.time,
-                    CalendarUtils.DISPLAY_DATE_FORMAT
-                ) ?: ""
+            val dateInt = (CalendarUtils.dateStringFromFormat(configuration.calendarLocale, calendarDate.time, CalendarUtils.DB_DATE_FORMAT) ?: "0").toString()
+            monthViewHolder.textViewDate.text = CalendarUtils.dateStringFromFormat(configuration.calendarLocale, calendarDate.time, CalendarUtils.DISPLAY_DATE_FORMAT) ?: ""
 
             if (mDataPass.isNotEmpty()) {
-//                println("----<<<<   2  <<<<data>>>>  2   >>>---" + mDataPass[position][1])
                 mDataPass.forEach { data ->
 
                     val newDate = data[1].split("/")
@@ -107,18 +79,9 @@ class CalendarAdapter(
 
                     if (dateInt == mCompareDate) {
                         monthViewHolder.viewEvent.visibility = View.VISIBLE
-                       // monthViewHolder.viewEvent.setBackgroundDrawable(mContext.resources.getDrawable(R.drawable.round_small))
                         monthViewHolder.viewEvent.setBackgroundColor(mContext.resources.getColor(R.color.green_300))
-
-
                         monthViewHolder.itemView.setOnClickListener { dateSelectListener.onDateSelected(data) }
-
-                    }
-                }
-            }
-        }
-    }
-}
+                    } } } } } }
 
 
 class MonthCalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

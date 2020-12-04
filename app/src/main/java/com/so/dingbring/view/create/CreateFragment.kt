@@ -27,6 +27,7 @@ import com.google.android.libraries.places.api.model.Place.Field
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.Utils.formatDate
@@ -54,24 +55,37 @@ class CreateFragment : BaseFragment() {
     var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mItemStatus: String = "I bring"
     var mEventUniqueID = UUID.randomUUID().toString()
-    var varbutton: BubbleNavigationLinearView? = null
+    var mPosBottomBar: BubbleNavigationLinearView? = null
+    var mFloat_action : FloatingActionButton? = null
+    var mFloat_back : FloatingActionButton? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         val view: View = inflater.inflate(R.layout.fragment_create, container, false)
         return view }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initCreateEvent()
         onBackPressed()
+        onBackBarPressed()
+    }
+
+    private fun onBackBarPressed() {
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.setOnClickListener {
+            navToHome()
+        }
     }
 
     private fun onBackPressed() {
-        varbutton = activity?.findViewById(R.id.float_bottom_bar)
+        mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -80,7 +94,7 @@ class CreateFragment : BaseFragment() {
 
     private fun navToHome() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
-        varbutton?.setCurrentActiveItem(1)
+        mPosBottomBar?.setCurrentActiveItem(1)
     }
 
     private fun initCreateEvent() {
@@ -176,7 +190,8 @@ class CreateFragment : BaseFragment() {
             TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show() } }
 
         fun createEvent() {
-            create_save?.setOnClickListener {
+            mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
+            mFloat_action?.setOnClickListener {
                 if (mEventAddress == "" ) { Toast.makeText(requireContext(), "Please complete address...", Toast.LENGTH_SHORT).show() }
                 if (mEventDate == "" ) { Toast.makeText(requireContext(), "Please complete date...", Toast.LENGTH_SHORT).show() }
                 if (mEventUniqueID == "" ) { Toast.makeText(requireContext(), "Error...", Toast.LENGTH_SHORT).show() }

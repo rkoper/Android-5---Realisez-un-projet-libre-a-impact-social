@@ -57,12 +57,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/custom_dialog_subject"
-                style="@style/TxtViewPrincipalBlack"
+                style="@style/TxtViewPrincipalWhite"
+                android:padding="1dp"
+                android:layout_margin="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="left"
                 android:text=" "
-                android:textSize="18dp" />
+                android:textSize="14dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,13 +85,15 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/custom_dialog_message"
-                style="@style/TxtViewPrincipalBlack"
                 android:maxLines="20"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto"
+                android:ellipsize="end"
                 android:gravity="left"
                 android:text=" "
-                android:textSize="18dp" />
+                android:textSize="14dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

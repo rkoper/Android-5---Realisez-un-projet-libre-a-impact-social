@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,17 +16,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.auth.AuthUI
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.login.LoginActivity
+import kotlinx.android.synthetic.main.dialog_layout_contact.*
 import kotlinx.android.synthetic.main.dialog_layout_language.*
 import kotlinx.android.synthetic.main.dialog_layout_profil.*
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -47,13 +51,13 @@ class SettingsFragment : BaseFragment() {
     var mNbUser = 0
     var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var fragmentStatus = ""
-    var varbutton: BubbleNavigationLinearView? = null
+    var mPosBottomBar: BubbleNavigationLinearView? = null
     private val mUserVM by viewModel<MyUserViewModel>()
     private var PRIVATE_MODE = 0
     private val PREF_NAME = "-"
     lateinit var sharedPref:SharedPreferences
     lateinit var mDrawable: Drawable
-
+    var mFloat_back : FloatingActionButton? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,27 +70,38 @@ class SettingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        varbutton = activity?.findViewById(R.id.float_bottom_bar)
+        mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                  //   view?.findNavController()?.navigate(R.id.action_settings_to_home)
-                    varbutton?.setCurrentActiveItem(1) } })
+                    mPosBottomBar?.setCurrentActiveItem(1) } })
         goHeader()
 
 
         onBackPressed()
+        onBackBarPressed()
+    }
+
+    private fun onBackBarPressed() {
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.setOnClickListener {
+            navToHome()
+        }
     }
 
     private fun onBackPressed() {
-        varbutton = activity?.findViewById(R.id.float_bottom_bar)
+        mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
-                    varbutton?.setCurrentActiveItem(1) } })
+                    navToHome() } })
     }
 
+    private fun navToHome() {
+        Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+        mPosBottomBar?.setCurrentActiveItem(1)
+    }
 
 
 
@@ -166,7 +181,8 @@ class SettingsFragment : BaseFragment() {
 
 
     private fun initProfil() {
-        d_profil.setting_profil_edit.hint = "  "
+        d_profil.setting_profil_edit.hint = ""
+
         Glide.with(requireContext()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(d_profil.dialog_setting_img_profil)
         editprofil() }
 
@@ -252,69 +268,50 @@ class SettingsFragment : BaseFragment() {
 
                 map.value.setOnClickListener {
                     Glide.with(requireContext()).load(key).apply(RequestOptions.circleCropTransform()).into(d_profil.dialog_setting_img_profil)
-                    mPhotoUser = key
-                   }
+                    mPhotoUser = key }
+
+
+                d_profil.setting_profil_edit.doOnTextChanged { text, start, before, count ->
+                    if (start > 1) { mNameUser = d_profil.setting_profil_edit.text.toString() } }
                 saveNewUserInfo() }
 
             private fun saveNewUserInfo() {
                 d_profil.settings_check.setOnClickListener {
-                    mNameUser = d_profil.setting_profil_edit.text.toString()
+
+
 
                     card_t_settings_name.text = mNameUser
+
                     Glide.with(requireActivity()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_settings_photo)
                     mUserVM.updateUserName(mIdUser, mNameUser)
                     mUserVM.updateUserPhoto(mIdUser, mPhotoUser)
-                    d_profil.dismiss() } }
+                    d_profil.dismiss() }
+
+                d_profil.settings_cancel.setOnClickListener { d_profil.dismiss() }
+
+
+            }
 
     private fun initContact() {
-        /*
+
+        d_contact.settings_send_mail.setOnClickListener {
         val recipient = "sofianem75018@gmail.com"
-        val subject = d.custom_dialog_subject.text.toString().trim()
-        val message = d.custom_dialog_message.text.toString().trim()
+        val subject = d_contact.custom_dialog_subject.text.toString().trim()
+        val message = d_contact.custom_dialog_message.text.toString().trim()
         val mIntent = Intent(Intent.ACTION_SEND)
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
         mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
         mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
         mIntent.putExtra(Intent.EXTRA_TEXT, message)
+            try { startActivity(Intent.createChooser(mIntent, "Choose Email Client...")) }
+            catch (e: Exception) { Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show() }}
 
 
-        try {
-            startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
-        } catch (e: Exception) {
-            Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
-    }
+        d_contact.settings_cancel_mail.setOnClickListener { d_contact.dismiss()}
 
-         */
+
     }
 }
-
-
-
-/*
-            private fun goContactUs() {
-
-
-                card_t_setting_contact?.setOnClickListener {
-
-
-
-
-                    d.settings_send_mail.setOnClickListener {
-
-                        Toast.makeText(requireContext(), "Send eMail", Toast.LENGTH_SHORT).show()
-
-
-                        }
-                    }
-                }
-
-
-            }
-
-
-    }
-
- */
 
 

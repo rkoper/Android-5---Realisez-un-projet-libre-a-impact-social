@@ -14,15 +14,19 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.AnimationUtils
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
@@ -38,7 +42,9 @@ import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.view.base.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.dialog_layout_calendar.*
 import kotlinx.android.synthetic.main.dialog_layout_detail.*
+import kotlinx.android.synthetic.main.dialog_layout_detail_info.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.item_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -80,46 +86,31 @@ class DetailFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         mEventId = arguments?.get("GlobalIdEvent").toString()
+        initTopBottomBar()
+        thisView =  inflater.inflate(R.layout.fragment_detail, container, false)
+        return thisView
+    }
 
-
-
-
+    private fun initTopBottomBar() {
         mBubble = activity?.findViewById(R.id.float_bottom_bar)
         mBubble!!.visibility = View.INVISIBLE
-       // mBubble!!.setCurrentActiveItem(1)
+        // mBubble!!.setCurrentActiveItem(1)
 
-           mTopBarTxt = activity?.findViewById(R.id.item_tool_bar)
-           mTopBarTxt?.text  = "Detail"
-           mTopBarTxt?.setTextColor(resources.getColor(R.color.red_300))
-
-
-           mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-           mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
-           mFloat_back?.setColorFilter(Color.argb(255, 255, 255, 255))
+        mTopBarTxt = activity?.findViewById(R.id.item_tool_bar)
+        mTopBarTxt?.text  = "Detail"
+        mTopBarTxt?.setTextColor(resources.getColor(R.color.red_300))
 
 
-           mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
-           mFloat_action?.visibility = View.VISIBLE
-           mFloat_action?.setImageResource(R.drawable.logo_share)
-           mFloat_action?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
+        mFloat_back?.setColorFilter(Color.argb(255, 255, 255, 255))
 
 
-
-
-
-
-
-
-
-
-
-
-        thisView =  inflater.inflate(R.layout.fragment_detail, container, false)
-
-            return thisView
+        mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
+        mFloat_action?.visibility = View.VISIBLE
+        mFloat_action?.setImageResource(R.drawable.logo_share)
+        mFloat_action?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -129,32 +120,41 @@ class DetailFragment : BaseFragment() {
         initRetrieveItem()
         prepareToShare()
         onBackPressed()
+        onBackBarPressed()
         initHeader()
     }
 
     private fun onBackPressed() {
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-               Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
-                    mBubble!!.visibility = View.VISIBLE
-                    mBubble?.setCurrentActiveItem(1) } })
+                override fun handleOnBackPressed() { navToHome() } })
+    }
+    private fun onBackBarPressed() {
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.setOnClickListener {
+            navToHome()
+        }
+    }
+    private fun navToHome() {
+        Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+        mTopBarTxt?.text  = "Event"
+        mBubble!!.visibility = View.VISIBLE
+        mBubble?.setCurrentActiveItem(1)
     }
 
 
-
     private fun prepareToShare() {
-        detail_share.setOnClickListener {
-                val dynamicLink = Firebase.dynamicLinks.dynamicLink {
-                    link = Uri.parse(   "https://dingbring.page.link/" + mEventId )
-                    domainUriPrefix = "https://dingbring.page.link/"
-                    androidParameters { } }
+        mFloat_action?.setOnClickListener {
+            val dynamicLink = Firebase.dynamicLinks.dynamicLink {
+                link = Uri.parse(   "https://dingbring.page.link/" + mEventId )
+                domainUriPrefix = "https://dingbring.page.link/"
+                androidParameters { } }
 
-                val dynamicLinkUri = dynamicLink.uri
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "text/plain"
-                intent.putExtra(Intent.EXTRA_TEXT, dynamicLinkUri.toString())
-                startActivity(Intent.createChooser(intent, "Share Link")) }
+            val dynamicLinkUri = dynamicLink.uri
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, dynamicLinkUri.toString())
+            startActivity(Intent.createChooser(intent, "Share Link")) }
     }
 
     @SuppressLint("CheckResult")
@@ -200,7 +200,33 @@ class DetailFragment : BaseFragment() {
 
     private fun initHeader() {
         mEventVM.getEventrById(mEventId).observe(requireActivity(), androidx.lifecycle.Observer { myevent ->
-            mTextName!!.text = myevent.mEventName }) }
+            var mEventAdress = myevent.mEventAdress
+            var mEventDate = myevent.mEventDate
+            var mEventHour = myevent.mEventHour
+            var mEventName = myevent.mEventName
+            var mEventDesc = myevent.mEventDesc
+
+            mTextName!!.text = mEventName
+            detail_button_info.setOnClickListener {
+
+                val d = Dialog(requireContext())
+                d.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                d.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                d.setContentView(R.layout.dialog_layout_detail_info)
+                d.dialog_det_info_addressevent.text = mEventAdress
+                d.dialog_det_info_dateevent.text = mEventDate
+                d.dialog_det_info_nameevent.text = mEventName
+                d.dialog_det_info_hourevent.text = mEventHour
+                d.dialog_det_info_descevent.text = mEventDesc
+                d.dialog_det_info_cancel.setOnClickListener { d.dismiss() }
+                d.show()
+
+            }
+
+
+
+
+        }) }
 
     private fun initButton() {
         detail_button_add.setOnClickListener {
@@ -209,15 +235,15 @@ class DetailFragment : BaseFragment() {
 
     private fun initStatus() {
         detail_status_bring?.setOnClickListener {
-            detail_status_bring.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red_300))
+            detail_status_bring_deco.visibility = View.VISIBLE
             mItemStatus = "I bring"
-            detail_status_need.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.fui_transparent))
+            detail_status_need_deco.visibility = View.INVISIBLE
             initAnimafterClickAdd()}
 
             detail_status_need?.setOnClickListener {
-            detail_status_need.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.red_300))
+            detail_status_need_deco.visibility = View.VISIBLE
             mItemStatus = "I need"
-            detail_status_bring.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.fui_transparent))
+            detail_status_bring_deco.visibility = View.INVISIBLE
                 initAnimafterClickAdd()}}
 
     private fun initAnimafterClickAdd() {
@@ -279,6 +305,8 @@ class DetailFragment : BaseFragment() {
         goAnimTxtLayoutBack(detail_item_txt)
         goAnimEditBack(detail_item_edit)
         goAnimTxtBack(detail_qty_txt)
+        goAnimImageViewBack(detail_status_bring_deco)
+        goAnimImageViewBack(detail_status_need_deco)
         goAnimViewBack(detail_quantity_item)
         goAnimViewBack(detail_quantity_minus)
         goAnimViewBack(detail_quantity_plus)
@@ -314,6 +342,9 @@ class DetailFragment : BaseFragment() {
         mLink?.startAnimation(zoom1)
         mLink?.startAnimation(zoom2) }
 
+    private fun goAnimImageViewBack(mLink: ImageView?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)
+        mLink?.startAnimation(zoom1) }
 
     private fun goAnimViewBack(mLink: View?) {
         val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)

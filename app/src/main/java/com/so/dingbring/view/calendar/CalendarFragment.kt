@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
@@ -41,10 +42,10 @@ class CalendarFragment : BaseFragment() {
     var mPhotoUser = "..."
     var mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mUserEvent = arrayListOf("", "")
-    var varbutton: BubbleNavigationLinearView? = null
+    var mPosBottomBar: BubbleNavigationLinearView? = null
     var mDataEventTest: MutableList<MutableList<String>> = mutableListOf()
     lateinit var mBundle: Bundle
-
+    var mFloat_back : FloatingActionButton? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,19 +72,27 @@ class CalendarFragment : BaseFragment() {
             })
 
         onBackPressed()
+        onBackBarPressed()
+    }
+
+    private fun onBackBarPressed() {
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.setOnClickListener { navToHome() }
     }
 
     private fun onBackPressed() {
-        varbutton = activity?.findViewById(R.id.float_bottom_bar)
+        mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    Navigation.findNavController(requireActivity(), R.id.hostFragment)
-                        .navigate(R.id.event_fragment)
-                    varbutton?.setCurrentActiveItem(1)
-                }
-            })
+                    navToHome() } })
     }
+
+    private fun navToHome() {
+        Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+        mPosBottomBar?.setCurrentActiveItem(1)
+    }
+
 
 
     private fun initCal() {
@@ -130,19 +139,32 @@ class CalendarFragment : BaseFragment() {
 
 
     private fun createAlert(datalist: MutableList<String>) {
+
+        println("-----0-------->>" + datalist[0])
+        println("-----1-------->>" + datalist[1])
+        println("-----2-------->>" + datalist[2])
+        println("-----3-------->>" + datalist[3])
+        println("-----4-------->>" + datalist[4])
+        println("-----5-------->>" + datalist[5])
+        println("-----6-------->>" + datalist[6])
+        println("-----7-------->>" + datalist[7])
+        println("----8--------->>" + datalist[8])
+        println("----9 --------->>" + datalist[9])
+
         val d = Dialog(requireContext())
         d.requestWindowFeature(Window.FEATURE_NO_TITLE)
         d.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         d.setContentView(R.layout.dialog_layout_calendar)
-        d.dialog_cal_nameuser.text = datalist[5]
         d.dialog_cal_addressevent.text = datalist[0]
         d.dialog_cal_dateevent.text = datalist[1]
-        d.dialog_cal_hourevent.text = datalist[7]
+        // Event Id
         d.dialog_cal_nameevent.text = datalist[3]
-        Glide.with(requireContext())
-            .load(datalist[6])
-            .apply(RequestOptions.circleCropTransform())
-            .into(d.dialog_cal_photouser)
+        // User Id
+        d.dialog_cal_nameuser.text = datalist[5]
+        Glide.with(requireContext()).load(datalist[6]).apply(RequestOptions.circleCropTransform()).into(d.dialog_cal_photouser)
+        d.dialog_cal_hourevent.text = datalist[7]
+        d.dialog_cal_descevent.text = datalist[8]
+
 
 
         d.dialog_cal_see.setOnClickListener {

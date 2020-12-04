@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.facebook.internal.Mutable
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEvent
@@ -56,7 +57,7 @@ class EventAdapter(
 
 
 
-        Glide.with(holder.itemView.context).load(mDataEvent[position][6]).centerCrop().into(holder.mDisEventPhoto)
+        Glide.with(holder.itemView.context).load(mDataEvent[position][6]).apply(RequestOptions.circleCropTransform()).into(holder.mDisEventPhoto)
       //  mMapUser[position] = mDataEvent[position][2]
         //itemUser.onNext(mMapUser)
 

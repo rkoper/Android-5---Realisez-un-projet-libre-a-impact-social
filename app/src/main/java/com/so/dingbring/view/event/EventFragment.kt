@@ -11,9 +11,12 @@ import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gauravk.bubblenavigation.BubbleNavigationLinearView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.so.dingbring.ItemActivityController
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEvent
@@ -37,9 +40,10 @@ class EventFragment : BaseFragment() {
     var mNameUser = "///"
     var mIdUser = "////"
     var mUserEvent = arrayListOf("", "")
-
+    var mFloat_back : FloatingActionButton? = null
     var mIdEvent = ""
     var mGoDetail = ""
+    var mPosBottomBar: BubbleNavigationLinearView? = null
 
  override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,12 +64,29 @@ class EventFragment : BaseFragment() {
                 mUserEvent = mlmu.mEventUser
                 initRV() } })
 
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
+        onBackPressed()
+        onBackBarPressed()
+    }
+
+    private fun onBackBarPressed() {
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.setOnClickListener {
+            navToHome()
+        }
+    }
+
+    private fun onBackPressed() {
+        mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    val intent = Intent(activity, MainActivity::class.java)
-                    activity?.startActivity(intent) } }) }
+                    navToHome() } })
+    }
+
+    private fun navToHome() {
+        Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+        mPosBottomBar?.setCurrentActiveItem(1)
+    }
 
 
     @SuppressLint("CheckResult")

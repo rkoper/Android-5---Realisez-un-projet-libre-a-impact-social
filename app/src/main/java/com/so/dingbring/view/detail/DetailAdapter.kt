@@ -61,7 +61,6 @@ class DetailAdapter(
             mDetailEditMinus.visibility = View.GONE
             mDetailEditPlus.visibility = View.GONE
             mDetailEditDelete.visibility = View.GONE
-            mDetailEditStatus.visibility = View.GONE
            // mDetailEditCache.visibility = View.GONE
              mItemStatus = mListMyItem[position][1]
              mItemName = mListMyItem[position][2]
@@ -107,7 +106,6 @@ class DetailAdapter(
         var mDetailB3: ImageView = itemView.findViewById(R.id.detail_item_bandb)
 
         var mDetailEdit: FloatingActionButton = itemView.findViewById(R.id.detail_item_global)
-        var mDetailEditStatus: FloatingActionButton = itemView.findViewById(R.id.detail_item_status)
         var mDetailEditPlus: FloatingActionButton = itemView.findViewById(R.id.detail_item_plus)
         var mDetailEditMinus: FloatingActionButton = itemView.findViewById(R.id.detail_item_minus)
         var mDetailEditDelete: FloatingActionButton = itemView.findViewById(R.id.detail_item_delete)
@@ -168,9 +166,7 @@ class DetailAdapter(
             mDetailEditMinus.visibility = View.VISIBLE
             mDetailEditPlus.visibility = View.VISIBLE
             mDetailEditDelete.visibility = View.VISIBLE
-            mDetailEditStatus.visibility = View.VISIBLE
             mDetailEditSub.visibility = View.VISIBLE
-            mDetailEditStatus.startAnimation(animation400)
             mDetailEditPlus.startAnimation(animation300)
             mDetailEditMinus.startAnimation(animation200)
             mDetailEditDelete.startAnimation(animation100)
@@ -185,7 +181,6 @@ class DetailAdapter(
             val animation300 = AnimationUtils.loadAnimation(mContext, R.anim.slideright300)
             val animation400 = AnimationUtils.loadAnimation(mContext, R.anim.slideright400)
             mDetailImageUser.startAnimation(animation100left)
-            mDetailEditStatus.startAnimation(animation100)
             mDetailEditPlus.startAnimation(animation200)
             mDetailEditMinus.startAnimation(animation300)
             mDetailEditDelete.startAnimation(animation400)
@@ -193,7 +188,6 @@ class DetailAdapter(
             mDetailEditMinus.visibility = View.GONE
             mDetailEditPlus.visibility = View.GONE
             mDetailEditDelete.visibility = View.GONE
-            mDetailEditStatus.visibility = View.GONE
             mDetailEditSub.visibility = View.GONE
             mDetailImageUser.visibility = View.VISIBLE }
 
