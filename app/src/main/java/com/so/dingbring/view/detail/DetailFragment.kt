@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.dynamiclinks.ktx.androidParameters
 import com.google.firebase.dynamiclinks.ktx.dynamicLink
@@ -78,6 +79,7 @@ class DetailFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        FirebaseApp.initializeApp(requireActivity())
         mEventId = arguments?.get("GlobalIdEvent").toString()
         initTopBottomBar()
         thisView =  inflater.inflate(R.layout.fragment_detail, container, false)
@@ -181,8 +183,6 @@ class DetailFragment : BaseFragment() {
 
     private fun initRVObserver() {
         mItemVM.getItem(mEventId).observe(requireActivity(), androidx.lifecycle.Observer {mlmi ->
-
-
             mlmi.sortByDescending { it[1] }
             mListMyItem.clear()
             mListMyItem.addAll(mlmi)
@@ -190,13 +190,19 @@ class DetailFragment : BaseFragment() {
     }
 
 
-    private fun initHeader() {
+     fun initHeader() : String{
+         FirebaseApp.initializeApp(requireActivity())
+        var mEventAdress = ""
+        var mEventDate = ""
+        var mEventHour = ""
+        var mEventName = ""
+        var mEventDesc = ""
         mEventVM.getEventrById(mEventId).observe(requireActivity(), androidx.lifecycle.Observer { myevent ->
-            val mEventAdress = myevent.mEventAdress
-            val mEventDate = myevent.mEventDate
-            val mEventHour = myevent.mEventHour
-            val mEventName = myevent.mEventName
-            val mEventDesc = myevent.mEventDesc
+             mEventAdress = myevent.mEventAdress
+             mEventDate = myevent.mEventDate
+             mEventHour = myevent.mEventHour
+             mEventName = myevent.mEventName
+             mEventDesc = myevent.mEventDesc
 
             mTextName!!.text = mEventName
             detail_button_info.setOnClickListener {
@@ -218,7 +224,10 @@ class DetailFragment : BaseFragment() {
 
 
 
-        }) }
+        })
+
+    return mEventName
+    }
 
     private fun initButton() {
         detail_button_add.setOnClickListener {

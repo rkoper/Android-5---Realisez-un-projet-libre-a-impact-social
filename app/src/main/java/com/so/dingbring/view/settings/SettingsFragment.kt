@@ -1,6 +1,5 @@
 package com.so.dingbring.view.settings
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -26,6 +25,7 @@ import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
+import com.so.dingbring.Utils
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.login.LoginActivity
@@ -57,6 +57,7 @@ class SettingsFragment : BaseFragment() {
     private lateinit var sharedPref:SharedPreferences
     private lateinit var mDrawable: Drawable
     private var mFloat_back : FloatingActionButton? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,12 +72,8 @@ class SettingsFragment : BaseFragment() {
         mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                 //   view?.findNavController()?.navigate(R.id.action_settings_to_home)
-                    mPosBottomBar?.setCurrentActiveItem(1) } })
+                override fun handleOnBackPressed() { mPosBottomBar?.setCurrentActiveItem(1) } })
         goHeader()
-
-
         onBackPressed()
         onBackBarPressed()
     }
@@ -84,22 +81,18 @@ class SettingsFragment : BaseFragment() {
     private fun onBackBarPressed() {
         mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
         mFloat_back?.setOnClickListener {
-            navToHome()
-        }
-    }
+            navToHome() } }
 
     private fun onBackPressed() {
         mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    navToHome() } })
-    }
+                    navToHome() } }) }
 
     private fun navToHome() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
-        mPosBottomBar?.setCurrentActiveItem(1)
-    }
+        mPosBottomBar?.setCurrentActiveItem(1) }
 
 
 
@@ -121,26 +114,11 @@ class SettingsFragment : BaseFragment() {
     }
 
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+
     private fun initMedal(mNbUser: Int) {
-        if(mNbUser in 0..4)   { mDrawable = resources.getDrawable(R.drawable.medalone)
-            card_t_settings_status.text = getString(R.string.newbie)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
-        if(mNbUser in 5..9)   { mDrawable = resources.getDrawable(R.drawable.medaltwo)
-            card_t_settings_status.text = getString(R.string.beginner)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
-        if(mNbUser in 10..14) { mDrawable = resources.getDrawable(R.drawable.medalthree)
-            card_t_settings_status.text = getString(R.string.intermediate)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
-        if(mNbUser in 15..19)   { mDrawable = resources.getDrawable(R.drawable.medalfour)
-            card_t_settings_status.text = getString(R.string.experienced)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
-        if(mNbUser in 20..24)   { mDrawable = resources.getDrawable(R.drawable.medalfive)
-            card_t_settings_status.text = getString(R.string.advanced)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal) }
-        if(mNbUser > 24)   { mDrawable = resources.getDrawable(R.drawable.medalsix)
-            card_t_settings_status.text = getString(R.string.expert)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(settings_medal)}
+
+            card_t_settings_status.text = mUserVM.Userv2(mNbUser, requireActivity())
+            Glide.with(this).load( mUserVM.Userv3(mNbUser,requireActivity())).apply(RequestOptions.circleCropTransform()).into(settings_medal)
     }
 
 
@@ -189,10 +167,8 @@ class SettingsFragment : BaseFragment() {
     private fun initLang() {
         sharedPref = requireActivity().getSharedPreferences(PREFNAME, PRIVATEMODE)
         mCurrentLanguage =  sharedPref.getString("localeName","en")
-        println("mCurrentLanguage------------------>" + mCurrentLanguage)
         if (mCurrentLanguage=="en") {
             changecolor(d_lang.setting_en)
-
             d_lang.dialog_lang_current_lang.text = getString(R.string.eng) }
         if (mCurrentLanguage=="fr") {
             changecolor(d_lang.setting_fr)
@@ -219,8 +195,6 @@ class SettingsFragment : BaseFragment() {
         }
 
     private fun changecolor(mTxtLang: TextView?) {
-
-        println("mTxtLang------------------>" + mTxtLang.toString())
         initcolor()
         mTxtLang?.setBackgroundColor(resources.getColor(R.color.orange_300))
         mTxtLang?.setTextColor(Color.BLACK)
@@ -228,17 +202,13 @@ class SettingsFragment : BaseFragment() {
 
 
     private fun goLanguage( ) {
-            d_lang.setting_en.setOnClickListener {
-                upadateColor(d_lang.setting_en, R.string.eng)
+            d_lang.setting_en.setOnClickListener { upadateColor(d_lang.setting_en, R.string.eng)
                 setLocale("en") }
-            d_lang.setting_fr.setOnClickListener {
-                upadateColor(d_lang.setting_fr, R.string.fra)
+            d_lang.setting_fr.setOnClickListener { upadateColor(d_lang.setting_fr, R.string.fra)
                 setLocale("fr") }
-            d_lang.setting_sp.setOnClickListener {
-                upadateColor(d_lang.setting_sp, R.string.spa)
+            d_lang.setting_sp.setOnClickListener { upadateColor(d_lang.setting_sp, R.string.spa)
                 setLocale("es") }
-            d_lang.setting_pt.setOnClickListener {
-                upadateColor(d_lang.setting_pt, R.string.pot)
+            d_lang.setting_pt.setOnClickListener { upadateColor(d_lang.setting_pt, R.string.pot)
                 setLocale("pt") }
     }
 
@@ -250,7 +220,6 @@ class SettingsFragment : BaseFragment() {
 
 
     private fun setLocale(localeName: String) {
-
         d_lang.settings_check_lang.setOnClickListener {
             if (localeName != mCurrentLang) {
              locale = Locale(localeName)
@@ -265,28 +234,16 @@ class SettingsFragment : BaseFragment() {
         initcolor()
 
                 val intent = Intent (activity, MainActivity::class.java)
-                activity?.startActivity(intent)
-
-
-            }
+                activity?.startActivity(intent) }
          else { Toast.makeText(requireContext(), "Language, , already, , selected)!", Toast.LENGTH_SHORT).show() }
     d_lang.dismiss() } }
 
     private fun editprofil() {
-        val c = HashMap<String, ImageView>()
-
-        val mLstDrawable = arrayListOf(
-            "https://i.ibb.co/Vtwz7tL/C6.png", "https://i.ibb.co/PN1dfmb/C5.png",
-            "https://i.ibb.co/SywTtCy/C4.png", "https://i.ibb.co/XjFxB00/C3.png",
-            "https://i.ibb.co/nsbNLwq/c2.png", "https://i.ibb.co/WDjtfWR/c1.png",
-            "https://i.ibb.co/7YHdHKt/C7.png")
-
-        val mLstImageV = arrayListOf(d_profil.setting_img_profil_1, d_profil.setting_img_profil_2, d_profil.setting_img_profil_3,
-            d_profil.setting_img_profil_4, d_profil.setting_img_profil_5, d_profil.setting_img_profil_6, d_profil.setting_img_profil_7)
-
-        for (i in 0..6) { c[mLstDrawable[i]] = mLstImageV[i] }
-
-        c.forEach { map -> loadUserChange(map) } }
+        val mMapPhoto = HashMap<String, ImageView>()
+        val mLstDrawable = Utils.listDrawable()
+        val mLstImageV = Utils.listImageV(d_profil)
+        for (i in 0..6) { mMapPhoto[mLstDrawable[i]] = mLstImageV[i] }
+        mMapPhoto.forEach { map -> loadUserChange(map) } }
 
 
             private fun loadUserChange(map: Map.Entry<String, ImageView>) {
@@ -304,9 +261,6 @@ class SettingsFragment : BaseFragment() {
 
             private fun saveNewUserInfo() {
                 d_profil.settings_check.setOnClickListener {
-
-
-
                     card_t_settings_name.text = mNameUser
 
                     Glide.with(requireActivity()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_settings_photo)
@@ -314,13 +268,9 @@ class SettingsFragment : BaseFragment() {
                     mUserVM.updateUserPhoto(mIdUser, mPhotoUser)
                     d_profil.dismiss() }
 
-                d_profil.settings_cancel.setOnClickListener { d_profil.dismiss() }
-
-
-            }
+                d_profil.settings_cancel.setOnClickListener { d_profil.dismiss() } }
 
     private fun initContact() {
-
         d_contact.settings_send_mail.setOnClickListener {
         val recipient = "sofianem75018@gmail.com"
         val subject = d_contact.custom_dialog_subject.text.toString().trim()
@@ -333,7 +283,6 @@ class SettingsFragment : BaseFragment() {
         mIntent.putExtra(Intent.EXTRA_TEXT, message)
             try { startActivity(Intent.createChooser(mIntent, "Choose Email Client...")) }
             catch (e: Exception) { Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show() }}
-
 
         d_contact.settings_cancel_mail.setOnClickListener { d_contact.dismiss()}
 

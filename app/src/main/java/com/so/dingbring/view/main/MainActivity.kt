@@ -4,7 +4,6 @@ package com.so.dingbring.view.main
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.facebook.AccessToken
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
@@ -31,10 +28,8 @@ import kotlinx.android.synthetic.main.activity_main.card_t_create
 import kotlinx.android.synthetic.main.activity_main.card_t_event
 import kotlinx.android.synthetic.main.activity_main.card_t_profil_name
 import kotlinx.android.synthetic.main.activity_main.card_t_setting
-import kotlinx.android.synthetic.main.dialog_layout_language.*
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.*
-import kotlin.collections.HashMap
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +45,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +52,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initDynamicLink()
         initUser()
-        initItemClick()
-
-
-    }
-
-
+        initItemClick() }
 
     private fun initItemClick() {
         val intent = Intent(this, ItemActivity::class.java)
@@ -90,13 +79,7 @@ class MainActivity : AppCompatActivity() {
 
                     if (mPhotoUser == "null") { mPhotoUser = "https://i.ibb.co/7YHdHKt/C7.png"}
 
-                    else { val mPhotoUserSplit1 = mPhotoUser.split("//")
-                        val mPhotoUserSplit2 = mPhotoUserSplit1[1].split(".com/")
-                        val mPhotoUserSplit3 = mPhotoUserSplit2[0]
-                        if (mPhotoUserSplit3 == "graph.facebook") {
-                            val token = AccessToken.getCurrentAccessToken().token
-                            val mImageUrl = "$mPhotoUser?access_token=$token"
-                            mPhotoUser = mImageUrl } }
+                    else { mPhotoUser =   mUserVM.Userv1(mPhotoUser) }
 
                     mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()
                     mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -119,12 +102,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initHeader() {
-
         card_t_profil_name.text = mNameUser
-
         goAnimText(card_t_profil_name)
         Glide.with(this).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_profil_photo)
-
         goAnimImage(card_t_profil_photo)
         goAnimText(card_t_profil_status)
         initMedal()
@@ -132,43 +112,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMedal() {
-        if(mNbUser in 0..4)   { mDrawable = ContextCompat.getDrawable(this, medalone )!!
-            card_t_profil_status.text = getString(R.string.newbie)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 5..9)   { mDrawable = ContextCompat.getDrawable(this, medaltwo )!!
-            card_t_profil_status.text = getString(R.string.beginner)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 10..14) { mDrawable = ContextCompat.getDrawable(this, medalthree )!!
-            card_t_profil_status.text = getString(R.string.intermediate)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 15..19)   { mDrawable = ContextCompat.getDrawable(this, medalfour )!!
-            card_t_profil_status.text = getString(R.string.experienced)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser in 20..24)   { mDrawable = ContextCompat.getDrawable(this, medalfive )!!
-            card_t_profil_status.text = getString(R.string.advanced)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal) }
-        if(mNbUser > 24)   { mDrawable =ContextCompat.getDrawable(this, medalsix )!!
-            card_t_profil_status.text = getString(R.string.expert)
-            Glide.with(this).load(mDrawable).apply(RequestOptions.circleCropTransform()).into(main_medal)}
-
-        goAnimImage(main_medal)
-
-    }
+        Glide.with(this).load( mUserVM.Userv3(mNbUser,this)).apply(RequestOptions.circleCropTransform()).into(main_medal)
+        card_t_profil_status.text = mUserVM.Userv2(mNbUser, this)
+        goAnimImage(main_medal) }
 
 
     private fun createFireStoreUser() {
         val emptylist = arrayListOf<String>()
-        val mDataUser: MutableMap<String, Any> = HashMap()
-
-        mDataUser["NameUser"] = FirebaseAuth.getInstance().currentUser?.displayName.toString()
-            mDataUser["EmailUser"] = FirebaseAuth.getInstance().currentUser?.email.toString()
-            mDataUser["PhotoUser"] = mPhotoUser
-            mDataUser["DocIdUser"] = FirebaseAuth.getInstance().currentUser?.uid.toString()
-            mDataUser["eventUser"] = emptylist
-            mDataUser["NbCreateEventUser"] = 0
-            mUserVM.createUser(mDataUser)
-
+        mUserVM.createUserMain(mNameUser, mEmailUser, mPhotoUser, mIdUser, emptylist, 0)
     }
+
 
 
     private fun initDynamicLink() {
@@ -184,10 +137,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            .addOnFailureListener(this) { e ->
-                Log.w(ContentValues.TAG, "getDynamicLink:onFailure", e)
-
-            }
+            .addOnFailureListener(this) { e -> Log.w(ContentValues.TAG, "getDynamicLink:onFailure", e) }
     }
 
 

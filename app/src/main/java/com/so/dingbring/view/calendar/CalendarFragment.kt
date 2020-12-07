@@ -45,25 +45,16 @@ class CalendarFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-        return inflater.inflate(R.layout.fragment_calendar, container, false)
-    }
+    ): View? { return inflater.inflate(R.layout.fragment_calendar, container, false) }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        mUserVM.getUserById(mIdUser)
-            .observe(requireActivity(), androidx.lifecycle.Observer { mlmu ->
+        mUserVM.getUserById(mIdUser).observe(requireActivity(), androidx.lifecycle.Observer { mlmu ->
                 if (mlmu != null) {
                     mUserEvent = mlmu.mEventUser
                     initCal()
-                    initRV()
-                }
-            })
-
+                    initRV() } })
         onBackPressed()
         onBackBarPressed()
     }
@@ -83,39 +74,29 @@ class CalendarFragment : BaseFragment() {
 
     private fun navToHome() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
-        mPosBottomBar?.setCurrentActiveItem(1)
-    }
+        mPosBottomBar?.setCurrentActiveItem(1) }
 
 
 
     private fun initCal() {
-
         date = Date()
         date.time = System.currentTimeMillis()
         startCal = Calendar.getInstance()
         endCal = Calendar.getInstance()
         endCal.time = date
-        endCal.add(Calendar.MONTH, 9)
-    }
+        endCal.add(Calendar.MONTH, 9) }
 
 
     private fun initRV() {
-
         configuration = RecyclerCalendarConfiguration(
             RecyclerCalendarConfiguration.CalenderViewType.VERTICAL,
             Locale.getDefault(),
-            true
-        )
+            true)
 
         val calendarRecyclerView = calendarRecyclerView
-        val calendarAdapterVertical = CalendarAdapter(
-            requireContext(), startCal.time, endCal.time, configuration, mDataEvent,
+        val calendarAdapterVertical = CalendarAdapter(requireContext(), startCal.time, endCal.time, configuration, mDataEvent,
             object : CalendarAdapter.OnDateSelected {
-                override fun onDateSelected(datalist: MutableList<String>) {
-                    createAlert(datalist)
-                }
-            })
-
+                override fun onDateSelected(datalist: MutableList<String>) { createAlert(datalist) } })
         calendarRecyclerView.adapter = calendarAdapterVertical
         loadRV(calendarAdapterVertical)
 
@@ -126,46 +107,25 @@ class CalendarFragment : BaseFragment() {
             .observe(requireActivity(), androidx.lifecycle.Observer { listMyEvent ->
                 mDataEvent.clear()
                 mDataEvent.addAll(listMyEvent)
-                calendarAdapterVertical.notifyDataSetChanged()
-            })
-    }
+                calendarAdapterVertical.notifyDataSetChanged() }) }
 
 
     private fun createAlert(datalist: MutableList<String>) {
-
-        println("-----0-------->>" + datalist[0])
-        println("-----1-------->>" + datalist[1])
-        println("-----2-------->>" + datalist[2])
-        println("-----3-------->>" + datalist[3])
-        println("-----4-------->>" + datalist[4])
-        println("-----5-------->>" + datalist[5])
-        println("-----6-------->>" + datalist[6])
-        println("-----7-------->>" + datalist[7])
-        println("----8--------->>" + datalist[8])
-        println("----9 --------->>" + datalist[9])
-
         val d = Dialog(requireContext())
         d.requestWindowFeature(Window.FEATURE_NO_TITLE)
         d.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         d.setContentView(R.layout.dialog_layout_calendar)
         d.dialog_cal_addressevent.text = datalist[0]
         d.dialog_cal_dateevent.text = datalist[1]
-        // Event Id
         d.dialog_cal_nameevent.text = datalist[3]
-        // User Id
         d.dialog_cal_nameuser.text = datalist[5]
         Glide.with(requireContext()).load(datalist[6]).apply(RequestOptions.circleCropTransform()).into(d.dialog_cal_photouser)
         d.dialog_cal_hourevent.text = datalist[7]
         d.dialog_cal_descevent.text = datalist[8]
 
-
-
         d.dialog_cal_see.setOnClickListener {
-
             val bundle = bundleOf("GlobalIdEvent" to datalist[2])
-
             Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.detail_Fragment, bundle)
-
             d.dismiss() }
 
         d.dialog_cal_cancel.setOnClickListener { d.dismiss() }

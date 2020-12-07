@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.so.dingbring.R
+import com.so.dingbring.Utils
 import io.reactivex.subjects.BehaviorSubject
 import java.util.ArrayList
 
@@ -22,8 +23,6 @@ class DetailAdapter(
     var mContext: Context,
     var mListMyItem: ArrayList<ArrayList<String>>
 ) : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
-
-
 
     val itemClickN: BehaviorSubject<HashMap<Int,ArrayList<String>>> = BehaviorSubject.create()
     var mItemStatus = ""
@@ -35,17 +34,13 @@ class DetailAdapter(
     var mUserPic = ""
     var mUserName = ""
 
-
-
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
 
         with(holder) {
-
             mDetailEditMinus.visibility = View.GONE
             mDetailEditPlus.visibility = View.GONE
             mDetailEditDelete.visibility = View.GONE
-           // mDetailEditCache.visibility = View.GONE
              mItemStatus = mListMyItem[position][1]
              mItemName = mListMyItem[position][2]
              mItemQty = mListMyItem[position][3]
@@ -55,19 +50,11 @@ class DetailAdapter(
              mUserPic = mListMyItem[position][7]
              mUserName =  mListMyItem[position][8]
 
-
             mDetailItem.text = mItemName
             mDetailQuantity.text = mItemQty
-           // mDetailUser.text = mListMyItem[position].mItemUser
-
-
-            Glide.with(mContext)
-                .load(mUserPic)
-                .apply(RequestOptions.circleCropTransform())
-                .into(mDetailImageUser)
+            Glide.with(mContext).load(mUserPic).apply(RequestOptions.circleCropTransform()).into(mDetailImageUser)
 
                if (mItemStatus== "I need") {warningVisible() }
-
                else {warningInvisible()} } }
 
 
@@ -96,88 +83,47 @@ class DetailAdapter(
         private var mDetailEditSub: ImageView = itemView.findViewById(R.id.detail_item_sub)
 
         init {
-
-
         mDetailEdit.setOnClickListener {
-         animShow = if (!animShow) {
+            animShow = if (!animShow) {
              val animation = AnimationUtils.loadAnimation(mContext, R.anim.zoomout)
              mDetailEdit.startAnimation(animation)
-             true
-         } else { val animation = AnimationUtils.loadAnimation(mContext, R.anim.zoomin)
+             true }
+
+            else { val animation = AnimationUtils.loadAnimation(mContext, R.anim.zoomin)
              mDetailEdit.startAnimation(animation)
-             false
-         }
+             false }
 
             if (mDetailEditMinus.isVisible) { iconInvisible()}
-
                 else { iconVisible()
                 mDetailEditPlus.setOnClickListener {initMapUp(1)
                     iconInvisible() }
                 mDetailEditMinus.setOnClickListener{initMapUp(2)
                     iconInvisible() }
                 mDetailEditDelete.setOnClickListener {initMapUp(3)
-                    iconInvisible() }
-
-            } } }
+                    iconInvisible() } } } }
 
          private fun initMapUp(i: Int) {
             val mChangeHashMap = hashMapOf<Int, ArrayList<String>>()
             mChangeHashMap.clear()
             mChangeHashMap[i] = mListMyItem[position]
-            itemClickN.onNext(mChangeHashMap)
+            itemClickN.onNext(mChangeHashMap) }
 
-        }
         fun warningInvisible(){
             mDetailB1.visibility = View.INVISIBLE
             mDetailB2.visibility = View.INVISIBLE
-            mDetailB3.visibility = View.INVISIBLE
-        }
+            mDetailB3.visibility = View.INVISIBLE }
 
          fun warningVisible(){
             mDetailB1.visibility = View.VISIBLE
             mDetailB2.visibility = View.VISIBLE
             mDetailB3.visibility = View.VISIBLE
 
-             mDetailB3.setOnClickListener { initMapUp(0) }
-         }
+             mDetailB3.setOnClickListener { initMapUp(0) } }
 
-        private fun iconVisible() {
-            val animation100right = AnimationUtils.loadAnimation(mContext, R.anim.slideright100)
-            val animation100 = AnimationUtils.loadAnimation(mContext, R.anim.slideleft100)
-            val animation200 = AnimationUtils.loadAnimation(mContext, R.anim.slideleft200)
-            val animation300 = AnimationUtils.loadAnimation(mContext, R.anim.slideleft300)
-            val animation400 = AnimationUtils.loadAnimation(mContext, R.anim.slideleft400)
-            mDetailEditMinus.visibility = View.VISIBLE
-            mDetailEditPlus.visibility = View.VISIBLE
-            mDetailEditDelete.visibility = View.VISIBLE
-            mDetailEditSub.visibility = View.VISIBLE
-            mDetailEditPlus.startAnimation(animation300)
-            mDetailEditMinus.startAnimation(animation200)
-            mDetailEditDelete.startAnimation(animation100)
-            mDetailEditSub.startAnimation(animation100)
-            mDetailImageUser.startAnimation(animation100right)
-            mDetailImageUser.visibility = View.INVISIBLE }
+        private fun iconVisible() { Utils.testAnim(mContext, mDetailEditMinus,mDetailEditPlus,mDetailEditDelete ,mDetailEditSub, mDetailImageUser) }
 
-        private fun iconInvisible() {
-            val animation100left = AnimationUtils.loadAnimation(mContext, R.anim.slideleft100)
-            val animation100 = AnimationUtils.loadAnimation(mContext, R.anim.slideright100)
-            val animation200 = AnimationUtils.loadAnimation(mContext, R.anim.slideright200)
-            val animation300 = AnimationUtils.loadAnimation(mContext, R.anim.slideright300)
-            val animation400 = AnimationUtils.loadAnimation(mContext, R.anim.slideright400)
-            mDetailImageUser.startAnimation(animation100left)
-            mDetailEditPlus.startAnimation(animation200)
-            mDetailEditMinus.startAnimation(animation300)
-            mDetailEditDelete.startAnimation(animation400)
-            mDetailEditSub.startAnimation(animation400)
-            mDetailEditMinus.visibility = View.GONE
-            mDetailEditPlus.visibility = View.GONE
-            mDetailEditDelete.visibility = View.GONE
-            mDetailEditSub.visibility = View.GONE
-            mDetailImageUser.visibility = View.VISIBLE }
-
+        private fun iconInvisible()  { Utils.testAnim2(mContext, mDetailEditMinus,mDetailEditPlus,mDetailEditDelete ,mDetailEditSub, mDetailImageUser) }
     }
-
-
 }
 
 

@@ -28,6 +28,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
+import com.so.dingbring.Utils
 import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
@@ -115,43 +116,27 @@ class CreateFragment : BaseFragment() {
     private fun initOrga() { create_orga_edit.doOnTextChanged { text, start, before, count ->
             if (count > 0) {mEventOrga = create_orga_edit.text.toString() } } }
 
-    private fun initAdresse() {
-            var mStreetNumber = ""
+     fun initAdresse() {
+        var mStreetNumber = ""
         var mStreetName = ""
         var mCity = ""
             if (!Places.isInitialized()) { Places.initialize(requireActivity().applicationContext, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
 
-            val autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment?
-            val fView: View? = autocompleteFragment?.view
-            val etTextInput: EditText? = fView?.findViewById(R.id.places_autocomplete_search_input)
-            etTextInput?.setBackgroundColor(resources.getColor(R.color.fui_transparent))
-            etTextInput?.setTextColor(resources.getColor(R.color.white))
-            etTextInput?.setHintTextColor(resources.getColor(R.color.white))
-            etTextInput?.gravity = Gravity.CENTER
-             etTextInput?.hint = " "
-            val font: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto)
-            etTextInput?.setTypeface(font, Typeface.BOLD)
-            val searchIcon = (autocompleteFragment?.view as LinearLayout).getChildAt(0) as ImageView
-            searchIcon.visibility = View.GONE
-            autocompleteFragment.setTypeFilter(TypeFilter.ADDRESS)
-        autocompleteFragment.setPlaceFields(
-            listOf(Field.ID, Field.NAME, Field.ADDRESS_COMPONENTS))
+           var autocompleteFragment = Utils.autoCompleteFrag(childFragmentManager )
+           var etTextInput = Utils.autoCompleteTxtInput(childFragmentManager, resources, Typeface.DEFAULT )
+
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 place.addressComponents?.asList()?.forEach { mAdressComp ->
                     Log.i("TAG", "AutoComplet: " + mAdressComp.types + " ")
                     when {
-                        mAdressComp.types.contains("street_number") -> {
-                            mStreetNumber = mAdressComp.name }
-                        mAdressComp.types.contains("route") -> {
-                            mStreetName = mAdressComp.name }
-                        mAdressComp.types.contains("locality") -> {
-                            mCity = mAdressComp.name } } }
+                        mAdressComp.types.contains("street_number") -> { mStreetNumber = mAdressComp.name }
+                        mAdressComp.types.contains("route") -> { mStreetName = mAdressComp.name }
+                        mAdressComp.types.contains("locality") -> { mCity = mAdressComp.name } } }
 
                 etTextInput?.visibility = View.INVISIBLE
                 create_address_txt_display.visibility = View.VISIBLE
-                create_address_txt_display.text =
-                    "$mStreetNumber $mStreetName, $mCity"
+                create_address_txt_display.text = "$mStreetNumber $mStreetName, $mCity"
                 mEventAddress = "$mStreetNumber $mStreetName, $mCity "}
 
             override fun onError(status: Status) {
@@ -159,7 +144,8 @@ class CreateFragment : BaseFragment() {
     }
 
 
-        private fun initDate() {
+
+    private fun initDate() {
             create_date_txt?.setOnClickListener {
 
                 val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
@@ -170,11 +156,9 @@ class CreateFragment : BaseFragment() {
                 now.setToNow()
                 val d = DatePickerDialog(requireContext(), R.style.MyAppThemeCalendar, dpd, now.year, now.month, now.monthDay)
                 d.show()
-
-
-
                 d.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.grey_800))
                 d.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.grey_800)) } }
+
 
     private fun initHour() {
         create_hour_txt.setOnClickListener {
@@ -204,14 +188,8 @@ class CreateFragment : BaseFragment() {
 
                     navToHome()
 
-
-
-
                 } }
                 }
-
-
-
 
 
     }

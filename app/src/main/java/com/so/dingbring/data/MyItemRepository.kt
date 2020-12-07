@@ -110,9 +110,6 @@ class MyItemRepository {
 
     fun updateStatusItem(mData: HashMap<Int, ArrayList<String>>) {
 
-        println("------===(++( mData )++)===-------$mData")
-
-
         if (mData.containsKey(0)) { val i=0
             val mItemStatus = mData[i]!![1]
             val mItemId = mData[i]!![4]
