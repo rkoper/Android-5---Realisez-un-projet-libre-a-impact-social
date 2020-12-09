@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/rectangle_corner_grey_600"
+    android:background="@drawable/rectangle_grey_600"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.main.MainActivity">
@@ -35,9 +35,8 @@
                 app:layout_constraintGuide_percent="0.5" />
 
 
-
-
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_margin="5dp"
                 android:id="@+id/recyclerview_event"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

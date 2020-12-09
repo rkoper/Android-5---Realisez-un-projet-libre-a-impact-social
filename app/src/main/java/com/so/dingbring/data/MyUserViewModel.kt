@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel() {
 
-    fun createUser(mDataUser: MutableMap<String, Any>) { mUserRepository.createUser(mDataUser) }
 
     fun getUserById(mUserId : String) : LiveData<MyUser> { return mUserRepository.getUserById(mUserId) }
 
@@ -28,7 +27,7 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
     fun upadateEventUser(mIDUser: String, mEventUniqueID: String) { mUserRepository.upadateEventUser(mIDUser, mEventUniqueID )  }
 
 
-    fun createUserMain(
+    fun createUser(
         displayName: String,
         email: String,
         mPhotoUser: String,
@@ -46,7 +45,7 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
         mDataUser["NbCreateEventUser"] = i
         mUserRepository.createUser(mDataUser) }
 
-    fun Userv1(mPhotoUser: String) : String {
+    fun SaveImage(mPhotoUser: String) : String {
         var mImageUrl = ""
         val mPhotoUserSplit1 = mPhotoUser.split("//")
         val mPhotoUserSplit2 = mPhotoUserSplit1[1].split(".com/")
@@ -58,7 +57,7 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
 
         return mImageUrl }
 
-    fun Userv2(mNbUser: Int, mContext: Context) : String {
+    fun DisplayName(mNbUser: Int, mContext: Context) : String {
         var mProfilStatus = ""
         if(mNbUser in 0..4)     { mProfilStatus = mContext.getString(R.string.newbie) }
         if(mNbUser in 5..9)     { mProfilStatus = mContext.getString(R.string.beginner) }
@@ -69,7 +68,7 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
         return mProfilStatus }
 
 
-    fun Userv3(mNbUser: Int, mContext: Context) : Drawable? {
+    fun DisplayImg(mNbUser: Int, mContext: Context) : Drawable? {
         var mProfilStatusImg  = ContextCompat.getDrawable(mContext, R.drawable.medalone)
 
         if(mNbUser in 0..4)   { mProfilStatusImg = ContextCompat.getDrawable(mContext, R.drawable.medalone)!! }

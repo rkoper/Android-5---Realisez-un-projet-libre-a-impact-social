@@ -56,13 +56,12 @@ class CreateFragment : BaseFragment() {
     private var mFloat_action : FloatingActionButton? = null
     private var mFloat_back : FloatingActionButton? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         return inflater.inflate(R.layout.fragment_create, container, false)
     }
 
@@ -113,8 +112,12 @@ class CreateFragment : BaseFragment() {
         create_name_edit.doOnTextChanged { text, start, before, count ->
             if (count > 0) {mEventName = create_name_edit.text.toString() } } }
 
+
+
     private fun initOrga() { create_orga_edit.doOnTextChanged { text, start, before, count ->
             if (count > 0) {mEventOrga = create_orga_edit.text.toString() } } }
+
+
 
      fun initAdresse() {
         var mStreetNumber = ""
@@ -140,7 +143,7 @@ class CreateFragment : BaseFragment() {
                 mEventAddress = "$mStreetNumber $mStreetName, $mCity "}
 
             override fun onError(status: Status) {
-                Log.i("TAG", "An error occurred: $mItemStatus") } })
+                Log.i("TAG", "An error occurred") } })
     }
 
 

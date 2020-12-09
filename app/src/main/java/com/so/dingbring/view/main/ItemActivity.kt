@@ -13,7 +13,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyUserViewModel
-import kotlinx.android.synthetic.main.item_main.*
+import kotlinx.android.synthetic.main.activity_item.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -30,10 +30,8 @@ class ItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
-        setContentView(R.layout.item_main)
-
+        setContentView(R.layout.activity_item)
         mclick = intent?.getIntExtra("msg", 99)!!
-
         retrieveData()
         initClickOnItem(mclick)
         initBottomBar() }
@@ -44,10 +42,7 @@ class ItemActivity : AppCompatActivity() {
         float_bottom_bar.setNavigationChangeListener { view, position ->
 
             if (position == 1) { initClickOnItem(11)}
-            else { initClickOnItem(position)}
-
-
-        }}
+            else { initClickOnItem(position)}  }}
 
     private fun initClickOnItem(mclick: Int) {
 
@@ -55,7 +50,6 @@ class ItemActivity : AppCompatActivity() {
         if (mclick == 1 ) { initBar(0,1, getString(R.string.event), R.color.red_300,View.INVISIBLE) }
         if (mclick == 11 ) { initBar(R.id.event_fragment,1, getString(R.string.event), R.color.red_300,View.INVISIBLE) }
         if (mclick == 2 ) {
-
             initBar(R.id.create_Fragment, mclick, "Create", R.color.blue_600,View.VISIBLE)
             item_tb_fb_action.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.blue_300))
             item_tb_fb_action.setImageResource(R.drawable.logo_save)
@@ -88,7 +82,6 @@ class ItemActivity : AppCompatActivity() {
             mPhotoUser  = mlmu.mPhotoUser
             mUserEvent = mlmu.mEventUser })
     }
-
 
 }
 

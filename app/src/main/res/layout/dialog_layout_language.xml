@@ -239,6 +239,7 @@
 
 
         <TextView
+            android:textColor="@color/white"
             android:textSize="16sp"
             style="@style/TxtViewPrincipalBlack"
             app:layout_constraintTop_toTopOf="@+id/dialog_lang_h_02"
@@ -263,6 +264,7 @@
 
 
         <TextView
+            android:textColor="@color/white"
             android:textSize="16sp"
             style="@style/TxtViewPrincipalBlack"
             app:layout_constraintTop_toTopOf="@+id/dialog_lang_h_1"

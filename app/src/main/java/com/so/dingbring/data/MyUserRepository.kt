@@ -11,8 +11,6 @@ class MyUserRepository {
     private val dbFire = FirebaseFirestore.getInstance()
     private var mUserSet: MutableLiveData<MyUser> = MutableLiveData()
     private var mUserIDSet: MutableLiveData<Boolean>? = MutableLiveData()
-    private var mUserSring: MutableLiveData<String> = MutableLiveData()
-
 
     fun createUser(mDataUser: MutableMap<String, Any>){ dbFire.collection("user").document(mDataUser["DocIdUser"].toString()).set(mDataUser) }
 
@@ -46,24 +44,14 @@ class MyUserRepository {
         return mUserIDSet
     }
 
-
     fun updateUserName(mUserId: String, mUserName: String) {
-        dbFire.collection("user").document(mUserId)
-            .update("NameUser", mUserName)
-
-    }
+        dbFire.collection("user").document(mUserId).update("NameUser", mUserName) }
 
     fun updateUserPhoto(mUserId: String, mUserPhoto: String) {
-        dbFire.collection("user").document(mUserId)
-            .update("PhotoUser", mUserPhoto)
-
-    }
+        dbFire.collection("user").document(mUserId).update("PhotoUser", mUserPhoto) }
 
     fun upadateEventUser(mIDUser: String, mEventUniqueID: String){
-        dbFire.collection("user")
-            .document(mIDUser)
-            .update("eventUser", FieldValue.arrayUnion(mEventUniqueID))
-    }
+        dbFire.collection("user").document(mIDUser).update("eventUser", FieldValue.arrayUnion(mEventUniqueID)) }
 
 
 }

@@ -7,6 +7,7 @@
     <string name="fra" translatable="false">Français</string>
     <string name="spa" translatable="false">Español</string>
     <string name="pot" translatable="false" >Português</string>
+    <string name="home" translatable="false" >Home</string>
 
     <string name="english">English</string>
     <string name="french">French</string>
@@ -41,6 +42,7 @@
     <string name="event">Event</string>
     <string name="detail">Detail</string>
     <string name="test">Calendar</string>
+    <string name="or">Or</string>
 
 
 

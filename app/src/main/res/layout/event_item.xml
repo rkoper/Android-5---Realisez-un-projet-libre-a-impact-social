@@ -3,11 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:elevation="2dp"
+    android:layout_height="110dp"
     android:id="@+id/item_event"
-    android:layout_marginBottom="5dp"
     android:orientation="horizontal">
+    <ImageView
+        android:background="@drawable/rectangle_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/home_item_v50"
         android:layout_width="1dp"
@@ -83,82 +86,22 @@
         android:layout_height="1dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9"/>
-    <View
-        android:id="@+id/item_view1"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/home_item2_h2"
-        app:layout_constraintBottom_toTopOf="@+id/home_item2_h98"
-        app:layout_constraintLeft_toLeftOf="@+id/home_item_img"
-        app:layout_constraintRight_toRightOf="@+id/home_item_img"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/red_300" />
+
+
     <ImageView
-        android:backgroundTint="@color/red_300"
-        android:layout_margin="5dp"
+        android:backgroundTint="@color/grey_600"
+        android:layout_margin="2dp"
         android:background="@drawable/round"
-        android:id="@+id/home_item_img_back"
+        android:id="@+id/home_item_img"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:backgroundTint="@color/black"
-        android:layout_margin="2dp"
-        android:background="@drawable/round"
-        android:id="@+id/home_item_img"
-        app:layout_constraintLeft_toLeftOf="@+id/home_item_img_back"
-        app:layout_constraintRight_toRightOf="@+id/home_item_img_back"
-        app:layout_constraintTop_toTopOf="@+id/home_item_img_back"
-        app:layout_constraintBottom_toBottomOf="@+id/home_item_img_back"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
-
-
-    <ImageView
-        android:layout_margin="5dp"
-        android:textSize="12sp"
-        android:backgroundTint="@color/red_300"
-        android:background="@drawable/round"
-        android:id="@+id/home_h"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
 
 
-    <View
-        app:layout_constraintTop_toTopOf="@+id/home_item2_h2"
-        app:layout_constraintLeft_toLeftOf="@+id/item_view1"
-        app:layout_constraintRight_toRightOf="@+id/item_view2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/red_300" />
 
-    <View
-        app:layout_constraintTop_toTopOf="@+id/home_item2_h98"
-        app:layout_constraintRight_toRightOf="@+id/item_view2"
-        app:layout_constraintLeft_toLeftOf="@+id/item_view1"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/red_300" />
-
-
-    <View
-        android:id="@+id/item_view2"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/red_300"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/home_item2_h98"
-        app:layout_constraintHorizontal_bias="0.538"
-        app:layout_constraintLeft_toLeftOf="@+id/home_hour"
-        app:layout_constraintRight_toRightOf="@+id/home_hour"
-        app:layout_constraintTop_toBottomOf="@+id/home_item2_h2"
-        app:layout_constraintVertical_bias="1.0" />
     <TextView
         android:layout_margin="2dp"
         android:textSize="12sp"
@@ -168,52 +111,40 @@
         android:id="@+id/home_hour"
         android:textColor="@color/white"
         style="@style/TxtViewPrincipalBlackv2"
-        app:layout_constraintRight_toRightOf="@+id/home_h"
-        app:layout_constraintTop_toTopOf="@+id/home_h"
-        app:layout_constraintLeft_toLeftOf="@+id/home_h"
-        app:layout_constraintBottom_toBottomOf="@+id/home_h"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
-    <ImageView
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:id="@+id/home_address_a"
-        android:background="@drawable/rectangle_corner_orange"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:elevation="1dp"
+        android:padding="5dp"
+        android:background="@color/grey_600"
+        android:textSize="22sp"
+        style="@style/TxtViewPrincipalWhitev2"
+            android:id="@+id/home_address"
         app:layout_constraintBottom_toBottomOf="@+id/home_item2_h95"
         app:layout_constraintTop_toTopOf="@+id/home_item2_h75"
         app:layout_constraintLeft_toRightOf="@+id/home_item_img"
         app:layout_constraintRight_toLeftOf="@+id/home_hour"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
-
-    <TextView
-        android:layout_margin="2dp"
-        android:background="@color/grey_600"
-        style="@style/TxtViewPrincipalBlack"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-            android:id="@+id/home_address"
-            app:layout_constraintBottom_toBottomOf="@+id/home_address_a"
-            app:layout_constraintTop_toTopOf="@+id/home_address_a"
-            app:layout_constraintLeft_toLeftOf="@+id/home_address_a"
-            app:layout_constraintRight_toRightOf="@+id/home_address_a"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text=""/>
+            android:text="1234"/>
 
 
         <TextView
             style="@style/TxtViewPrincipalBlack"
             android:id="@+id/home_date"
-            android:textSize="14sp"
             android:textColor="@color/white"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/home_item2_h75"
             app:layout_constraintTop_toTopOf="@+id/home_item2_h5"
             app:layout_constraintLeft_toLeftOf="@+id/home_item_v50"
             app:layout_constraintRight_toLeftOf="@+id/home_hour"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text=""/>
+            android:text="345"/>
         <TextView
             android:textSize="14sp"
             style="@style/TxtViewPrincipalBlack"
@@ -225,27 +156,19 @@
             app:layout_constraintRight_toRightOf="@+id/home_item_v50"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text=""/>
+            android:text="123"/>
 
-    <ImageView
-        android:background="@drawable/rectangle_corner_orange"
-        android:id="@+id/home_name_b"
-        app:layout_constraintTop_toTopOf="@+id/home_item2_h05"
-        app:layout_constraintBottom_toBottomOf="@+id/home_item2_h5"
-        app:layout_constraintLeft_toRightOf="@+id/home_item_v35"
-        app:layout_constraintRight_toRightOf="@+id/home_item_v5"
-        android:layout_width="0dp"
-        android:layout_height="0dp" />
     <TextView
-        android:layout_margin="2dp"
+        android:padding="5dp"
+        android:elevation="1dp"
         android:background="@color/grey_600"
         android:id="@+id/home_name"
         android:textSize="25sp"
         style="@style/TxtViewPrincipalWhitev2"
-        app:layout_constraintTop_toTopOf="@+id/home_name_b"
-        app:layout_constraintBottom_toBottomOf="@+id/home_name_b"
-        app:layout_constraintLeft_toLeftOf="@+id/home_name_b"
-        app:layout_constraintRight_toRightOf="@+id/home_name_b"
+        app:layout_constraintTop_toTopOf="@+id/home_item2_h05"
+        app:layout_constraintBottom_toBottomOf="@+id/home_item2_h5"
+        app:layout_constraintLeft_toRightOf="@+id/home_item_v35"
+        app:layout_constraintRight_toRightOf="@+id/home_item_v5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/event" />

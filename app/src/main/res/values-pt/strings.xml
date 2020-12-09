@@ -42,7 +42,7 @@
     <string name="message">Mensagem</string>
     <string name="subject">Tema</string>
     <string name="new_name">Novo nome</string>
-
+    <string name="or" translatable="false">Ou</string>
 
 
 </resources>

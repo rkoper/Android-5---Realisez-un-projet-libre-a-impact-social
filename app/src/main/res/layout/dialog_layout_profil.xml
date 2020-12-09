@@ -78,6 +78,7 @@
             app:layout_constraintGuide_percent="0.99"/>
 
         <TextView
+            android:textColor="@color/white"
             android:textSize="16sp"
             style="@style/TxtViewPrincipalBlack"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_1"
@@ -127,6 +128,7 @@
         <TextView
             android:textSize="16sp"
             style="@style/TxtViewPrincipalBlack"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_5"
             app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_4"
             app:layout_constraintLeft_toLeftOf="parent"

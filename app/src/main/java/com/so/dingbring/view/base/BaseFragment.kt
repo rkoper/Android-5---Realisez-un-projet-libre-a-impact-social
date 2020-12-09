@@ -8,11 +8,8 @@ abstract class BaseFragment : Fragment() {
 
     private lateinit var ITEM_ACTIVITY: ItemActivity
 
-
     override fun onAttach(context: Context)  {
         super.onAttach(context)
-        ITEM_ACTIVITY = context as ItemActivity
-
-    }
+        ITEM_ACTIVITY = context as ItemActivity }
 
 }

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/rectangle_corner_grey_600"
+    android:background="@drawable/rectangle_grey_600"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +109,7 @@
                 app:layout_constraintGuide_percent="0.65" />
 
             <TextView
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:layout_margin="2dp"
                 android:id="@+id/detail_name_txt"
                 style="@style/TxtViewPrincipalWhitev2"
@@ -128,82 +128,56 @@
                 android:id="@+id/detail_button_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fabCustomSize="35dp"
+                app:fabCustomSize="25dp"
                 app:borderWidth="2dp"
-                app:maxImageSize="30dp"
+                app:maxImageSize="20dp"
+                android:layout_margin="5dp"
                 app:srcCompat="@drawable/logo_info"
                 app:tint="@android:color/white"
                 android:backgroundTint="@color/grey_600"
                 app:backgroundTint="@color/red_300" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                app:layout_constraintTop_toTopOf="@+id/detail_gl_16"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_gl_24"
-                app:layout_constraintLeft_toRightOf="@+id/detail_status_bring"
-                app:layout_constraintRight_toLeftOf="@+id/detail_status_need"
-                android:id="@+id/detail_button_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabCustomSize="35dp"
-                app:borderWidth="2dp"
-                app:maxImageSize="22dp"
-                app:srcCompat="@drawable/logo_add"
-                app:tint="@android:color/white"
-                android:backgroundTint="@color/grey_600"
-                app:backgroundTint="@color/red_300" />
 
-            <ImageView
+            <TextView
                 app:layout_constraintTop_toTopOf="@+id/detail_gl_16"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_gl_24"
                 app:layout_constraintLeft_toLeftOf="@+id/detail_gl_v_05"
                 app:layout_constraintRight_toLeftOf="@+id/detail_gl_v_35"
-                android:visibility="invisible"
-                android:id="@+id/detail_status_bring_deco"
-                android:background="@drawable/rectangle_border"
-                android:layout_width="0dp"
-                android:layout_height="0dp" />
-
-            <TextView
-                app:layout_constraintTop_toTopOf="@+id/detail_status_bring_deco"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_status_bring_deco"
-                app:layout_constraintLeft_toLeftOf="@+id/detail_status_bring_deco"
-                app:layout_constraintRight_toRightOf="@+id/detail_status_bring_deco"
                 style="@style/TxtViewPrincipalBlack"
                 android:textColor="@color/colorWhite"
                 android:text="@string/i_bring"
-                android:padding="5dp"
-                android:layout_margin="15dp"
-                android:textSize="20sp"
-                android:visibility="invisible"
+                android:background="@drawable/rectangle_corner_orange"
+                android:textSize="15sp"
                 android:id="@+id/detail_status_bring"
+                android:layout_width="0dp"
+                android:layout_height="0dp"  />
+
+            <TextView
+                app:layout_constraintTop_toTopOf="@+id/detail_gl_16"
+                app:layout_constraintBottom_toBottomOf="@+id/detail_gl_24"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                style="@style/TxtViewPrincipalBlackv2"
+                android:textSize="22sp"
+                android:textColor="@color/colorWhite"
+                android:text="@string/or"
+                android:gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <ImageView
+                android:layout_height="0dp" />
+            <TextView
                 app:layout_constraintTop_toTopOf="@+id/detail_gl_16"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_gl_24"
                 app:layout_constraintLeft_toLeftOf="@+id/detail_gl_v_65"
                 app:layout_constraintRight_toRightOf="@+id/detail_gl_v_95"
-                android:visibility="invisible"
-                android:id="@+id/detail_status_need_deco"
-                android:background="@drawable/rectangle_border"
-                android:layout_width="0dp"
-                android:layout_height="0dp" />
-            <TextView
-                app:layout_constraintTop_toTopOf="@+id/detail_status_need_deco"
-                app:layout_constraintBottom_toBottomOf="@+id/detail_status_need_deco"
-                app:layout_constraintLeft_toLeftOf="@+id/detail_status_need_deco"
-                app:layout_constraintRight_toRightOf="@+id/detail_status_need_deco"
                 style="@style/TxtViewPrincipalBlack"
+                android:background="@drawable/rectangle_corner_orange"
                 android:textColor="@color/colorWhite"
                 android:text="@string/i_need"
                 android:gravity="center"
-                android:padding="5dp"
-                android:layout_margin="5dp"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:id="@+id/detail_status_need"
-                android:visibility="invisible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginStart="20dp"
@@ -211,7 +185,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:id="@+id/detail_item_txt"
-                android:visibility="invisible"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -225,7 +198,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/detail_item_edit"
                     style="@style/TxtViewPrincipalBlack"
-                    android:textSize="25sp"
+                    android:textSize="15sp"
                     android:textColor="@color/white"
                     android:gravity="start"
                   android:text=" "
@@ -239,9 +212,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/detail_gl_35"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:visibility="invisible"
                 style="@style/TxtViewPrincipalBlackv2"
-                android:textSize="18sp"
+                android:textSize="13sp"
                 android:textColor="@color/colorWhite"
                 android:text="@string/quantity"
                 android:gravity="center"
@@ -249,7 +221,6 @@
                 android:layout_height="0dp" />
 
             <LinearLayout
-                android:visibility="invisible"
                 android:id="@+id/detail_quantity_item"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -267,12 +238,10 @@
                     android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/detail_quantity_txt"
-                    android:layout_margin="1dp"
-                    android:padding="1dp"
-                    android:textSize="5sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     android:text="@string/_1"
-                    style="@style/TxtViewPrincipalWhite"
+                    style="@style/TxtViewPrincipalWhitev2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -293,7 +262,6 @@
                 android:id="@+id/detail_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
                 app:fabCustomSize="35dp"
                 app:borderWidth="2dp"
                 app:maxImageSize="22dp"

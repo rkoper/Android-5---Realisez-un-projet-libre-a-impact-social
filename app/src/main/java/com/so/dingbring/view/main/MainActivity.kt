@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
+
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
         initDynamicLink()
@@ -79,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
                     if (mPhotoUser == "null") { mPhotoUser = "https://i.ibb.co/7YHdHKt/C7.png"}
 
-                    else { mPhotoUser =   mUserVM.Userv1(mPhotoUser) }
+                    else { mPhotoUser =   mUserVM.SaveImage(mPhotoUser) }
 
                     mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()
                     mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -112,14 +116,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMedal() {
-        Glide.with(this).load( mUserVM.Userv3(mNbUser,this)).apply(RequestOptions.circleCropTransform()).into(main_medal)
-        card_t_profil_status.text = mUserVM.Userv2(mNbUser, this)
+        Glide.with(this).load( mUserVM.DisplayImg(mNbUser,this)).apply(RequestOptions.circleCropTransform()).into(main_medal)
+        card_t_profil_status.text = mUserVM.DisplayName(mNbUser, this)
         goAnimImage(main_medal) }
 
 
     private fun createFireStoreUser() {
         val emptylist = arrayListOf<String>()
-        mUserVM.createUserMain(mNameUser, mEmailUser, mPhotoUser, mIdUser, emptylist, 0)
+        mUserVM.createUser(mNameUser, mEmailUser, mPhotoUser, mIdUser, emptylist, 0)
     }
 
 
@@ -132,13 +136,8 @@ class MainActivity : AppCompatActivity() {
                    val deepLink = pendingDynamicLinkData.link.toString()
                     val mDeepId =  deepLink.split("link/")[1]
                     mUserVM.upadateEventUser(mIdUser, mDeepId)
-                    Toast.makeText(this, "New Event !", Toast.LENGTH_SHORT).show()
-
-                }
-            }
-
-            .addOnFailureListener(this) { e -> Log.w(ContentValues.TAG, "getDynamicLink:onFailure", e) }
-    }
+                    Toast.makeText(this, "New Event !", Toast.LENGTH_SHORT).show() } }
+            .addOnFailureListener(this) { e -> Log.w(ContentValues.TAG, "getDynamicLink:onFailure", e) } }
 
 
 

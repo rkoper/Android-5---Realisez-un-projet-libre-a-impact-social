@@ -119,6 +119,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/guideline2">
                                 <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:elevation="2dp"
                                     android:background="@drawable/rectangle_corner_grey_700"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
@@ -309,6 +310,7 @@
                             >
 
                                 <LinearLayout
+                                    android:elevation="2dp"
                                     android:background="@drawable/rectangle_corner_grey_700"
                                     android:id="@+id/card_t_settings_click"
                                     android:layout_width="match_parent"
@@ -357,6 +359,7 @@
                             >
 
                                 <LinearLayout
+                                    android:elevation="2dp"
                                     android:background="@drawable/rectangle_corner_grey_700"
                                     android:id="@+id/card_t_event_click"
                                     android:layout_width="match_parent"
@@ -400,6 +403,7 @@
 
                             >
                                 <LinearLayout
+                                    android:elevation="2dp"
                                     android:background="@drawable/rectangle_corner_grey_700"
                                     android:id="@+id/card_t_create_click"
                                     android:layout_width="match_parent"
@@ -444,6 +448,7 @@
                             >
 
                                 <LinearLayout
+                                    android:elevation="2dp"
                                     android:background="@drawable/rectangle_corner_grey_700"
                                     android:id="@+id/card_t_calendar_click"
                                     android:layout_width="match_parent"

@@ -42,4 +42,5 @@
     <string name="message">Message</string>
     <string name="subject">Subject</string>
     <string name="new_name">New name</string>
+    <string name="or" translatable="false">Or</string>
 </resources>

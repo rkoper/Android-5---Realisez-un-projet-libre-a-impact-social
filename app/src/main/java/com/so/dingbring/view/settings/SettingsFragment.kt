@@ -117,8 +117,8 @@ class SettingsFragment : BaseFragment() {
 
     private fun initMedal(mNbUser: Int) {
 
-            card_t_settings_status.text = mUserVM.Userv2(mNbUser, requireActivity())
-            Glide.with(this).load( mUserVM.Userv3(mNbUser,requireActivity())).apply(RequestOptions.circleCropTransform()).into(settings_medal)
+            card_t_settings_status.text = mUserVM.DisplayName(mNbUser, requireActivity())
+            Glide.with(this).load( mUserVM.DisplayImg(mNbUser,requireActivity())).apply(RequestOptions.circleCropTransform()).into(settings_medal)
     }
 
 

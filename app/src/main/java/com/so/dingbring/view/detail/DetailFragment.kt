@@ -1,5 +1,7 @@
 package com.so.dingbring.view.detail
 
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
@@ -12,19 +14,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.dynamiclinks.ktx.androidParameters
@@ -36,12 +35,16 @@ import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyItem
 import com.so.dingbring.data.MyItemViewModel
 import com.so.dingbring.view.base.BaseFragment
+import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_layout_detail.*
 import kotlinx.android.synthetic.main.dialog_layout_detail_info.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import render.animations.Attention
+import render.animations.Bounce
+import render.animations.Render
 import java.util.*
 
 
@@ -57,20 +60,16 @@ class DetailFragment : BaseFragment() {
     private var mListMyItem: ArrayList<ArrayList<String>> = arrayListOf()
     var mNameUser = "..."
     private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
-
-
+    var mStatusBool = true
     private var mBubble : BubbleNavigationLinearView? = null
+    private var mBubbleDetail : BubbleNavigationLinearView? = null
     private var mTopBarTxt : TextView? = null
-
     private var mFloat_back : FloatingActionButton? = null
     private var mFloat_action : FloatingActionButton? = null
-
-
     private var mItemQuantity = 1
     private lateinit var d_detail:Dialog
     private var thisView: View? = null
-
-     private var mTextName: TextView? = null
+    private var mTextName: TextView? = null
 
 
 
@@ -87,24 +86,35 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun initTopBottomBar() {
-        mBubble = activity?.findViewById(R.id.float_bottom_bar)
-        mBubble!!.visibility = View.INVISIBLE
-        // mBubble!!.setCurrentActiveItem(1)
+        initBubble()
+        initBubbleDetail()
+        iniTopBar()
+    }
 
+    private fun iniTopBar() {
         mTopBarTxt = activity?.findViewById(R.id.item_tool_bar)
         mTopBarTxt?.text  = getString(R.string.detail)
         mTopBarTxt?.setTextColor(resources.getColor(R.color.red_300))
-
 
         mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
         mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
         mFloat_back?.setColorFilter(Color.argb(255, 255, 255, 255))
 
-
         mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
         mFloat_action?.visibility = View.VISIBLE
         mFloat_action?.setImageResource(R.drawable.logo_share)
         mFloat_action?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
+    }
+
+    private fun initBubbleDetail() {
+        mBubbleDetail = activity?.findViewById(R.id.float_bottom_bar_detail)
+        mBubbleDetail?.setCurrentActiveItem(1)
+        mBubbleDetail?.visibility = View.VISIBLE
+    }
+
+    private fun initBubble() {
+        mBubble = activity?.findViewById(R.id.float_bottom_bar)
+        mBubble?.visibility = View.INVISIBLE
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,26 +125,36 @@ class DetailFragment : BaseFragment() {
         prepareToShare()
         onBackPressed()
         onBackBarPressed()
+        initBottom()
         initHeader()
     }
+
+    private fun initBottom() {
+        mBubbleDetail?.setNavigationChangeListener { view, position ->
+            when (position) {
+                0 ->  navToHome()
+                2 -> navToFrag() } } }
 
     private fun onBackPressed() {
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() { navToHome() } })
-    }
+                override fun handleOnBackPressed() { navToHome() } }) }
     private fun onBackBarPressed() {
         mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
         mFloat_back?.setOnClickListener {
-            navToHome()
-        }
-    }
+            navToHome() } }
+
     private fun navToHome() {
+        val intent = Intent (activity, MainActivity::class.java)
+        activity?.startActivity(intent) }
+
+    private fun navToFrag() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
         mTopBarTxt?.text  = getString(R.string.event)
+        mBubbleDetail!!.visibility = View.INVISIBLE
         mBubble!!.visibility = View.VISIBLE
-        mBubble?.setCurrentActiveItem(1)
-    }
+        mBubble?.setCurrentActiveItem(1) }
+
 
 
     private fun prepareToShare() {
@@ -148,8 +168,7 @@ class DetailFragment : BaseFragment() {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
             intent.putExtra(Intent.EXTRA_TEXT, dynamicLinkUri.toString())
-            startActivity(Intent.createChooser(intent, "Share Link")) }
-    }
+            startActivity(Intent.createChooser(intent, "Share Link")) } }
 
     @SuppressLint("CheckResult")
     private fun initRetrieveItem() {
@@ -171,10 +190,7 @@ class DetailFragment : BaseFragment() {
                             initRVObserver()
                             d_detail.dismiss()}
 
-                        d_detail.dialog_down.setOnClickListener { d_detail.dismiss()}
-
-
-                    }
+                        d_detail.dialog_down.setOnClickListener { d_detail.dismiss()} }
                     else { mItemVM.updateStatus(data)
                     initRVObserver()  }} }
 
@@ -186,8 +202,7 @@ class DetailFragment : BaseFragment() {
             mlmi.sortByDescending { it[1] }
             mListMyItem.clear()
             mListMyItem.addAll(mlmi)
-            mDetailAdapter.notifyDataSetChanged()})
-    }
+            mDetailAdapter.notifyDataSetChanged()}) }
 
 
      fun initHeader() : String{
@@ -217,57 +232,51 @@ class DetailFragment : BaseFragment() {
                 d.dialog_det_info_hourevent.text = mEventHour
                 d.dialog_det_info_descevent.text = mEventDesc
                 d.dialog_det_info_cancel.setOnClickListener { d.dismiss() }
-                d.show()
-
-            }
-
-
-
-
-        })
-
+                d.show() } })
     return mEventName
     }
 
-    private fun initButton() {
-        detail_button_add.setOnClickListener {
-            goAnimTxt(detail_status_need)
-            goAnimTxt(detail_status_bring) } }
-
+    @SuppressLint("WrongConstant")
     private fun initStatus() {
+
+        val renderLeft = Render(requireContext())
+        val renderRight = Render(requireContext())
+
+// Set Animation
+        renderRight.setAnimation(Attention().Shake(detail_status_bring))
+        renderRight.setDuration(2000)
+        renderRight.start()
+
+        renderLeft.setAnimation(Attention().Shake(detail_status_need))
+        renderLeft.setDuration(2000)
+        renderLeft.start()
+
         detail_status_bring?.setOnClickListener {
-            detail_status_bring_deco.visibility = View.VISIBLE
+            mStatusBool = true
             mItemStatus = "I bring"
-            detail_status_need_deco.visibility = View.INVISIBLE
-            initAnimafterClickAdd()}
+            detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.red_300)!!)
+            detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!)
+        }
 
             detail_status_need?.setOnClickListener {
-            detail_status_need_deco.visibility = View.VISIBLE
+                mStatusBool = false
             mItemStatus = "I need"
-            detail_status_bring_deco.visibility = View.INVISIBLE
-                initAnimafterClickAdd()}}
+                detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.red_300)!!)
+                detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!)
+            }
 
-    private fun initAnimafterClickAdd() {
-        goAnimTxtLayout(detail_item_txt)
-        goAnimEdit(detail_item_edit)
+
+
     }
+
+
 
     private fun initItem() {
         detail_item_edit.doOnTextChanged { text, start, before, count ->
-            if (start == 1) {
-                goAnimTxt(detail_qty_txt)
-                goAnimView(detail_quantity_item)
-                goAnimView(detail_quantity_minus)
-                goAnimView(detail_quantity_plus)
-                goAnimFloating(detail_check)
-            }
-
-            mItemName= detail_item_edit.text.toString()
-        } }
+            mItemName= detail_item_edit.text.toString() } }
 
     private fun initQuantity() {
         detail_quantity_txt.text =  mItemQuantity.toString()
-
         detail_quantity_minus.setOnClickListener {
 
             if (mItemQuantity > 1){
@@ -279,7 +288,6 @@ class DetailFragment : BaseFragment() {
              detail_quantity_txt.text = mItemQuantity.toString()} }
 
     private fun initCreateItem() {
-        initButton()
         initItem()
         initQuantity()
         initStatus()
@@ -288,85 +296,20 @@ class DetailFragment : BaseFragment() {
             initItem()
             if (mItemName == "") { Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show() }
             else { val mMyItem = MyItem(mItemUniqueID, mItemName, mItemStatus, mItemQuantity.toString(), mIdUser, mEventId)
-
                mItemVM.createUniqueItem(mMyItem)
-                initRVObserver()
-                invisible()
+                initRVObserver() } } }
 
-            }
 
-        } }
-    private fun invisible() {
-        detail_status_need.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.fui_transparent))
-        detail_status_bring.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.fui_transparent))
-        detail_quantity_txt.text = "1"
-        detail_item_edit.setText(" ")
-        goAnimTxtBack(detail_status_need)
-        goAnimTxtBack(detail_status_bring)
-        goAnimTxtLayoutBack(detail_item_txt)
-        goAnimEditBack(detail_item_edit)
-        goAnimTxtBack(detail_qty_txt)
-        goAnimImageViewBack(detail_status_bring_deco)
-        goAnimImageViewBack(detail_status_need_deco)
-        goAnimViewBack(detail_quantity_item)
-        goAnimViewBack(detail_quantity_minus)
-        goAnimViewBack(detail_quantity_plus)
-        goAnimFloatingBack(detail_check) }
+    private fun goAnimTxtZoomIn(mLink: TextView?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_3)
+        mLink?.startAnimation(zoom1) }
 
-    private fun goAnimView(mLink: View?) {
+    private fun goAnimTxtZoomOut(mLink: TextView?) {
+        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_3)
+        mLink?.startAnimation(zoom1) }
+
+    private fun goAnimTxtJuggle(mLink: TextView?) {
         val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_1)
-        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_1)
-        mLink?.startAnimation(zoom1)
-        mLink?.startAnimation(zoom2) }
-
-    private fun goAnimTxt(mLink: TextView?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_1)
-        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_1)
-        mLink?.startAnimation(zoom1)
-        mLink?.startAnimation(zoom2) }
-
-    private fun goAnimTxtLayout(mLink: TextInputLayout?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_1)
-        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_1)
-        mLink?.startAnimation(zoom1)
-        mLink?.startAnimation(zoom2) }
-
-    private fun goAnimEdit(mLink: EditText?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_1)
-        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_1)
-        mLink?.startAnimation(zoom1)
-        mLink?.startAnimation(zoom2) }
-
-    private fun goAnimFloating(mLink: FloatingActionButton?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_1)
-        val zoom2 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_1)
-        mLink?.startAnimation(zoom1)
-        mLink?.startAnimation(zoom2) }
-
-    private fun goAnimImageViewBack(mLink: ImageView?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)
-        mLink?.startAnimation(zoom1) }
-
-    private fun goAnimViewBack(mLink: View?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)
-        mLink?.startAnimation(zoom1) }
-
-    private fun goAnimTxtBack(mLink: TextView?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)
-        mLink?.startAnimation(zoom1) }
-
-    private fun goAnimTxtLayoutBack(mLink: TextInputLayout?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)
-        mLink?.startAnimation(zoom1) }
-
-    private fun goAnimEditBack(mLink: EditText?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)
-        mLink?.startAnimation(zoom1) }
-
-    private fun goAnimFloatingBack(mLink: FloatingActionButton?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_2)
-        mLink?.startAnimation(zoom1) }
-
-
+        mLink?.startAnimation(zoom1)    }
 
 }
