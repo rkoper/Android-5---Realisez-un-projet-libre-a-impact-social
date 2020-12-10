@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -38,6 +39,7 @@ class EventFragment : BaseFragment() {
     private var mIdUser = "////"
     private var mUserEvent = arrayListOf("", "")
     private var mFloat_back : FloatingActionButton? = null
+    private var mTxtNoEventYet : TextView? = null
     private var mPosBottomBar: BubbleNavigationLinearView? = null
 
  override fun onCreateView(
@@ -47,7 +49,6 @@ class EventFragment : BaseFragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_event, container, false)
      mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-     println("mIdUser-------------event------------------->> " +mIdUser )
         return view }
 
 
@@ -103,14 +104,13 @@ class EventFragment : BaseFragment() {
 
     private fun loadRV() {
 
-        if (mUserEvent.size == 0) {event_no_event.visibility = View.VISIBLE}
-
-        else { mEventVM.getUserEvent(mUserEvent, requireActivity()).observe(
-                requireActivity(), androidx.lifecycle.Observer {listMyEvent ->
+        mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
+            mEventVM.getUserEvent(mUserEvent, requireActivity()).observe(requireActivity(), androidx.lifecycle.Observer {listMyEvent ->
                 mDataEvent.clear()
                 mDataEvent.addAll(listMyEvent)
-                mEventAdapter.notifyDataSetChanged() }) }}
+                mEventAdapter.notifyDataSetChanged() })
 
+            }
 
 
 }

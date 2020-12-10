@@ -72,7 +72,7 @@ class DetailFragment : BaseFragment() {
     private var thisView: View? = null
     private var mTextName: TextView? = null
     private var mPosBottomBar: BubbleNavigationLinearView? = null
-
+    private var mTxtNoEventYet : TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,6 +89,11 @@ class DetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
+        mTxtNoEventYet?.visibility = View.INVISIBLE
+
+
         mTextName = view.findViewById(R.id.detail_name_txt)
         initCreateItem()
         initRetrieveItem()

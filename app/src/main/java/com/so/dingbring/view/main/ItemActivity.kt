@@ -14,7 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyUserViewModel
 import kotlinx.android.synthetic.main.activity_item.*
+import kotlinx.coroutines.withContext
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.coroutines.coroutineContext
 
 
 class ItemActivity : AppCompatActivity() {
@@ -85,10 +87,6 @@ class ItemActivity : AppCompatActivity() {
             mUserEvent = mlmu.mEventUser })
     }
 
-
-    companion object {
-       var  mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    }
 
 }
 

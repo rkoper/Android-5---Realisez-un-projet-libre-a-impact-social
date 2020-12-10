@@ -9,10 +9,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
@@ -49,6 +46,7 @@ class CreateFragment : BaseFragment() {
     private var mEventHour = ""
     private var mEventDescription = ""
     var mNameUser = ""
+    private var mTxtNoEventYet : TextView? = null
     private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
     var mItemStatus: String = "I bring"
     private var mEventUniqueID = UUID.randomUUID().toString()
@@ -94,6 +92,9 @@ class CreateFragment : BaseFragment() {
     }
 
     private fun initCreateEvent() {
+          mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
+         mTxtNoEventYet?.visibility = View.INVISIBLE
+
         initAdresse()
         initDate()
         initEvent()

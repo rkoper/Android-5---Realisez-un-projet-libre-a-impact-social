@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
@@ -41,6 +42,8 @@ class CalendarFragment : BaseFragment() {
     private var mUserEvent = arrayListOf("", "")
     private var mPosBottomBar: BubbleNavigationLinearView? = null
     private var mFloat_back : FloatingActionButton? = null
+    private var mTxtNoEventYet : TextView? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +54,6 @@ class CalendarFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println("mIdUser-------------Cal------------------->> " +mIdUser )
         mUserVM.getUserById(mIdUser).observe(requireActivity(), androidx.lifecycle.Observer { mlmu ->
                 if (mlmu != null) {
                     mUserEvent = mlmu.mEventUser
@@ -107,9 +109,21 @@ class CalendarFragment : BaseFragment() {
     private fun loadRV(calendarAdapterVertical: CalendarAdapter) {
         mEventVM.getUserEvent(mUserEvent, requireActivity())
             .observe(requireActivity(), androidx.lifecycle.Observer { listMyEvent ->
+
+
                 mDataEvent.clear()
                 mDataEvent.addAll(listMyEvent)
-                calendarAdapterVertical.notifyDataSetChanged() }) }
+                calendarAdapterVertical.notifyDataSetChanged() })
+
+    if (mUserEvent.isEmpty())
+    {
+
+
+    }
+
+
+
+    }
 
 
     private fun createAlert(datalist: MutableList<String>) {

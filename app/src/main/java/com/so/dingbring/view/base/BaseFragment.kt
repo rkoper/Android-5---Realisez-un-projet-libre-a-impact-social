@@ -2,6 +2,7 @@ package com.so.dingbring.view.base
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import com.so.dingbring.R
 import com.so.dingbring.view.main.ItemActivity
 
 abstract class BaseFragment : Fragment() {
@@ -10,6 +11,10 @@ abstract class BaseFragment : Fragment() {
 
     override fun onAttach(context: Context)  {
         super.onAttach(context)
-        ITEM_ACTIVITY = context as ItemActivity }
+        ITEM_ACTIVITY = context as ItemActivity
+
+
+    }
+
 
 }

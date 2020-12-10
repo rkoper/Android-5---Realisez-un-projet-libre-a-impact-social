@@ -36,6 +36,39 @@
                     app:layout_constraintGuide_percent="0.095" />
 
                 <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/main_h_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.45" />
+
+
+                <TextView
+                    android:id="@+id/item_no_event_yet"
+                    style="@style/TxtViewPrincipalWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/grey_800"
+                    android:elevation="5dp"
+                    android:rotation="-10"
+                    android:visibility="invisible"
+                    android:text="@string/no_event_yet"
+                    app:layout_constraintBottom_toBottomOf="@+id/main_h_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/main_h_4"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/main_h_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.55" />
+
+
+                <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/main_h_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

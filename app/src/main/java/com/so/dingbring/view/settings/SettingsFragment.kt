@@ -59,6 +59,7 @@ class SettingsFragment : BaseFragment() {
     private lateinit var sharedPref:SharedPreferences
     private lateinit var mDrawable: Drawable
     private var mFloat_back : FloatingActionButton? = null
+    private var mTxtNoEventYet : TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +71,10 @@ class SettingsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
+        mTxtNoEventYet?.visibility = View.INVISIBLE
+
 
         mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
         requireActivity().onBackPressedDispatcher
