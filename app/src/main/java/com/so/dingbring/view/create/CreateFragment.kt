@@ -85,7 +85,7 @@ class CreateFragment : BaseFragment() {
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                  navToHome() } })
+                    navToHome() } })
     }
 
     private fun navToHome() {
@@ -94,39 +94,38 @@ class CreateFragment : BaseFragment() {
     }
 
     private fun initCreateEvent() {
-            initAdresse()
-            initDate()
-            initEvent()
-            initOrga()
-            initHour()
-            initDescription()
-            createEvent()
-        }
+        initAdresse()
+        initDate()
+        initEvent()
+        initOrga()
+        initHour()
+        initDescription()
+        createEvent()
+    }
 
     private fun initDescription() { create_info_edit.doOnTextChanged { text, start, before, count ->
-            if (count > 0) {mEventDescription = create_info_edit.text.toString() } } }
+        if (count > 0) {mEventDescription = create_info_edit.text.toString() } } }
 
     private fun initEvent() {
-        create_name_edit.setText(" ")
-
         create_name_edit.doOnTextChanged { text, start, before, count ->
-            if (count > 0) {mEventName = create_name_edit.text.toString() } } }
+            if (count > 0) {
+                mEventName = create_name_edit.text.toString() } } }
 
 
 
     private fun initOrga() { create_orga_edit.doOnTextChanged { text, start, before, count ->
-            if (count > 0) {mEventOrga = create_orga_edit.text.toString() } } }
+        if (count > 0) {mEventOrga = create_orga_edit.text.toString() } } }
 
 
 
-     fun initAdresse() {
+    fun initAdresse() {
         var mStreetNumber = ""
         var mStreetName = ""
         var mCity = ""
-            if (!Places.isInitialized()) { Places.initialize(requireActivity().applicationContext, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
+        if (!Places.isInitialized()) { Places.initialize(requireActivity().applicationContext, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
 
-           var autocompleteFragment = Utils.autoCompleteFrag(childFragmentManager )
-           var etTextInput = Utils.autoCompleteTxtInput(childFragmentManager, resources, Typeface.DEFAULT )
+        var autocompleteFragment = Utils.autoCompleteFrag(childFragmentManager )
+        var etTextInput = Utils.autoCompleteTxtInput(childFragmentManager, resources, Typeface.DEFAULT )
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
@@ -138,8 +137,9 @@ class CreateFragment : BaseFragment() {
                         mAdressComp.types.contains("locality") -> { mCity = mAdressComp.name } } }
 
                 etTextInput?.visibility = View.INVISIBLE
-                create_address_txt_display.visibility = View.VISIBLE
                 create_address_txt_display.text = "$mStreetNumber $mStreetName, $mCity"
+                create_address_txt_display.visibility = View.VISIBLE
+
                 mEventAddress = "$mStreetNumber $mStreetName, $mCity "}
 
             override fun onError(status: Status) {
@@ -149,18 +149,19 @@ class CreateFragment : BaseFragment() {
 
 
     private fun initDate() {
-            create_date_txt?.setOnClickListener {
+        create_date_txt?.setOnClickListener {
 
-                val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
-                    val newDate = formatDate(y, m, d)
-                    create_date_txt.text = newDate
-                    mEventDate = newDate   }
-                val now = android.text.format.Time()
-                now.setToNow()
-                val d = DatePickerDialog(requireContext(), R.style.MyAppThemeCalendar, dpd, now.year, now.month, now.monthDay)
-                d.show()
-                d.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.grey_800))
-                d.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.grey_800)) } }
+            val dpd = DatePickerDialog.OnDateSetListener { a, y, m, d ->
+                val newDate = formatDate(y, m, d)
+                create_date_txt.text = newDate
+                create_date_edit.setText(" ")
+                mEventDate = newDate   }
+            val now = android.text.format.Time()
+            now.setToNow()
+            val d = DatePickerDialog(requireContext(), R.style.MyAppThemeCalendar, dpd, now.year, now.month, now.monthDay)
+            d.show()
+            d.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.grey_800))
+            d.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.grey_800)) } }
 
 
     private fun initHour() {
@@ -170,31 +171,32 @@ class CreateFragment : BaseFragment() {
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
                 create_hour_txt.text = SimpleDateFormat("HH:mm").format(cal.time)
+                create_hour_edit.setText(" ")
                 mEventHour =  create_hour_txt.text.toString() }
             TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show() } }
 
-        private fun createEvent() {
-            mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
-            mFloat_action?.setOnClickListener {
-                if (mEventAddress == "" ) { Toast.makeText(requireContext(), "Please complete address...", Toast.LENGTH_SHORT).show() }
-                if (mEventDate == "" ) { Toast.makeText(requireContext(), "Please complete date...", Toast.LENGTH_SHORT).show() }
-                if (mEventUniqueID == "" ) { Toast.makeText(requireContext(), "Error...", Toast.LENGTH_SHORT).show() }
-                if (mEventName == "" ) { Toast.makeText(requireContext(), "Please complete event name...", Toast.LENGTH_SHORT).show() }
-                if (mEventHour == "" ) { Toast.makeText(requireContext(), "Please complete hour...", Toast.LENGTH_SHORT).show() }
-                if (mIdUser == "" ) { Toast.makeText(requireContext(), "Error...", Toast.LENGTH_SHORT).show() }
-                if (mEventOrga == "" ) { Toast.makeText(requireContext(), "Please complete Organizer...", Toast.LENGTH_SHORT).show() }
+    private fun createEvent() {
+        mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
+        mFloat_action?.setOnClickListener {
+            if (mEventAddress == "" ) { Toast.makeText(requireContext(), "Please complete address...", Toast.LENGTH_SHORT).show() }
+            if (mEventDate == "" ) { Toast.makeText(requireContext(), "Please complete date...", Toast.LENGTH_SHORT).show() }
+            if (mEventUniqueID == "" ) { Toast.makeText(requireContext(), "Error...", Toast.LENGTH_SHORT).show() }
+            if (mEventName == "" ) { Toast.makeText(requireContext(), "Please complete event name...", Toast.LENGTH_SHORT).show() }
+            if (mEventHour == "" ) { Toast.makeText(requireContext(), "Please complete hour...", Toast.LENGTH_SHORT).show() }
+            if (mIdUser == "" ) { Toast.makeText(requireContext(), "Error...", Toast.LENGTH_SHORT).show() }
+            if (mEventOrga == "" ) { Toast.makeText(requireContext(), "Please complete Organizer...", Toast.LENGTH_SHORT).show() }
 
-                else { val mDataEvent = MyEvent(mEventAddress,mEventDate,mEventUniqueID,mEventName,mEventHour,mEventDescription,mIdUser,mEventOrga)
+            else { val mDataEvent = MyEvent(mEventAddress,mEventDate,mEventUniqueID,mEventName,mEventHour,mEventDescription,mIdUser,mEventOrga)
 
-                    mEventVM.createEvent(mDataEvent)
-                    mUserVM.upadateEventUser(mIdUser,mEventUniqueID )
+                mEventVM.createEvent(mDataEvent)
+                mUserVM.upadateEventUser(mIdUser,mEventUniqueID )
 
-                    navToHome()
+                navToHome()
 
-                } }
-                }
-
-
+            } }
     }
+
+
+}
 
 

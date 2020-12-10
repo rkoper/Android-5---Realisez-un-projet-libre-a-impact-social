@@ -242,7 +242,6 @@ class DetailFragment : BaseFragment() {
         val renderLeft = Render(requireContext())
         val renderRight = Render(requireContext())
 
-// Set Animation
         renderRight.setAnimation(Attention().Shake(detail_status_bring))
         renderRight.setDuration(2000)
         renderRight.start()
@@ -255,21 +254,13 @@ class DetailFragment : BaseFragment() {
             mStatusBool = true
             mItemStatus = "I bring"
             detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.red_300)!!)
-            detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!)
-        }
+            detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!) }
 
             detail_status_need?.setOnClickListener {
                 mStatusBool = false
             mItemStatus = "I need"
                 detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.red_300)!!)
-                detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!)
-            }
-
-
-
-    }
-
-
+                detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!) } }
 
     private fun initItem() {
         detail_item_edit.doOnTextChanged { text, start, before, count ->
@@ -297,19 +288,12 @@ class DetailFragment : BaseFragment() {
             if (mItemName == "") { Toast.makeText(requireContext(), "Please add item <3", Toast.LENGTH_LONG).show() }
             else { val mMyItem = MyItem(mItemUniqueID, mItemName, mItemStatus, mItemQuantity.toString(), mIdUser, mEventId)
                mItemVM.createUniqueItem(mMyItem)
-                initRVObserver() } } }
+                initRVObserver()
 
-
-    private fun goAnimTxtZoomIn(mLink: TextView?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_3)
-        mLink?.startAnimation(zoom1) }
-
-    private fun goAnimTxtZoomOut(mLink: TextView?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomout_3)
-        mLink?.startAnimation(zoom1) }
-
-    private fun goAnimTxtJuggle(mLink: TextView?) {
-        val zoom1 = AnimationUtils.loadAnimation(requireContext(), R.anim.zoomin_1)
-        mLink?.startAnimation(zoom1)    }
+                detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!)
+                detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!)
+                detail_quantity_txt.text = "1"
+                detail_item_edit.setText("")
+            } } }
 
 }

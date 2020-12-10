@@ -16,11 +16,29 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.0" />
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/create_gl_02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.045" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/create_gl_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/create_gl_20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.14" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/create_gl_31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.32" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/create_gl_30"
         android:layout_width="wrap_content"
@@ -34,11 +52,23 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.42" />
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/create_gl_44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/create_gl_50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.575" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/create_gl_60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/create_gl_75"
@@ -52,6 +82,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -60,27 +92,34 @@
         android:id="@+id/create_name_txt"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:boxStrokeColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/create_gl_10"
         app:layout_constraintBottom_toBottomOf="@+id/create_gl_20"
         app:layout_constraintRight_toRightOf="parent"
-        android:cursorVisible="false"
         android:hint="@string/event_name"
-        style="@style/LoginTextInputLayoutStyle"
+        style="@style/LoginTextInputLayoutStyleV2"
         android:textColorHint="@color/white">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_name_edit"
             style="@style/TxtViewPrincipalWhite"
-            app:boxStrokeColor="@color/white"
-            android:gravity="start"
-            android:cursorVisible="false"
-             android:text=" "
             android:layout_width="match_parent"
+            android:text=" "
+            android:textColor="@color/white"
+            android:textSize="26sp"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:textSize="25sp"
+        style="@style/TxtViewPrincipalWhitev3"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="@+id/create_name_txt"
+        app:layout_constraintTop_toTopOf="@+id/create_gl_02"
+        app:layout_constraintBottom_toBottomOf="@+id/create_name_txt"
+        app:layout_constraintRight_toRightOf="@+id/create_name_txt"
+        android:id="@+id/create_address_txt_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginStart="20dp"
@@ -95,17 +134,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/create_gl_40"
         app:layout_constraintRight_toRightOf="parent"
         android:hint="@string/organizer"
-        style="@style/LoginTextInputLayoutStyle"
+        style="@style/LoginTextInputLayoutStyleV2"
         android:textColorHint="@color/white">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_orga_edit"
             style="@style/TxtViewPrincipalWhite"
-            android:gravity="left"
             android:text=" "
             android:layout_width="match_parent"
+            android:textSize="26sp"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
-
+    <TextView
+        android:textSize="25sp"
+        style="@style/TxtViewPrincipalWhitev3"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="@+id/create_orga_txt"
+        app:layout_constraintTop_toTopOf="@+id/create_gl_31"
+        app:layout_constraintBottom_toBottomOf="@+id/create_orga_txt"
+        app:layout_constraintRight_toRightOf="@+id/create_orga_txt"
+        android:id="@+id/create_address_txt_orga"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -119,34 +168,28 @@
         app:layout_constraintBottom_toBottomOf="@+id/create_gl_30"
         app:layout_constraintRight_toRightOf="parent"
         android:hint="@string/address"
-        style="@style/LoginTextInputLayoutStyle"
+        style="@style/LoginTextInputLayoutStyleV2"
         android:textColorHint="@color/white">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/create_address_edit"
             style="@style/TxtViewPrincipalWhite"
-            android:gravity="start"
-            android:textSize="18sp"
-          android:text=" "
+            android:textSize="26sp"
+            android:text=" "
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
     <TextView
-        android:visibility="visible"
+        android:textSize="25sp"
         android:layout_marginBottom="4dp"
         android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        style="@style/TxtViewPrincipalWhite"
+        style="@style/TxtViewPrincipalWhitev3"
         android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="@+id/create_address_txt"
-        app:layout_constraintTop_toTopOf="@+id/create_address_txt"
+        app:layout_constraintTop_toTopOf="@+id/create_gl_16"
         app:layout_constraintBottom_toBottomOf="@+id/create_address_txt"
         app:layout_constraintRight_toRightOf="@+id/create_address_txt"
         android:id="@+id/create_address_txt_display"
@@ -185,25 +228,28 @@
         app:layout_constraintBottom_toBottomOf="@+id/create_gl_50"
         app:layout_constraintRight_toRightOf="@+id/create_gl_v_50"
         android:hint="@string/date"
-        style="@style/LoginTextInputLayoutStyle"
+        style="@style/LoginTextInputLayoutStyleV2"
         android:textColorHint="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:text=" "
             android:id="@+id/create_date_edit"
             style="@style/TxtViewPrincipalWhite"
-            android:gravity="start"
-          android:text=" "
+            android:textSize="26sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
     </com.google.android.material.textfield.TextInputLayout>
     <TextView
+        android:visibility="visible"
+        android:textSize="25sp"
         android:id="@+id/create_date_txt"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        style="@style/TxtViewPrincipalWhite"
+        android:gravity="center"
+        style="@style/TxtViewPrincipalWhitev3"
         app:layout_constraintLeft_toLeftOf="@+id/outlinedTextField3"
-        app:layout_constraintTop_toTopOf="@+id/create_gl_40"
+        app:layout_constraintTop_toTopOf="@+id/create_gl_44"
         app:layout_constraintBottom_toBottomOf="@+id/create_gl_50"
         app:layout_constraintRight_toRightOf="@+id/outlinedTextField3"/>
 
@@ -222,55 +268,31 @@
         app:layout_constraintBottom_toBottomOf="@+id/create_gl_50"
         app:layout_constraintLeft_toLeftOf="@+id/create_gl_v_50"
         android:hint="@string/hour"
-        style="@style/LoginTextInputLayoutStyle"
+        style="@style/LoginTextInputLayoutStyleV2"
         android:textColorHint="@color/white">
-
         <com.google.android.material.textfield.TextInputEditText
             style="@style/TxtViewPrincipalWhite"
             android:id="@+id/create_hour_edit"
-            android:gravity="start"
-            android:textSize="18sp"
-                android:text=" "
+            android:textSize="26sp"
             android:layout_width="match_parent"
+            android:text=" "
             android:layout_height="match_parent" />
-
     </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
+        android:textSize="25sp"
         android:paddingTop="15dp"
         android:id="@+id/create_hour_txt"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        style="@style/TxtViewPrincipalWhite"
+        android:visibility="visible"
+        style="@style/TxtViewPrincipalWhitev3"
         app:layout_constraintLeft_toLeftOf="@+id/outlinedTextField4"
-        app:layout_constraintTop_toTopOf="@+id/create_gl_40"
+        app:layout_constraintTop_toTopOf="@+id/create_gl_44"
         app:layout_constraintBottom_toBottomOf="@+id/create_gl_50"
         app:layout_constraintRight_toRightOf="@+id/outlinedTextField4"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/create_info_txt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/create_gl_50"
-        app:layout_constraintBottom_toBottomOf="@+id/create_gl_75"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/description"
-        style="@style/LoginTextInputLayoutStyle"
-        android:textColorHint="@color/white">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/create_info_edit"
-            style="@style/TxtViewPrincipalWhiteForDesc"
-            android:layout_marginTop="30dp"
-                android:text=" "
-            android:textAlignment="viewStart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/create_guide_9"
@@ -285,5 +307,31 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/create_info_txt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/create_gl_50"
+        app:layout_constraintBottom_toBottomOf="@+id/create_gl_75"
+        app:layout_constraintRight_toRightOf="parent"
+        android:hint="@string/description"
+        style="@style/LoginTextInputLayoutStyleV2"
+        android:textColorHint="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/create_info_edit"
+            style="@style/TxtViewPrincipalWhiteForDesc"
+            android:layout_marginTop="30dp"
+            android:text="  "
+            android:textAlignment="viewStart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
