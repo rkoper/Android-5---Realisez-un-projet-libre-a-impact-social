@@ -60,6 +60,13 @@ class EventFragment : BaseFragment() {
         mUserVM.getUserById(mIdUser).observe(requireActivity(), Observer { mlmu ->
             if (mlmu != null) {
                 mUserEvent = mlmu.mEventUser
+
+                if (mUserEvent.isEmpty())
+                {
+                    mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
+                    mTxtNoEventYet?.visibility = View.VISIBLE
+
+                }
                 initRV() } })
 
         onBackPressed()
@@ -105,12 +112,10 @@ class EventFragment : BaseFragment() {
     private fun loadRV() {
 
         mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
-            mEventVM.getUserEvent(mUserEvent, requireActivity()).observe(requireActivity(), androidx.lifecycle.Observer {listMyEvent ->
+        mEventVM.getUserEvent(mUserEvent, requireActivity()).observe(requireActivity(), androidx.lifecycle.Observer {listMyEvent ->
                 mDataEvent.clear()
                 mDataEvent.addAll(listMyEvent)
-                mEventAdapter.notifyDataSetChanged() })
-
-            }
+                mEventAdapter.notifyDataSetChanged() }) }
 
 
 }

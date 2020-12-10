@@ -117,7 +117,8 @@ class CalendarFragment : BaseFragment() {
 
     if (mUserEvent.isEmpty())
     {
-
+        mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
+        mTxtNoEventYet?.visibility = View.VISIBLE
 
     }
 
