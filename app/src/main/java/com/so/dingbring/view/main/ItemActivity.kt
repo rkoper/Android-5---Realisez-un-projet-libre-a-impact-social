@@ -55,7 +55,7 @@ class ItemActivity : AppCompatActivity() {
             item_tb_fb_action.setImageResource(R.drawable.logo_save)
             item_tb_fb_action.setColorFilter(Color.argb(255, 255, 255, 255)) }
         if (mclick == 3 ) {initBar(R.id.calendar_fragment, mclick, getString(R.string.calendar), R.color.green_300,View.INVISIBLE)}
-        if (mclick == 4) { initBar(R.id.settings_fragment, mclick,getString(R.string.settings) , R.color.yellow_900,View.INVISIBLE)}
+        if (mclick == 4) { initBar(R.id.settings_fragment, mclick,getString(R.string.settings) , R.color.black,View.INVISIBLE)}
     }
 
     private fun initBar(

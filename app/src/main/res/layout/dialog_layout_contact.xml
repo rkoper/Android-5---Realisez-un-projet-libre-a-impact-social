@@ -114,7 +114,7 @@
             app:srcCompat="@drawable/logo_send"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/yellow_900" />
+            app:backgroundTint="@color/black" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -132,7 +132,7 @@
             android:rotation="45"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/yellow_900" />
+            app:backgroundTint="@color/black" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

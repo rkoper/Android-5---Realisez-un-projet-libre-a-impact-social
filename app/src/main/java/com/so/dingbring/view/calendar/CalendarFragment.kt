@@ -22,6 +22,7 @@ import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
 import kotlinx.android.synthetic.main.dialog_layout_calendar.*
+import kotlinx.android.synthetic.main.dialog_layout_detail_info.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -115,13 +116,13 @@ class CalendarFragment : BaseFragment() {
         d.requestWindowFeature(Window.FEATURE_NO_TITLE)
         d.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         d.setContentView(R.layout.dialog_layout_calendar)
-        d.dialog_cal_addressevent.text = datalist[0]
-        d.dialog_cal_dateevent.text = datalist[1]
-        d.dialog_cal_nameevent.text = datalist[3]
-        d.dialog_cal_nameuser.text = datalist[5]
-        Glide.with(requireContext()).load(datalist[6]).apply(RequestOptions.circleCropTransform()).into(d.dialog_cal_photouser)
-        d.dialog_cal_hourevent.text = datalist[7]
-        d.dialog_cal_descevent.text = datalist[8]
+
+        d.dialog_cal_info_addressevent.text = datalist[0]
+        d.dialog_cal_info_dateevent.text = datalist[1]
+        d.dialog_cal_info_nameevent.text = datalist[3]
+        d.dialog_cal_info_hourevent.text = datalist[7]
+        d.dialog_cal_info_descevent.text = datalist[8]
+
 
         d.dialog_cal_see.setOnClickListener {
             val bundle = bundleOf("GlobalIdEvent" to datalist[2])

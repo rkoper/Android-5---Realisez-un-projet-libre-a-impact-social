@@ -45,9 +45,6 @@ class EventFragment : BaseFragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_event, container, false)
         mIdUser = LoginActivity.mIdUser
-
-     println("----------------------->>" + mIdUser)
-
         return view }
 
 
@@ -57,8 +54,6 @@ class EventFragment : BaseFragment() {
         mUserVM.getUserById(mIdUser).observe(requireActivity(), Observer { mlmu ->
             if (mlmu != null) {
                 mUserEvent = mlmu.mEventUser
-
-                println("-------mUserEvent--------------->>" + mUserEvent)
                 initRV() } })
 
         onBackPressed()
@@ -107,9 +102,6 @@ class EventFragment : BaseFragment() {
 
         else { mEventVM.getUserEvent(mUserEvent, requireActivity()).observe(
                 requireActivity(), androidx.lifecycle.Observer {listMyEvent ->
-
-                println("-------listMyEvent--------------->>" + listMyEvent)
-
                 mDataEvent.clear()
                 mDataEvent.addAll(listMyEvent)
                 mEventAdapter.notifyDataSetChanged() }) }}

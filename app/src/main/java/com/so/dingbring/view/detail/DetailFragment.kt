@@ -38,6 +38,7 @@ import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_item.*
 import kotlinx.android.synthetic.main.dialog_layout_detail.*
 import kotlinx.android.synthetic.main.dialog_layout_detail_info.*
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -70,7 +71,7 @@ class DetailFragment : BaseFragment() {
     private lateinit var d_detail:Dialog
     private var thisView: View? = null
     private var mTextName: TextView? = null
-
+    private var mPosBottomBar: BubbleNavigationLinearView? = null
 
 
     override fun onCreateView(
@@ -85,37 +86,6 @@ class DetailFragment : BaseFragment() {
         return thisView
     }
 
-    private fun initTopBottomBar() {
-        initBubble()
-        initBubbleDetail()
-        iniTopBar()
-    }
-
-    private fun iniTopBar() {
-        mTopBarTxt = activity?.findViewById(R.id.item_tool_bar)
-        mTopBarTxt?.text  = getString(R.string.detail)
-        mTopBarTxt?.setTextColor(resources.getColor(R.color.red_300))
-
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
-        mFloat_back?.setColorFilter(Color.argb(255, 255, 255, 255))
-
-        mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
-        mFloat_action?.visibility = View.VISIBLE
-        mFloat_action?.setImageResource(R.drawable.logo_share)
-        mFloat_action?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
-    }
-
-    private fun initBubbleDetail() {
-        mBubbleDetail = activity?.findViewById(R.id.float_bottom_bar_detail)
-        mBubbleDetail?.setCurrentActiveItem(1)
-        mBubbleDetail?.visibility = View.VISIBLE
-    }
-
-    private fun initBubble() {
-        mBubble = activity?.findViewById(R.id.float_bottom_bar)
-        mBubble?.visibility = View.INVISIBLE
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -129,27 +99,84 @@ class DetailFragment : BaseFragment() {
         initHeader()
     }
 
+
+    private fun onBackPressed() {
+        mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    navToHome() } })}
+
+
+    private fun onBackBarPressed() {
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.setOnClickListener { navToHome() } }
+
+    private fun navToHome() {
+        Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+        initBubbleDetailInvisible()
+        initBubbleVisible() }
+
+
+    private fun initTopBottomBar() {
+        initBubbleInvisible()
+        initBubbleDetailVisible()
+        iniTopBar()
+    }
+
+
+    private fun iniTopBar() {
+        mTopBarTxt = activity?.findViewById(R.id.item_tool_bar)
+        mTopBarTxt?.text  = getString(R.string.detail)
+        mTopBarTxt?.setTextColor(resources.getColor(R.color.yellow_900))
+
+        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.yellow_900))
+        mFloat_back?.setColorFilter(Color.argb(255, 255, 255, 255))
+
+        mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
+        mFloat_action?.visibility = View.VISIBLE
+        mFloat_action?.setImageResource(R.drawable.logo_share)
+        mFloat_action?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.yellow_900))
+    }
+
+    private fun initBubbleDetailVisible() {
+        mBubbleDetail = activity?.findViewById(R.id.float_bottom_bar_detail)
+        mBubbleDetail?.setCurrentActiveItem(1)
+        mBubbleDetail?.visibility = View.VISIBLE
+    }
+
+    private fun initBubbleInvisible() {
+        mBubble = activity?.findViewById(R.id.float_bottom_bar)
+        mBubble?.visibility = View.INVISIBLE
+    }
+
+    private fun initBubbleDetailInvisible() {
+        mBubbleDetail = activity?.findViewById(R.id.float_bottom_bar_detail)
+        mBubbleDetail?.visibility = View.INVISIBLE
+    }
+
+    private fun initBubbleVisible() {
+        mBubble = activity?.findViewById(R.id.float_bottom_bar)
+        mBubble?.visibility = View.VISIBLE
+        mBubble?.setCurrentActiveItem(1)
+        mTopBarTxt?.text  = getString(R.string.event)
+        mTopBarTxt?.setTextColor(resources.getColor(R.color.yellow_900))
+    }
+
     private fun initBottom() {
         mBubbleDetail?.setNavigationChangeListener { view, position ->
             when (position) {
                 0 ->  navToHome()
                 2 -> navToFrag() } } }
 
-    private fun onBackPressed() {
-        requireActivity().onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() { navToHome() } }) }
-    private fun onBackBarPressed() {
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.setOnClickListener {
-            navToHome() } }
-
-    private fun navToHome() {
-        val intent = Intent (activity, MainActivity::class.java)
-        activity?.startActivity(intent) }
 
     private fun navToFrag() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
+        mTopBarTxt?.text  = getString(R.string.event)
+        mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
+        mFloat_action?.visibility = View.INVISIBLE
+        mTopBarTxt?.text  = getString(R.string.event)
         mTopBarTxt?.text  = getString(R.string.event)
         mBubbleDetail!!.visibility = View.INVISIBLE
         mBubble!!.visibility = View.VISIBLE
@@ -253,13 +280,13 @@ class DetailFragment : BaseFragment() {
         detail_status_bring?.setOnClickListener {
             mStatusBool = true
             mItemStatus = "I bring"
-            detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.red_300)!!)
+            detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.yellow_900)!!)
             detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!) }
 
             detail_status_need?.setOnClickListener {
                 mStatusBool = false
             mItemStatus = "I need"
-                detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.red_300)!!)
+                detail_status_need.setBackgroundColor(activity?.resources?.getColor(R.color.yellow_900)!!)
                 detail_status_bring.setBackgroundColor(activity?.resources?.getColor(R.color.grey_400)!!) } }
 
     private fun initItem() {

@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.93" />
+            app:layout_constraintGuide_percent="0.96" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/home_gl_h_9"
@@ -23,81 +23,17 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.92" />
 
-        <ImageButton
-            android:elevation="1dp"
-            android:id="@+id/ic_facebook"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@android:dimen/notification_large_icon_width"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/logo_facebook"
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dingbring_1_0"
+            android:textSize="12sp"
+            style="@style/TxtViewPrincipalWhitev2"
             app:layout_constraintBottom_toBottomOf="@+id/home_gl_h_97"
-            app:layout_constraintEnd_toStartOf="@+id/ic_twitter"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:elevation="5dp"
-            android:id="@+id/ic_twitter"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/logo_twitter"
-            app:layout_constraintBottom_toBottomOf="@+id/home_gl_h_97"
-            app:layout_constraintEnd_toStartOf="@+id/ic_linkedin"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ic_facebook"/>
-
-
-
-        <ImageButton
-            android:elevation="9dp"
-            android:id="@+id/ic_linkedin"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/logo_linkedin"
-            app:layout_constraintBottom_toBottomOf="@+id/ic_twitter"
-            app:layout_constraintEnd_toStartOf="@+id/ic_youtube"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ic_twitter"
-            app:layout_constraintTop_toTopOf="@+id/ic_twitter" />
-
-        <ImageButton
-            android:elevation="14dp"
-            android:id="@+id/ic_youtube"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/logo_youtube"
-            app:layout_constraintBottom_toBottomOf="@+id/ic_linkedin"
-            app:layout_constraintEnd_toStartOf="@+id/ic_sms"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ic_linkedin"
-            app:layout_constraintTop_toTopOf="@+id/ic_linkedin" />
-
-        <ImageButton
-            android:elevation="19dp"
-            android:id="@+id/ic_sms"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/logo_sms"
-            android:backgroundTint="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/ic_youtube"
-            app:layout_constraintEnd_toStartOf="@+id/ic_mail"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ic_youtube"
-            app:layout_constraintTop_toTopOf="@+id/ic_youtube" />
-
-        <ImageButton
-            android:elevation="24dp"
-            android:id="@+id/ic_mail"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="@android:dimen/notification_large_icon_width"
-            android:background="@drawable/logo_envelope"
-            app:layout_constraintBottom_toBottomOf="@+id/ic_sms"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ic_sms"
-            app:layout_constraintTop_toTopOf="@+id/ic_sms" />
 
 
 
@@ -326,10 +262,10 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="0dp"
                                             app:srcCompat="@drawable/logo_settings"
-                                            app:tint="@color/yellow_900"/>
+                                            app:tint="@color/black"/>
 
                                         <TextView
-                                            android:textColor="@color/yellow_900"
+                                            android:textColor="@color/black"
                                             android:layout_marginEnd="10dp"
                                             style="@style/TxtViewPrincipalWhite"
                                             android:textStyle="bold"

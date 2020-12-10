@@ -135,7 +135,7 @@
                     app:layout_constraintGuide_percent="0.5" />
                 <ImageView
                     android:background="@drawable/round"
-                    android:backgroundTint="@color/yellow_900"
+                    android:backgroundTint="@color/black"
 
                     android:layout_gravity="left|center_vertical"
                     android:layout_width="80dp"
@@ -236,10 +236,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_exit"
-                    app:tint="@color/yellow_900"/>
+                    app:tint="@color/black"/>
 
                 <TextView
-                    android:textColor="@color/yellow_900"
+                    android:textColor="@color/black"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"
@@ -281,10 +281,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_personn"
-                    app:tint="@color/yellow_900"/>
+                    app:tint="@color/black"/>
 
                 <TextView
-                    android:textColor="@color/yellow_900"
+                    android:textColor="@color/black"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"
@@ -326,10 +326,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_mail"
-                    app:tint="@color/yellow_900"/>
+                    app:tint="@color/black"/>
 
                 <TextView
-                    android:textColor="@color/yellow_900"
+                    android:textColor="@color/black"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"
@@ -370,10 +370,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:srcCompat="@drawable/logo_language"
-                    app:tint="@color/yellow_900"/>
+                    app:tint="@color/black"/>
 
                 <TextView
-                    android:textColor="@color/yellow_900"
+                    android:textColor="@color/black"
                     android:layout_marginEnd="10dp"
                     style="@style/TxtViewPrincipalWhite"
                     android:textStyle="bold"

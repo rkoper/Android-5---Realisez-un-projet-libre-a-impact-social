@@ -8,6 +8,7 @@
     <string name="spa" translatable="false">Español</string>
     <string name="pot" translatable="false" >Português</string>
     <string name="home" translatable="false" >Home</string>
+    <string name="dingbring_1_0" translatable="false">DingBring 1.0</string>
 
     <string name="english">English</string>
     <string name="french">French</string>
@@ -55,6 +56,7 @@
     <string name="message">Message</string>
     <string name="subject">Subject</string>
     <string name="new_name">New name</string>
+
 
 
 </resources>

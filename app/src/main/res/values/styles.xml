@@ -135,6 +135,8 @@
 
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/Cursor</item>
+
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">2dp</item>
         <item name="android:textSize">18dp</item>
@@ -146,6 +148,8 @@
 
 
     <style name="LoginTextInputLayoutStyleV2" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/Cursor</item>
+
         <item name="hintTextAppearance">@style/HintTextAppearance</item>
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">2dp</item>
@@ -159,7 +163,26 @@
     <style name="HintTextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textSize">25sp</item> <!-- floating hint text size -->
     </style>
+    <style name="LoginTextInputLayoutStyleV3" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/Cursor</item>
 
+        <item name="hintTextAppearance">@style/HintTextAppearanceV2</item>
+        <item name="boxStrokeColor">#fff</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="android:textColorHint"> @color/white</item>
+        <item name="hintTextColor"> @color/white</item>
+        <item name="hintEnabled">true</item>
+    </style>
+    <style name="Cursor" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/black</item>
+    </style>
+    <style name="HintTextAppearanceV2" parent="@android:style/TextAppearance">
+        <item name="android:textSize">20sp</item> <!-- floating hint text size -->
+    </style>
 
     <style name="LoginTheme" parent="FirebaseUI">
         <item name="android:layout_width">300dp</item>

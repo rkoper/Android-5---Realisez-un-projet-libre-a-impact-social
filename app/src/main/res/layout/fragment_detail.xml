@@ -135,7 +135,7 @@
                 app:srcCompat="@drawable/logo_info"
                 app:tint="@android:color/white"
                 android:backgroundTint="@color/grey_600"
-                app:backgroundTint="@color/red_300" />
+                app:backgroundTint="@color/yellow_900" />
 
 
             <TextView
@@ -268,7 +268,7 @@
                 app:srcCompat="@drawable/logo_check"
                 app:tint="@android:color/white"
                 android:backgroundTint="@color/grey_600"
-                app:backgroundTint="@color/red_300" />
+                app:backgroundTint="@color/yellow_900" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:elevation="10dp"
