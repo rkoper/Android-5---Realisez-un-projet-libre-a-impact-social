@@ -24,6 +24,8 @@ import com.firebase.ui.auth.AuthUI
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.so.dingbring.R
 import com.so.dingbring.Utils
 import com.so.dingbring.data.MyUserViewModel
@@ -152,10 +154,13 @@ class SettingsFragment : BaseFragment() {
 
 
     private fun loadLogOut() {
-        AuthUI.getInstance().signOut(requireContext()).addOnCompleteListener {
-            Toast.makeText(requireContext(), "Bye bye", Toast.LENGTH_SHORT).show()
+        Firebase.auth.signOut()
+        activity?.finish()
             val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intent) } }
+            startActivity(intent)
+
+
+    }
 
 
     private fun initProfil() {

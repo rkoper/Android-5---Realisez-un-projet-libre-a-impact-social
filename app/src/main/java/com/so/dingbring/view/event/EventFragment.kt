@@ -15,11 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
 import com.so.dingbring.view.base.BaseFragment
 import com.so.dingbring.view.login.LoginActivity
+import com.so.dingbring.view.main.ItemActivity
 import com.so.dingbring.view.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -44,13 +46,16 @@ class EventFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_event, container, false)
-        mIdUser = LoginActivity.mIdUser
+     mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+     println("mIdUser-------------event------------------->> " +mIdUser )
         return view }
 
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         mUserVM.getUserById(mIdUser).observe(requireActivity(), Observer { mlmu ->
             if (mlmu != null) {
                 mUserEvent = mlmu.mEventUser

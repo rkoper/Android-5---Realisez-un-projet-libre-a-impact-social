@@ -22,7 +22,7 @@ class ItemActivity : AppCompatActivity() {
     var mNameUser = " ..mNameUser.. "
     private var mEmailUser = "..mEmailUser.."
     private var mPhotoUser = "..mPhotoUser.."
-    private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var mIdUser  = "..////."
     private val mUserVM by viewModel<MyUserViewModel>()
     private var mclick = 0
 
@@ -32,6 +32,7 @@ class ItemActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_item)
         mclick = intent?.getIntExtra("msg", 99)!!
+        mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
         retrieveData()
         initClickOnItem(mclick)
         initBottomBar() }
@@ -75,12 +76,18 @@ class ItemActivity : AppCompatActivity() {
 
 
     private fun retrieveData() {
+        println("mIdUser----------------ItemAc---------------->> " +mIdUser )
         mUserVM.getUserById(mIdUser).observe(this,androidx.lifecycle.Observer { mlmu ->
             mIdUser  = mlmu.mUserId
             mNameUser  = mlmu.mNameUser
             mEmailUser  = mlmu.mEmailUser
             mPhotoUser  = mlmu.mPhotoUser
             mUserEvent = mlmu.mEventUser })
+    }
+
+
+    companion object {
+       var  mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
     }
 
 }

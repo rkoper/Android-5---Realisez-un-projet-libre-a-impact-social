@@ -51,6 +51,7 @@ class CalendarFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        println("mIdUser-------------Cal------------------->> " +mIdUser )
         mUserVM.getUserById(mIdUser).observe(requireActivity(), androidx.lifecycle.Observer { mlmu ->
                 if (mlmu != null) {
                     mUserEvent = mlmu.mEventUser

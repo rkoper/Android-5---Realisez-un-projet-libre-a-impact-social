@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     var mNameUser = " .... "
     private var mEmailUser = "...."
     private var mPhotoUser = "...."
-    private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private var mIdUser  = "..////."
     private var mNbUser = 0
     private val mUserVM by viewModel<MyUserViewModel>()
     private var mUserEvent = arrayListOf("", "")
@@ -48,35 +48,40 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
-
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
+
+        mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        println("mIdUser-------------Main------------------->> " +mIdUser )
         initDynamicLink()
         initUser()
         initItemClick() }
 
     private fun initItemClick() {
         val intent = Intent(this, ItemActivity::class.java)
-        intent.putExtra("GlobalIdUser", mIdUser)
-        card_t_event.setOnClickListener { intent.putExtra("msg", 1)
+
+        card_t_event.setOnClickListener {
+            intent.putExtra("msg", 1)
             startActivity(intent) }
 
-        card_t_create.setOnClickListener { intent.putExtra("msg", 2)
+        card_t_create.setOnClickListener {
+            intent.putExtra("msg", 2)
             startActivity(intent) }
 
-        card_t_calendar.setOnClickListener { intent.putExtra("msg", 3)
+        card_t_calendar.setOnClickListener {
+            intent.putExtra("msg", 3)
             startActivity(intent) }
 
-        card_t_setting.setOnClickListener { intent.putExtra("msg", 4)
+        card_t_setting.setOnClickListener {
+            intent.putExtra("msg", 4)
             startActivity(intent) }
     }
 
     private fun initUser() {
         if (mIdUser != "null") {
             mUserVM.getifNewUser(mIdUser)?.observe(this, androidx.lifecycle.Observer { condition ->
+                mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                println("Condiction-------------main------------------->> " +condition )
                 if (condition) {
 
                     mPhotoUser = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
@@ -93,6 +98,7 @@ class MainActivity : AppCompatActivity() {
                     createFireStoreUser()
 
                 } else {
+                    println("getUserById-------------main------------------->> " +mIdUser )
                     mUserVM.getUserById(mIdUser).observe(this, androidx.lifecycle.Observer { mlmu ->
                         mIdUser = mlmu.mUserId
                         mNameUser = mlmu.mNameUser
@@ -106,6 +112,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initHeader() {
+        println("mNameUser-------------main------------------->> " +mNameUser )
         card_t_profil_name.text = mNameUser
         goAnimText(card_t_profil_name)
         Glide.with(this).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_profil_photo)

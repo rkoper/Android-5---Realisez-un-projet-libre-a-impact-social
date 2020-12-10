@@ -32,12 +32,15 @@ class LoginActivity : AppCompatActivity() {
         initLang()
         showSignInOptions()
 
-
+/*
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser?.let{
             launchMainActivity()
         } ?: showSignInOptions()
 
+
+
+ */
 
 
     }
@@ -102,6 +105,8 @@ class LoginActivity : AppCompatActivity() {
         { mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
             val mIntent = Intent(this, MainActivity::class.java)
+
+            println("mIdUser-------------Login------------------->> " +mIdUser )
             mIntent.putExtra("GlobalIdUser", mIdUser)
             startActivity(mIntent)
 
@@ -109,12 +114,6 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-
-    companion object {
-
-        var mIdUser= FirebaseAuth.getInstance().currentUser?.uid.toString()
-
-    }
 
 
 }
