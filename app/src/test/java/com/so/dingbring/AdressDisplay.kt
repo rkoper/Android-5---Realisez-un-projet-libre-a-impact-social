@@ -1,6 +1,5 @@
 package com.so.dingbring
 
-import com.google.android.gms.common.util.ArrayUtils
 import org.junit.Assert
 import org.junit.Test
 
@@ -19,9 +18,9 @@ class AdressDisplay {
         var mStreetNumber = ""
         var mStreetName = ""
         var mCity = ""
-        var mDisplay = "12 Rue des Fripouilles, Paris"
+        val mDisplay = "12 Rue des Fripouilles, Paris"
 
-        var mAdressComp = mutableMapOf<String, String>()
+        val mAdressComp = mutableMapOf<String, String>()
         mAdressComp["street_number"] = "12"
         mAdressComp["route"] = "Rue des Fripouilles"
         mAdressComp["localityame"] = "Paris"

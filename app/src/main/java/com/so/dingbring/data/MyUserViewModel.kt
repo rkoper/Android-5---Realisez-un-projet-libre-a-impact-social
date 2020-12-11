@@ -2,16 +2,11 @@ package com.so.dingbring.data
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.provider.Settings.Global.getString
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.facebook.AccessToken
 import com.so.dingbring.R
-import com.so.dingbring.view.main.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel() {
 
@@ -45,19 +40,21 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
         mDataUser["NbCreateEventUser"] = i
         mUserRepository.createUser(mDataUser) }
 
-    fun SaveImage(mPhotoUser: String) : String {
+    fun saveImage(mPhotoUser: String) : String {
         var mImageUrl = ""
         val mPhotoUserSplit1 = mPhotoUser.split("//")
         val mPhotoUserSplit2 = mPhotoUserSplit1[1].split(".com/")
         val mPhotoUserSplit3 = mPhotoUserSplit2[0]
-        if (mPhotoUserSplit3 == "graph.facebook") {
+        mImageUrl = if (mPhotoUserSplit3 == "graph.facebook") {
             val token = AccessToken.getCurrentAccessToken().token
-             mImageUrl = "$mPhotoUser?access_token=$token" }
-        else {mImageUrl = mPhotoUser}
+            "$mPhotoUser?access_token=$token"
+        } else {
+            mPhotoUser
+        }
 
         return mImageUrl }
 
-    fun DisplayName(mNbUser: Int, mContext: Context) : String {
+    fun displayName(mNbUser: Int, mContext: Context) : String {
         var mProfilStatus = ""
         if(mNbUser in 0..4)     { mProfilStatus = mContext.getString(R.string.newbie) }
         if(mNbUser in 5..9)     { mProfilStatus = mContext.getString(R.string.beginner) }
@@ -68,7 +65,7 @@ class MyUserViewModel(private val mUserRepository: MyUserRepository): ViewModel(
         return mProfilStatus }
 
 
-    fun DisplayImg(mNbUser: Int, mContext: Context) : Drawable? {
+    fun displayImg(mNbUser: Int, mContext: Context) : Drawable? {
         var mProfilStatusImg  = ContextCompat.getDrawable(mContext, R.drawable.medalone)
 
         if(mNbUser in 0..4)   { mProfilStatusImg = ContextCompat.getDrawable(mContext, R.drawable.medalone)!! }

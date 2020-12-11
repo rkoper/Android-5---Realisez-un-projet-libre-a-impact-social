@@ -1,4 +1,4 @@
-package com.so.dingbring.view.main
+package com.so.dingbring.view.activity
 
 
 import android.annotation.SuppressLint
@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.FirebaseApp
@@ -20,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.so.dingbring.R
-import com.so.dingbring.R.drawable.*
 import com.so.dingbring.data.MyUserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.card_t_calendar
@@ -28,13 +26,11 @@ import kotlinx.android.synthetic.main.activity_main.card_t_create
 import kotlinx.android.synthetic.main.activity_main.card_t_event
 import kotlinx.android.synthetic.main.activity_main.card_t_profil_name
 import kotlinx.android.synthetic.main.activity_main.card_t_setting
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mDrawable: Drawable
     var mNameUser = " .... "
     private var mEmailUser = "...."
     private var mPhotoUser = "...."
@@ -52,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-        println("mIdUser-------------Main------------------->> " +mIdUser )
+        println("mIdUser-------------Main------------------->> $mIdUser")
         initDynamicLink()
         initUser()
         initItemClick() }
@@ -81,14 +77,16 @@ class MainActivity : AppCompatActivity() {
         if (mIdUser != "null") {
             mUserVM.getifNewUser(mIdUser)?.observe(this, androidx.lifecycle.Observer { condition ->
                 mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
-                println("Condiction-------------main------------------->> " +condition )
+                println("Condiction-------------main------------------->> $condition")
                 if (condition) {
 
                     mPhotoUser = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
 
-                    if (mPhotoUser == "null") { mPhotoUser = "https://i.ibb.co/7YHdHKt/C7.png"}
-
-                    else { mPhotoUser =   mUserVM.SaveImage(mPhotoUser) }
+                    mPhotoUser = if (mPhotoUser == "null") {
+                        "https://i.ibb.co/7YHdHKt/C7.png"
+                    } else {
+                        mUserVM.saveImage(mPhotoUser)
+                    }
 
                     mNameUser = FirebaseAuth.getInstance().currentUser?.displayName.toString()
                     mEmailUser = FirebaseAuth.getInstance().currentUser?.email.toString()
@@ -98,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                     createFireStoreUser()
 
                 } else {
-                    println("getUserById-------------main------------------->> " +mIdUser )
+                    println("getUserById-------------main------------------->> $mIdUser")
                     mUserVM.getUserById(mIdUser).observe(this, androidx.lifecycle.Observer { mlmu ->
                         mIdUser = mlmu.mUserId
                         mNameUser = mlmu.mNameUser
@@ -112,7 +110,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initHeader() {
-        println("mNameUser-------------main------------------->> " +mNameUser )
+        println("mNameUser-------------main------------------->> $mNameUser")
         card_t_profil_name.text = mNameUser
         goAnimText(card_t_profil_name)
         Glide.with(this).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_profil_photo)
@@ -123,8 +121,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initMedal() {
-        Glide.with(this).load( mUserVM.DisplayImg(mNbUser,this)).apply(RequestOptions.circleCropTransform()).into(main_medal)
-        card_t_profil_status.text = mUserVM.DisplayName(mNbUser, this)
+        Glide.with(this).load( mUserVM.displayImg(mNbUser,this)).apply(RequestOptions.circleCropTransform()).into(main_medal)
+        card_t_profil_status.text = mUserVM.displayName(mNbUser, this)
         goAnimImage(main_medal) }
 
 

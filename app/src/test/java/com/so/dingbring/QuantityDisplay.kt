@@ -1,7 +1,5 @@
 package com.so.dingbring
 
-import com.google.android.gms.common.util.ArrayUtils
-import kotlinx.android.synthetic.main.fragment_detail.*
 import org.junit.Assert
 import org.junit.Test
 

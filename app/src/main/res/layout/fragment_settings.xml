@@ -136,7 +136,7 @@
                 <ImageView
                     android:background="@drawable/round"
                     android:backgroundTint="@color/black"
-
+                    android:contentDescription="@string/photo_profil"
                     android:layout_gravity="left|center_vertical"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -145,9 +145,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/guideline11"
                     app:layout_constraintBottom_toTopOf="@+id/guideline11"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/card_t_settings_name"/>
+                    app:layout_constraintEnd_toStartOf="@+id/card_t_settings_name"
+                    tools:targetApi="lollipop" />
 
                 <ImageView
+                    android:contentDescription="@string/photo_profil"
                     android:background="@drawable/round"
                     android:backgroundTint="@color/white"
                     app:layout_constraintTop_toBottomOf="@+id/guideline11"
@@ -159,7 +161,8 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:scaleType="fitXY"
-                    tools:ignore="RtlHardcoded" />
+                    tools:ignore="RtlHardcoded"
+                    tools:targetApi="lollipop" />
                 <TextView
                     android:textSize="28sp"
                     style="@style/TxtViewPrincipalBlackv2"
@@ -189,6 +192,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:layout_gravity="center|bottom" />
                 <ImageView
+                    android:contentDescription="@string/historic_symbol"
                     style="@style/TxtViewPrincipalBlack"
                     app:layout_constraintTop_toTopOf="@+id/card_t_settings_status"
                     app:layout_constraintBottom_toBottomOf="@+id/card_t_settings_status"
@@ -231,6 +235,7 @@
                 >
 
                 <ImageView
+                    android:contentDescription="@string/settings"
                     android:padding="10dp"
                     android:layout_weight="3"
                     android:layout_width="match_parent"
@@ -275,6 +280,7 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
                 <ImageView
+                    android:contentDescription="@string/profil"
                     android:padding="10dp"
                     android:layout_weight="3"
                     android:id="@+id/img__speakers"
@@ -321,6 +327,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:contentDescription="@string/contact_us"
                     android:padding="10dp"
                     android:layout_weight="3"
                     android:layout_width="match_parent"
@@ -365,6 +372,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:contentDescription="@string/language"
                     android:padding="10dp"
                     android:layout_weight="3"
                     android:layout_width="match_parent"

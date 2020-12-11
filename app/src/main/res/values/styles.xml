@@ -139,7 +139,7 @@
 
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">2dp</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="colorControlActivated">@color/white</item>
         <item name="android:textColorHint"> @color/white</item>
         <item name="hintTextColor"> @color/white</item>
@@ -153,7 +153,7 @@
         <item name="hintTextAppearance">@style/HintTextAppearance</item>
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">2dp</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="colorControlActivated">@color/white</item>
         <item name="android:textColorHint"> @color/white</item>
         <item name="hintTextColor"> @color/white</item>
@@ -169,7 +169,7 @@
         <item name="hintTextAppearance">@style/HintTextAppearanceV2</item>
         <item name="boxStrokeColor">#fff</item>
         <item name="boxStrokeWidth">2dp</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="colorControlActivated">@color/white</item>
         <item name="android:textColorHint"> @color/white</item>
         <item name="hintTextColor"> @color/white</item>

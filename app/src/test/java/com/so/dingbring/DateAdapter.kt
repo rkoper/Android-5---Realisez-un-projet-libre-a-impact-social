@@ -1,6 +1,5 @@
 package com.so.dingbring
 
-import com.google.android.gms.common.util.ArrayUtils
 import org.junit.Assert
 import org.junit.Test
 
@@ -11,8 +10,8 @@ import org.junit.Test
  */
 class DateAdapter {
 
-    val mResult = "20200101"
-    val data = arrayListOf("Test", "01/01/2020", "Test2", "Test3")
+    private val mResult = "20200101"
+    private val data = arrayListOf("Test", "01/01/2020", "Test2", "Test3")
     @Test
     fun dataAdapter() {
     val newDate = data[1].split("/")

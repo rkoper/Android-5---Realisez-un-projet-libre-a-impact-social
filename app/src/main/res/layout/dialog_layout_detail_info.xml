@@ -1,5 +1,6 @@
  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -109,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:textSize="22sp"
                 android:textColor="@color/white"
-                android:text="12345"
+                android:text=" "
                 style="@style/TxtViewPrincipalWhitev3"
                 android:id="@+id/dialog_det_info_nameevent"
                 android:layout_width="0dp"
@@ -313,7 +314,9 @@
                 app:layout_constraintTop_toTopOf="@id/dialog_det_info_h_81"
                 app:maxImageSize="22dp"
                 app:srcCompat="@drawable/logo_add"
-                app:tint="@android:color/white" />
+                app:tint="@android:color/white"
+                android:contentDescription="@string/cancel"
+                tools:targetApi="lollipop" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

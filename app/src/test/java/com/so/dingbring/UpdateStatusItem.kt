@@ -1,7 +1,5 @@
 package com.so.dingbring
 
-import com.google.android.gms.common.util.ArrayUtils
-import kotlinx.android.synthetic.main.fragment_detail.*
 import org.junit.Assert
 import org.junit.Test
 
@@ -20,15 +18,18 @@ class UpdateStatusItem {
         var mIdItem = "XXX-XXX-XXX"
 
 
-        var mData = HashMap<Int, String>()
+        val mData = HashMap<Int, String>()
         mData[0] = "I bring"
 
        if (mData.containsKey(0)) {
            mFireSend = mData[0].toString()
 
-            if (mFireSend == "I bring" )
-                {mFireNewValue = "I bring"}
-            else {mFireNewValue =  "I need"}}
+           mFireNewValue = if (mFireSend == "I bring" ) {
+               "I bring"
+           } else {
+               "I need"
+           }
+       }
 
         Assert.assertEquals(mFireNewValue, mFireSend)
     }

@@ -1,7 +1,5 @@
 package com.so.dingbring
 
-import android.widget.Toast
-import com.google.android.gms.common.util.ArrayUtils
 import org.junit.Assert
 import org.junit.Test
 
@@ -13,7 +11,7 @@ import org.junit.Test
 class DynamicLink {
     @Test
     fun dynamicLink() {
-        var pendingDynamicLinkData = "https://dingbring.page.link/?apn=com.so.dingbring&link=https%3A%2F%2Fdingbring.page.link%2Fb8a2b31c-4f56-4c9b-9947-fcb07e0b61e7"
+        val pendingDynamicLinkData = "https://dingbring.page.link/?apn=com.so.dingbring&link=https%3A%2F%2Fdingbring.page.link%2Fb8a2b31c-4f56-4c9b-9947-fcb07e0b61e7"
         val mResult = "2Fb8a2b31c-4f56-4c9b-9947-fcb07e0b61e7"
 
         val deepLink = pendingDynamicLinkData

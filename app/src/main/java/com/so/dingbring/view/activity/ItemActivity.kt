@@ -1,4 +1,4 @@
-package com.so.dingbring.view.main
+package com.so.dingbring.view.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,17 +6,18 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.Navigation
+import com.gauravk.bubblenavigation.BubbleNavigationLinearView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyUserViewModel
 import kotlinx.android.synthetic.main.activity_item.*
-import kotlinx.coroutines.withContext
 import org.koin.android.viewmodel.ext.android.viewModel
-import kotlin.coroutines.coroutineContext
 
 
 class ItemActivity : AppCompatActivity() {
@@ -27,6 +28,8 @@ class ItemActivity : AppCompatActivity() {
     private var mIdUser  = "..////."
     private val mUserVM by viewModel<MyUserViewModel>()
     private var mclick = 0
+    private var mTxtNoEventYet : TextView? = null
+
 
     @SuppressLint("WrongConstant", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +38,24 @@ class ItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_item)
         mclick = intent?.getIntExtra("msg", 99)!!
         mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
+
+        mTxtNoEventYet = this.findViewById(R.id.item_no_event_yet)
+
+
         retrieveData()
         initClickOnItem(mclick)
         initBottomBar() }
+
+    private fun retrieveData() {
+        println("mIdUser----------------ItemAc---------------->> $mIdUser")
+        mUserVM.getUserById(mIdUser).observe(this,androidx.lifecycle.Observer { mlmu ->
+            mIdUser  = mlmu.mUserId
+            mNameUser  = mlmu.mNameUser
+            mEmailUser  = mlmu.mEmailUser
+            mPhotoUser  = mlmu.mPhotoUser
+            mUserEvent = mlmu.mEventUser })
+    }
 
     private fun initBottomBar() {
         float_bottom_bar.visibility = View.VISIBLE
@@ -76,16 +94,6 @@ class ItemActivity : AppCompatActivity() {
         item_tb_fb_action.visibility = mVisible
     }
 
-
-    private fun retrieveData() {
-        println("mIdUser----------------ItemAc---------------->> " +mIdUser )
-        mUserVM.getUserById(mIdUser).observe(this,androidx.lifecycle.Observer { mlmu ->
-            mIdUser  = mlmu.mUserId
-            mNameUser  = mlmu.mNameUser
-            mEmailUser  = mlmu.mEmailUser
-            mPhotoUser  = mlmu.mPhotoUser
-            mUserEvent = mlmu.mEventUser })
-    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.so.dingbring.view.settings
+package com.so.dingbring.view.fragment
 
 import android.app.Dialog
 import android.content.Intent
@@ -20,7 +20,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.firebase.ui.auth.AuthUI
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -29,9 +28,8 @@ import com.google.firebase.ktx.Firebase
 import com.so.dingbring.R
 import com.so.dingbring.Utils
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.base.BaseFragment
-import com.so.dingbring.view.login.LoginActivity
-import com.so.dingbring.view.main.MainActivity
+import com.so.dingbring.view.activity.LoginActivity
+import com.so.dingbring.view.activity.MainActivity
 import kotlinx.android.synthetic.main.dialog_layout_contact.*
 import kotlinx.android.synthetic.main.dialog_layout_language.*
 import kotlinx.android.synthetic.main.dialog_layout_profil.*
@@ -44,9 +42,9 @@ class SettingsFragment : BaseFragment() {
     private lateinit var locale: Locale
     private var mCurrentLanguage :String? = ""
     private var mCurrentLang = ""
-    private lateinit var d_contact:Dialog
-    private lateinit var d_profil:Dialog
-    private lateinit var d_lang:Dialog
+    private lateinit var mDContact:Dialog
+    private lateinit var mDProfil:Dialog
+    private lateinit var mDLang:Dialog
     var mNameUser = "..."
     private var mEmailUser = "..."
     private var mPhotoUser = "..."
@@ -57,9 +55,7 @@ class SettingsFragment : BaseFragment() {
     private var PRIVATEMODE = 0
     private val PREFNAME = "-"
     private lateinit var sharedPref:SharedPreferences
-    private lateinit var mDrawable: Drawable
-    private var mFloat_back : FloatingActionButton? = null
-    private var mTxtNoEventYet : TextView? = null
+    private var mFloatBack : FloatingActionButton? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,8 +68,6 @@ class SettingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
-        mTxtNoEventYet?.visibility = View.INVISIBLE
 
 
         mPosBottomBar = activity?.findViewById(R.id.float_bottom_bar)
@@ -86,8 +80,8 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun onBackBarPressed() {
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.setOnClickListener {
+        mFloatBack = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloatBack?.setOnClickListener {
             navToHome() } }
 
     private fun onBackPressed() {
@@ -124,37 +118,37 @@ class SettingsFragment : BaseFragment() {
 
     private fun initMedal(mNbUser: Int) {
 
-            card_t_settings_status.text = mUserVM.DisplayName(mNbUser, requireActivity())
-            Glide.with(this).load( mUserVM.DisplayImg(mNbUser,requireActivity())).apply(RequestOptions.circleCropTransform()).into(settings_medal)
+            card_t_settings_status.text = mUserVM.displayName(mNbUser, requireActivity())
+            Glide.with(this).load( mUserVM.displayImg(mNbUser,requireActivity())).apply(RequestOptions.circleCropTransform()).into(settings_medal)
     }
 
 
 
     private fun loadProfil() {
-        d_profil= Dialog(requireContext())
-        d_profil.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        d_profil.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        d_profil.setContentView(R.layout.dialog_layout_profil)
-        d_profil.setting_profil_edit.hint = mNameUser
-        d_profil.show()
+        mDProfil= Dialog(requireContext())
+        mDProfil.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        mDProfil.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mDProfil.setContentView(R.layout.dialog_layout_profil)
+        mDProfil.setting_profil_edit.hint = mNameUser
+        mDProfil.show()
         initProfil() }
 
 
     private fun loadLanguage() {
-        d_lang= Dialog(requireContext())
-        d_lang.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        d_lang.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        d_lang.setContentView(R.layout.dialog_layout_language)
-        d_lang.show()
+        mDLang= Dialog(requireContext())
+        mDLang.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        mDLang.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mDLang.setContentView(R.layout.dialog_layout_language)
+        mDLang.show()
         initLang()
-        d_lang.settings_cancel_lang.setOnClickListener { d_lang.dismiss() } }
+        mDLang.settings_cancel_lang.setOnClickListener { mDLang.dismiss() } }
 
     private fun loadContact() {
-        d_contact = Dialog(requireContext())
-        d_contact.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        d_contact.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        d_contact.setContentView(R.layout.dialog_layout_contact)
-        d_contact.show()
+        mDContact = Dialog(requireContext())
+        mDContact.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        mDContact.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mDContact.setContentView(R.layout.dialog_layout_contact)
+        mDContact.show()
         initContact() }
 
 
@@ -169,8 +163,8 @@ class SettingsFragment : BaseFragment() {
 
 
     private fun initProfil() {
-        d_profil.setting_profil_edit.hint = ""
-        Glide.with(requireContext()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(d_profil.dialog_setting_img_profil)
+        mDProfil.setting_profil_edit.hint = ""
+        Glide.with(requireContext()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(mDProfil.dialog_setting_img_profil)
         editprofil() }
 
 
@@ -178,47 +172,47 @@ class SettingsFragment : BaseFragment() {
         sharedPref = requireActivity().getSharedPreferences(PREFNAME, PRIVATEMODE)
         mCurrentLanguage =  sharedPref.getString("localeName","en")
         if (mCurrentLanguage=="en") {
-            changecolor(d_lang.setting_en)
-            d_lang.dialog_lang_current_lang.text = getString(R.string.eng) }
+            changecolor(mDLang.setting_en)
+            mDLang.dialog_lang_current_lang.text = getString(R.string.eng) }
         if (mCurrentLanguage=="fr") {
-            changecolor(d_lang.setting_fr)
-            d_lang.dialog_lang_current_lang.text = getString(R.string.fra) }
+            changecolor(mDLang.setting_fr)
+            mDLang.dialog_lang_current_lang.text = getString(R.string.fra) }
         if (mCurrentLanguage=="es") {
-            changecolor(d_lang.setting_sp)
-            d_lang.dialog_lang_current_lang.text = getString(R.string.spa) }
+            changecolor(mDLang.setting_sp)
+            mDLang.dialog_lang_current_lang.text = getString(R.string.spa) }
         if (mCurrentLanguage=="pt") {
-            changecolor(d_lang.setting_pt)
-            d_lang.dialog_lang_current_lang.text = getString(R.string.pot) }
+            changecolor(mDLang.setting_pt)
+            mDLang.dialog_lang_current_lang.text = getString(R.string.pot) }
         goLanguage() }
 
 
 
     private fun initcolor() {
-        d_lang.setting_en.setBackgroundColor(Color.GRAY)
-        d_lang.setting_en.setTextColor(Color.WHITE)
-        d_lang.setting_fr.setBackgroundColor(Color.GRAY)
-        d_lang.setting_fr.setTextColor(Color.WHITE)
-        d_lang.setting_sp.setBackgroundColor(Color.GRAY)
-        d_lang.setting_sp.setTextColor(Color.WHITE)
-        d_lang.setting_pt.setBackgroundColor(Color.GRAY)
-        d_lang.setting_pt.setTextColor(Color.WHITE)
+        mDLang.setting_en.setBackgroundColor(Color.GRAY)
+        mDLang.setting_en.setTextColor(Color.WHITE)
+        mDLang.setting_fr.setBackgroundColor(Color.GRAY)
+        mDLang.setting_fr.setTextColor(Color.WHITE)
+        mDLang.setting_sp.setBackgroundColor(Color.GRAY)
+        mDLang.setting_sp.setTextColor(Color.WHITE)
+        mDLang.setting_pt.setBackgroundColor(Color.GRAY)
+        mDLang.setting_pt.setTextColor(Color.WHITE)
         }
 
     private fun changecolor(mTxtLang: TextView?) {
         initcolor()
         mTxtLang?.setBackgroundColor(resources.getColor(R.color.orange_300))
         mTxtLang?.setTextColor(Color.BLACK)
-        d_lang.dialog_lang_current_lang.text = mCurrentLang }
+        mDLang.dialog_lang_current_lang.text = mCurrentLang }
 
 
     private fun goLanguage( ) {
-            d_lang.setting_en.setOnClickListener { upadateColor(d_lang.setting_en, R.string.eng)
+            mDLang.setting_en.setOnClickListener { upadateColor(mDLang.setting_en, R.string.eng)
                 setLocale("en") }
-            d_lang.setting_fr.setOnClickListener { upadateColor(d_lang.setting_fr, R.string.fra)
+            mDLang.setting_fr.setOnClickListener { upadateColor(mDLang.setting_fr, R.string.fra)
                 setLocale("fr") }
-            d_lang.setting_sp.setOnClickListener { upadateColor(d_lang.setting_sp, R.string.spa)
+            mDLang.setting_sp.setOnClickListener { upadateColor(mDLang.setting_sp, R.string.spa)
                 setLocale("es") }
-            d_lang.setting_pt.setOnClickListener { upadateColor(d_lang.setting_pt, R.string.pot)
+            mDLang.setting_pt.setOnClickListener { upadateColor(mDLang.setting_pt, R.string.pot)
                 setLocale("pt") }
     }
 
@@ -226,11 +220,11 @@ class SettingsFragment : BaseFragment() {
         initcolor()
         mTxtLang?.setBackgroundColor(resources.getColor(R.color.orange_300))
         mTxtLang?.setTextColor(Color.BLACK)
-        d_lang.dialog_lang_current_lang.text = getString(lang) }
+        mDLang.dialog_lang_current_lang.text = getString(lang) }
 
 
     private fun setLocale(localeName: String) {
-        d_lang.settings_check_lang.setOnClickListener {
+        mDLang.settings_check_lang.setOnClickListener {
             if (localeName != mCurrentLang) {
              locale = Locale(localeName)
              val res = resources
@@ -246,12 +240,12 @@ class SettingsFragment : BaseFragment() {
                 val intent = Intent (activity, MainActivity::class.java)
                 activity?.startActivity(intent) }
          else { Toast.makeText(requireContext(), "Language, , already, , selected)!", Toast.LENGTH_SHORT).show() }
-    d_lang.dismiss() } }
+    mDLang.dismiss() } }
 
     private fun editprofil() {
         val mMapPhoto = HashMap<String, ImageView>()
         val mLstDrawable = Utils.listDrawable()
-        val mLstImageV = Utils.listImageV(d_profil)
+        val mLstImageV = Utils.listImageV(mDProfil)
         for (i in 0..6) { mMapPhoto[mLstDrawable[i]] = mLstImageV[i] }
         mMapPhoto.forEach { map -> loadUserChange(map) } }
 
@@ -261,30 +255,30 @@ class SettingsFragment : BaseFragment() {
                 Glide.with(requireContext()).load(map.key).apply(RequestOptions.circleCropTransform()).into(map.value)
 
                 map.value.setOnClickListener {
-                    Glide.with(requireContext()).load(key).apply(RequestOptions.circleCropTransform()).into(d_profil.dialog_setting_img_profil)
+                    Glide.with(requireContext()).load(key).apply(RequestOptions.circleCropTransform()).into(mDProfil.dialog_setting_img_profil)
                     mPhotoUser = key }
 
 
-                d_profil.setting_profil_edit.doOnTextChanged { text, start, before, count ->
-                    if (start > 1) { mNameUser = d_profil.setting_profil_edit.text.toString() } }
+                mDProfil.setting_profil_edit.doOnTextChanged { text, start, before, count ->
+                    if (start > 1) { mNameUser = mDProfil.setting_profil_edit.text.toString() } }
                 saveNewUserInfo() }
 
             private fun saveNewUserInfo() {
-                d_profil.settings_check.setOnClickListener {
+                mDProfil.settings_check.setOnClickListener {
                     card_t_settings_name.text = mNameUser
 
                     Glide.with(requireActivity()).load(mPhotoUser).apply(RequestOptions.circleCropTransform()).into(card_t_settings_photo)
                     mUserVM.updateUserName(mIdUser, mNameUser)
                     mUserVM.updateUserPhoto(mIdUser, mPhotoUser)
-                    d_profil.dismiss() }
+                    mDProfil.dismiss() }
 
-                d_profil.settings_cancel.setOnClickListener { d_profil.dismiss() } }
+                mDProfil.settings_cancel.setOnClickListener { mDProfil.dismiss() } }
 
     private fun initContact() {
-        d_contact.settings_send_mail.setOnClickListener {
+        mDContact.settings_send_mail.setOnClickListener {
         val recipient = "sofianem75018@gmail.com"
-        val subject = d_contact.custom_dialog_subject.text.toString().trim()
-        val message = d_contact.custom_dialog_message.text.toString().trim()
+        val subject = mDContact.custom_dialog_subject.text.toString().trim()
+        val message = mDContact.custom_dialog_message.text.toString().trim()
         val mIntent = Intent(Intent.ACTION_SEND)
         mIntent.data = Uri.parse("mailto:")
         mIntent.type = "text/plain"
@@ -294,7 +288,7 @@ class SettingsFragment : BaseFragment() {
             try { startActivity(Intent.createChooser(mIntent, "Choose Email Client...")) }
             catch (e: Exception) { Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show() }}
 
-        d_contact.settings_cancel_mail.setOnClickListener { d_contact.dismiss()}
+        mDContact.settings_cancel_mail.setOnClickListener { mDContact.dismiss()}
 
 
     }

@@ -1,4 +1,4 @@
-package com.so.dingbring.view.calendar
+package com.so.dingbring.view.adapter
 
 
 import android.content.Context
@@ -30,7 +30,8 @@ class CalendarAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.calendar_item, parent, false)
-        return MonthCalendarViewHolder(view) }
+        return MonthCalendarViewHolder(view)
+    }
 
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,

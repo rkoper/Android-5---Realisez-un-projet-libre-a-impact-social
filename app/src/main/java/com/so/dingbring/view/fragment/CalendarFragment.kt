@@ -1,4 +1,4 @@
-package com.so.dingbring.view.calendar
+package com.so.dingbring.view.fragment
 
 import android.app.Dialog
 import android.graphics.Color
@@ -12,18 +12,15 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.base.BaseFragment
+import com.so.dingbring.view.adapter.CalendarAdapter
 import com.tejpratapsingh.recyclercalendar.model.RecyclerCalendarConfiguration
 import kotlinx.android.synthetic.main.dialog_layout_calendar.*
-import kotlinx.android.synthetic.main.dialog_layout_detail_info.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
@@ -41,7 +38,7 @@ class CalendarFragment : BaseFragment() {
     private var mIdUser = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private var mUserEvent = arrayListOf("", "")
     private var mPosBottomBar: BubbleNavigationLinearView? = null
-    private var mFloat_back : FloatingActionButton? = null
+    private var mFloatBack : FloatingActionButton? = null
     private var mTxtNoEventYet : TextView? = null
 
 
@@ -64,8 +61,8 @@ class CalendarFragment : BaseFragment() {
     }
 
     private fun onBackBarPressed() {
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.setOnClickListener { navToHome() }
+        mFloatBack = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloatBack?.setOnClickListener { navToHome() }
     }
 
     private fun onBackPressed() {
@@ -98,9 +95,18 @@ class CalendarFragment : BaseFragment() {
             true)
 
         val calendarRecyclerView = calendarRecyclerView
-        val calendarAdapterVertical = CalendarAdapter(requireContext(), startCal.time, endCal.time, configuration, mDataEvent,
-            object : CalendarAdapter.OnDateSelected {
-                override fun onDateSelected(datalist: MutableList<String>) { createAlert(datalist) } })
+        val calendarAdapterVertical =
+            CalendarAdapter(requireContext(),
+                startCal.time,
+                endCal.time,
+                configuration,
+                mDataEvent,
+                object :
+                    CalendarAdapter.OnDateSelected {
+                    override fun onDateSelected(datalist: MutableList<String>) {
+                        createAlert(datalist)
+                    }
+                })
         calendarRecyclerView.adapter = calendarAdapterVertical
         loadRV(calendarAdapterVertical)
 

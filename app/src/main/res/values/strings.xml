@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">>dingbring</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb3481097821967676</string>
     <string name="facebook_application_id" translatable="false">3481097821967676</string>
+
     <string name="_1" translatable="false">1</string>
     <string name="eng" translatable="false">English</string>
     <string name="fra" translatable="false">Français</string>
@@ -9,6 +10,29 @@
     <string name="pot" translatable="false" >Português</string>
     <string name="home" translatable="false" >Home</string>
     <string name="dingbring_1_0" translatable="false">DingBring 1.0</string>
+    <string name="bottom_bar" translatable="false" >Bottom bar</string>
+    <string name="top_bar" translatable="false">Top bar</string>
+    <string name="back_button" translatable="false">back button</string>
+    <string name="photo_profil" translatable="false">photo profil</string>
+<string name="historic_symbol" translatable="false">historic symbol</string>
+<string name="day" translatable="false">day</string>
+<string name="warning" translatable="false">warning</string>
+<string name="edit" translatable="false">edit</string>
+<string name="minus" translatable="false">minus</string>
+<string name="plus" translatable="false">plus</string>
+<string name="delete" translatable="false">delete</string>
+<string name="cancel" translatable="false">Cancel</string>
+<string name="see" translatable="false">see</string>
+<string name="send" translatable="false">send</string>
+<string name="yes" translatable="false">yes</string>
+<string name="no" translatable="false">no</string>
+<string name="save" translatable="false">save</string>
+<string name="item" translatable="false">item</string>
+<string name="info" translatable="false">information</string>
+<string name="add" translatable="false">add</string>
+    <string name="article"  translatable="false">article</string>
+
+
 
     <string name="english">English</string>
     <string name="french">French</string>
@@ -42,7 +66,6 @@
     <string name="i_need">I need</string>
     <string name="event">Event</string>
     <string name="detail">Detail</string>
-    <string name="test">Calendar</string>
     <string name="or">Or</string>
 
 
@@ -56,7 +79,6 @@
     <string name="message">Message</string>
     <string name="subject">Subject</string>
     <string name="new_name">New name</string>
-
 
 
 </resources>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/event_fragment"
-        android:name="com.so.dingbring.view.event.EventFragment"
+        android:name="com.so.dingbring.view.fragment.EventFragment"
         android:label="fragment_event"
         tools:layout="@layout/fragment_event" >
         <action
@@ -26,14 +26,14 @@
 
     <fragment
         android:id="@+id/create_Fragment"
-        android:name="com.so.dingbring.view.create.CreateFragment"
+        android:name="com.so.dingbring.view.fragment.CreateFragment"
         android:label="fragment_image"
         tools:layout="@layout/fragment_create" />
 
 
     <fragment
         android:id="@+id/detail_Fragment"
-        android:name="com.so.dingbring.view.detail.DetailFragment"
+        android:name="com.so.dingbring.view.fragment.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
     </fragment>
@@ -41,7 +41,7 @@
 
     <fragment
         android:id="@+id/calendar_fragment"
-        android:name="com.so.dingbring.view.calendar.CalendarFragment"
+        android:name="com.so.dingbring.view.fragment.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" >
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="com.so.dingbring.view.settings.SettingsFragment"
+        android:name="com.so.dingbring.view.fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 

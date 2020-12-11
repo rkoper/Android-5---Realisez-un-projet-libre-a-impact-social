@@ -1,6 +1,5 @@
 package com.so.dingbring
 
-import com.google.android.gms.common.util.ArrayUtils
 import org.junit.Assert
 import org.junit.Test
 

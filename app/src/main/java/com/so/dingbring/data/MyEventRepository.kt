@@ -9,7 +9,6 @@ import kotlin.collections.HashMap
 
 class MyEventRepository {
 
-    private var mEventSet: MutableLiveData<MutableList<MyEvent>> = MutableLiveData()
     private var mEventDate: String? = ""
     private var mEventName: String? = ""
     private var mEventAdress: String? = ""

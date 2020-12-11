@@ -32,7 +32,6 @@
     <string name="i_need">Necesito</string>
     <string name="event">Evento</string>
     <string name="detail">Detail</string>
-    <string name="test">Calendar</string>
     <string name="description">Descripcion</string>
     <string name="event_name">Nombre del evento</string>
     <string name="organizer">Organizador</string>
@@ -42,6 +41,6 @@
     <string name="message">Mensaje</string>
     <string name="subject">Tema</string>
     <string name="new_name">Nuevo nombre</string>
-    <string name="or" translatable="false">O</string>
+    <string name="or" >O</string>
 
 </resources>

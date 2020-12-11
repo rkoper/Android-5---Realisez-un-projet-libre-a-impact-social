@@ -1,6 +1,5 @@
 package com.so.dingbring
 
-import com.google.android.gms.common.util.ArrayUtils
 import org.junit.Assert
 import org.junit.Test
 
@@ -12,7 +11,7 @@ import org.junit.Test
 class IconDisplay {
     @Test
     fun iconDisplay() {
-        var mNbUser = 12
+        val mNbUser = 12
         var mProfilStatus = ""
         val mResult = "intermediate"
 

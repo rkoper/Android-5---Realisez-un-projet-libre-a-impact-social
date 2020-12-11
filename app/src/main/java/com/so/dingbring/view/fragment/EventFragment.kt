@@ -1,4 +1,4 @@
-package com.so.dingbring.view.event
+package com.so.dingbring.view.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,13 +19,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.base.BaseFragment
-import com.so.dingbring.view.login.LoginActivity
-import com.so.dingbring.view.main.ItemActivity
-import com.so.dingbring.view.main.MainActivity
+import com.so.dingbring.view.adapter.EventAdapter
+import com.so.dingbring.view.activity.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_event.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class EventFragment : BaseFragment() {
@@ -38,7 +34,7 @@ class EventFragment : BaseFragment() {
     var mNameUser = "///"
     private var mIdUser = "////"
     private var mUserEvent = arrayListOf("", "")
-    private var mFloat_back : FloatingActionButton? = null
+    private var mFloatBack : FloatingActionButton? = null
     private var mTxtNoEventYet : TextView? = null
     private var mPosBottomBar: BubbleNavigationLinearView? = null
 
@@ -63,6 +59,7 @@ class EventFragment : BaseFragment() {
 
                 if (mUserEvent.isEmpty())
                 {
+
                     mTxtNoEventYet = activity?.findViewById(R.id.item_no_event_yet)
                     mTxtNoEventYet?.visibility = View.VISIBLE
 
@@ -74,8 +71,8 @@ class EventFragment : BaseFragment() {
     }
 
     private fun onBackBarPressed() {
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.setOnClickListener {
+        mFloatBack = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloatBack?.setOnClickListener {
             navToMain()
         }
     }
@@ -97,7 +94,10 @@ class EventFragment : BaseFragment() {
     @SuppressLint("CheckResult")
     private fun initRV() {
         val mRecyclerView = view?.findViewById<RecyclerView>(R.id.recyclerview_event)
-        mEventAdapter = EventAdapter(requireActivity(), mDataEvent)
+        mEventAdapter = EventAdapter(
+            requireActivity(),
+            mDataEvent
+        )
         mRecyclerView?.setHasFixedSize(true)
         mRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
         mRecyclerView?.adapter = mEventAdapter

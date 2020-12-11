@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -116,6 +117,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/dialog_setting_img_profil"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -124,7 +126,8 @@
             app:layout_constraintTop_toTopOf="@+id/dialog_profil_h_25"
             app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_4"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:targetApi="lollipop" />
         <TextView
             android:textSize="16sp"
             style="@style/TxtViewPrincipalBlack"
@@ -138,6 +141,7 @@
             android:text="@string/change_your_profile_picture"/>
 
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/setting_img_profil_1"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -145,9 +149,11 @@
             android:backgroundTint="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55"
             app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_2"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:targetApi="lollipop" />
 
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/setting_img_profil_2"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -155,8 +161,10 @@
             android:backgroundTint="@color/black"
             app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_1"
             app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_3"
-            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55" />
+            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55"
+            tools:targetApi="lollipop" />
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/setting_img_profil_3"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -164,8 +172,10 @@
             android:backgroundTint="@color/black"
             app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_2"
             app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_4"
-            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55" />
+            app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55"
+            tools:targetApi="lollipop" />
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/setting_img_profil_4"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -173,8 +183,10 @@
             android:backgroundTint="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/dialog_profil_h_55"
             app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_3"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            tools:targetApi="lollipop" />
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/setting_img_profil_5"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -182,7 +194,8 @@
             android:backgroundTint="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/dialog_profil_h_65"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_6"/>
+            app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_6"
+            tools:targetApi="lollipop" />
         <ImageView
             android:id="@+id/setting_img_profil_6"
             android:layout_width="35dp"
@@ -191,8 +204,10 @@
             android:backgroundTint="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/dialog_profil_h_65"
             app:layout_constraintRight_toLeftOf="@+id/setting_img_profil_7"
-            app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_5" />
+            app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_5"
+            tools:targetApi="lollipop" />
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/setting_img_profil_7"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -200,12 +215,14 @@
             android:backgroundTint="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/dialog_profil_h_65"
             app:layout_constraintLeft_toRightOf="@+id/setting_img_profil_6"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            tools:targetApi="lollipop" />
 
 
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/save"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_profil_v_5"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/dialog_profil_h_85"
@@ -218,7 +235,8 @@
             app:srcCompat="@drawable/logo_check"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/black" />
+            app:backgroundTint="@color/black"
+            tools:targetApi="lollipop" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             app:layout_constraintLeft_toLeftOf="parent"
@@ -231,10 +249,12 @@
             app:borderWidth="2dp"
             app:maxImageSize="22dp"
             app:srcCompat="@drawable/logo_add"
+            android:contentDescription="@string/cancel"
             android:rotation="45"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/black" />
+            app:backgroundTint="@color/black"
+            tools:targetApi="lollipop" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

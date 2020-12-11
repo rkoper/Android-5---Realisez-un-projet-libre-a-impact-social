@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:layout_margin="2dp">
@@ -224,6 +225,7 @@
 
 
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:id="@+id/detail_item_p"
             android:visibility="visible"
             android:background="@drawable/round"
@@ -233,8 +235,10 @@
             app:layout_constraintBottom_toBottomOf="@+id/detail_gl_h_9"
             app:layout_constraintRight_toRightOf="@+id/detail_gl_v_9"
             android:layout_width="40dp"
-            android:layout_height="40dp" />
+            android:layout_height="40dp"
+            tools:targetApi="lollipop" />
         <ImageView
+            android:contentDescription="@string/photo_profil"
             android:visibility="visible"
             android:background="@drawable/round"
             android:id="@+id/detail_item_photo"
@@ -249,6 +253,7 @@
 
 
         <ImageView
+            android:contentDescription="@string/warning"
             android:id="@+id/detail_item_b"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -259,9 +264,11 @@
             android:elevation="1dp"
             android:visibility="visible"
             android:backgroundTint="@color/yellow_900"
-            android:background="@drawable/round_small" />
+            android:background="@drawable/round_small"
+            tools:targetApi="lollipop" />
 
         <ImageView
+            android:contentDescription="@string/warning"
             android:id="@+id/detail_item_band"
             app:layout_constraintTop_toTopOf="@+id/detail_item_b"
             app:layout_constraintBottom_toBottomOf="@+id/detail_item_b"
@@ -272,8 +279,10 @@
             android:visibility="visible"
             android:elevation="1dp"
             android:background="@drawable/round_small"
-            android:backgroundTint="@color/grey_600"/>
+            android:backgroundTint="@color/grey_600"
+            tools:targetApi="lollipop" />
         <ImageView
+            android:contentDescription="@string/warning"
             android:id="@+id/detail_item_bandb"
             app:layout_constraintTop_toTopOf="@+id/detail_item_band"
             app:layout_constraintBottom_toBottomOf="@+id/detail_item_band"
@@ -285,10 +294,12 @@
             android:elevation="1dp"
             app:srcCompat="@drawable/logo_warning"
             android:background="@drawable/round_small"
-            android:backgroundTint="@color/grey_600"/>
+            android:backgroundTint="@color/grey_600"
+            tools:targetApi="lollipop" />
 
 
         <ImageView
+            android:contentDescription="@string/event"
             android:elevation="3dp"
             android:id="@+id/detail_item_sub"
             android:layout_width="0dp"
@@ -300,9 +311,11 @@
             app:layout_constraintLeft_toLeftOf="@+id/detail_gl_v_07"
             app:layout_constraintBottom_toBottomOf="@+id/detail_gl_h_98"
             app:layout_constraintRight_toRightOf="@+id/detail_gl_v_93"
-            app:layout_constraintTop_toTopOf="@+id/detail_gl_h_03" />
+            app:layout_constraintTop_toTopOf="@+id/detail_gl_h_03"
+            tools:targetApi="lollipop" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/edit"
             android:id="@+id/detail_item_global"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="@+id/detail_gl_h_1"
@@ -316,12 +329,14 @@
             app:srcCompat="@drawable/logo_edit"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/yellow_900" />
+            app:backgroundTint="@color/yellow_900"
+            tools:targetApi="lollipop" />
 
 
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/plus"
             android:id="@+id/detail_item_plus"
             app:layout_constraintTop_toTopOf="@+id/detail_gl_h_1"
             app:layout_constraintBottom_toBottomOf="@+id/detail_gl_h_9"
@@ -336,10 +351,12 @@
             app:srcCompat="@drawable/logo_plus"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/yellow_900" />
+            app:backgroundTint="@color/yellow_900"
+            tools:targetApi="lollipop" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/minus"
             android:id="@+id/detail_item_minus"
             app:layout_constraintTop_toTopOf="@+id/detail_gl_h_1"
             app:layout_constraintBottom_toBottomOf="@+id/detail_gl_h_9"
@@ -354,10 +371,12 @@
             app:srcCompat="@drawable/logo_minus"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/yellow_900" />
+            app:backgroundTint="@color/yellow_900"
+            tools:targetApi="lollipop" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/delete"
             android:id="@+id/detail_item_delete"
             android:background="@drawable/round_small"
             android:visibility="invisible"
@@ -373,7 +392,8 @@
             app:srcCompat="@drawable/logo_delete"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/yellow_900" />
+            app:backgroundTint="@color/yellow_900"
+            tools:targetApi="lollipop" />
 
 
 

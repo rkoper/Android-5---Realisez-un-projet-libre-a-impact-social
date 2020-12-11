@@ -136,6 +136,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/detail_gl_16" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:contentDescription="@string/info"
                 app:layout_constraintTop_toTopOf="@+id/detail_name_txt"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_name_txt"
                 app:layout_constraintLeft_toRightOf="@+id/detail_name_txt"
@@ -149,7 +150,8 @@
                 app:srcCompat="@drawable/logo_info"
                 app:tint="@android:color/white"
                 android:backgroundTint="@color/grey_600"
-                app:backgroundTint="@color/yellow_900" />
+                app:backgroundTint="@color/yellow_900"
+                tools:targetApi="lollipop" />
 
 
             <TextView
@@ -205,9 +207,10 @@
                 app:layout_constraintTop_toTopOf="@+id/detail_gl_24"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_gl_32"
                 app:layout_constraintRight_toRightOf="parent"
-                android:hint="Article"
+                android:hint="@string/article"
                 style="@style/LoginTextInputLayoutStyle"
-                android:textColorHint="@color/white">
+                android:textColorHint="@color/white"
+                tools:ignore="HardcodedText">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/detail_item_edit"
@@ -244,12 +247,14 @@
                 app:layout_constraintLeft_toLeftOf="@+id/detail_gl_v_35"
                 android:orientation="horizontal" >
                 <ImageView
+                    android:contentDescription="@string/minus"
                     android:id="@+id/detail_quantity_minus"
                     android:background="@drawable/logo_arrowleft"
                     android:backgroundTint="@color/white"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    tools:targetApi="lollipop" />
                 <TextView
                     android:id="@+id/detail_quantity_txt"
                     android:textSize="12sp"
@@ -261,15 +266,18 @@
                     android:layout_weight="1"
                     tools:ignore="SmallSp" />
                 <ImageView
+                    android:contentDescription="@string/add"
                     android:id="@+id/detail_quantity_plus"
                     android:backgroundTint="@color/white"
                     android:background="@drawable/logo_arrowright"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    tools:targetApi="lollipop" />
             </LinearLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:contentDescription="@string/save"
                 app:layout_constraintTop_toTopOf="@id/detail_gl_32"
                 app:layout_constraintBottom_toBottomOf="@+id/detail_gl_40"
                 app:layout_constraintRight_toRightOf="parent"
@@ -282,7 +290,8 @@
                 app:srcCompat="@drawable/logo_check"
                 app:tint="@android:color/white"
                 android:backgroundTint="@color/grey_600"
-                app:backgroundTint="@color/yellow_900" />
+                app:backgroundTint="@color/yellow_900"
+                tools:targetApi="lollipop" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:elevation="10dp"
@@ -293,7 +302,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:id="@+id/detail_recyclerView" />
+                android:id="@+id/detail_recyclerView"
+                tools:targetApi="lollipop" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline

@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -276,6 +277,7 @@
             android:text="@string/current_language"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/dialog_lang_v_5"
@@ -288,9 +290,11 @@
             app:srcCompat="@drawable/logo_check"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/black" />
+            app:backgroundTint="@color/black"
+            tools:targetApi="lollipop" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@string/cancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="@+id/dialog_lang_v_5"
@@ -304,6 +308,7 @@
             android:rotation="45"
             app:tint="@android:color/white"
             android:backgroundTint="@color/grey_600"
-            app:backgroundTint="@color/black" />
+            app:backgroundTint="@color/black"
+            tools:targetApi="lollipop" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

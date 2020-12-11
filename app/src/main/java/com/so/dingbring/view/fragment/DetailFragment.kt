@@ -1,7 +1,5 @@
-package com.so.dingbring.view.detail
+package com.so.dingbring.view.fragment
 
-import android.animation.ArgbEvaluator
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
@@ -14,8 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -34,17 +30,14 @@ import com.so.dingbring.R
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyItem
 import com.so.dingbring.data.MyItemViewModel
-import com.so.dingbring.view.base.BaseFragment
-import com.so.dingbring.view.main.MainActivity
+import com.so.dingbring.view.adapter.DetailAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_item.*
 import kotlinx.android.synthetic.main.dialog_layout_detail.*
 import kotlinx.android.synthetic.main.dialog_layout_detail_info.*
 import kotlinx.android.synthetic.main.fragment_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import render.animations.Attention
-import render.animations.Bounce
 import render.animations.Render
 import java.util.*
 
@@ -61,12 +54,12 @@ class DetailFragment : BaseFragment() {
     private var mListMyItem: ArrayList<ArrayList<String>> = arrayListOf()
     var mNameUser = "..."
     private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    var mStatusBool = true
+    private var mStatusBool = true
     private var mBubble : BubbleNavigationLinearView? = null
     private var mBubbleDetail : BubbleNavigationLinearView? = null
     private var mTopBarTxt : TextView? = null
-    private var mFloat_back : FloatingActionButton? = null
-    private var mFloat_action : FloatingActionButton? = null
+    private var mFloatBack : FloatingActionButton? = null
+    private var mFloatAction : FloatingActionButton? = null
     private var mItemQuantity = 1
     private lateinit var d_detail:Dialog
     private var thisView: View? = null
@@ -114,8 +107,8 @@ class DetailFragment : BaseFragment() {
 
 
     private fun onBackBarPressed() {
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.setOnClickListener { navToHome() } }
+        mFloatBack = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloatBack?.setOnClickListener { navToHome() } }
 
     private fun navToHome() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
@@ -135,14 +128,14 @@ class DetailFragment : BaseFragment() {
         mTopBarTxt?.text  = getString(R.string.detail)
         mTopBarTxt?.setTextColor(resources.getColor(R.color.yellow_900))
 
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.yellow_900))
-        mFloat_back?.setColorFilter(Color.argb(255, 255, 255, 255))
+        mFloatBack = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloatBack?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.yellow_900))
+        mFloatBack?.setColorFilter(Color.argb(255, 255, 255, 255))
 
-        mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
-        mFloat_action?.visibility = View.VISIBLE
-        mFloat_action?.setImageResource(R.drawable.logo_share)
-        mFloat_action?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.yellow_900))
+        mFloatAction = activity?.findViewById(R.id.item_tb_fb_action)
+        mFloatAction?.visibility = View.VISIBLE
+        mFloatAction?.setImageResource(R.drawable.logo_share)
+        mFloatAction?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.yellow_900))
     }
 
     private fun initBubbleDetailVisible() {
@@ -179,8 +172,8 @@ class DetailFragment : BaseFragment() {
     private fun navToFrag() {
         Navigation.findNavController(requireActivity(), R.id.hostFragment).navigate(R.id.event_fragment)
         mTopBarTxt?.text  = getString(R.string.event)
-        mFloat_back?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
-        mFloat_action?.visibility = View.INVISIBLE
+        mFloatBack?.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.red_300))
+        mFloatAction?.visibility = View.INVISIBLE
         mTopBarTxt?.text  = getString(R.string.event)
         mTopBarTxt?.text  = getString(R.string.event)
         mBubbleDetail!!.visibility = View.INVISIBLE
@@ -190,7 +183,7 @@ class DetailFragment : BaseFragment() {
 
 
     private fun prepareToShare() {
-        mFloat_action?.setOnClickListener {
+        mFloatAction?.setOnClickListener {
             val dynamicLink = Firebase.dynamicLinks.dynamicLink {
                 link = Uri.parse("https://dingbring.page.link/$mEventId")
                 domainUriPrefix = "https://dingbring.page.link/"
@@ -204,7 +197,10 @@ class DetailFragment : BaseFragment() {
 
     @SuppressLint("CheckResult")
     private fun initRetrieveItem() {
-        mDetailAdapter = DetailAdapter(requireContext(), mListMyItem)
+        mDetailAdapter = DetailAdapter(
+            requireContext(),
+            mListMyItem
+        )
         detail_recyclerView.layoutManager = LinearLayoutManager(context)
         detail_recyclerView.adapter = mDetailAdapter
         initRVObserver()
@@ -237,7 +233,7 @@ class DetailFragment : BaseFragment() {
             mDetailAdapter.notifyDataSetChanged()}) }
 
 
-     fun initHeader() : String{
+     private fun initHeader() : String{
          FirebaseApp.initializeApp(requireActivity())
         var mEventAdress = ""
         var mEventDate = ""

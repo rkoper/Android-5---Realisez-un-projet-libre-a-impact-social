@@ -1,4 +1,4 @@
-package com.so.dingbring.view.event
+package com.so.dingbring.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,16 +15,16 @@ import io.reactivex.subjects.BehaviorSubject
 
 class EventAdapter(
     var context: Context,
-    mDataEvent: MutableList<MutableList<String>>
+   var mDataEvent: MutableList<MutableList<String>>
 ): RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
-    private var mDataEvent = mDataEvent
     val itemClick: BehaviorSubject<String> = BehaviorSubject.create()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): EventViewHolder { val view = LayoutInflater.from(parent.context).inflate(R.layout.event_item, parent, false)
-        return EventViewHolder(view) }
+        return EventViewHolder(view)
+    }
 
     override fun getItemCount(): Int {
         return if (mDataEvent.size > 0) { mDataEvent.size } else { 0 } }

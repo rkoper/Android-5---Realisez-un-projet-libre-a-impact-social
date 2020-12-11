@@ -1,26 +1,21 @@
-package com.so.dingbring.view.create
+package com.so.dingbring.view.fragment
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.Navigation
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.Place.Field
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -30,7 +25,6 @@ import com.so.dingbring.Utils.formatDate
 import com.so.dingbring.data.MyEvent
 import com.so.dingbring.data.MyEventViewModel
 import com.so.dingbring.data.MyUserViewModel
-import com.so.dingbring.view.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_create.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -48,11 +42,10 @@ class CreateFragment : BaseFragment() {
     var mNameUser = ""
     private var mTxtNoEventYet : TextView? = null
     private var mIdUser  = FirebaseAuth.getInstance().currentUser?.uid.toString()
-    var mItemStatus: String = "I bring"
     private var mEventUniqueID = UUID.randomUUID().toString()
     private var mPosBottomBar: BubbleNavigationLinearView? = null
-    private var mFloat_action : FloatingActionButton? = null
-    private var mFloat_back : FloatingActionButton? = null
+    private var mFloatAction : FloatingActionButton? = null
+    private var mFloatBack : FloatingActionButton? = null
 
 
     override fun onCreateView(
@@ -72,8 +65,8 @@ class CreateFragment : BaseFragment() {
     }
 
     private fun onBackBarPressed() {
-        mFloat_back = activity?.findViewById(R.id.item_tb_fb_back)
-        mFloat_back?.setOnClickListener {
+        mFloatBack = activity?.findViewById(R.id.item_tb_fb_back)
+        mFloatBack?.setOnClickListener {
             navToHome()
         }
     }
@@ -119,14 +112,14 @@ class CreateFragment : BaseFragment() {
 
 
 
-    fun initAdresse() {
+    private fun initAdresse() {
         var mStreetNumber = ""
         var mStreetName = ""
         var mCity = ""
         if (!Places.isInitialized()) { Places.initialize(requireActivity().applicationContext, "AIzaSyA29ttP7zVNeG68hHXh4g6VpOMZxJRDE58") }
 
-        var autocompleteFragment = Utils.autoCompleteFrag(childFragmentManager )
-        var etTextInput = Utils.autoCompleteTxtInput(childFragmentManager, resources, Typeface.DEFAULT )
+        val autocompleteFragment = Utils.autoCompleteFrag(childFragmentManager )
+        val etTextInput = Utils.autoCompleteTxtInput(childFragmentManager, resources, Typeface.DEFAULT )
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
@@ -177,8 +170,8 @@ class CreateFragment : BaseFragment() {
             TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show() } }
 
     private fun createEvent() {
-        mFloat_action = activity?.findViewById(R.id.item_tb_fb_action)
-        mFloat_action?.setOnClickListener {
+        mFloatAction = activity?.findViewById(R.id.item_tb_fb_action)
+        mFloatAction?.setOnClickListener {
             if (mEventAddress == "" ) { Toast.makeText(requireContext(), "Please complete address...", Toast.LENGTH_SHORT).show() }
             if (mEventDate == "" ) { Toast.makeText(requireContext(), "Please complete date...", Toast.LENGTH_SHORT).show() }
             if (mEventUniqueID == "" ) { Toast.makeText(requireContext(), "Error...", Toast.LENGTH_SHORT).show() }

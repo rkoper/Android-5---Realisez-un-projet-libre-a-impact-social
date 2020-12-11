@@ -1,4 +1,4 @@
-package com.so.dingbring.view.detail
+package com.so.dingbring.view.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -25,14 +25,14 @@ class DetailAdapter(
 ) : RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
 
     val itemClickN: BehaviorSubject<HashMap<Int,ArrayList<String>>> = BehaviorSubject.create()
-    var mItemStatus = ""
-    var mItemName = ""
-    var mItemQty = ""
-    var mItemId = ""
-    var mItemUserId = ""
-    var mItemEventId = ""
-    var mUserPic = ""
-    var mUserName = ""
+    private var mItemStatus = ""
+    private var mItemName = ""
+    private var mItemQty = ""
+    private var mItemId = ""
+    private var mItemUserId = ""
+    private var mItemEventId = ""
+    private var mUserPic = ""
+    private var mUserName = ""
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {

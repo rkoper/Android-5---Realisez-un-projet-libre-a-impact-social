@@ -3,13 +3,11 @@ package com.so.dingbring.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import java.util.*
 import kotlin.collections.HashMap
 
 class MyItemRepository {
 
-    private var mItemSet: MutableLiveData<MutableList<MyItem>> = MutableLiveData()
     private var mMegaListItem: ArrayList<ArrayList<String>> = arrayListOf()
     private val dbFire = FirebaseFirestore.getInstance()
     private var mMegaListStringSend: MutableLiveData<ArrayList<ArrayList<String>>> =  MutableLiveData()
